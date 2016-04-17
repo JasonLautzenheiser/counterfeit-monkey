@@ -4993,7 +4993,7 @@ Chapter 1 - Barriers and Spaces
 
 [Because the temporary barrier is the first real puzzle the player faces, it is especially important to handle all attempts at interaction as clearly as possible. In addition, the point of the puzzle is to figure out how to get the code, not to make the player do fiddly things -- so anything that could reasonably be construed as an attempt to use the code once it's been discovered should be redirected towards opening.]
 
-The temporary barrier is south of Fair. The temporary barrier is a door. It is transparent, closed and locked. "[A temporary barrier] blocks [if the location is the Fair]this noisy fair from the empty street to the south[otherwise]this empty street from the busy fair to the north[end if][if the temporary barrier is locked], though there is a door that could be opened with the correct code[otherwise], though it is currently unlocked and anyone could go through[end if][if the location is Ampersand Bend]. From here the gaiety and excitement of the holiday are fairly loud[end if]."  
+The temporary barrier is south of Fair. The temporary barrier is a door. It is transparent, closed and locked. The initial appearance is "[A temporary barrier] blocks [if the location is the Fair]this noisy fair from the empty street to the south[otherwise]this empty street from the busy fair to the north[end if][if the temporary barrier is locked], though there is a door that could be opened with the correct code[otherwise], though it is currently unlocked and anyone could go through[end if][if the location is Ampersand Bend]. From here the gaiety and excitement of the holiday are fairly loud[end if]."  
 
 The description of the temporary barrier is "It's a high metal fence, supported by sturdy poles. It's designed to contain the chaos a little, and keep people who have come in for the Fair from wandering off down the side streets and causing trouble in unpoliced areas of town. It has [a code-lock] that opens the inset door."
 
@@ -5111,7 +5111,7 @@ Instead of listening to the code-lock:
 Carry out going through the temporary barrier:
 	record "passing through the temporary barrier" as achieved.
 
-Ampersand Bend is south of the temporary barrier. It is a road. "A bend in the street, which runs west and north. This district combines the old and the new: a small [museum] in an ancient stone building to the east, a shiny [real estate office] south. The window of the museum is currently displaying one of its exhibits, [a list of things on the display stand][if the code is on the display stand]. Well, not to worry: they'll be able to restore the codex easily enough when the museum reopens[end if]." Understand "district" as Ampersand Bend.
+Ampersand Bend is south of the temporary barrier. It is a road. The description is "A bend in the street, which runs west and north. This district combines the old and the new: a small [museum] in an ancient stone building to the east, a shiny [real estate office] south. The window of the museum is currently displaying one of its exhibits, [a list of things on the display stand][if the code is on the display stand]. Well, not to worry: they'll be able to restore the codex easily enough when the museum reopens[end if]." Understand "district" as Ampersand Bend.
 
 Instead of listening to Ampersand Bend:
 	say "The sounds from the north suggest a holiday fair in full swing: children laughing and shouting, people selling food and drinks, various fairground machinery, tinny music."
@@ -5166,7 +5166,7 @@ Instead of going south in Ampersand Bend:
 Rule for listing exits while looking in Ampersand Bend:
 	do nothing instead.
 
-Sigil Street is west of Ampersand Bend. It is a road. "The buildings here are two and three [if the player wears the Britishizing goggles]storeys[otherwise]stories[end if], with shops at ground level and [apartments] above. The shops are closed for the holiday: [a typographer's office], [clothing shop] of col[our]ful skirts and ethnic bodices (rarely if ever worn by natives) and t-shirts covered with font designs[if the reflective window is in Sigil Street].
+Sigil Street is west of Ampersand Bend. It is a road. The description is "The buildings here are two and three [if the player wears the Britishizing goggles]storeys[otherwise]stories[end if], with shops at ground level and [apartments] above. The shops are closed for the holiday: [a typographer's office], [clothing shop] of col[our]ful skirts and ethnic bodices (rarely if ever worn by natives) and t-shirts covered with font designs[if the reflective window is in Sigil Street].
 
 [one of]Passing by [the reflective window] [you] catch the sight of our single blended body, and it creeps me out[or][The reflective window] of the closed shops reflect our synthes[ize]d self[stopping][end if]." 
 
@@ -5207,7 +5207,7 @@ The typographer's office is a facade in Sigil Street.  It is scenery.
 Instead of looking toward Back Alley:
 	say "It doesn't look like there's anything interesting back that way."
 
-Back Alley is south of Sigil Street. It is a road. "[one of]This isn't much, is it? Just[or]There is nothing here but[stopping] the back sides of a couple of [yellow buildings], some peeling yellow paint[one of], and[or];[stopping] not even much by way of windows to look in through. [if unvisited]I think the place where [you] had the procedure done is just a block or two away, but I've already lost the door. I imagine they change it. [end if]
+Back Alley is south of Sigil Street. It is a road. The description is "[one of]This isn't much, is it? Just[or]There is nothing here but[stopping] the back sides of a couple of [yellow buildings], some peeling yellow paint[one of], and[or];[stopping] not even much by way of windows to look in through. [if unvisited]I think the place where [you] had the procedure done is just a block or two away, but I've already lost the door. I imagine they change it. [end if]
 
 This alley runs north to the open street, towards the town square[if unvisited]. That's the way [you][']ll want to go first[end if]."
 The dull house-back is a facade in Back Alley. It fronts south. It is scenery. The description is "The owners of the house obviously didn't want a view in this direction, as there aren't any windows to see through, just a wall scarred by decades of occasional remodeling."
@@ -5761,7 +5761,7 @@ Some grass is scenery in the Park Center. The description is "Deep green and vel
 Rule for distantly describing the Fair:
 	say "That way is the fair: a mass of booths and people and games and bright sunlight, too chaotic to get a good look at from here."
 
-The Fair is south of Park Center. "[one of]Today is Serial Comma Day, one of the biggest holidays on the island, and a time when half the police force is off duty while the other half is over-extended. The perfect day to make an escape. [or][stopping]The square at the cen[ter] of town is [one of]therefore [or][stopping]crowded with people, and there's an overpowering smell of artificial butter and spun sugar."
+The Fair is south of Park Center. The description is "[one of]Today is Serial Comma Day, one of the biggest holidays on the island, and a time when half the police force is off duty while the other half is over-extended. The perfect day to make an escape. [or][stopping]The square at the cen[ter] of town is [one of]therefore [or][stopping]crowded with people, and there's an overpowering smell of artificial butter and spun sugar."
 
 Instead of smelling the Fair:
 	say "It smells like candy and popcorn, with a note of booze and another note of sweaty crowd."
@@ -5806,7 +5806,7 @@ Rule for listing exits when in Fair:
 
 Section 2 - Midway
 
-The Midway is west of the Fair and southwest of Park Center. "Here in front of the [pharmacy] in the southwestern corner of the town square, various contests have been set up [--] a [strong-man contest], a contest to see who can burst the most [balloons] using [a styrofoam dart-plane], and so on."
+The Midway is west of the Fair and southwest of Park Center. The description is "Here in front of the [pharmacy] in the southwestern corner of the town square, various contests have been set up [--] a [strong-man contest], a contest to see who can burst the most [balloons] using [a styrofoam dart-plane], and so on."
 
 The pharmacy is a facade in Midway. It fronts south. It is scenery. Understand "pharmacy" or "window" or "windows" or "glass" or "front" or "shade" or "shampoo" or "razors" or "analgesics" or "burn" or "creams" or "candy" or "toothpaste" or "homeopathic" or "remedies" as the pharmacy. The description is "There's not much to see, as a shade has been pulled down behind the glass front. I can tell you what's back there, though, if you care: the usual assortment of shampoo and razors and analgesics and burn creams; candy, and also toothpaste; and a costly selection of homeopathic remedies in matching brown bottles."
 
@@ -5826,7 +5826,7 @@ The balloons are scenery in the Midway. The description is "All stapled in place
 
 The styrofoam dart-plane is scenery in the Midway. The description is "Ridiculous little styrofoam gliders with dart-noses. No use to us, anyway."
 
-The word-balance is fixed in place in the Midway. Understand "balance" or "steel" or "scales" or "pair of" or "beam" or "fabulous" as the word-balance. The printed name is "word-balance". "[if the barker is visible]I assume you've noticed, though, [otherwise]No longer so useful is [end if]the [word-balance], which comes up as high as our hip. [balance contents]". The description is "The beam is [if the word-balance is tilting]tilting[otherwise]balanced[end if]. [balance contents]".
+The word-balance is fixed in place in the Midway. Understand "balance" or "steel" or "scales" or "pair of" or "beam" or "fabulous" as the word-balance. The printed name is "word-balance". The initial appearance is "[if the barker is visible]I assume you've noticed, though, [otherwise]No longer so useful is [end if]the [word-balance], which comes up as high as our hip. [balance contents]". The description is "The beam is [if the word-balance is tilting]tilting[otherwise]balanced[end if]. [balance contents]".
 
 Instead of touching, pushing, pulling, or turning the word-balance: 
 	try pushing the right pan.
@@ -5915,7 +5915,7 @@ To say barker-refusal:
 
 A little boy in the crowd snickers rudely. 'Got ya!'[or]The barker gives us a warning look. In case you forgot, we may not increase or decrease the contents of the pan by hand or lean on the beam.[or]It is against the rules of the contest to remove something from the pans; and whatever we do, we've got to do without touching.[stopping]";  
 	
-The barker is a man in the Midway. "Beside the word-balance is a barker in [a blue suit], the same regulation blue used by the Bureau of Orthography." The barker wears a blue suit. The description of the barker is "He is dapper in his suit, as though he might belong to an especially vivid barber-shop quartet." The description of the suit is "Carefully tailored in bright blue linen, with fine white pinstripes." 
+The barker is a man in the Midway. The initial appearance is "Beside the word-balance is a barker in [a blue suit], the same regulation blue used by the Bureau of Orthography." The barker wears a blue suit. The description of the barker is "He is dapper in his suit, as though he might belong to an especially vivid barber-shop quartet." The description of the suit is "Carefully tailored in bright blue linen, with fine white pinstripes." 
 
 Instead of telling someone about something:
 	say "[The noun] stares at us coldly. [one of]I wish you wouldn't babble at folks: it just draws attention.[or]I know you didn't grow up around here, but people in this vicinity tend not to be so free with their words.[stopping]".
@@ -5965,7 +5965,7 @@ Understand "put [tube] on/onto/over/to [tube]" as a mistake ("The gel doesn't re
 
 
 
-[The Postcard Stalls are north of the Park Center, east of the Food Corner, and west of Outdoor Cafe. "It is astonishing how exactly alike all postcard vendors are. It is the usual thing: white wire racks with pictures of the harbor, the city walls, the ancient fortifications."
+[The Postcard Stalls are north of the Park Center, east of the Food Corner, and west of Outdoor Cafe. The description is "It is astonishing how exactly alike all postcard vendors are. It is the usual thing: white wire racks with pictures of the harbor, the city walls, the ancient fortifications."
 
 Rule for listing exits when looking in Postcard Stalls: do nothing.
 
@@ -5975,7 +5975,7 @@ Rule for listing exits when looking in Postcard Stalls: do nothing.
 
 The description of the Food Corner is "In this corner of the park, a sausage stand has been set up. This is partly for the benefit of the people enjoying the park and partly for the patrons of the cinema to the north, which has no food counter of its own."
 
-The sausage stand is scenery in Food Corner. "An ingenious invention able to keep several dozen Italian sausages, bratwurst, and Kosher hot dogs simultaneously at the ideal heat for serving."
+The sausage stand is scenery in Food Corner. The initial appearance is "An ingenious invention able to keep several dozen Italian sausages, bratwurst, and Kosher hot dogs simultaneously at the ideal heat for serving."
 
 The sausage-seller is a man in Food Corner. The description of the sausage-seller is "He looks suspicious [--] I mean, he looks as though he suspects us of something. It's true that I passed him earlier a few times when I came up here to stash my things before our operation. I even contemplated buying a Kosher hot dog from him, and changed my mind at the last minute because I was afraid of missing our appointment.
 
@@ -6016,7 +6016,7 @@ Rule for disclosing contents of the blankets:
 	say "Laid out on the blankets carefully as though precious merchandise [is-are a list of mentionable things on the blankets]. " ]
 
 The church exterior is a facade in Church Forecourt. Understand "new church" or "plaster" or "entrance" or "entry" or "flank" or "building" or "flank of the building" as the church exterior. The printed name is "New Church". 
-	"This corner of the park, in the lee of the church, has been left free of kiosks and booths. Contrary to the usual rules of cathedral layout, the [church exterior] is oriented toward the north, so [you] are standing by the flank of the building, though there is an entrance on this side."
+	The initial appearance is "This corner of the park, in the lee of the church, has been left free of kiosks and booths. Contrary to the usual rules of cathedral layout, the [church exterior] is oriented toward the north, so [you] are standing by the flank of the building, though there is an entrance on this side."
 	The description is "It manages to be austere without seeming in the least modern: the walls are white and the windows clear, but the proportions, the texture of the plaster, the irregular leading between the panes of glass, all come of the age of handmade things."
 	
 Instead of touching the church exterior:
@@ -6038,14 +6038,14 @@ The cinema-exterior is a facade in Church Forecourt. It fronts north. It is scen
 
 Section 4 - Heritage Corner
 
-The Heritage Corner is east of the Fair and southeast of Park Center. It is proper-named. "This patch of the town square has been paved over in [octagonal bricks] and is commonly used for displays of traditional dancing: over-50 women in home-made embroidered aprons, skipping arm-in-arm and jumping over broomsticks[one of].
+The Heritage Corner is east of the Fair and southeast of Park Center. It is proper-named. The description is "This patch of the town square has been paved over in [octagonal bricks] and is commonly used for displays of traditional dancing: over-50 women in home-made embroidered aprons, skipping arm-in-arm and jumping over broomsticks[one of].
 
 No, there aren't any here [i]now[/i]. But trust me. It's an unforgettable sight[or][stopping]."
 
 Rule for distantly describing Heritage Corner:
 	say "That way is the bricked-over portion of the town square, sometimes used for exhibitions of regional dance. Today it is less populated than most of the Square[if the location is the Fair]. Beyond Heritage Corner to the east is the hostel where you stowed some important gear[end if]."
 	
-A diorama table is fixed in place in Heritage Corner. It is a supporter. "Under a bit of [diorama-shelter] in the corner, [a diorama table] shows scenes from local history, rotated out each week. This week's diorama represents the first sitting of the Committee for the New Orthodox Orthography." Understand "diorama" or "scene" or "dioramas" or "shelter" or "scenes" or "local history" or "history" as the diorama table.
+A diorama table is fixed in place in Heritage Corner. It is a supporter. The initial appearance is "Under a bit of [diorama-shelter] in the corner, [a diorama table] shows scenes from local history, rotated out each week. This week's diorama represents the first sitting of the Committee for the New Orthodox Orthography." Understand "diorama" or "scene" or "dioramas" or "shelter" or "scenes" or "local history" or "history" as the diorama table.
 
 The description of the diorama table is "The patriotic scene is set against the backdrop of the Bureau's buildings ca. 1895, where the committee first met, but the historians have included a bit of the building exterior to show that the meetings were conducted under army guard. The writing of dictionaries has not always been bloodless[if the army is not on the diorama table and the members are not on the diorama table]. Both army and members are missing[otherwise if the army is not on the diorama table]. The army has been removed[otherwise if the members are not on the diorama table and the member is on the diorama table]. The members have been reduced to a single [member][otherwise if the members are not on the diorama table]. The members have been removed[end if].". Understand "backdrop" or "setting" or "buildings" or "bureau" or "bureau's" or "building" or "scenery" as the diorama table.
 
@@ -6120,7 +6120,7 @@ Chapter 2 - Indoor Areas
 Section 1 - Cinema
  
 
-The Cinema Lobby is north of Church Forecourt. It is indoors. "This is a small, one-screen theater. [one of]The seats are not comfortable and the screen is not large. The projector is old. The management is lazy. No food is served. 
+The Cinema Lobby is north of Church Forecourt. It is indoors. The description is "This is a small, one-screen theater. [one of]The seats are not comfortable and the screen is not large. The projector is old. The management is lazy. No food is served. 
 
 On two occasions, the film I was watching burst into flames while it was being shown.
 
@@ -6135,7 +6135,7 @@ Rule for listing exits when in Cinema Lobby:
 	if looking, do nothing;
 	otherwise say "There is of course the exit to the south; the screening room itself is west."
 
-The ticket-taker is an alert man in the Cinema Lobby. "[The ticket-taker] waits just west of us, at the entrance to the screening room, ready to take tickets."  
+The ticket-taker is an alert man in the Cinema Lobby. The initial appearance is "[The ticket-taker] waits just west of us, at the entrance to the screening room, ready to take tickets."  
 	The description of the ticket-taker is "Not one of this country's best and brightest, but he seems good-natured."
 	Understand "young" or "man" or "ticket taker" or "taker" as the ticket-taker. 
 
@@ -6153,7 +6153,7 @@ Instead of going to the Screening Room when the ticket-taker does not know allow
 	set the current interlocutor to the ticket-taker;
 	queue hang-on-there.
 
-The Screening Room is west of Cinema Lobby. It is indoors. "[if the player recollects what the movie seems]'Red'[otherwise]Whatever is scheduled for later showing[end if] has not started yet, and is probably not destined to start for some time; at any rate,[unless the project is switched on] the [film screen] is blank and[end if] no audience has yet assembled."
+The Screening Room is west of Cinema Lobby. It is indoors. The description is "[if the player recollects what the movie seems]'Red'[otherwise]Whatever is scheduled for later showing[end if] has not started yet, and is probably not destined to start for some time; at any rate,[unless the project is switched on] the [film screen] is blank and[end if] no audience has yet assembled."
 
 Instead of waiting in the Screening Room:
 	if the reel is in the projector and the projector is switched on:
@@ -6170,7 +6170,7 @@ The seats are an enterable supporter in the Screening Room. The seats are scener
 		say "I've already located the backpack, right where I left it."
 	The scent-description of the seats is "a mixture of wood lacquer and popcorn grease".
 
-The backpack is in the Screening Room. "My [backpack] is stowed under a seat in the third row from the back." Understand "pack" or "rucksack" or "backsack" as the backpack.
+The backpack is in the Screening Room. The initial appearance is "My [backpack] is stowed under a seat in the third row from the back." Understand "pack" or "rucksack" or "backsack" as the backpack.
 	The backpack is wearable and essential. 
 	It covers the torso-area.
 	The introduction of the backpack is "I figured that it would be undisturbed there for a couple of hours, in the dark and out of sight, and if anyone found it they would probably turn it in to Lost and Found. But it is a big relief to find it still there."
@@ -6195,21 +6195,21 @@ The flash drive is essential.
 
 [ The projection booth is here chiefly for easter egg purposes: if the player (much later on) manages to create the abstract LEER, run it through the mirror, and bring the resulting REEL back to the projection booth, the result is this curious movie -- an achievement reward. ]
 
-The Projection Booth is north of Screening Room. It is indoors. "The booth is small and lined with [grey-carpet]. It smells faintly of hot dogs."
+The Projection Booth is north of Screening Room. It is indoors. The description is "The booth is small and lined with [grey-carpet]. It smells faintly of hot dogs."
 
 The grey-carpet is scenery in the Projection Booth. The printed name is "grey carpet". Understand "gray" or "grey" or "carpet" as the grey-carpet. The description is "In this dim light it's hard to give the carpet too exact an inspection, which I imagine is just as well."
 
 Instead of smelling the Projection Booth:
 	say "The ghost of hot dog and relish lingers in the air. It's mildly nauseating."
 
-The jotter is a notepad in the Projection Booth. "[A jotter] is propped up next to the projector." The description is "It's a little spiral-bound notebook, the kind reporters in old movies carry. It's full of notes: running times of movies. Numbers of people in the audience. Who clapped during potentially subversive scenes. Who arrived in a group of more than three."
+The jotter is a notepad in the Projection Booth. The initial appearance is "[A jotter] is propped up next to the projector." The description is "It's a little spiral-bound notebook, the kind reporters in old movies carry. It's full of notes: running times of movies. Numbers of people in the audience. Who clapped during potentially subversive scenes. Who arrived in a group of more than three."
 	The allowed-pens of the jotter is { pen, pens }.
 	The memo of the jotter is "Red: audience 14. FM couple. MM couple. M in raincoat. FFFFF group. F. MF. M.".
 
 Rule for writing a topic sentence about the jotter when the projector is mentionable:
 	say "[A jotter] is propped up next to [the projector]."
 
-The projector is a container in the Projection Booth. It is fixed in place. "[A projector] has been set up facing the [film screen][if the reel is in the projector] and [a reel] threaded into it[end if]." The description of the projector is "It's an old-fashioned film projector[if the reel is in the projector], with [a reel] of film inserted[otherwise], with a spot to hold [a reel] of film[end if]. The lens points at the screen." Understand "lens" as the projector.
+The projector is a container in the Projection Booth. It is fixed in place. The initial appearance is "[A projector] has been set up facing the [film screen][if the reel is in the projector] and [a reel] threaded into it[end if]." The description of the projector is "It's an old-fashioned film projector[if the reel is in the projector], with [a reel] of film inserted[otherwise], with a spot to hold [a reel] of film[end if]. The lens points at the screen." Understand "lens" as the projector.
 
 The projector-switch is a device. The projector-switch is part of the projector. The printed name of the projector-switch is "projector switch". Understand "switch" or "projector switch" as the projector-switch.
 
@@ -6328,7 +6328,7 @@ Test projection with "tutorial off / put reel on projector / turn on projector /
 Section 2 - Staircase
 		
 
-The Monumental Staircase is east of Park Center and north of Heritage Corner [and south of Outdoor Cafe]. "Once, the [central hillock] of the city was a fortified enclave, protected from the harbor and the peasant town by great walls. Now, however, the walls are mostly gone, except for a little spur that runs north from here. The walkways and tower are open to the public. 
+The Monumental Staircase is east of Park Center and north of Heritage Corner [and south of Outdoor Cafe]. The description is "Once, the [central hillock] of the city was a fortified enclave, protected from the harbor and the peasant town by great walls. Now, however, the walls are mostly gone, except for a little spur that runs north from here. The walkways and tower are open to the public. 
 
 Meanwhile a staircase as wide as a street [if the former direction is west]ascends into this town square, with the fountain playing at the cen[ter][otherwise]descends east from the town square toward the harbor[end if]."
 
@@ -6359,7 +6359,7 @@ The staircase-close-view is scenery in Monumental Staircase. The printed name is
 
 Instead of going down in Monumental Staircase, try going east. 
 
-A poster is fixed in place in Monumental Staircase. "An enormous blue and orange warning [poster] covers the wall alongside the staircase." The description is "'WARNING: Have you seen these dangerous individuals? If so, avoid contact and report all interactions to the Bureau of Orthography.' Below, there's a picture of several people. One of them is you, before your face got shuffled with mine.[one of] It's funny that when we met, you mentioned you were a user of illegally modified language-tools, but you didn't emphas[ize] the grand larceny side so much.
+A poster is fixed in place in Monumental Staircase. The initial appearance is "An enormous blue and orange warning [poster] covers the wall alongside the staircase." The description is "'WARNING: Have you seen these dangerous individuals? If so, avoid contact and report all interactions to the Bureau of Orthography.' Below, there's a picture of several people. One of them is you, before your face got shuffled with mine.[one of] It's funny that when we met, you mentioned you were a user of illegally modified language-tools, but you didn't emphas[ize] the grand larceny side so much.
 
 Not to worry. I won't turn you in. I can hardly afford to, can I?[or][stopping]". Understand "blue" or "orange" or "enormous" or "huge" or "warning" as the poster.
 
@@ -6390,7 +6390,7 @@ The Open-Air is a region. The Fair, Church Forecourt, Midway, Heritage Corner, [
 
 Section 3 - The Hostel
 
-The Hostel is east of Heritage Corner. It is indoors. "I take it this is where you stayed from the time you got to town until our operation. I would have expected that someone with your credentials would have been able to afford something better: The Fleur d'Or, maybe? But maybe you thought this was lower-profile. At least it's clean and doesn't smell funny."
+The Hostel is east of Heritage Corner. It is indoors. The description is "I take it this is where you stayed from the time you got to town until our operation. I would have expected that someone with your credentials would have been able to afford something better: The Fleur d'Or, maybe? But maybe you thought this was lower-profile. At least it's clean and doesn't smell funny."
 
 Instead of going out in the Hostel, try going west.
 
@@ -6405,7 +6405,7 @@ Instead of facing up in the hostel:
 
 The attendant's desk is a desk in the Hostel. The description is "Formica with a fake wood grain."
 
-The attendant is a woman in the Hostel. The printed name is "desk attendant". Understand "desk attendant" as the attendant. "[The attendant] [if the current mood of the attendant is distrustful]watches us suspiciously[otherwise]is sort of eying us[end if]." The description of the attendant is "She's dressed in a kind of casual-hippy way: nose ring, poofy [blouse] that doesn't fit quite right."
+The attendant is a woman in the Hostel. The printed name is "desk attendant". Understand "desk attendant" as the attendant. The initial appearance is "[The attendant] [if the current mood of the attendant is distrustful]watches us suspiciously[otherwise]is sort of eying us[end if]." The description of the attendant is "She's dressed in a kind of casual-hippy way: nose ring, poofy [blouse] that doesn't fit quite right."
 
 The introduction of the attendant is "She doesn't recogn[ize] you [--] us [--] but that's a good thing, I think."
 
@@ -6419,7 +6419,7 @@ Instead of looking at an attendant-related thing through an authentication scope
 		do nothing instead;
 	say "[The second noun] pings happily as [you] sight [the noun] with the crosshairs. [one of]'Do you mind?' [if the noun is the attendant]she[otherwise]the attendant[end if] asks. 'That's kind of rude.'[or]She sighs pointedly.[or]She mutters about people who can't take hints.[or]She ignores us stoically.[stopping]".
 
-Guidebook is a book in the Hostel. The printed name is "Guidebook to Anglophone Atlantis". Understand "guidebook to atlantis" or "guide" or "book" or "guidebook to anglophone atlantis" as the guidebook. "Discarded in one corner is [a guidebook]." The description is "A much-thumbed and several years out-of-date guidebook to this immediate area. The cover is tomato-red but the pages are crinkly and beige: it appears that someone has spilled coffee on it.
+Guidebook is a book in the Hostel. The printed name is "Guidebook to Anglophone Atlantis". Understand "guidebook to atlantis" or "guide" or "book" or "guidebook to anglophone atlantis" as the guidebook. The initial appearance is "Discarded in one corner is [a guidebook]." The description is "A much-thumbed and several years out-of-date guidebook to this immediate area. The cover is tomato-red but the pages are crinkly and beige: it appears that someone has spilled coffee on it.
 
 There's too much here to take in in a quick read, but we could look up specific topics if we wanted to read more." The contents of the guidebook is the Table of Local Attractions.
 
@@ -6480,7 +6480,7 @@ She then tears out of the room, leaving the room unattended. Unfortunately, plac
 
 The attendant wears a nose-ring and a blouse. The description of the blouse is "White cotton with little ribbons on it. I hate that kind of frilly nonsense." The description of the nose-ring is "It's silver and reasonably discreet." Understand "nose" or "nose ring" as the nose-ring. Understand "ring" as the nose-ring when the ring is not visible.
 
-The Dormitory Room is above the Hostel. It is indoors. Understand "dorm" as the Dormitory Room. "Painted off-white, with [hard wood floors] under many layers of protective gloss coating: there are no surfaces in this room that would take a stain. Four [random dorm bed]s are lined up against the wall."
+The Dormitory Room is above the Hostel. It is indoors. Understand "dorm" as the Dormitory Room. The description is "Painted off-white, with [hard wood floors] under many layers of protective gloss coating: there are no surfaces in this room that would take a stain. Four [random dorm bed]s are lined up against the wall."
 
 A dorm bed is usually scenery.
 
@@ -6488,7 +6488,7 @@ Four dorm beds are in the dormitory room. Understand "beds" as a dorm bed. The d
 
 
 A backpacking girl is an alert tourist woman in the dormitory room. She exhibits caution.
-	"[one of]A girl of about 19 [set prior to backpacking girl][if the girl is in the location]is standing in the middle of the room, looking around as though she can't quite believe where she landed or what she's doing here[otherwise]seems to be inclined to hang out here for the duration[end if][or][The backpacking girl] is still hanging out here[stopping]."
+	The initial appearance is "[one of]A girl of about 19 [set prior to backpacking girl][if the girl is in the location]is standing in the middle of the room, looking around as though she can't quite believe where she landed or what she's doing here[otherwise]seems to be inclined to hang out here for the duration[end if][or][The backpacking girl] is still hanging out here[stopping]."
 	The description is "She is just the sort of tourist who most annoys the locals, but actually I find her type a little endearing: she may not be very sophisticated yet, but she [i]wants[/i] to expand her horizons, and that's more than you can say for most of the friends she probably left back at home.". 
 	The backpacking girl wears a pink t-shirt. The description of the pink t-shirt is "It is somewhat too tight and bears the word JUICY in rhinestones across the bust." Understand "shirt" as the pink t-shirt.
 	She carries a heavy pack. The heavy pack is a closed openable container. The description of the heavy pack is "The flag of Canada is [canada-girl][if the player knows fake-canada]mendaciously [end if]sewn on the back." Understand "full" or "massive" or "massively" or "backpack" or "her backpack" or "her pack" or "flag" or "of Canada" as the heavy pack.
@@ -6648,9 +6648,9 @@ Understand "count [bills]" as a mistake ("[You] thumb quickly through the bills 
 
 Section 4 - The New Church
 
-The New Church is west of the Church Forecourt. It is indoors and proper-named. "Not a Gothic cathedral from the era when the church was wealthy and secure, but a gallant Neo-classical response to the turmoil of the 18th century, when the power of language was just beginning to be evident, and instead of an immutable cosmology, we suddenly had observer-consensus reality. [one of]What is the need or use of God, if it turns out that He gave all the power of creation to Adam when He let him name the animals?[or][stopping]".
+The New Church is west of the Church Forecourt. It is indoors and proper-named. The description is "Not a Gothic cathedral from the era when the church was wealthy and secure, but a gallant Neo-classical response to the turmoil of the 18th century, when the power of language was just beginning to be evident, and instead of an immutable cosmology, we suddenly had observer-consensus reality. [one of]What is the need or use of God, if it turns out that He gave all the power of creation to Adam when He let him name the animals?[or][stopping]".
 
-The inscription is fixed in place in the New Church. It is distant. "An [inscription] above [the altar], picked out in gold paint, reads Ἐν ἀρχῇ ἦν ὁ λόγος." Understand "paint" or "gold" as the inscription.
+The inscription is fixed in place in the New Church. It is distant. The initial appearance is "An [inscription] above [the altar], picked out in gold paint, reads Ἐν ἀρχῇ ἦν ὁ λόγος." Understand "paint" or "gold" as the inscription.
 	The description is "It means, In the Beginning was the Word. 
 	
 A patchy attempt to make theology align with scientific and linguistic reality, but it still has power. And despite the Bureau's depredations of foreign language writings everywhere else, they have never quite had the nerve to deface this." 
@@ -6707,7 +6707,7 @@ To say prayer response:
 	
 The gift-shop-exterior is a facade in New Church. It is scenery. It fronts south. The description is "[You] can't really see it from here; I just know that it is back there, from previous visits, though decently screened from the main body of the church."  Understand "shop" or "gift shop" or "narthex" as the gift-shop-exterior. The printed name is "gift shop".
 
-The Cathedral Gift Shop is south of the New Church. Understand "narthex" as the cathedral gift shop. It is indoors. "This area used to be a sort of antechamber where the priests and choir might gather for processions into the church, but it has now been done over for retail purposes. This is one of several schemes to make the New Church pay for its own upkeep: a problem is that people somehow feel everything associated with a church ought to be free, including lunchtime concerts, potluck suppers, and Thursday-night lecture series."
+The Cathedral Gift Shop is south of the New Church. Understand "narthex" as the cathedral gift shop. It is indoors. The description is "This area used to be a sort of antechamber where the priests and choir might gather for processions into the church, but it has now been done over for retail purposes. This is one of several schemes to make the New Church pay for its own upkeep: a problem is that people somehow feel everything associated with a church ought to be free, including lunchtime concerts, potluck suppers, and Thursday-night lecture series."
 
 The gift-shop counter is a scenery supporter in the Cathedral Gift Shop. The description is "The usual arrangement for making purchases."
 
@@ -6741,7 +6741,7 @@ Instead of buying the souvenir tea-towels:
 Instead of buying the shot glasses:
 	say "The inscribed proverbs about the merits and demerits of the grape would be likely to put me off my drink."
 	
-Some tomes are a fixed in place thing in the Cathedral Gift Shop. "A long line of dusty [tomes] are lined up on one of the shelves, marked 'free for taking'. None are missing." A component-tome is part of the tomes. The printed name of the component-tome is "tome". Understand "tome" or "book" as the component-tome.
+Some tomes are a fixed in place thing in the Cathedral Gift Shop. The initial appearance is "A long line of dusty [tomes] are lined up on one of the shelves, marked 'free for taking'. None are missing." A component-tome is part of the tomes. The printed name of the component-tome is "tome". Understand "tome" or "book" as the component-tome.
 
 The description of the tomes is "Looking at one gives a sense of all. [description of the tome]". The description of the component-tome is "[description of the tome]".
 
@@ -6766,7 +6766,7 @@ The description of the souvenir tea-towels is "Embroidered with gaudy logos."
 
 The description of the shot glasses is "Printed with various Biblical verses related to drinking."
 
-The gift shop volunteer is an alert man in Cathedral Gift Shop. "An elderly man in a [knitted wool cap] presides over the gift shop." Understand "elderly" or "man" as the gift shop volunteer. 
+The gift shop volunteer is an alert man in Cathedral Gift Shop. The initial appearance is "An elderly man in a [knitted wool cap] presides over the gift shop." Understand "elderly" or "man" as the gift shop volunteer. 
 
 Rule for writing a topic sentence about the gift shop volunteer when the gift shop volunteer is not the current interlocutor:
 	set the current interlocutor to the gift shop volunteer;
@@ -6777,7 +6777,7 @@ The description of the gift shop volunteer is "He has one of those withered-appl
 
 The gift shop volunteer wears a knitted wool cap. The description of the knitted wool cap is "It is made of some kind of soft and fuzzy blue yarn." Understand "yarn" as the knitted wool cap.
 
-The Church Garden is west of New Church. "One might expect a graveyard, but burial inside the city walls has been forbidden for sanitation reasons since well before the New Church was built. Instead, there is a small meditation garden, which was once designed as an intricate knotwork of shrubs[if the thicket is not in the location]. Now the shrubs are gone[end if]."
+The Church Garden is west of New Church. The description is "One might expect a graveyard, but burial inside the city walls has been forbidden for sanitation reasons since well before the New Church was built. Instead, there is a small meditation garden, which was once designed as an intricate knotwork of shrubs[if the thicket is not in the location]. Now the shrubs are gone[end if]."
 
 Report facing in Church Garden:
 	say "The garden is intentionally a space set apart, from which it is hard to see anything of the rest of the world." instead.
@@ -6788,7 +6788,7 @@ Understand "meditate" as a mistake ("I'm not bringing you on a tandem ride throu
 
 
 
-The thicket is a fixed in place thing in the Church Garden. "The knotwork has since grown into [a thicket].". 
+The thicket is a fixed in place thing in the Church Garden. The initial appearance is "The knotwork has since grown into [a thicket].". 
 	The description is "Densely-grown: the church hasn't been able to afford a real groundskeeper for some time."
 	The scent-description is "dusty vegetation and maybe a little rosemary". 
 	Understand "knotwork" or "shrubs" or "bushes" or "herbaceous" or "rosemary" as the thicket.
@@ -6844,7 +6844,7 @@ The crowds are a backdrop. The crowds are in Fair, Monumental Staircase, Church 
 	understand "children" or "child" as the crowds when the small children are not in the location.
 	The description is "[if the location is a road]They are all in a hurry to get somewhere, though it is not clear exactly where or why[otherwise]The people seem to be enjoying themselves. I don't recogn[ize] anyone in particular, though[end if]."
 
-The High Street is east of Monumental Staircase. It is proper-named. "[if the player is not enclosed by the car]Hustle, bustle, [grimy-dirt]; [ugly American chain shops]; lots and lots of people. [otherwise][You] [are] surrounded by tail-lights and impatient men swearing. [end if][if the protesters are in High Street]There seems to be a large organ[ize]d protest in progress: [protesters] completely cram the sidewalk to the southeast.[end if]"
+The High Street is east of Monumental Staircase. It is proper-named. The description is "[if the player is not enclosed by the car]Hustle, bustle, [grimy-dirt]; [ugly American chain shops]; lots and lots of people. [otherwise][You] [are] surrounded by tail-lights and impatient men swearing. [end if][if the protesters are in High Street]There seems to be a large organ[ize]d protest in progress: [protesters] completely cram the sidewalk to the southeast.[end if]"
 
 
 The grimy-dirt is scenery in High Street. Understand "grime" or "dirt" or "griminess" or "filth" as the grimy-dirt. The printed name is "dirt". The description is "Just a general griminess over all surfaces. Some parts of the city have recently been renovated, and some are being renovated now, scouring off the accumulated filth on facades and walls; but this area hasn't been treated yet and is simply unappealing."
@@ -6856,7 +6856,7 @@ The optometry clinic is a facade in High Street. It fronts northeast. It is scen
 The tower-side is a facade in High Street. It fronts north. It is scenery. Understand "tower" or "hexagonal" as the tower-side. The printed name is "hexagonal tower". The description is "Immediately to the north is the [tower-side] of the old city walls. It rises some [if the player wears the Britishizing goggles]storeys[otherwise]stories[end if] above where [you] now stand, so from here the only thing to see is a blank wall of rough-hewn masonry." 
 	The closure notice is "The tower has no doors at this level, just masonry. ".
 
-A garbage is a thing in High Street. "The curb is lined with [garbage]." The description is "Discarded containers from the assortment of food shops and coffee stores lining High Street." The indefinite article is "some".
+A garbage is a thing in High Street. The initial appearance is "The curb is lined with [garbage]." The description is "Discarded containers from the assortment of food shops and coffee stores lining High Street." The indefinite article is "some".
 
 Instead of putting gel on the mechanic:
 	try putting gel on the garage.
@@ -6877,7 +6877,7 @@ Rule for listing exits when in High Street:
 	
 The distant-staircase is scenery in High Street. Instead of climbing or entering the distant-staircase, try going west. The description of the distant-staircase is "Broad flat stairs of white stone, with people going up and down[if Monumental Staircase is unvisited]. There's a good view from the top of those stairs: you can see the ships in the harbor and everything. Well, you'll know that, of course[end if]."
 
-The Roundabout is southeast of the High Street. The Roundabout is a road. "The traffic flows in a tight circle around a statue which [if Traffic Circle is visited][you] know all too well[otherwise][you] can never see clearly[end if][if the player is not in the car]. There is a pedestrian walkway around the outside of this circle, but crossing the tributary streets is an unpleasant experience involving considerable hazard. Unfortunately, there is no other quick way to get around this part of town[end if]."
+The Roundabout is southeast of the High Street. The Roundabout is a road. The description is "The traffic flows in a tight circle around a statue which [if Traffic Circle is visited][you] know all too well[otherwise][you] can never see clearly[end if][if the player is not in the car]. There is a pedestrian walkway around the outside of this circle, but crossing the tributary streets is an unpleasant experience involving considerable hazard. Unfortunately, there is no other quick way to get around this part of town[end if]."
 
 The hard-to-see statue is scenery in the Roundabout. The description is "[if Traffic Circle is visited]It is, curiously, easier to get a sense of from a distance than it was close-up in the Traffic Circle[otherwise]I've seen it before: it's supposed to be Atlantida, the Spirit of the Atlantean people[end if]. Kind of a 19th-century French style of thing: flowing bronze robes, one breast naked, plump fingers clasping an olive branch. But [you] can't stop and stare at it with the traffic the way it is." Understand "atlantida" or "olive" or "branch" or "robes" or "bronze" or "breast" or "naked" as the hard-to-see statue.
 
@@ -6910,18 +6910,18 @@ Instead of exiting in Roundabout:
 
 
 
-[The Questionable Chinese Restaurant is southeast of the Bus Station. "Thanks to the limitations of space, the kitchen is actually kept in the basement, down a steep flight of stairs."
+[The Questionable Chinese Restaurant is southeast of the Bus Station. The description is "Thanks to the limitations of space, the kitchen is actually kept in the basement, down a steep flight of stairs."
 
 The steep flight of stairs is a backdrop. It is in the Restaurant Kitchen and the Questionable Chinese Restaurant. Instead of entering or climbing steep flight of stairs in the Restaurant Kitchen: try going up. Instead of entering or climbing steep flight of stairs in Questionable Chinese Restaurant: try going down.
 
 The Restaurant Kitchen is below Questionable Chinese Restaurant. The Restaurant Kitchen is a kitchen.
 
-The Two-Star Hotel is north of the Bus Station. "This is a very different place from the Fleur D'Or, and different, too, from your backpacking hostel. There is a carpet, which is clean but old. The lobby features a single sofa, which has thin cushions and does not promise comfort or luxury. The front desk is veneered in fake walnut. It is unmanned."
+The Two-Star Hotel is north of the Bus Station. The description is "This is a very different place from the Fleur D'Or, and different, too, from your backpacking hostel. There is a carpet, which is clean but old. The lobby features a single sofa, which has thin cushions and does not promise comfort or luxury. The front desk is veneered in fake walnut. It is unmanned."
 
 Some carpet is in the Two-Star Hotel. It is scenery.
 	The description is "It is deep red, a color likely chosen for its capacity to hide stains, and there is a pattern on it of tiny grey diamonds, so that it looks rather as though someone's tie had been made the basis of an entire room design."
 
-A hotel sofa is an enterable supporter in the Two-Star hotel. It is scenery. "No one has to sit there at the moment, which is the key point."
+A hotel sofa is an enterable supporter in the Two-Star hotel. It is scenery. The initial appearance is "No one has to sit there at the moment, which is the key point."
 
 The front desk is a scenery supporter in the Two-Star hotel. The description of the front desk is "No one is sitting there now; but this entire time of year must be a bit of a slump for the hotel, since there is not a busy tourist trade running through on its way to buses out of town."
 
@@ -6935,7 +6935,7 @@ Chapter 1 - City Walls
 
 Section 1 - Old City Walls
 
-Old City Walls are north of the Monumental Staircase. Understand "wall" as Old City Walls. "Only portions of the old walls still stand, but you can walk along what remains, as though you were defending the place. They're a me[ter] and a half wide, made of ashlar blocks. On the vertical faces these blocks are still rough, but underfoot they have been worn smooth by the passage of many defenders and (subsequently) tourists. One of the [defaced ashlar block]s in the wall has even been defaced, some old inscription gouged out.[one of]
+Old City Walls are north of the Monumental Staircase. Understand "wall" as Old City Walls. The description is "Only portions of the old walls still stand, but you can walk along what remains, as though you were defending the place. They're a me[ter] and a half wide, made of ashlar blocks. On the vertical faces these blocks are still rough, but underfoot they have been worn smooth by the passage of many defenders and (subsequently) tourists. One of the [defaced ashlar block]s in the wall has even been defaced, some old inscription gouged out.[one of]
 
 I used to like to climb around up here when I was a kid. I made believe[--] oh, you'll think it's silly.[or][stopping]
 
@@ -6958,10 +6958,10 @@ Turret-view is a facade in Old City Walls. It is scenery. The printed name is "t
 
 Section 2 - The Turret
 
-The Old Hexagonal Turret is east of Old City Walls. "Up here [you] stand on the remains of the old fortifications; this turret offers a view out over the docks, the fish market, and the harbor, which it was designed to protect."
+The Old Hexagonal Turret is east of Old City Walls. The description is "Up here [you] stand on the remains of the old fortifications; this turret offers a view out over the docks, the fish market, and the harbor, which it was designed to protect."
 
 The depluralizing cannon is a container in the Old Hexagonal Turret. It is fixed in place. Understand "heavy" or "old" or "barrel" as the depluralizing cannon. The printed name is "deplural[izing] cannon".
-	"A heavy old [depluralizing cannon] is aimed out to sea."
+	The initial appearance is "A heavy old [depluralizing cannon] is aimed out to sea."
 	The description is "Like a conventional cannon it has a mounting to allow the users to turn the gun and change its angle, to hit objects at various ranges.
 	
 It is currently unloaded, of course; but time was when this vast weapon was employed to reduce entire fleets to a single ship, and a whole crew of marines to a single man. This tactic was found so effective that the harbor was never successfully taken."
@@ -6993,7 +6993,7 @@ Understand "fire [cannon]" or "load [cannon]" or "aim [cannon]" or "use [cannon]
 
 Section 3 - The Walls Crumble
 
-Crumbling Wall Face is north of the Old City Walls. "The wall once continued north from here some distance before curving northwest around the remainder of the city. So much has crumbled away, though, that the walkway is impassable north of this point. To protect citizens, there is a [safety railing] across the [view of jagged wall].
+Crumbling Wall Face is north of the Old City Walls. The description is "The wall once continued north from here some distance before curving northwest around the remainder of the city. So much has crumbled away, though, that the walkway is impassable north of this point. To protect citizens, there is a [safety railing] across the [view of jagged wall].
 
 A [metal ladder] of four rungs descends the inner face of the wall, allowing pedestrians access to the streets to the west."
 
@@ -7006,7 +7006,7 @@ rule for listing exits while looking in Crumbling Wall Face:
 Instead of facing southeast in Crumbling Wall Face:
 	say "[You] would have to go south and then east to reach it, but that way is the top of the hexagonal turret."
 
-The fossil is a thing in Crumbling Wall Face. "Among the rubble fill of the wall is [if we have examined the fossil]a fossil[otherwise]an odd spiral-shaped rock[end if]."
+The fossil is a thing in Crumbling Wall Face. The initial appearance is "Among the rubble fill of the wall is [if we have examined the fossil]a fossil[otherwise]an odd spiral-shaped rock[end if]."
 	Understand "odd" or "spiral-shaped" or "spiral" or "shaped" or "rock" or "stone" as the fossil.
 	The description is "[one of]The spiral rock turns out to be a fossil, from one of those sea creatures long ago.[or]It is perhaps an inch and a half long, the shape of a corkscrew seashell that once housed something small and soft. There are thousands of these things around; they're not exactly valuable, but an interesting curiosity all the same.[stopping]".
 
@@ -7083,7 +7083,7 @@ A description-concealing rule:
 
 Section 2 - Webster Court
 
-Webster Court is north of Hesychius Street and west of Crumbling Wall Face. "[if former direction is north]Hesychius Street opens here into a broad and plainly-paved court[otherwise if former direction is west]Here below the wall is a broad, plainly-paved court[otherwise]A broad and plainly-paved court[end if][unless statue of Noah Webster is as-yet-unknown], named for [the statue of Noah Webster][end if]."
+Webster Court is north of Hesychius Street and west of Crumbling Wall Face. The description is "[if former direction is north]Hesychius Street opens here into a broad and plainly-paved court[otherwise if former direction is west]Here below the wall is a broad, plainly-paved court[otherwise]A broad and plainly-paved court[end if][unless statue of Noah Webster is as-yet-unknown], named for [the statue of Noah Webster][end if]."
 
 Instead of facing west in Webster Court:
 	say "The old city wall cuts off any view towards the harbor and the far horizon. The taller houses permit a view over, however."
@@ -7101,7 +7101,7 @@ A description-concealing rule:
 	if the statue of Noah Webster is not as-yet-unknown:
 		now the statue of Noah Webster is not marked for listing. [after its first introduction it becomes scenery, since it's not really interactive and we want to emphasize other things]
 
-The statue of Noah Webster is a fixed in place thing in Webster Court. "Lending its name to the location is a bronze statue of Noah Webster." 
+The statue of Noah Webster is a fixed in place thing in Webster Court. The initial appearance is "Lending its name to the location is a bronze statue of Noah Webster." 
 	Understand "bronze" as the statue.
 	The description is "It's that hero of spelling reform, and personally responsible for the island going over to American[ize]d spellings over the British standard."
 	The introduction is "My mother likes to irritate my father by quoting what his contemporaries called Webster: a 'viper', a 'maniacal pedant', and (always a fav[our]ite at Reform Day parties) 'a toad in the service of [i]sans-culottism[/i]'. She makes sure to pronounce that in the most Parisian accent possible."
@@ -7122,7 +7122,7 @@ Instead of examining the statue of Noah Webster when the player is not in Webste
 After deciding the scope of the player when Webster Court is adjacent to the location: 
 	place the statue of Noah Webster in scope.
 
-My parents' home is a facade in Webster Court. The printed name is "my parents['] home". Understand "house" or "building" or "pink" or "large building" as my parents' home. "The [one of]large building just to the north [--] yes, the one in pale pink [--][or]large, pale pink building north of us[stopping] is [my parents' home]." The introduction is "I think I mentioned that my parents were well off. My father works for the Bureau, embarrassingly, and my mother was born into the kind of money that we like to pretend doesn't exist on this island."
+My parents' home is a facade in Webster Court. The printed name is "my parents['] home". Understand "house" or "building" or "pink" or "large building" as my parents' home. The initial appearance is "The [one of]large building just to the north [--] yes, the one in pale pink [--][or]large, pale pink building north of us[stopping] is [my parents' home]." The introduction is "I think I mentioned that my parents were well off. My father works for the Bureau, embarrassingly, and my mother was born into the kind of money that we like to pretend doesn't exist on this island."
 	The description is "It's stucco and tile, inspired by southern California ideas of gracious living. There are potted palm trees inside, and leather sofas, and French oil paintings for which expensive importation lic[ense]s had to be bought. 
 	
 My childhood bedroom faces northwest, away from the docks, towards the roofs of other villas and the open sea."
@@ -7220,14 +7220,14 @@ The decaying old wall is scenery in Patriotic Chard-Garden. The description is "
 Instead of climbing on the decaying old wall:
 	say "It's not in the best of shape. It wouldn't be hard to become part of a minor rockfall and kill ourselves on the descent."
 
-A chard is in Patriotic Chard-Garden. It is a vegetable. "A little [chard] still grows in the nearest bed, carefully tended to thrive in this climate." The indefinite article of the chard is "some".
+A chard is in Patriotic Chard-Garden. It is a vegetable. The initial appearance is "A little [chard] still grows in the nearest bed, carefully tended to thrive in this climate." The indefinite article of the chard is "some".
 
 Report taking the chard when the chard is not handled:
 	say "We pick the chard, leaving bare soil behind.
 		
 A flicker of curtains from inside the house suggests that someone saw us [--] a cleaner, possibly. But then there is a voice, not audible except as a confident rising and falling tone; this will be my mother, saying not to worry and not to interfere." instead.
 
-A soil is a fixed in place thing in the Patriotic Chard-Garden. The indefinite article is "some". "At our feet is a patch of [soil]." 
+A soil is a fixed in place thing in the Patriotic Chard-Garden. The indefinite article is "some". The initial appearance is "At our feet is a patch of [soil]." 
 	Understand "ground" or "earth" or "soil" as the soil.
 	The description is "Bare dirt[if the chard is not in the location and the location is the Patriotic Chard-Garden], revealed when the chard was cleared away[otherwise], looking somewhat out of place here[end if]." 
 	The soil is diggable.
@@ -7249,7 +7249,7 @@ The house-wall is scenery in Patriotic Chard-Garden. Understand "house" or "flic
 
 Section 4 - Roget Close
 
-Roget Close is west of Webster Court. "A pleasantly sheltered lane in which I learned to ride a bicycle, and where my friend Lucy used to live, before she and her parents moved off-island. Restrictions were looser even twenty years ago. Our old [schoolhouse] is just west of here." 
+Roget Close is west of Webster Court. The description is "A pleasantly sheltered lane in which I learned to ride a bicycle, and where my friend Lucy used to live, before she and her parents moved off-island. Restrictions were looser even twenty years ago. Our old [schoolhouse] is just west of here." 
 	 
 [Instead of looking in Roget Close when Private Beach is visited and lexicon-tick is 0:
 	do nothing instead.]
@@ -7271,7 +7271,7 @@ Instead of climbing palm trees:
 
 Once they *have* seen the gum, it becomes more prominently visible in the room description to hint that they could interact with it if they want.]
 	
-The gum is in Roget Close. It is edible. The heft of the gum is 1. The indefinite article is "some". "Gum adheres to one of the palm trees, left no doubt by some departing school kid." The description is "The lump of blue-green gum has largely dried, but is still intensely unappetizing."
+The gum is in Roget Close. It is edible. The heft of the gum is 1. The indefinite article is "some". The initial appearance is "Gum adheres to one of the palm trees, left no doubt by some departing school kid." The description is "The lump of blue-green gum has largely dried, but is still intensely unappetizing."
 	The scent-description is "spearmint".
 	Understand "lump" or "blue-green" as the gum.
 
@@ -7303,13 +7303,13 @@ Soon, however, the footpath begins to descend purposefully towards the level of 
 	
 Section 5 - Winding Footpath
 
-The spinner-gate is north of Roget Close.  It is a closed locked door. The printed name of the spinner-gate is "gate". Understand "gate" as the spinner-gate. "If you look just north between the houses, you'll notice also the footpath down to an almost-private beach. It used to be open, but it's now gated off, and built into the [spinner-gate] is a chic modern sculpture." 
+The spinner-gate is north of Roget Close.  It is a closed locked door. The printed name of the spinner-gate is "gate". Understand "gate" as the spinner-gate. The initial appearance is "If you look just north between the houses, you'll notice also the footpath down to an almost-private beach. It used to be open, but it's now gated off, and built into the [spinner-gate] is a chic modern sculpture." 
 
 The description of the spinner-gate is "A gate of wrought iron bars between two sturdy columns[if the spinner-gate is closed and the spinner-gate is locked], too close to climb through and too tall to climb over[else if the spinner-gate is closed], closed but not locked[else if the spinner-gate is open]; at the moment the gate has been pushed conveniently open[end if]. Built into the right-hand column, next to the gate latch, is a curious sculpture."
 
 Through spinner-gate is the Winding Footpath. South of Winding Footpath is Roget Close.
 
-Winding Footpath is an outdoors room. "The [underfoot-path] winds between the villas, sloping steeply downward. It is narrow, and [bushes] left and right conceal it even from the windows of the people living nearby." Understand "path" as Winding Footpath.
+Winding Footpath is an outdoors room. The description is "The [underfoot-path] winds between the villas, sloping steeply downward. It is narrow, and [bushes] left and right conceal it even from the windows of the people living nearby." Understand "path" as Winding Footpath.
 
 Instead of going down in Winding Footpath:
 	try going north.
@@ -7378,7 +7378,7 @@ Sanity-check doing something when the bushes are shrine-hiding:
 
 [The nymph 'shrine' is nod to the island's Roman history. There's nothing in the game to reveal this, really, but the idea is that this stone is actually a panel from an imperial-era sarcophagus (nymphs were often featured on such panels, and sarcophagus carvers were of very varied levels of skill). Subsequent inhabitants moved it.]
 
-The shrine is a fixed in place container in the Winding Footpath. "Now that the bushes have been cleared a little, the ancient shrine is plainly visible[if something is in the shrine], and [a random thing in the shrine] [is-are] set up in the place of hon[our][end if]." Understand "ancient" or "wall" or "niche" or "stone" or "backing" as the shrine. The description of the shrine is "There's a niche dug into the stone of the wall, above a [low relief] of three ladies. It's not very good work to start with, and has been eroded by a lot of weather, and I wouldn't be surprised if this weren't its original location; it probably stood somewhere else and was brought here.".
+The shrine is a fixed in place container in the Winding Footpath. The initial appearance is "Now that the bushes have been cleared a little, the ancient shrine is plainly visible[if something is in the shrine], and [a random thing in the shrine] [is-are] set up in the place of hon[our][end if]." Understand "ancient" or "wall" or "niche" or "stone" or "backing" as the shrine. The description of the shrine is "There's a niche dug into the stone of the wall, above a [low relief] of three ladies. It's not very good work to start with, and has been eroded by a lot of weather, and I wouldn't be surprised if this weren't its original location; it probably stood somewhere else and was brought here.".
 
 The carrying capacity of the shrine is 1.
 
@@ -7458,13 +7458,13 @@ Instead of climbing underfoot-path:
 	
 Section 6 - The Beach
 
-Private Beach is north of Winding Footpath. "This is little more than a strip of fine yellow [sand], perhaps twenty me[ter]s from side to side, and five from the [hillside] to the waterline[if the sage is in the location and the sage is not handled]. A little [sage] grows on the hillside, escaped from some garden, along with wilder plants[end if]. Above, at the top of that slope, are houses with balconies overlooking the sea, but from this angle it's impossible to see much of them, or for them (you'll have to take my word on this) to see us[if high street is visited and roundabout is not visited].
+Private Beach is north of Winding Footpath. The description is "This is little more than a strip of fine yellow [sand], perhaps twenty me[ter]s from side to side, and five from the [hillside] to the waterline[if the sage is in the location and the sage is not handled]. A little [sage] grows on the hillside, escaped from some garden, along with wilder plants[end if]. Above, at the top of that slope, are houses with balconies overlooking the sea, but from this angle it's impossible to see much of them, or for them (you'll have to take my word on this) to see us[if high street is visited and roundabout is not visited].
 
 It's tempting to look for crabs among the rocks, but the tide is high just now, and even at the best of times this is not an area rich in sealife[end if]."
 
 Understand "look for crabs" or "search for crabs" or "find crabs" or "catch crabs" as a mistake ("There aren't likely to be any, is the point.") when the player is in Private Beach.
 
-The hillside is a facade in Private Beach. It is scenery. It fronts west. "The [hillside] both east and west runs steeply down into the water [--] much too steep to allow for beaches or buildings. Here and there some bit of plant life has managed to cling onto the rock, but mostly it is bare and rough." Understand "hill" or "slope" or "plant life" or "plants" as the hillside.
+The hillside is a facade in Private Beach. It is scenery. It fronts west. The initial appearance is "The [hillside] both east and west runs steeply down into the water [--] much too steep to allow for beaches or buildings. Here and there some bit of plant life has managed to cling onto the rock, but mostly it is bare and rough." Understand "hill" or "slope" or "plant life" or "plants" as the hillside.
 	The closure notice is "That way is just bare hillside, much too steep to climb. ".
 
 Instead of facing east in Private Beach:
@@ -7476,7 +7476,7 @@ A description-concealing rule:
 	if the sage is not handled:
 		now the sage is not marked for listing. 
 
-The sandcastle is fixed in place in Private Beach. "A fragile [sandcastle] stands near the water's edge." The sandcastle can be built or unbuilt. The sandcastle is unbuilt. The description is "[if unbuilt]At the edge of the water the sand is disturbed just enough to suggest where a previous sandcastle might have been, but that is all.[otherwise]No more than a couple of cylindrical turrets and a protective wall.[end if]". Understand "turret" or "turrets" or "wall" or "cylindrical" or "protective wall" or "cylinder" or "cylinders" or "castle" or "sand castle" or "sand-castle" or "palace" or "fort" or "fortress" or "project" as the sandcastle.
+The sandcastle is fixed in place in Private Beach. The initial appearance is "A fragile [sandcastle] stands near the water's edge." The sandcastle can be built or unbuilt. The sandcastle is unbuilt. The description is "[if unbuilt]At the edge of the water the sand is disturbed just enough to suggest where a previous sandcastle might have been, but that is all.[otherwise]No more than a couple of cylindrical turrets and a protective wall.[end if]". Understand "turret" or "turrets" or "wall" or "cylindrical" or "protective wall" or "cylinder" or "cylinders" or "castle" or "sand castle" or "sand-castle" or "palace" or "fort" or "fortress" or "project" as the sandcastle.
 
 The scent-description is "salt and seaweed".
 
@@ -7542,7 +7542,7 @@ Instead of inserting the sand into the funnel:
 Instead of inserting the sea-view into the funnel:
 	say "The water fills the funnel and then runs out again in a decorative drizzle on the sand. A moment later even that is gone in the heat of the day."
 
-A funnel is a thing in the Private Beach. "[if the funnel is buried]Something green and plastic just barely pokes out of the sand[otherwise]Half-hidden in the sand, no doubt left over from some kid's sandcastle project, is a plastic funnel[end if]." The description is "A gaudy green plastic toy suitable for funneling water and shaping conical sand-turrets. [if handled]A few grains of sand still cling to it[otherwise]It's all sandy[end if]." The scent-description is "warm plastic".
+A funnel is a thing in the Private Beach. The initial appearance is "[if the funnel is buried]Something green and plastic just barely pokes out of the sand[otherwise]Half-hidden in the sand, no doubt left over from some kid's sandcastle project, is a plastic funnel[end if]." The description is "A gaudy green plastic toy suitable for funneling water and shaping conical sand-turrets. [if handled]A few grains of sand still cling to it[otherwise]It's all sandy[end if]." The scent-description is "warm plastic".
 	Understand "green" or "plastic" or "toy" or "gaudy" as the funnel.
 	
 Instead of examining the buried funnel:
@@ -7614,7 +7614,7 @@ Section 1 - Deep Street
 
 [The mixed architecture of Deep Street is an echo of the dreamlike buildings I once saw in the French seaside town of Cerbère, on the Mediterranean just across the border from Spain.]
 
-Deep Street is a proper-named road. "This road descends steeply from [southwest] to [northwest], passing between [white concrete buildings] to provide access to the marina [--] the Fish Market, the Docks, and a bar or two. The street is in deep shadow, protected from sunlight from almost any angle by its narrowness and by the height of the walls."
+Deep Street is a proper-named road. The description is "This road descends steeply from [southwest] to [northwest], passing between [white concrete buildings] to provide access to the marina [--] the Fish Market, the Docks, and a bar or two. The street is in deep shadow, protected from sunlight from almost any angle by its narrowness and by the height of the walls."
 
 Instead of going southeast in Deep Street:
 	say "The [Post Office] is of course shut down for the holiday."
@@ -7656,7 +7656,7 @@ A description-concealing rule:
 	if Counterfeit Monkey is unvisited:
 		now aquarium-exterior is not marked for listing.
 	
-aquarium-exterior is a facade in Deep Street. It fronts east. The printed name is "Aquarium Bookstore". Understand "aquarium" or "shop" or "window" or "bookstore" or "store" as aquarium-exterior. "[The Aquarium] is to the east." The introduction is "It is an esoteric bookstore (and purveyor of other things), but one whose owner has helped you in the past[if the player knows lena-needed and aquarium is not visited]. That would be Lena, the woman that [you] need to talk to about Slango[end if]."
+aquarium-exterior is a facade in Deep Street. It fronts east. The printed name is "Aquarium Bookstore". Understand "aquarium" or "shop" or "window" or "bookstore" or "store" as aquarium-exterior. The initial appearance is "[The Aquarium] is to the east." The introduction is "It is an esoteric bookstore (and purveyor of other things), but one whose owner has helped you in the past[if the player knows lena-needed and aquarium is not visited]. That would be Lena, the woman that [you] need to talk to about Slango[end if]."
 	The description is "[if Aquarium is visited]The outside manages to give an impression of poverty, gloom, and probable drug use; though, having seen the inside, I am going to guess that the real issues are sloth and kookiness[otherwise]I've never been inside the Aquarium: the outside never looked terribly savory. Perhaps that's the point[end if]."
 	
 Rule for writing a topic sentence about aquarium-exterior when aquarium-exterior is not as-yet-unknown:
@@ -7717,7 +7717,7 @@ Instead of searching the aquarium-shelving:
 A ranking rule for the merchandise:
 	increase the description-rank of the merchandise by 50.
 
-The merchandise is fixed in place in the aquarium. "The merchandise consists mainly, but not exclusively, of books, and the selection caters to odd tastes." 
+The merchandise is fixed in place in the aquarium. The initial appearance is "The merchandise consists mainly, but not exclusively, of books, and the selection caters to odd tastes." 
 	The introduction is "You once picked up in here a book about a man who R-removed a wrench, and then had his way with it. You and Brock had a good time with that one for the next month and a half."
 	Understand "books" or "book" or "stack" or "stacks" or "grandfather clock" or "grandfather" or "his gray lover" or "seventy ways to disable an authentication scope" or "ways to disable" or "seventy" or "stack/stacks of books" as the merchandise.
 	The description is "Our eyes scan over the merchandise and pick out [one of][a random thing which is part of the merchandise][or][a random number between 2 and 7 in words] copies of [a random thing which is part of the merchandise][at random][one of][or] inexplicably filed under '[one-genre]'[as decreasingly likely outcomes]."
@@ -7770,7 +7770,7 @@ The description of the modems is "If Brock were here, he would know exactly what
 
 Section 3 - Lena 
 
-Lena is an alert woman in the Aquarium. "[one of][Lena] is present, all right. In fact she watches us keenly the instant [you] come into the shop.[or][Lena] hovers, unwilling to let us look around ungoverned[if the contraband box is mentionable and the contraband box contains something]. At her feet is [a contraband box] containing [a list of things in the contraband box][end if].[stopping]".
+Lena is an alert woman in the Aquarium. The initial appearance is "[one of][Lena] is present, all right. In fact she watches us keenly the instant [you] come into the shop.[or][Lena] hovers, unwilling to let us look around ungoverned[if the contraband box is mentionable and the contraband box contains something]. At her feet is [a contraband box] containing [a list of things in the contraband box][end if].[stopping]".
 	The introduction is "[Lena] is an associate of Slango's. You hadn't realized that had crossed over into a romance. Slango has never, ever in your recollection dated anyone. And now this."
 	The description is "She has grey hair in a curly cloud around her head, and she wears a [long patchwork skirt] and [leather sandals]. But her eyes are keen."
 	Lena wears a long patchwork skirt and some leather sandals. The description of the leather sandals is "The sort of sturdy comfortable sandals one can walk in for hours." 
@@ -7845,7 +7845,7 @@ Before going to the Fish Market from the Tin Hut:
 	remove Authenticator from play;
 	say "I don't think there's anything showing that should get us into trouble. Timidly I open the door; the Authenticator has her back to us. [You] slip out. She makes one more turn in place [--] monocled gaze sliding across us without stopping [--] and then she strides away to the north."
 
-The storage-exterior is in the Fish Market. The printed name is "tin building". Understand "tin" or "hut" or "building" or "rusting" or "corrugated" as storage-exterior. It fronts east. "Just east of here is a rusting corrugated tin building, which was built to house various possessions of the fishermen."
+The storage-exterior is in the Fish Market. The printed name is "tin building". Understand "tin" or "hut" or "building" or "rusting" or "corrugated" as storage-exterior. It fronts east. The initial appearance is "Just east of here is a rusting corrugated tin building, which was built to house various possessions of the fishermen."
 	The description is "It looks very much as though it would like to fall down, but it has not done so yet."
 	
 Sanity-check doing something in the presence of the Authenticator:
@@ -7883,12 +7883,12 @@ Check waving the letter-remover at the briny rivulets when the current setting o
 	say "The letter-remover has a go, and for a moment the rivulets turn into a single, unified trickle. But the ground is so uneven that soon the liquid has diverged again into multiple rivulets. Some things can only be cleaned up the old-fashioned way, but fortunately this one isn't really our problem." instead
 
 
-The Authenticator is a woman in Fish Market. Understand "tall" or "stern" or "woman" or "uniform" or "black" or "caped" as the Authenticator. "A tall, stern woman is standing in the middle of the market. She wears the black caped uniform of an Authenticator, and a monocle just like mine. And I don't think I want her to see us." The description of the Authenticator is "She isn't looking our way yet, but she will be any minute now."
+The Authenticator is a woman in Fish Market. Understand "tall" or "stern" or "woman" or "uniform" or "black" or "caped" as the Authenticator. The initial appearance is "A tall, stern woman is standing in the middle of the market. She wears the black caped uniform of an Authenticator, and a monocle just like mine. And I don't think I want her to see us." The description of the Authenticator is "She isn't looking our way yet, but she will be any minute now."
  
 
 Section 5 - Outdoor Cafe
 
-The Outdoor Cafe is south of the Fish Market and west of Deep Street. The printed name is "Outdoor Café". "From this slightly raised terrace, tourists have a view of the activity in the market and out over the docks[one of][or]. The street is [east], the Fish Market [north][stopping]." 
+The Outdoor Cafe is south of the Fish Market and west of Deep Street. The printed name is "Outdoor Café". The description is "From this slightly raised terrace, tourists have a view of the activity in the market and out over the docks[one of][or]. The street is [east], the Fish Market [north][stopping]." 
 
 The rocky cliff-face is a scenery facade in Outdoor Cafe. It fronts south. Understand "cliff" or "rocks" or "face" as the rocky cliff-face. The description is "This little terrace area has been carved out of the hillside. Immediately to the south there is only rough rock wall for many feet up."
 	The closure notice is "That way is bare cliff rock. ".
@@ -7896,7 +7896,7 @@ The rocky cliff-face is a scenery facade in Outdoor Cafe. It fronts south. Under
 The cafe building is a scenery facade in Outdoor Cafe. It fronts west. The printed name is "café building". Understand "café" as the cafe building. The description is "The source of drinks and small snacks when the café is in full operation. At the moment there isn't much sign of life from inside." The closure notice of the cafe building is "[if traffic circle is visited]The place is entirely closed now.[else]When we approach, a girl comes to the window and waves us off. 'We're just closing up. No new customers!'[end if]"
 
 Some round black metal tables are supporters in the outdoor cafe. 
-	"Several [round black metal tables] have been set out, with [umbrellas]." 
+	The initial appearance is "Several [round black metal tables] have been set out, with [umbrellas]." 
 	The description is "The wobbly, tipsy kind of table that jog at a touch and spill your coffee everywhere.". 
 	Understand "table" as the round black metal tables.
 	
@@ -7964,7 +7964,7 @@ Before approaching the Tin Hut when the Counterfeit Monkey is unvisited:
 	
 Section 6 - Tin Hut
 
-The Tin Hut is east of the Fish Market. It is indoors. "Most of the light in here comes from [circular windows] punched into the tin walls just under the ceiling. From the inside, the building looks both larger and more sound than it appears from outside: there are plenty of sturdy [struts] supporting the roof and keeping the walls upright."
+The Tin Hut is east of the Fish Market. It is indoors. The description is "Most of the light in here comes from [circular windows] punched into the tin walls just under the ceiling. From the inside, the building looks both larger and more sound than it appears from outside: there are plenty of sturdy [struts] supporting the roof and keeping the walls upright."
 	The introduction is "Sometimes smugglers and forgers have been known to stash things in here, since the building is close to the docks but rarely attracts the interest of customs officials."
 	
 Understand "hide [text]" as a mistake ("A natural impulse, but I don't think she's coming in here. And if she did, the last thing [you][']d want would be to be caught hiding. The key thing is to be in plain sight and obviously innocent.") when the location is the Tin Hut and the Authenticator is in the Fish Market.
@@ -7972,7 +7972,7 @@ Understand "hide [text]" as a mistake ("A natural impulse, but I don't think she
 Rule for listing exits while looking in the tin hut:
 	do nothing instead.
 
-Some tarpaulin-covered masses are an enterable supporter in Tin Hut. They are fixed in place. "Various [tarpaulin-covered masses] fill the room." The description is "From the shapes visible under the blue plastic, it appears that they are probably tables and stalls, buckets, signs, and other necessary features of the fish market when sales are in progress. There's a flattish area we could probably scramble onto." Understand "tarpaulin" or "tarp" or "tarps" or "tables" or "stalls" or "awnings" or "signs" or "buckets" or "table" or "stall" or "awning" or "bucket" or "flattish" or "area" as the masses.
+Some tarpaulin-covered masses are an enterable supporter in Tin Hut. They are fixed in place. The initial appearance is "Various [tarpaulin-covered masses] fill the room." The description is "From the shapes visible under the blue plastic, it appears that they are probably tables and stalls, buckets, signs, and other necessary features of the fish market when sales are in progress. There's a flattish area we could probably scramble onto." Understand "tarpaulin" or "tarp" or "tarps" or "tables" or "stalls" or "awnings" or "signs" or "buckets" or "table" or "stall" or "awning" or "bucket" or "flattish" or "area" as the masses.
 
 The masses allow seated, standing, and reclining. The posture of the masses is standing.
 
@@ -7997,7 +7997,7 @@ Instead of taking the masses:
 Instead of searching or looking under the masses:
 	say "[one of]Lifting the edges of the nearest tarps confirms what [you] already suspected: they[or]They[stopping] are various tables, stalls, awnings, etc. belonging to the fish market."
 
-Some circular windows are scenery in Tin Hut. "The windows admit diffuse light only." 
+Some circular windows are scenery in Tin Hut. The initial appearance is "The windows admit diffuse light only." 
 	Understand "sky" or "ellipse" or "window" or "ellipse of sky" as the circular windows.
 	
 Every turn when the Authenticator is in the Fish Market and the location is Tin Hut:
@@ -8025,7 +8025,7 @@ The struts are scenery in Tin Hut. Understand "strut" or "roof" or "wall" or "wa
 Instead of attacking the struts:
 	say "When struck, the metal booms hollowly, but nothing happens."
 
-The trap-door is a door. It is below the Tin Hut. "A [trap-door] is set in the floor[if something wedges the trap-door], propped by [a random thing which wedges the trap-door][end if]." The printed name is "trap door". Understand "trap" or "door" or "trapdoor" or "hinge" or "hinges" or "hinging" or "mechanism" as the trap-door. The description is "It is a wooden door set into the floor. The hinging mechanism is designed to keep the door closed if possible, perhaps as a safety feature so that people won't fall into an open hole."
+The trap-door is a door. It is below the Tin Hut. The initial appearance is "A [trap-door] is set in the floor[if something wedges the trap-door], propped by [a random thing which wedges the trap-door][end if]." The printed name is "trap door". Understand "trap" or "door" or "trapdoor" or "hinge" or "hinges" or "hinging" or "mechanism" as the trap-door. The description is "It is a wooden door set into the floor. The hinging mechanism is designed to keep the door closed if possible, perhaps as a safety feature so that people won't fall into an open hole."
 
 Rule for writing a paragraph about the trap-door when the location is the Crawlspace:
 	say "[The trap-door], wedged open by [a random thing which wedges the trap-door], admits the only light.";
@@ -8057,7 +8057,7 @@ Before taking something which wedges the trap-door when the player is in the cra
 	
 Section 7 - The Crawlspace
 
-The Crawlspace is below the trap-door. "An awkward, low, concrete-lined crawlspace beneath the tin hut. It smells somewhat like animals; in spite of this it clearly gets a bit more use than anyone would like the customs officials to know about."
+The Crawlspace is below the trap-door. The description is "An awkward, low, concrete-lined crawlspace beneath the tin hut. It smells somewhat like animals; in spite of this it clearly gets a bit more use than anyone would like the customs officials to know about."
 
 The Crawlspace is indoors.
 
@@ -8068,7 +8068,7 @@ After deciding the scope of the player when the player is in the Crawlspace:
 Report facing in Crawlspace:
 	say "There is only darkness, but I assume the space extends only under the rest of the building. There's no obvious sign of any other interesting items being stored down here." instead.
 
-The crate is a container in the Crawlspace. "[if the location is the Crawlspace]The only significant thing down here is a [crate][otherwise]A [crate] is here, looking desperately out of place[end if]." The crate is openable and closed and fixed in place. The heft of the crate is 4. 
+The crate is a container in the Crawlspace. The initial appearance is "[if the location is the Crawlspace]The only significant thing down here is a [crate][otherwise]A [crate] is here, looking desperately out of place[end if]." The crate is openable and closed and fixed in place. The heft of the crate is 4. 
 
 [TODO: fix tests]
 [Test crate-bug with "drop crate / put tub in crate / wave c-remover at crate / autoupgrade / wave c-remover at crate / open tub / gel rate / put plans in crate / wave c-remover at crate / n" holding the tub and the crate and the plans.]
@@ -8097,7 +8097,7 @@ Rule for printing the name of the leaflet while listing contents of something:
 	
 Section 8 - Docks
 
-The Docks are north of the Fish Market. "Here are some dozens of [boats] tied up: some of them are small to medium-sized fishing craft, some tourist boats for trips around the island, some merely ferries to the deeper harbor where the cruise ships anchor."
+The Docks are north of the Fish Market. The description is "Here are some dozens of [boats] tied up: some of them are small to medium-sized fishing craft, some tourist boats for trips around the island, some merely ferries to the deeper harbor where the cruise ships anchor."
 
 The boats are scenery in the Docks. Understand "craft" or "fishing craft" or "tourist" or "ferries" as the boats. The description is "I know nothing about boats. You, on the other hand, appear to have an unnerving awareness of which of these craft are here on legal business and which are engaged in some form of smuggling or refugee-assistance."
 
@@ -8118,7 +8118,7 @@ Check waving the letter-remover at the boats when the current setting of the let
 Check waving the letter-remover at the boats when the current setting of the letter-remover is "s":
 	say "Deplural[izing] all the boats would be a fascinating re-enactment of historical events, except that the boats are full of harmless tourists and the letter-remover doesn't have nearly the power required to achieve that goal."
  
-The customs-exterior is a facade in Docks. It fronts east. "To the east, up a moderate rise from the sea-level docks, is the imposing exterior of the Customs House. The classical look is only a little undermined by the public-service posters along the front." The introduction is "There passports are inspected and cargo passed under authentication, foreign items renamed or confiscated, and suspected smugglers interrogated." 
+The customs-exterior is a facade in Docks. It fronts east. The initial appearance is "To the east, up a moderate rise from the sea-level docks, is the imposing exterior of the Customs House. The classical look is only a little undermined by the public-service posters along the front." The introduction is "There passports are inspected and cargo passed under authentication, foreign items renamed or confiscated, and suspected smugglers interrogated." 
 	The description is "The building itself is not especially grand, but you have never been on the good side of the people who work there, and that gives you a perfectly justifiable dislike of the place, and the sense that it's larger than life."
 	Understand "exterior" or "customs" or "house" as the customs-exterior. The printed name is "customs house".
 	
@@ -8131,7 +8131,7 @@ Rule for listing exits when looking in Docks:
 	
 
 
-The counterfeit-monkey-exterior is a facade in the Docks. Understand "counterfeit" or "monkey" as the counterfeit-monkey-exterior. The printed name is "pub". It fronts west. "Immediately west, [if Counterfeit Monkey is unvisited and the garish sign is part of the counterfeit-monkey-exterior]a [garish sign] advertises a pub called the Counterfeit Monkey[otherwise if the garish sign is part of the counterfeit-monkey-exterior]the Counterfeit Monkey's [garish sign] sways in the wind[otherwise]the Counterfeit Monkey looks atypically bare with its sign missing[end if]." Understand "pub" or "bar" as the counterfeit-monkey-exterior. The description is "The place looks [--] and is [--] wholly disreputable."
+The counterfeit-monkey-exterior is a facade in the Docks. Understand "counterfeit" or "monkey" as the counterfeit-monkey-exterior. The printed name is "pub". It fronts west. The initial appearance is "Immediately west, [if Counterfeit Monkey is unvisited and the garish sign is part of the counterfeit-monkey-exterior]a [garish sign] advertises a pub called the Counterfeit Monkey[otherwise if the garish sign is part of the counterfeit-monkey-exterior]the Counterfeit Monkey's [garish sign] sways in the wind[otherwise]the Counterfeit Monkey looks atypically bare with its sign missing[end if]." Understand "pub" or "bar" as the counterfeit-monkey-exterior. The description is "The place looks [--] and is [--] wholly disreputable."
 
 The garish sign is part of counterfeit-monkey-exterior. It is a sign. The description is "In the picture, a villainous man threatens a cage full of tiny primates with a primitive Victorian letter-remover. In the background is an enormous bag of cash."
 	The printed name of the garish sign is "sign".
@@ -8146,7 +8146,7 @@ Section 9 - Counterfeit Monkey
 
 [The concept of the Monkey came fairly early.]
 
-The Counterfeit Monkey is west of the Docks. It is proper-named and indoors. "[one of]It takes a minute for us to adjust to the light in here. [or]Infamously this pub was raided in 1929, the year that the Bureau developed its first meager attempt at an Authentication Scope, and dozens of smugglers and fraudulent businessmen went to jail. But neither that raid nor subsequent scrutiny has ever shut the place down entirely. [or][stopping]Built when people were a bit shorter and ceilings were a bit lower, the Counterfeit Monkey is always smoky and never well lit, even in the middle of the day." 
+The Counterfeit Monkey is west of the Docks. It is proper-named and indoors. The description is "[one of]It takes a minute for us to adjust to the light in here. [or]Infamously this pub was raided in 1929, the year that the Bureau developed its first meager attempt at an Authentication Scope, and dozens of smugglers and fraudulent businessmen went to jail. But neither that raid nor subsequent scrutiny has ever shut the place down entirely. [or][stopping]Built when people were a bit shorter and ceilings were a bit lower, the Counterfeit Monkey is always smoky and never well lit, even in the middle of the day." 
 
 A description-concealing rule when Slango is in the Counterfeit Monkey:
 	now the clientele is unmarked for listing;
@@ -8175,7 +8175,7 @@ Check waving the letter-remover at the tattoos:
 
 Some tattoos are part of the clientele. The description of the tattoos is "[one of]One says I HEART MA[or]One is a detailed rendering of scenes from Brooklyn[or]One looks like an Elder Sign[at random]."
 
-The clientele is a person in Counterfeit Monkey. "[The clientele] is keeping [the barman] thoroughly busy."
+The clientele is a person in Counterfeit Monkey. The initial appearance is "[The clientele] is keeping [the barman] thoroughly busy."
 	The description of the clientele is "A nasty-looking bunch. They can be good enough if you're on the right side of them, but getting and staying that way isn't easy. And they're justly suspicious: the customs house not infrequently tries to infiltrate the criminal organ[ization]s and brotherhoods, though with no great success." Understand "crowd" or "players" or "player" or "customers" or "customer" or "men" or "guys" or "people" or "man" or "guy" as the clientele.
 
 The barman is a man in Counterfeit Monkey. The description of the barman is "His name is Parker, and he is a friend of yours, when you're wearing your own skin. At the moment, though, it seems like a good idea not to trust these friendships by making our new disguise known." Understand "bartender" or "barkeep" or "Parker" as the barman.
@@ -8193,7 +8193,7 @@ To summon Slango:
 	move Slango to the Counterfeit Monkey;
 	now the barman is not alert.
 
-Slango is an alert man. "[Slango] sits at [a dark table], nursing [a root beer]."
+Slango is an alert man. The initial appearance is "[Slango] sits at [a dark table], nursing [a root beer]."
 	The description is "He's dressed plainly but neatly: clean jeans, crisp white button-up shirt. His face is calm and his voice is even and he could be any age between thirty and fifty. He looked that way when you met him eight years ago, too."
 	The introduction is "Slango is, of course, not Slango's real name. He is half criminal, half ideological revolutionary: uncouth, restless, always hungry for a new exploit. Had he been born into a freer society, he might have become a very valuable engineer or consultant. He has been your mentor in crime and your usher into the world of adults."
 	
@@ -8227,7 +8227,7 @@ At least, that's the theory. In practice, there's massively more complex output 
 
 In an earlier version of the game, the player *did* leave via the Customs House, after first solving a puzzle of manipulating the exit lines — the challenge was to distract multiple officers by creating fake humans and animals, so that everyone manning customs was kept busy dealing with these frauds while the player snuck into a back room to rescue Brock. But this puzzle proved fiddly to explain to the player and not actually very much fun, so we axed the entire sequence. At that point the game was also perhaps a half or two thirds its present length: not only was it missing the escapades in the Bureau basement, but it also lacked the traffic circle and the dead drop/map store sequence. ]
 
-The Customs House is east of the Docks. It is indoors. "This one building handles both people entering Atlantis by sea and those leaving, so there is an entry line (which feeds out into the city by the door we used) and an exit line (which snakes through from here to the point where boats and ferries board their passengers). 
+The Customs House is east of the Docks. It is indoors. The description is "This one building handles both people entering Atlantis by sea and those leaving, so there is an entry line (which feeds out into the city by the door we used) and an exit line (which snakes through from here to the point where boats and ferries board their passengers). 
 
 There is a [long line] of people waiting to leave Atlantis, even on Serial Comma Day."
 	The introduction is "No one is paying any attention to us [i]yet[/i], but I wouldn't advise spending much time here."
@@ -8242,7 +8242,7 @@ The long line is a scenery enterable container in the Customs House. The descrip
 Some local-officials are scenery in the Customs House. Understand "officials" or "official" or "customs" as the local-officials. The printed name is "customs officials". The description is "The officials are at the far end of a very long line."
 
 
-An Atlantida propaganda poster is fixed in place in Customs House. Understand "old" or "war-time" or "wartime" or "war" or "war time" as the propaganda poster. The printed name is "old war-time poster". "An [Atlantida propaganda poster] on the wall shows Atlantida striding boldly forward." The description is "The poster is huge, almost as tall as [you] are, and covers most of a wall. Atlantida, dressed in blue, walks towards the viewer from a bold sunrise background. The legend reads THE SPIRIT OF OUR PEOPLE.
+An Atlantida propaganda poster is fixed in place in Customs House. Understand "old" or "war-time" or "wartime" or "war" or "war time" as the propaganda poster. The printed name is "old war-time poster". The initial appearance is "An [Atlantida propaganda poster] on the wall shows Atlantida striding boldly forward." The description is "The poster is huge, almost as tall as [you] are, and covers most of a wall. Atlantida, dressed in blue, walks towards the viewer from a bold sunrise background. The legend reads THE SPIRIT OF OUR PEOPLE.
 
 It was part of a propaganda campaign to get the Atlanteans to think of Atlantis as inherently invulnerable, on the off-chance that the belief would create the reality. 
 
@@ -8468,7 +8468,7 @@ The description of the Confiscated Articles Depository is "A room brightly but u
 
 Some shelves are scenery in the Depository. The description of the shelves is "Ordinary metal shelves, painted beige."
 
-The dead articles are on the shelves. Understand "confiscated" and "definite" and "indefinite" as the articles. The articles are scenery. "Plucked from their nouns, they are limp and pale. The ones in front are a typical mix of 'le' and 'il' and 'gli', 'der' and 'die' and 'la' and 'des'. Towards the back they get more interesting, though little more than husks now [--] I'm sure I see a 'τῶν' wedged back there, and in a contraband alphabet at that." Instead of doing something other than examining with the articles: say "There is bound to be an alarm." ]
+The dead articles are on the shelves. Understand "confiscated" and "definite" and "indefinite" as the articles. The articles are scenery. The initial appearance is "Plucked from their nouns, they are limp and pale. The ones in front are a typical mix of 'le' and 'il' and 'gli', 'der' and 'die' and 'la' and 'des'. Towards the back they get more interesting, though little more than husks now [--] I'm sure I see a 'τῶν' wedged back there, and in a contraband alphabet at that." Instead of doing something other than examining with the articles: say "There is bound to be an alarm." ]
 
 
 Part 2 - Direct Disobedience
@@ -8555,7 +8555,7 @@ A ranking rule for the giant Atlantida statue:
 	increase the description-rank of the giant Atlantida statue by 50.
 
 The giant Atlantida statue is a distant fixed in place enterable supporter in Traffic Circle. 
-	"A [giant Atlantida statue] stands at the cen[ter][if something unsuitable is on the giant Atlantida statue], decorated in an unorthodox fashion with [a list of unsuitable things on the giant Atlantida statue][end if][if the signet is on the giant Atlantida statue]. [A signet], outsized, representing the seal of the Bureau, hangs around her neck in classic albatross fashion[end if][if the restoration-gel rifle is in the location]. [The restoration-gel rifle] is propped against the base of the statue[end if]."
+	The initial appearance is "A [giant Atlantida statue] stands at the cen[ter][if something unsuitable is on the giant Atlantida statue], decorated in an unorthodox fashion with [a list of unsuitable things on the giant Atlantida statue][end if][if the signet is on the giant Atlantida statue]. [A signet], outsized, representing the seal of the Bureau, hangs around her neck in classic albatross fashion[end if][if the restoration-gel rifle is in the location]. [The restoration-gel rifle] is propped against the base of the statue[end if]."
 	The introduction is "Atlantida is to us a bit as Uncle Sam might be to you, except that she embodies the spirit of the people rather than the government. In recent years she's become a symbol of opposition to the Bureau."
 	
 The huge-metal-arm is part of the giant Atlantida statue. It is a distant fixed in place enterable supporter. The printed name is "huge metal arm". Understand "huge" or "enormous" or "metal" or "arm" as the huge-metal-arm. The description of the huge-metal-arm is "It is bare and muscular, as though Atlantida is envisioned championing her people through a series of arm-wrestling matches."
@@ -8618,7 +8618,7 @@ The description of the stuffed octopus is "Slightly wrong, actually, but I suppo
 This one has been tied to Atlantida's hand alongside the olive branch she traditionally carries[end if]."
  
 
-Some traffic-island-protesters are a plural-named man. The printed name is "protesters".  Understand "protesters" or "crowd" as the traffic-island-protesters. "Protesters clog the street and sit or stand around the base of the statue."
+Some traffic-island-protesters are a plural-named man. The printed name is "protesters".  Understand "protesters" or "crowd" as the traffic-island-protesters. The initial appearance is "Protesters clog the street and sit or stand around the base of the statue."
 
 The All-Purpose-Officer is a privately-named man in Traffic Circle. The printed name is "All-Purpose Officer". Understand "all" or "purpose" or "all-purpose" or "officer" as the All-Purpose-Officer. The description is "He is uniformed and has a look of serious determination." The All-Purpose-Officer is carrying a diminutive affixer and a restoration-gel rifle.
 
@@ -8626,14 +8626,15 @@ The description of the diminutive affixer is "A piece of special[ize]d equipment
 
 Report taking the restoration-gel rifle for the first time:
 	say "[You] pick up the rifle. It fits well in your hand: good heft. I feel like we know how to aim this thing. It's illegal to carry, but that doesn't seem to be bothering you right now." instead.
-[The film crew is a man in Traffic Circle. "In addition to everything else, there's a small film crew [--] cameraman, someone with a mike, and what appears to be a reporter or narrator [--] filming the whole thing. The Bureau must love this."
+
+[The film crew is a man in Traffic Circle. The initial appearance is "In addition to everything else, there's a small film crew [--] cameraman, someone with a mike, and what appears to be a reporter or narrator [--] filming the whole thing. The Bureau must love this."
 	The description of the film crew is "It's curious how a familiar place in a TV show makes the show seem more authentic, but a film crew on location makes the [i]location[/i] seem fake. The protesters are giving the film crew an unreasonable amount of space, more than they'd allow to anyone else."]
 	
 
 Check waving the letter-remover at the teenagers when the current setting of the letter-remover is "s":
 	say "Reducing the pair of teenagers to a single teenager would just add our own war crimes to this mix." instead.
 	
-Some teenagers are a woman in Traffic Circle. Understand "teens" or "teenage" or "girls" or "girl" or "teenager" or "defiant" or "nervous" or "handcuffs" or "cuff" or "cuff" or "handcuff" as the teenagers. "Two [teenagers] are cuffed to [a tree], apparently for safe-keeping while [the All-Purpose-Officer] undoes their vandalism." The description of the teenagers is "One of them looks nervous, the other defiant[one of]. When she catches us looking her way, she contorts herself uncomfortably in order to be able to give us the finger[or][stopping]."
+Some teenagers are a woman in Traffic Circle. Understand "teens" or "teenage" or "girls" or "girl" or "teenager" or "defiant" or "nervous" or "handcuffs" or "cuff" or "cuff" or "handcuff" as the teenagers. The initial appearance is "Two [teenagers] are cuffed to [a tree], apparently for safe-keeping while [the All-Purpose-Officer] undoes their vandalism." The description of the teenagers is "One of them looks nervous, the other defiant[one of]. When she catches us looking her way, she contorts herself uncomfortably in order to be able to give us the finger[or][stopping]."
 
 Instead of saying hello to the teenagers:
 	say "We try shouting to them over the hubbub of the crowd, but it doesn't really work. [one of]The defiant one waggles her tongue at us obscenely.[or]The nervous one swallows pathetically.[at random]".
@@ -8816,7 +8817,7 @@ Every turn when Traffic Circle is the location and the teenagers are not in the 
 	if difference is 1 minute:
 		say "The crowd is parting. We might be able to leave soon."
 
-Protest-scenario ends in departure when the player is in the car and the teenagers are not in the location.
+Protest-scenario ends in departure when the player is in a car and the teenagers are not in the location.
 
 When protest-scenario ends in departure:
 	say "We climb back in the car, and no one seems to be much the wiser about what just happened. I have to say, you know what you're doing. "; 
@@ -8910,15 +8911,15 @@ Literal Restaurant is a facade in Long Street North. It fronts east. It is scene
 Instead of looking toward Roundabout:
 	say "That direction is just a chaos of traffic and bad signage."
 
-Long Street North is a proper-named road. "Long Street is lined on each side with a double-row of tall, an[ae]mic palm trees that bend towards one another many feet overhead. This corridor continues some considerable distance south."
+Long Street North is a proper-named road. The description is "Long Street is lined on each side with a double-row of tall, an[ae]mic palm trees that bend towards one another many feet overhead. This corridor continues some considerable distance south."
 
 Some anemic palm trees are a backdrop. They are in Long Street North and Long Street South. The description is "The only foliage comes in a clump high above. The effect is distorted and unnatural, and I say that having lived with them all my life. They are trees in the same sense that ostriches are birds." The printed name is "an[ae]mic palm trees". Understand "palms" or "anaemic" as the anemic palm trees. 
 
-South of Long Street North is Long Street South. Long Street South is a  proper-named road. "Long Street is lined on each side with a double-row of tall, an[ae]mic palm trees that bend towards one another many feet overhead. [You] are now in the southern part of this long corridor, between the Canadian Embassy and Arbot Maps & Antiques."
+South of Long Street North is Long Street South. Long Street South is a  proper-named road. The description is "Long Street is lined on each side with a double-row of tall, an[ae]mic palm trees that bend towards one another many feet overhead. [You] are now in the southern part of this long corridor, between the Canadian Embassy and Arbot Maps & Antiques."
 
 The Canadian Embassy is a facade in Long Street South. It fronts east. It is scenery. The description is "The embassy is the largest foreign embassy here: Canadians do a lot of business with Atlantis, but the Québécois require special permission to enter, so there's a call for substantial clerical work. The building is a solid 1960s block in concrete with slit-shaped windows." Understand "concrete" or "windows" or "solid" or "block" or "slit-shaped" or "slit" or "window" or "slit shaped" or "slits" as the Canadian Embassy.
 
-The shopping bag is a container in Long Street South. "Someone has left a shopping bag at the roadside [--] maybe by accident when loading up a car, maybe because they mean to come back for it." The description is "The logo on the outside is from Landison's, a popular toy store on the island. It's probably closed today, so this would have been bought earlier [--] possibly even as a present for Serial Comma Day."
+The shopping bag is a container in Long Street South. The initial appearance is "Someone has left a shopping bag at the roadside [--] maybe by accident when loading up a car, maybe because they mean to come back for it." The description is "The logo on the outside is from Landison's, a popular toy store on the island. It's probably closed today, so this would have been bought earlier [--] possibly even as a present for Serial Comma Day."
 
 Check waving the letter-remover at the shopping bag when the current setting of the letter-remover is "s":
 	say "The device buzzes, puzzled. Evidently there is not enough Atlantean interest in brewing to make 'hopping bag' a recogn[ize]d item in itself." instead.
@@ -8949,7 +8950,7 @@ Arbot Maps & Antiques is west of Long Street South. It is indoors. Understand "s
 Instead of smelling Arbot Antiques:
 	say "The place smells of fresh coffee and old paper."
 
-The maps collection is a thing in Arbot Maps & Antiques. Understand "large" or "collection" or "of" or "antique" or "under glass" or "street maps" or "maiana" or "navigation" or "distant places" or "charts" or "island" or  "topography" as the maps collection. It is fixed in place. The printed name is "[if looking]collection[otherwise]maps collection[end if]". "There is a large [maps collection] of vintage and antique maps under glass [--] the island of Atlantis as a whole, street maps of here and of Maiana, navigation maps of the harb[our], and then maps of more distant places as well."
+The maps collection is a thing in Arbot Maps & Antiques. Understand "large" or "collection" or "of" or "antique" or "under glass" or "street maps" or "maiana" or "navigation" or "distant places" or "charts" or "island" or  "topography" as the maps collection. It is fixed in place. The printed name is "[if looking]collection[otherwise]maps collection[end if]". The initial appearance is "There is a large [maps collection] of vintage and antique maps under glass [--] the island of Atlantis as a whole, street maps of here and of Maiana, navigation maps of the harb[our], and then maps of more distant places as well."
 	The description of the maps collection is "[You] pore over a map of [one of]the Old City when the walls were still intact, as reconstructed from archaeological surveys[or]forbidden dig zones in Atlantis[or]bus routes between here and Maiana ca. 1973[or]island topography as measured in 1910[or]1880 shipping lines between Atlantis, Gibraltar, and points east[at random]."
 	
 Instead of examining the maps collection when the Slangovia map is unseen:
@@ -8974,7 +8975,7 @@ Instead of putting something on the mannequin:
 The Britishizing goggles are on the mannequin. The indefinite article of the Britishizing goggles is "a pair of". Understand "pair" or "pair of" as the Britishizing goggles.
 	The Britishizing goggles cover the face-area.
 
-Kate is an alert woman in Arbot Maps & Antiques. "Overseeing all this is a woman named [Kate]." The description is "Something about her clothes and bearing suggest that she's not simply here to run the cash register, but that she has some expertise. She has, however, spilled something on her shirt."
+Kate is an alert woman in Arbot Maps & Antiques. The initial appearance is "Overseeing all this is a woman named [Kate]." The description is "Something about her clothes and bearing suggest that she's not simply here to run the cash register, but that she has some expertise. She has, however, spilled something on her shirt."
 
 Kate wears a stained shirt. The description of the stained shirt is "It looks very handsome, save for the brown stain on the front. Coffee mishap, presumably."
 
@@ -9017,7 +9018,7 @@ West of Long Street North is the Fleur d'Or Lobby. The description of the Fleur 
 [or][stopping][The spotlights] in the ceiling light the floor in distinct pools of Bureau blue, and a [room divider] etched with random letters separates the lobby from the drinks club to the [west]." 
 	Understand "hotel" as the Fleur d'Or Lobby.
  
-Fleur d'Or front is a facade in Long Street North. It fronts west. "On the west side of the street is the several-story front of the Fleur d'Or hotel." Understand "hotel" as the Fleur d'Or front.
+Fleur d'Or front is a facade in Long Street North. It fronts west. The initial appearance is "On the west side of the street is the several-story front of the Fleur d'Or hotel." Understand "hotel" as the Fleur d'Or front.
 	The description is "The Fleur d'Or used to have a very fussy, ornate façade done up with pilasters and statue niches and a cornice that looked like it had been piped on with cake icing. 
 	
 The hotel has recently had a face lift, with the silly old ornamentation pried off, and smooth modern material laid down in its place. Blue tiles pick out the shapes where pilasters used to be, and panels of frosted glass have been fitted to cover the statue niches.
@@ -9034,7 +9035,7 @@ The spotlights are a scenery thing in the Fleur d'Or Lobby. Understand "spotligh
 Rule for listing exits when looking in Fleur d'Or Lobby:
 	do nothing instead.
 
-A piano is a fixed in place instrument in the Fleur d'Or Lobby.  "[if the player is on the piano-bench]We're seated at a handsome piano in the corner[else]There is no one at the glossy [piano] in the corner[end if]." The description is "A glossy grand, probably worthy of better than bar music." Understand "keys" or "keyboard" as the piano.
+A piano is a fixed in place instrument in the Fleur d'Or Lobby.  The initial appearance is "[if the player is on the piano-bench]We're seated at a handsome piano in the corner[else]There is no one at the glossy [piano] in the corner[end if]." The description is "A glossy grand, probably worthy of better than bar music." Understand "keys" or "keyboard" as the piano.
 
 The piano-bench is an enterable supporter. It allows seated. [The piano-bench is part of the piano.] The piano-bench is in the Fleur d'Or Lobby. The printed name is "piano bench". Understand "bench" or "piano bench" as the piano-bench. The description of the piano-bench is "Lightly padded and made of the same wood as the piano itself."
 
@@ -9217,17 +9218,17 @@ The wart removal advertisement is a thing. It is part of the clearwater cosmetic
 Rule for listing exits when looking in Palm Square:
 	do nothing instead.
 
-The apartment complex is a facade in Palm Square. "I live in [the apartment complex] that runs along the west side of the square [--] in fact, my apartment door is immediately to the southwest." The description is "I know it's a bit shabby, but you know what graduate stipends are like. Or maybe you don't. My parents help with the rent, but it's still nothing spectacular." The apartment complex fronts southwest. Understand "home" or "house" or "flat" as the apartment complex.
+The apartment complex is a facade in Palm Square. The initial appearance is "I live in [the apartment complex] that runs along the west side of the square [--] in fact, my apartment door is immediately to the southwest." The description is "I know it's a bit shabby, but you know what graduate stipends are like. Or maybe you don't. My parents help with the rent, but it's still nothing spectacular." The apartment complex fronts southwest. Understand "home" or "house" or "flat" as the apartment complex.
 
 Section 2 - Babel Cafe
 
 South of Palm Square is Babel Café. Understand "cafe" as the Babel Café. The description of Babel Café is "Through many changes of management, this institution has fed the denizens of the university and ignored their semi-sedition." Babel Café is indoors.
 
-The clerk is an alert man in the Babel Café. "[A clerk] in [a white apron] stands behind [the long glass case][unless the long glass case contains something], now emptied by our purchases[end if]." The clerk wears a white apron. 
+The clerk is an alert man in the Babel Café. The initial appearance is "[A clerk] in [a white apron] stands behind [the long glass case][unless the long glass case contains something], now emptied by our purchases[end if]." The clerk wears a white apron. 
 	The description of the clerk is "A smooth-faced young man. He has the cheery demean[our] of one earning substantial overtime pay."
 	The description of the white apron is "Clean white cotton, bordered with a Greek meander trim in dark blue embroidery thread."
 
-Some découpaged tables are a supporter in Babel Café. "The tables are square wooden things painted dark blue (not the vibrant blue of the Bureau, but something closer to midnight), and the upper surfaces are découpaged with antique travel postcards." 
+Some découpaged tables are a supporter in Babel Café. The initial appearance is "The tables are square wooden things painted dark blue (not the vibrant blue of the Bureau, but something closer to midnight), and the upper surfaces are découpaged with antique travel postcards." 
 	Understand "antique" or "travel" or "postcard" or "postcards" or "square" or "wooden" or "blue" or "dark blue" or "upper surfaces" or "upper surface" or "surface" or "surfaces" or "table" as the découpaged tables.
 
 	The description is "The surfaces depict, fragmented, such exotic locations as Giza, Beijing, and Sioux City, Iowa. There is even an advertisement for the 1893 Chicago World's Fair."
@@ -9235,7 +9236,7 @@ Some découpaged tables are a supporter in Babel Café. "The tables are square w
 Sanity-check opening the long glass case:
 	say "The case opens only from the back side, where the clerk is." instead.
 
-The long glass case is fixed in place in the Babel Café. "[A long glass case] displays middle-eastern and Greek delicacies." It is closed and transparent. In the long glass case are a pocket-bread, a wrap, and a honey pastry triangle.
+The long glass case is fixed in place in the Babel Café. The initial appearance is "[A long glass case] displays middle-eastern and Greek delicacies." It is closed and transparent. In the long glass case are a pocket-bread, a wrap, and a honey pastry triangle.
 
 The honey pastry triangle and the pocket-bread are edible. The description of the honey pastry triangle is "Despite its enforced linguistic transformation, it still looks delicious: fine layers of crisp filo with nuts and honey between."
 
@@ -9246,7 +9247,7 @@ The wrap is an edible thing. The description is "It's a construction of flat bre
 
 [A nod to the blue plaque commemorating Watson and Crick at the Eagle Pub in Cambridge.]
 
-A blue plaque is fixed in place in the Babel Café. Understand "plaque" or "placard" or "historical" as the blue plaque. "A [blue plaque] is mounted on the wall." The description is "[i]On this site in 1969 the theoretical groundwork for Q-insertion was laid by James Elias and Milford Higgate using five drinking straws and a bowl of oatmeal.[/i]".
+A blue plaque is fixed in place in the Babel Café. Understand "plaque" or "placard" or "historical" as the blue plaque. The initial appearance is "A [blue plaque] is mounted on the wall." The description is "[i]On this site in 1969 the theoretical groundwork for Q-insertion was laid by James Elias and Milford Higgate using five drinking straws and a bowl of oatmeal.[/i]".
  
 Section 3 - Apartment Window
 
@@ -9346,7 +9347,7 @@ The Apartment Bathroom is north of My Apartment. The apartment bathroom is a bat
 Rule for listing exits when in Apartment Bathroom:
 	say "[You] could climb back out the window, or [you] could go south into the rest of my apartment."
 
-A nightstand is a supporter in the apartment bathroom. "An antique [nightstand] of my mother's, which does not actually fit anywhere near my bed, is jammed into one corner of the bathroom."  
+A nightstand is a supporter in the apartment bathroom. The initial appearance is "An antique [nightstand] of my mother's, which does not actually fit anywhere near my bed, is jammed into one corner of the bathroom."  
 
 The description of the nightstand is "It is wobbly, scratched, and chipped, which is the state in which my mother likes her antiques."
 
@@ -9565,7 +9566,7 @@ buildings-general is scenery in University Oval. The description is "Of the orig
 
 My own building is Samuel Johnson Hall, to the south."
 
-s-johnson-hall-exterior is a facade in University Oval. The printed name is "Samuel Johnson Hall". It fronts south. "Immediately south of here is the building where I spend most of my time, Samuel Johnson Hall.".
+s-johnson-hall-exterior is a facade in University Oval. The printed name is "Samuel Johnson Hall". It fronts south. The initial appearance is "Immediately south of here is the building where I spend most of my time, Samuel Johnson Hall.".
 	Understand "building" or "samuel" or "johnson" or "hall" as s-johnson-hall-exterior.
 	The description is "When it was built in the [']30s, the whole purpose was to prove to the rest of the faculty the tremendous value of the new field of language studies (as opposed to language engineering, a field long valued for its ability to produce tools and, more importantly, weapons). 
 
@@ -9584,7 +9585,7 @@ The east-campus-extension is a facade in University Oval. It fronts east. It is 
 Instead of going east in University Oval:
 	try examining east-campus-extension.
 
-An activist is an alert woman in University Oval. Understand "student" or "protester" as the activist. "[An activist] is standing in our way[if the activist carries the bright yellow sign], gripping [a bright yellow sign] that says 'TOXI WASTE AWARENESS!'[end if]." The description of the activist is "An earnest-looking woman, about 22."
+An activist is an alert woman in University Oval. Understand "student" or "protester" as the activist. The initial appearance is "[An activist] is standing in our way[if the activist carries the bright yellow sign], gripping [a bright yellow sign] that says 'TOXI WASTE AWARENESS!'[end if]." The description of the activist is "An earnest-looking woman, about 22."
 	The activist carries a bright yellow sign. The bright yellow sign is a sign. The description of the bright yellow sign is "The sign is bright yellow and says 'TOXI WASTE AWARENESS!'" The initial appearance is "A sign lies on the grass, abandoned by its owner."
 	The printed name of the bright yellow sign is "sign".
 	
@@ -9623,7 +9624,7 @@ Samuel Johnson Hall is indoors.
 Rule for listing exits while in Samuel Johnson Hall:
 	do nothing instead.
 
-The framed photograph of Waterstone is a thing in Samuel Johnson Hall. It is fixed in place. "On the wall hangs a [photograph of Waterstone], with the words SHAPLY CHAIR in big letters underneath."  Understand "photo" or "picture" or  "professor" or "frame" as the framed photograph.
+The framed photograph of Waterstone is a thing in Samuel Johnson Hall. It is fixed in place. The initial appearance is "On the wall hangs a [photograph of Waterstone], with the words SHAPLY CHAIR in big letters underneath."  Understand "photo" or "picture" or  "professor" or "frame" as the framed photograph.
 	The printed name is "framed photograph of Professor Waterstone".
 	The description is "The Shaply Chair is not named after the famous suffragette Phyllida Shaply, but after her considerably less famous or interesting descendant Lawrence Shaply, who was well-placed within Dental Consonants Ltd. when it started up and subsequently had buckets of money with which to endow university chairs. 
 
@@ -9656,9 +9657,9 @@ Carry out putting Problem of Adjectives on the LSR Bookcase:
 Carry out going to the Language Studies Seminar Room:
 	record "gaining access to the synthesizer" as achieved. 
 	
-The LSR bookcase is a supporter in the Language Studies Seminar Room. "The bookshelves lining the walls contain the department library." The description is "Built in and sturdily made." The printed name is "bookshelf". Understand "shelf" or "shelves" or "bookshelf" as the LSR bookcase.
+The LSR bookcase is a supporter in the Language Studies Seminar Room. The initial appearance is "The bookshelves lining the walls contain the department library." The description is "Built in and sturdily made." The printed name is "bookshelf". Understand "shelf" or "shelves" or "bookshelf" as the LSR bookcase.
 
-The big table is a supporter in the Language Studies Seminar Room.  "The [big table] at the cen[ter] of the room is an irregular polygon[if exactly one chair is visible and no chair is mentioned], with one [random visible chair] pushed up to the shortest side[end if]."
+The big table is a supporter in the Language Studies Seminar Room.  The initial appearance is "The [big table] at the cen[ter] of the room is an irregular polygon[if exactly one chair is visible and no chair is mentioned], with one [random visible chair] pushed up to the shortest side[end if]."
 	The introduction is "I think the shape is intended to undermine traditional conceptions of academic hierarchy, but in practice it  just means that whoever gets to seminar late has to sit with a table angle jabbing him in the stomach."
 	The description is "Crafted from some exotic wood with lots of interesting burl structure. There was a wealthy donor behind the construction of this room."
 
@@ -9669,7 +9670,7 @@ Lives of the Lexicographers is a book on the LSR bookcase. The description of Li
 Section 4 - Department Office
 
 The Language Studies Department Office is southeast of Samuel Johnson Hall. 
-	"This big, slightly drab area holds such useful objects as the [mailboxes] and [secretary's computer]. On ordinary days the secretary would be in as well, presiding over affairs. The offices of individual professors lie [north] and [west][if Higgate's office door is closed and office-door-1 is closed], though both doors are closed[otherwise if Higgate's office door is closed], though the west door is closed[otherwise if office-door-1 is closed], though the north door is closed[end if]."
+	The description is "This big, slightly drab area holds such useful objects as the [mailboxes] and [secretary's computer]. On ordinary days the secretary would be in as well, presiding over affairs. The offices of individual professors lie [north] and [west][if Higgate's office door is closed and office-door-1 is closed], though both doors are closed[otherwise if Higgate's office door is closed], though the west door is closed[otherwise if office-door-1 is closed], though the north door is closed[end if]."
 	The introduction is "This corner office was won in a battle of wills with several other departments during the most recent rebuilding drive. Professor Waterstone is fond of reminding the others that he was the one to obtain this fav[our]able position whenever there is a disagreement about procedure."
 	
 Rule for listing exits when looking in the Language Studies Department Office:
@@ -9937,7 +9938,7 @@ Instead of listening to Higgate's office door when Higgate's office door is clos
 		say "Dead silence." instead;
 	say "Putting our ear to the door, [you] hear [one of]a girl's voice stumbling over a question[or]Professor Higgate saying something rapid and fluent[or]a boy laughing[stopping]." 
 
-Higgate's Office is west of Higgate's office door. "Higgate got about 30% finished with a stylish decorating scheme and then got distracted, leaving everything in a unsettled state. A few of her books are arranged on a very nice [rosewood bookshelf], which looks Asian[if the small figurines are on the bookshelf] and is ornamented with [small figurines][end if]; all the rest of her library is stacked higgledy-piggledy in [plastic cartons]."
+Higgate's Office is west of Higgate's office door. The description is "Higgate got about 30% finished with a stylish decorating scheme and then got distracted, leaving everything in a unsettled state. A few of her books are arranged on a very nice [rosewood bookshelf], which looks Asian[if the small figurines are on the bookshelf] and is ornamented with [small figurines][end if]; all the rest of her library is stacked higgledy-piggledy in [plastic cartons]."
 
 The rosewood bookshelf is a supporter in Higgate's Office. It is scenery. Some small figurines are on the rosewood bookshelf. The small figurines are scenery. The description of the small figurines is "They depict mostly characters from popular children's fiction: Professor Higgate has a particularly strong and inexplicable fetish for the Wizard of Oz."
 
@@ -9945,7 +9946,7 @@ Some plastic cartons are containers in Higgate's Office. They are scenery. The d
 
 [Some trim is scenery in Higgate's office. The description is "The trim [--] no more than a line around the top of the walls, really [--] is a handsome dark green that sets off the rosewood."]
 
-[A paint is in Higgate's Office. "Left over from the decoration process is some paint." The indefinite article is "some". The description is "It looks as though it's left over from Higgate's work on the trim in the office."
+[A paint is in Higgate's Office. The initial appearance is "Left over from the decoration process is some paint." The indefinite article is "some". The description is "It looks as though it's left over from Higgate's work on the trim in the office."
 
 The paint can be released or retained. The paint is retained. 
 
@@ -10280,7 +10281,7 @@ Instead of unlocking the small door with the pass:
 	
 [Originally a "large box", but the risk of having it become a large ox was too great -- it would be easy to implement the transformation but hard to make it fair to the player if the box were to move from its appointed position.]
 
-A large carton is a container in Samuel Johnson Basement. It is fixed in place. Understand "recycling" as the large carton. "A large open carton stands against the wall right between Brown's lab door and [if the rectification room is visited]the Rectification Room[otherwise]the interesting door[end if][if the carton-sign is part of the carton]. 'Recycling,' reads the sign over the carton. 'Place your lab-created items here for processing.'[otherwise].[end if]". 
+A large carton is a container in Samuel Johnson Basement. It is fixed in place. Understand "recycling" as the large carton. The initial appearance is "A large open carton stands against the wall right between Brown's lab door and [if the rectification room is visited]the Rectification Room[otherwise]the interesting door[end if][if the carton-sign is part of the carton]. 'Recycling,' reads the sign over the carton. 'Place your lab-created items here for processing.'[otherwise].[end if]". 
 
 The carton-sign is a sign. The carton-sign is part of the carton. The printed name is "sign". Understand "sign" as the carton-sign. The description is "'Recycling. Place your lab-created items here for processing.'"
 
@@ -10561,7 +10562,7 @@ It's a little weird. Abstract reifications are one of the absolute coolest thing
 
 This pretty much sums up everything you need to know about the guy."
 
-Professor Brown is an alert man in Brown's Lab. "[Professor Brown], the Reification of Abstracts researcher, is [if Brown is in Brown's Lab]hunched over his work table[else]standing around awkwardly[end if]."
+Professor Brown is an alert man in Brown's Lab. The initial appearance is "[Professor Brown], the Reification of Abstracts researcher, is [if Brown is in Brown's Lab]hunched over his work table[else]standing around awkwardly[end if]."
 
 The introduction is "Brown is only barely a professor at all [--] actually, his working title is Senior Lecturer, and he holds a yearly contract which the University has the option to renew at whim. This prevents him going elsewhere while ensuring that he never has a fully-funded lab of his own. All [the electrical equipment] down here is tinker-toys compared to the stuff he really wants; in fact, half of it he built himself with components he bought with his own money.
 
@@ -10593,7 +10594,7 @@ The description of the worn leather jacket is "A moderately cool sort of bomber-
 	
 Section 11 - Lecture Hall
 
-Lecture Hall 1 is east of Samuel Johnson Basement. "The main lecture hall used for large survey courses in language studies offered to undergraduates. I sat through courses here when I was an undergraduate myself, and have now delivered a few lectures as a teaching assistant." Lecture Hall 1 is indoors.
+Lecture Hall 1 is east of Samuel Johnson Basement. The description is "The main lecture hall used for large survey courses in language studies offered to undergraduates. I sat through courses here when I was an undergraduate myself, and have now delivered a few lectures as a teaching assistant." Lecture Hall 1 is indoors.
 
 After deciding the scope of the player when in Lecture Hall 1:
 	place the wooden seats in scope.
@@ -10621,7 +10622,7 @@ Rule for writing a topic sentence about the page when the page is on the podium:
 Test page with "tutorial off / look / x podium / look" in Lecture Hall 1.
 
 The conference poster is a fixed in place thing in Lecture Hall 1. Understand "title" or "papyrus" or "font" or "daguerreotype" or "catchy" or "portly woman" or "speakers" or "pictures" or "inset" or "waterstone" as the conference poster.
-	"A poster at the front of the room announces a conference on cultural reactions to linguistic change. It is being held in Nice the day after tomorrow, with Professor Waterstone as keynote speaker, on the topic of 'homonym shame'."
+	The initial appearance is "A poster at the front of the room announces a conference on cultural reactions to linguistic change. It is being held in Nice the day after tomorrow, with Professor Waterstone as keynote speaker, on the topic of 'homonym shame'."
 	The introduction is "Somehow I had forgotten about the date of this: I've been too much worried about our escape."
 	The description is "It's the usual sort of thing: the conference title set in Papyrus font; a stock daguerreotype of a portly woman holding a letter-remover the size of a policeman's cosh; inset pictures of the major speakers, with pride of place for Waterstone himself."
 
@@ -10638,7 +10639,7 @@ Lecture Hall 2 is south of Lecture Hall 1. The printed name is "Lecture Hall (am
 	The description is "Many are the fine hours I have spent here dozing; and many are the students of mine who have done the same. The circle of life becomes complete."
 	
 	
-Some wooden seats are supporters in Lecture Hall 2. Understand "hard" or "wood" as the wooden seats. "The room extends [if Location is Lecture Hall 1]south[otherwise]north[end if], full of hard [wooden seats]." The description is "Ingeniously uncomfortable."
+Some wooden seats are supporters in Lecture Hall 2. Understand "hard" or "wood" as the wooden seats. The initial appearance is "The room extends [if Location is Lecture Hall 1]south[otherwise]north[end if], full of hard [wooden seats]." The description is "Ingeniously uncomfortable."
 
 
 
@@ -10651,7 +10652,7 @@ The scent-description of the coat is "dust and a faintest lingering trace of men
 
 
 The course advertisement is a fixed in place thing in Lecture Hall 2. Understand "ad" or "interlingua" as course advertisement.
-	"Someone has taped to the wall a [course advertisement] for next quarter, inviting interested undergraduates to enroll in Interlingua 101."  	
+	The initial appearance is "Someone has taped to the wall a [course advertisement] for next quarter, inviting interested undergraduates to enroll in Interlingua 101."  	
 
 The description of the course advertisement is "In large type:
 	
@@ -10680,7 +10681,7 @@ Chapter 1 - The Bureau and Environs
 
 Section 1 - Tall Street
 
-East of Roundabout is Tall Street. Tall Street is a road. "Tall Street is very quiet. No celebrations have reached this far, and neither is there any business today; so it has an air of dull abandonment. At the [east] end the street bends to go around an old park rarely visited."
+East of Roundabout is Tall Street. Tall Street is a road. The description is "Tall Street is very quiet. No celebrations have reached this far, and neither is there any business today; so it has an air of dull abandonment. At the [east] end the street bends to go around an old park rarely visited."
 The distant-rotunda is scenery in Tall Street. It is distant. The printed name is "rotunda". Understand "rotunda" and "distant" and "blue" and "bureau of orthography" as the distant-rotunda. 
 
 To decide whether (item - a thing) must be touched: 
@@ -10702,7 +10703,7 @@ The employment office is a facade in Tall Street. It fronts north.  It is scener
 
 Section 2 - Abandoned Park
 
-The Abandoned Park is east of Tall Street. "In contrast with the parks in the more savory parts of town, this is a bit of [patchy grass] where local dogs occasionally come out to do their business. A granite [war memorial] is fixed at the cen[ter][one of], which is why tourist maps optimistically call the place Monument Green. But the memorial is only moderately monumental and the grass hardly green at all[or][stopping]."
+The Abandoned Park is east of Tall Street. The description is "In contrast with the parks in the more savory parts of town, this is a bit of [patchy grass] where local dogs occasionally come out to do their business. A granite [war memorial] is fixed at the cen[ter][one of], which is why tourist maps optimistically call the place Monument Green. But the memorial is only moderately monumental and the grass hardly green at all[or][stopping]."
 	Understand "monument" or "green" as the abandoned park.
 	The introduction is "It is a place that might have been developed long ago; only it is known that there are remains of Roman settlement here, and there is a risk that digging out the foundations would turn up some of those ruins, exposing a large number of Latin-language objects to the light of day. To prevent this catastrophe the whole area has been placed off limits to development."
 
@@ -10732,7 +10733,7 @@ The description of the dog is "A small, heavy metal figurine representing a watc
 Test dog with "tutorial off / dig / g / x dog / test dog-placing" in abandoned park.
 Test dog-placing with "put dog on pedestal / get god / n / autoupgrade / wave z-remover at kudzu / look behind bushes / put god in shrine / look" in Roget Close.
 	
-A twig is a thing in Abandoned Park. "[one of][You] step on a [twig] before I back away again.[or]A [twig] lies in the grass.[stopping]". The description is "Nine or ten inches long, very thin and somewhat flexible. There are no leaves left on it."
+A twig is a thing in Abandoned Park. The initial appearance is "[one of][You] step on a [twig] before I back away again.[or]A [twig] lies in the grass.[stopping]". The description is "Nine or ten inches long, very thin and somewhat flexible. There are no leaves left on it."
 
 Instead of propping a door with the twig:
 	say "A nice thought, but the twig is too short and supple to make an effective prop. One needs something a bit longer." 
@@ -10749,7 +10750,7 @@ The veterinary clinic is a facade in Abandoned Park. It fronts north.  It is sce
 	
 Section 3 - Bus Station
 
-The Bus Station is southeast of the Abandoned Park. "A currently-desolate depot from which buses run seasonally to Maiana, the island's other major town. The [station building] is a low, rectilinear edifice from the 60s, all pebbled concrete and sheet glass, but it's shut, leaving accessible only a series of empty [bus bays] and a [wall-mounted schedule]. The public convenience to the [east] is the only thing open, while the area to the [northwest] is open parkland."
+The Bus Station is southeast of the Abandoned Park. The description is "A currently-desolate depot from which buses run seasonally to Maiana, the island's other major town. The [station building] is a low, rectilinear edifice from the 60s, all pebbled concrete and sheet glass, but it's shut, leaving accessible only a series of empty [bus bays] and a [wall-mounted schedule]. The public convenience to the [east] is the only thing open, while the area to the [northwest] is open parkland."
 
 The old station building is scenery in the Bus Station. The description is "It's the most pathetic thing imaginable: the future, as imagined by the past. No one is in there at the moment." Understand "pebbled" and "concrete" and "sheet" and "glass" and "edifice" as the old station building.
 
@@ -10761,12 +10762,12 @@ During the run of the school year there is an extra inbound bus in the morning a
 
 Like today."
 
-The shed is a thing in the Bus Station. "A [shed], rather ramshackle and unlikely, sits on the pavement, where it ought to be in the way of incoming buses." The heft of the shed is 10. The description of the shed is "Sheds like this are typically cheap and very very temporary housing for the homeless. The policy of the Bureau is that no one is allowed to beg, and punishments for begging and homelessness are often quite stiff, so there is nothing in the way of an established shelter on the island and little recourse for those who might need it."
+The shed is a thing in the Bus Station. The initial appearance is "A [shed], rather ramshackle and unlikely, sits on the pavement, where it ought to be in the way of incoming buses." The heft of the shed is 10. The description of the shed is "Sheds like this are typically cheap and very very temporary housing for the homeless. The policy of the Bureau is that no one is allowed to beg, and punishments for begging and homelessness are often quite stiff, so there is nothing in the way of an established shelter on the island and little recourse for those who might need it."
 
 Instead of opening or entering the shed:
 	say "It's locked, but I doubt there's anything inside but possibly a few used blankets."
 
-A dove is a bird in the Bus Station. "A [dove] flutters from one surface to another, occasionally stopping to stare at us." The heft of the dove is 2. Understand "bird" as dove. The description is "It is pure white, probably a refugee from a group released at a wedding. People do occasionally get married on Serial Comma Day."
+A dove is a bird in the Bus Station. The initial appearance is "A [dove] flutters from one surface to another, occasionally stopping to stare at us." The heft of the dove is 2. Understand "bird" as dove. The description is "It is pure white, probably a refugee from a group released at a wedding. People do occasionally get married on Serial Comma Day."
 
 The long-road is a facade in the Bus Station. The printed name is "long road". Understand "long" or "road" as the long-road. It is scenery. It fronts southeast. The description is "A long road leads through the outskirts of town south and east towards the rest of the island. It's an interesting journey, but not for today." 
 	The closure notice is "That would be a long walk and in the wrong direction. ".
@@ -10836,7 +10837,7 @@ Instead of squeezing the soap dispenser:
 The soap is in the soap dispenser. 
  
 
-The wall-hole is a fixed in place container in the Public Convenience. Understand "hole" or "hole in the wall" or "hole in wall" or "wall" as the wall-hole. The printed name is "[if looking]hole[otherwise]hole in the wall[end if]". "About knee-height in one of the stalls is a [wall-hole] that runs right through the wall between the men's and women's restrooms." The description of the wall-hole is "It's too small to get a good look through, really, and usually cluttered with junk."
+The wall-hole is a fixed in place container in the Public Convenience. Understand "hole" or "hole in the wall" or "hole in wall" or "wall" as the wall-hole. The printed name is "[if looking]hole[otherwise]hole in the wall[end if]". The initial appearance is "About knee-height in one of the stalls is a [wall-hole] that runs right through the wall between the men's and women's restrooms." The description of the wall-hole is "It's too small to get a good look through, really, and usually cluttered with junk."
 
 Report searching the wall-hole when the ash is in the wall-hole:
 	say "[one of]At first there doesn't seem to be anything in there, but when we put our finger in, we find it's full of ash[or]The ash is still mounded up in the hole[stopping]." instead.
@@ -10857,7 +10858,7 @@ Test ash with "tutorial off / open tub / get ash / smell ash / touch ash / put g
 	
 Section 5 - Rotunda
 
-The Rotunda is south of Tall Street. It is indoors. "Echoing space, marble floor, eye-like [skylight] many me[ter]s above us: so far, the Rotunda might belong to any 19th-century government bureau of means and self-importance. 
+The Rotunda is south of Tall Street. It is indoors. The description is "Echoing space, marble floor, eye-like [skylight] many me[ter]s above us: so far, the Rotunda might belong to any 19th-century government bureau of means and self-importance. 
 
 What sets this one apart is the lettering, each sigil no bigger than a flea, carved over every inch of the walls. Inscribed here is, in fact, the [italic type]entire[roman type] [inscribed-text] of A New Orthodox Orthography[if the Rotunda is unvisited], which means that if [you] had a great deal of patience and many rolls of butcher paper, [you] could take rubbings and wind up with our very own volume.
 
@@ -10869,7 +10870,7 @@ The skylight is scenery in the rotunda. The description is "It is distant and pe
 
 The inscribed-text is scenery in the Rotunda. Understand "new" or "orthodox" or "orthography" or "inscribed" or "text" or "lettering" or "inscription" as the inscribed-text. The printed name is "text". The description of the inscribed-text is "It is far too small to read, especially since the letters are not painted or inked, just carved into the stone surfaces." Instead of touching the inscribed-text: say "The letters are cool and tiny under our fingers." 
 
-The informational bulletin-board is fixed in place in the Rotunda. Understand "bulletin" or "board" as the bulletin-board.  "Near the street entrance is a sizable [bulletin-board] advertising the services of the Bureau[if the bin is in the location]; and next to this, pushed back to be out of the way, is a [bin][end if]. [run paragraph on]"
+The informational bulletin-board is fixed in place in the Rotunda. Understand "bulletin" or "board" as the bulletin-board.  The initial appearance is "Near the street entrance is a sizable [bulletin-board] advertising the services of the Bureau[if the bin is in the location]; and next to this, pushed back to be out of the way, is a [bin][end if]. [run paragraph on]"
 	
 The description is "[i]What Can Your Bureau of Orthography Do For You?[/i] inquires the bulletin board, in a sprightly casual font.
 	
@@ -10949,7 +10950,7 @@ Sanity-check going to a privately-controlled room in Official grounds:
 	
 Section 7 - Antechamber
 
-The Antechamber is south of the Rotunda. It is indoors.  "The most important task of any government bureau is to keep away time-wasters, irritants, and uninformed members of the general public, who might distract the diligent workers within from their important tasks. The Bureau of Orthography is no different.
+The Antechamber is south of the Rotunda. It is indoors.  The description is "The most important task of any government bureau is to keep away time-wasters, irritants, and uninformed members of the general public, who might distract the diligent workers within from their important tasks. The Bureau of Orthography is no different.
 
 An [instructive notice] details the criteria for entry to the Bureau proper."
 
@@ -11133,11 +11134,11 @@ Instead of showing something to the secretary when the secretary encloses the Sc
 	
 Section 8 - Hallway and Inaccessible Room
 
-The Bureau Hallway is east of the Antechamber. It is Indoors. "This is a long hallway with many doors leading off, the business of the bureau being varied and all-encompassing; it is for all essential purposes the chief organ of government in Atlantis, since only a few topics are brought to citizen referendum."
+The Bureau Hallway is east of the Antechamber. It is Indoors. The description is "This is a long hallway with many doors leading off, the business of the bureau being varied and all-encompassing; it is for all essential purposes the chief organ of government in Atlantis, since only a few topics are brought to citizen referendum."
 
 
 
-The All-Purpose Office is east of Bureau Hallway. It is indoors.  "There's a front desk at which a receptionist meets with members of the public and assesses their needs; beyond that, the room is crowded with dozens of stations for the use of the All-Purpose Officers, and stretches back some distance. It looks like an old-fashioned newsroom.
+The All-Purpose Office is east of Bureau Hallway. It is indoors.  The description is "There's a front desk at which a receptionist meets with members of the public and assesses their needs; beyond that, the room is crowded with dozens of stations for the use of the All-Purpose Officers, and stretches back some distance. It looks like an old-fashioned newsroom.
 
 Fully half the stations are empty, due to their owners being away on call somewhere on the island, but the rest are fully occupied [--] many of them by people who wear authentication monocles routinely."
 
@@ -11165,7 +11166,7 @@ The seer automaton is a push-button device in Bureau Basement South. Understand 
 Instead of switching on the seer automaton:
 	say "The seer cranks to life, looks us up and down with painted wooden eyeballs, and in a tinny voice, says, 'I predict [one of]you will become BIG. Much bigger than you were yesterday[or]you will escape.' Asthmatic whirring. 'Possibly on the back of an interstellar whale[or]the Bureau won't last past tomorrow[cycling].'"
 	
-The plywood cutout is a fixed in place thing in Bureau Basement South. "A plywood cutout depicting Atlantida is propped in the corner." Understand "painted" or "depicting" or "atlantida" or "hole" or "head" or "funny pose" as the plywood cutout. The heft is 5. The description is "It's one of those plywood cutouts where a tourist sticks his head through and someone else takes a photo showing the tourist a funny pose. This one puts the tourist's face on Atlantida, complete with flowing blue robes and expansive bosom."
+The plywood cutout is a fixed in place thing in Bureau Basement South. The initial appearance is "A plywood cutout depicting Atlantida is propped in the corner." Understand "painted" or "depicting" or "atlantida" or "hole" or "head" or "funny pose" as the plywood cutout. The heft is 5. The description is "It's one of those plywood cutouts where a tourist sticks his head through and someone else takes a photo showing the tourist a funny pose. This one puts the tourist's face on Atlantida, complete with flowing blue robes and expansive bosom."
 
 Understand "put [something] through [something]" as inserting it into.
 
@@ -11221,11 +11222,11 @@ The description of the chartreuse door is "A small plaque on the door reads 'Ove
 To say door-quip for (N - a thing):
 	say "[one of][The N] is impervious even to N-insertion, should someone develop it[or]I don't even recogn[ize] the kind of lock on this thing[at random]".
 	
-The cute security door is a locked lockable door. "The [cute security door] at the [if the location is Bureau Basement Middle]north[otherwise]south[end if] end is solidly shut[if Cold Dilemma has happened]; there's no sign of anyone still waiting on this side of it[end if]." It is north of Bureau Basement Middle and south of Bureau Basement Secret Section. The description is "A thick iron door, decorated with Hello Kitty stickers. There is no handle and no access to the locking mechanism (though it is certainly locked). The door can only be activated by guards in another room, watching through a video camera."
+The cute security door is a locked lockable door. The initial appearance is "The [cute security door] at the [if the location is Bureau Basement Middle]north[otherwise]south[end if] end is solidly shut[if Cold Dilemma has happened]; there's no sign of anyone still waiting on this side of it[end if]." It is north of Bureau Basement Middle and south of Bureau Basement Secret Section. The description is "A thick iron door, decorated with Hello Kitty stickers. There is no handle and no access to the locking mechanism (though it is certainly locked). The door can only be activated by guards in another room, watching through a video camera."
 
 [Here I compromised narrative plausibility in order to make the game winnable. It seems highly unlikely to me that anyone would be allowed to visit this area without an escort of guards. However, the multiplication of doors, and the trick of the guard controlling a second door by watching for it through a video camera, are based on memories and stories about the facility where my mother did some classified work back in the 80s.]
 
-The adorable video camera is a thing in Bureau Basement Middle. "[An adorable video camera] hangs in the left corner above the door." It is fixed in place. The description is "It has a lens, certainly, but it is also made of pink plastic and has cat ears. And it looks like it will recognize us if we approach, perhaps?"
+The adorable video camera is a thing in Bureau Basement Middle. The initial appearance is "[An adorable video camera] hangs in the left corner above the door." It is fixed in place. The description is "It has a lens, certainly, but it is also made of pink plastic and has cat ears. And it looks like it will recognize us if we approach, perhaps?"
 
 A ranking rule for the adorable video camera:
 	decrease the description-rank of the adorable video camera by 100.
@@ -11262,7 +11263,7 @@ Some Hello Kitty stickers are part of the cute security door. The description is
 
 Section 3 - Secret Section
 	
-Bureau Basement Secret Section is indoors and forbidden. "The heightened security on this side of the door is obvious everywhere [you] look. The floor is tiled in paisley tiles. The light fixtures give off pale pink light. The walls are covered in frog leather. The doors are locked with padlocks the size of handbags, locks decorated à la Louis Quinze, combination locks made of solid gold. There is not a bare noun in sight."
+Bureau Basement Secret Section is indoors and forbidden. The description is "The heightened security on this side of the door is obvious everywhere [you] look. The floor is tiled in paisley tiles. The light fixtures give off pale pink light. The walls are covered in frog leather. The doors are locked with padlocks the size of handbags, locks decorated à la Louis Quinze, combination locks made of solid gold. There is not a bare noun in sight."
 
 Some frog leather walls, paisley tile floors, enormous padlocks, fancy locks, and gold combination locks are scenery in the Bureau Basement Secret Section. The description of the frog leather walls is "Mostly green spotted with brown, but for decorative trim they've used more exotic tree frogs in blue and orange."
 
@@ -11279,7 +11280,7 @@ Rule for listing exits while looking in Bureau Basement Secret Section:
 
 Section 4 - Testing Room
 
-The Sensitive Equipment Testing Room is west of Bureau Basement Secret Section. It is indoors and forbidden. "A room with no windows, no cameras, no recording equipment, and barely any furniture." The Sensitive Equipment Testing Room contains a rock.
+The Sensitive Equipment Testing Room is west of Bureau Basement Secret Section. It is indoors and forbidden. The description is "A room with no windows, no cameras, no recording equipment, and barely any furniture." The Sensitive Equipment Testing Room contains a rock.
 
 The initial appearance of the rock is "A [rock] sits in one corner of the room."
 
@@ -11367,13 +11368,13 @@ Definition: a thing is bureau-disallowed if it is not bureau-allowed.
 Section 5 - Cold Storage
 
 
-Cold Storage is southwest of Bureau Basement Secret Section. It is indoors and forbidden. "Shelves on both sides of the room are full of [objects-on-stands] on stands: objects that used to be men and women, and in a few cases even children. The [stand labels] preserve their original names."
+Cold Storage is southwest of Bureau Basement Secret Section. It is indoors and forbidden. The description is "Shelves on both sides of the room are full of [objects-on-stands] on stands: objects that used to be men and women, and in a few cases even children. The [stand labels] preserve their original names."
 
 The introduction is "If this goes wrong, we could wind up living in here permanently. So we'd better figure whom to send out, and do it fast."
 
 Some assorted shelves are scenery in cold storage. The description is "There's room for more contents, to be sure."
 
-The duty roster is fixed in place in Cold Storage. "[A duty roster] is posted prominently." The description is "The roster records duty shifts once every two weeks, assigned to various people in the department, all of them very high-ranking. 
+The duty roster is fixed in place in Cold Storage. The initial appearance is "[A duty roster] is posted prominently." The description is "The roster records duty shifts once every two weeks, assigned to various people in the department, all of them very high-ranking. 
 
 'Be conscientious,' admonishes the roster. 'Read each name clearly while looking at the item through a monocle. If you suspect an object of losing its original identity, contact the Curator. We have disposed of seventeen objects this year!!'"
 
@@ -11518,9 +11519,9 @@ Section 1 - Display Reloading Room
 
 At the same time, we want to discourage the player from thinking that there is something to be won by trying to communicate with those back upstairs. So while the tourists are shown to have reactions to certain types of item, they remain on a tight cycle and can't be broken out of their basic behavior.]
 	
-Display Reloading Room is south of Equipment Archive. It is indoors and forbidden. "This area [if the display-platform is not in the location]is more or less empty. [Hazard-tape] marks off an area of the floor to indicate that [you] shouldn't stand there[otherwise]is mostly taken up with the [display-platform] descended from the room above[end if]."
+Display Reloading Room is south of Equipment Archive. It is indoors and forbidden. The description is "This area [if the display-platform is not in the location]is more or less empty. [Hazard-tape] marks off an area of the floor to indicate that [you] shouldn't stand there[otherwise]is mostly taken up with the [display-platform] descended from the room above[end if]."
 
-A tv monitor is a fixed in place device in the Display Reloading Room. It is switched on. Understand "black" or "white" or "black and white" or "television" or "security" as the tv monitor. "A black and white [tv monitor] is embedded in the wall."
+A tv monitor is a fixed in place device in the Display Reloading Room. It is switched on. Understand "black" or "white" or "black and white" or "television" or "security" as the tv monitor. The initial appearance is "A black and white [tv monitor] is embedded in the wall."
 
 Rule for writing a topic sentence about the tv monitor:
 	say "[initial appearance of tv monitor] [description of the tv monitor] [run paragraph on]".
@@ -11574,7 +11575,7 @@ To say tourist-face:
 
 A hazard-tape is scenery in the Display Reloading Room. The description is "It's striped yellow and red, and describes an area on the floor. Come to that, there's an area in the ceiling immediately above the hazard tape that looks separate from the rest of the ceiling." The indefinite article of the hazard-tape is "some". The printed name of the hazard-tape is "[if looking]Hazard[otherwise]hazard[end if] tape". Understand "hazard tape" as the hazard-tape. Understand "tape" as the hazard-tape when the tape is not visible.
 
-A small black push-button is fixed in place in the Display Reloading Room. "There is [an item described] on the wall." Understand "button" or "push button" as the push-button. The description is "It is unlabeled."
+A small black push-button is fixed in place in the Display Reloading Room. The initial appearance is "There is [an item described] on the wall." Understand "button" or "push button" as the push-button. The description is "It is unlabeled."
 
 Does the player mean pushing the small black push-button:
 	it is very likely.
@@ -11612,7 +11613,7 @@ Wonderland is north of Bureau Basement Secret Section. It is indoors and forbidd
 
 An open archway leads to storage space east of here."
 
-The odor is a fixed in place thing in Wonderland. The printed name is "od[our]". "Hanging in the air at the north end of the hallway is an [odor]." Understand "odour" as the odor.
+The odor is a fixed in place thing in Wonderland. The printed name is "od[our]". The initial appearance is "Hanging in the air at the north end of the hallway is an [odor]." Understand "odour" as the odor.
 
 Instead of examining the odor:
 	try smelling the odor.
@@ -11659,7 +11660,7 @@ Rule for printing the name of the odor while waving the letter-remover at the od
 	
 Section 3 - Equipment Archive
 	
-Equipment Archive is a room. It is indoors and forbidden. "The ceiling is mirrored, perhaps to make it harder for anyone to sneak around without being noticed among the shelves."
+Equipment Archive is a room. It is indoors and forbidden. The description is "The ceiling is mirrored, perhaps to make it harder for anyone to sneak around without being noticed among the shelves."
 
 A ceiling mirror is a mirror in the Equipment Archive.
 
@@ -11671,7 +11672,7 @@ The gnu stares around in confusion, its watery gaze temporarily dissolving every
 
 A moment later, the anagramming gun is merely a gun again."
 
-Some equipment shelves are a supporter in Equipment Archive. "[The shelves] here display an assortment of obsolete, broken, foreign, or otherwise unusual letter tools. "
+Some equipment shelves are a supporter in Equipment Archive. The initial appearance is "[The shelves] here display an assortment of obsolete, broken, foreign, or otherwise unusual letter tools. "
 
 On the shelves are an accent flipper, an umlaut punch, a Catalan punt volat needle, some broken components, and some lamb-granulates.
 
@@ -11699,7 +11700,7 @@ Chapter 2 - Through the ODOR DOOR
 
 Section 1 - Oracle Project
 	
-The Oracle Project is a room [north of Wonderland]. It is indoors and forbidden. "This is nothing less than the command cen[ter] for a massive propaganda campaign. [Paintings] of Atlantida and [polling charts] cover the walls, dating back to the second world war and continuing straight through to the present."
+The Oracle Project is a room [north of Wonderland]. It is indoors and forbidden. The description is "This is nothing less than the command cen[ter] for a massive propaganda campaign. [Paintings] of Atlantida and [polling charts] cover the walls, dating back to the second world war and continuing straight through to the present."
 
 Rule for printing the name of the paintings while looking:
 	say "Paintings".
@@ -11730,7 +11731,7 @@ The surveillance room description is intentionally kept very brief as a partial 
 
 The Surveillance Room is east of the Oracle Project. It is indoors.
 
-The surveillance computer is a desktop computer in the Surveillance Room. It is fixed in place.  "A [surveillance computer] is mounted on the wall, an impressive flat screen readout[if the surveillance computer is switched on] displaying current activity[otherwise] presently blacked out[end if]." The surveillance computer is switched on.
+The surveillance computer is a desktop computer in the Surveillance Room. It is fixed in place.  The initial appearance is "A [surveillance computer] is mounted on the wall, an impressive flat screen readout[if the surveillance computer is switched on] displaying current activity[otherwise] presently blacked out[end if]." The surveillance computer is switched on.
 	The description of the surveillance computer is "Below the flat screen are a keyboard and mouse, both shiny silver. Only top of the line equipment down here, it seems."
 
 Understand "flat" or "screen" or "readout" as the surveillance computer's screen. The description of the surveillance computer's screen is "It is bigger than my parent's television, and that is saying something."
@@ -11902,12 +11903,12 @@ After examining a quittable software (called chosen software):
 Rule for listing exits when looking in Surveillance room:
 	say "[if Workshop is visited]The Workshop[otherwise]Another room[end if] lies to the east. The door [you] came through is west, and there is also a spiral staircase down[if tunnel is visited] to the tunnel[end if]."
  
-The spiral staircase is a down-staircase in Surveillance Room. "A [spiral staircase] descends into a hole in the corner of the room, into what looks like a tunnel through natural rock."
+The spiral staircase is a down-staircase in Surveillance Room. The initial appearance is "A [spiral staircase] descends into a hole in the corner of the room, into what looks like a tunnel through natural rock."
 
 
 Section 3 - Workshop
 
-Workshop is east of Surveillance Room. Workshop is indoors and forbidden. "A room whose importance is obvious from how clean it is and how little furniture it is allowed to have."
+Workshop is east of Surveillance Room. Workshop is indoors and forbidden. The description is "A room whose importance is obvious from how clean it is and how little furniture it is allowed to have."
 
 
 
@@ -11921,14 +11922,14 @@ Section 4 - Generator Room
 
 The imagery for this area is intentionally a bit first-person-shooterish, though I was thinking more Portal 2 than Half-Life. ]
 
-The Generator Room is east of the Workshop. It is indoors and forbidden. "The walls are lined with concrete. [Yellow paint lettering] says CAUTION: HIGH ENERGY EQUIPMENT and DO NOT OPERATE WITHOUT TRAINING."
+The Generator Room is east of the Workshop. It is indoors and forbidden. The description is "The walls are lined with concrete. [Yellow paint lettering] says CAUTION: HIGH ENERGY EQUIPMENT and DO NOT OPERATE WITHOUT TRAINING."
 
 The concrete-lining is scenery in the Generator Room. The printed name is "concrete lining". Understand "concrete" or "lining" or "walls" or "wall" as the concrete-lining. The description is "It's untreated grey concrete."
 
-The yellow paint lettering is scenery in the Generator Room. "CAUTION: HIGH ENERGY EQUIPMENT, it says. DO NOT OPERATE WITHOUT TRAINING. There is also a stenciled letter A surrounded by atom-style rings." Understand "stenciled" or "letter" or "letter a" or "atom-style" or "rings" or "ring" or "atom" as the yellow paint lettering.
+The yellow paint lettering is scenery in the Generator Room. The initial appearance is "CAUTION: HIGH ENERGY EQUIPMENT, it says. DO NOT OPERATE WITHOUT TRAINING. There is also a stenciled letter A surrounded by atom-style rings." Understand "stenciled" or "letter" or "letter a" or "atom-style" or "rings" or "ring" or "atom" as the yellow paint lettering.
 	The printed name is "[if looking]Yellow[otherwise]yellow[end if] paint lettering".
 
-The first aid station is in the Generator Room. "[A first aid station] is built onto the wall[if the first aid station is open] and hangs open[otherwise]. It is closed[end if]." The first aid station is an openable closed container. The description of the first aid station is "It's a large box mounted to the wall, with a red cross painted on the front of it." Understand "large" or "box" or "red" or "cross" as the first aid station.
+The first aid station is in the Generator Room. The initial appearance is "[A first aid station] is built onto the wall[if the first aid station is open] and hangs open[otherwise]. It is closed[end if]." The first aid station is an openable closed container. The description of the first aid station is "It's a large box mounted to the wall, with a red cross painted on the front of it." Understand "large" or "box" or "red" or "cross" as the first aid station.
  
 A ranking rule when the first aid station is mentionable:
 	increase the description-rank of the first aid station by 10.
@@ -11940,7 +11941,7 @@ Instead of waving the letter-remover at the balm when the current setting of the
 	say "For a moment, just a moment, the balm starts to turn into an old-fashioned coin representing the concept of 'alm'; then it flickers out again uncertainly. Probably because 'alms' is not really a plural form and 'alm' is unattested in practice."
 
 
-The boiler is a device in the Generator Room. It is fixed in place. "Most of the room is taken up with a gigantic boiler installation[if the boiler is switched on] periodically giving off flashes of light and steam[otherwise] that is currently off[end if]. The locking mechanism is [a cryptolock][if something is in the cryptolock], currently containing [a list of things in the cryptolock][otherwise], currently empty[end if]." It is switched off. 
+The boiler is a device in the Generator Room. It is fixed in place. The initial appearance is "Most of the room is taken up with a gigantic boiler installation[if the boiler is switched on] periodically giving off flashes of light and steam[otherwise] that is currently off[end if]. The locking mechanism is [a cryptolock][if something is in the cryptolock], currently containing [a list of things in the cryptolock][otherwise], currently empty[end if]." It is switched off. 
 
 The description is "This frighteningly massive contraption has pipes and compression tanks and steam gauges and dents and rust stains[if switched on]. It trembles a little. The needles of the gauges twitch, but stay out of the red[otherwise]. All the gauge needles point to 0[end if]. A thick glass pane allows a view of one of the first chambers." 
 
@@ -11982,7 +11983,7 @@ Check an actor switching on the boiler:
 
 Section 5 - Tunnel through Chalk
 
-The Tunnel through Chalk is below Surveillance Room.  Tunnel through Chalk is indoors  and forbidden. "This passage has been cut through natural cliff rock and looks older than the Bureau itself. The walls are rough-hewn, exposing [sedimentary strata]. Here and there it looks as though someone has actually excavated a fav[our]ed rock or relic."
+The Tunnel through Chalk is below Surveillance Room.  Tunnel through Chalk is indoors  and forbidden. The description is "This passage has been cut through natural cliff rock and looks older than the Bureau itself. The walls are rough-hewn, exposing [sedimentary strata]. Here and there it looks as though someone has actually excavated a fav[our]ed rock or relic."
 
 The sedimentary strata are scenery in the Tunnel through Chalk. The description is "Layers of slightly varying chalk col[our], some of which are embedded with tiny seashells and other fossil evidence." Understand "layers" or "chalk" or "seashells" or "tiny" or "shells" or "evidence" or "fossil evidence" as the sedimentary strata.
 
@@ -11997,7 +11998,7 @@ The upward-spiral staircase is an up-staircase in Tunnel through Chalk. The prin
 
 Understand "raise [portcullis]" or "lift [portcullis]" as opening.
 
-The portcullis is a door. It is east of Tunnel through Chalk and west of Personal Apartment. "[if the location is Tunnel through Chalk]Blocking the far end of the corridor is a metal [portcullis][otherwise]The metal [portcullis] guards the way back[end if]. [portcullis status]."
+The portcullis is a door. It is east of Tunnel through Chalk and west of Personal Apartment. The initial appearance is "[if the location is Tunnel through Chalk]Blocking the far end of the corridor is a metal [portcullis][otherwise]The metal [portcullis] guards the way back[end if]. [portcullis status]."
 	The description of the portcullis is "Heavy black metal bars, left from a much earlier state. [portcullis status]."
 
 To say portcullis status:
@@ -12117,7 +12118,7 @@ Chapter 3 - Atlantida's Spaces
 Section 1 - Personal Apartment
   
 
-The Personal Apartment is a room. It is indoors and forbidden. "At a guess, this is a room hardly anyone ever visits, or even knows about. Though the ceiling and one wall are bare cave, the rest has been paneled and  graciously decorated in the style of the end of the 18th century. [if the oil-paintings are in the location][Oil-paintings] on the walls depict great men and women of Atlantis gone by: Phyllida Shaply, Amelia Landison, Clarence Arbot, Jon Rosehip. [end if]An antique bed stands in the cen[ter] of the room." 
+The Personal Apartment is a room. It is indoors and forbidden. The description is "At a guess, this is a room hardly anyone ever visits, or even knows about. Though the ceiling and one wall are bare cave, the rest has been paneled and  graciously decorated in the style of the end of the 18th century. [if the oil-paintings are in the location][Oil-paintings] on the walls depict great men and women of Atlantis gone by: Phyllida Shaply, Amelia Landison, Clarence Arbot, Jon Rosehip. [end if]An antique bed stands in the cen[ter] of the room." 
 
 atlantida-woman is an attackable  woman in the Personal Apartment. [She is on the fancy bed.] The printed name of atlantida-woman is "Atlantida". The description of atlantida-woman is "Her face is ageless, her eyes a piercing blue. She looks like Phyllida Shaply, our famous forebear, except that there is something ethereal and heroic about her as well." 
 
@@ -12209,7 +12210,7 @@ topic	title	data
 "biography" or "phyllida" or "shaply" or "marcus" or "aurelius" or "churchill" or "winston" or "margaret" or "thatcher" or "martin" or "luther" or "king" or "nelson" or "mandela"	"biographies"	"The collection includes four different biographies of Phyllida Shaply; numerous lives of her contemporaries; and then a bizarrely diverse coverage of saints and villains, ancient and recent figures. Marcus Aurelius appears, as do Winston Churchill and Margaret Thatcher, Martin Luther King and Nelson Mandela." 
 "economy/economics/macroeconomics"	"books on the economy"	"Several impressive-looking textbooks on macroeconomics are listed, though from the bookmarks it is clear that the owner has not been able to get all the way through them."
 
-The tall window is an attackable door. "A window in the north wall, cut out through the cliff face, gives a view of [if the current daytime is sunset]the ocean in fading sunlight[otherwise if the current daytime is evening]tranquil sea under a darkening sky[otherwise]brilliant sunlight and the hot sea[end if]."   It is north of Private Solarium and south of the Precarious Perch.
+The tall window is an attackable door. The initial appearance is "A window in the north wall, cut out through the cliff face, gives a view of [if the current daytime is sunset]the ocean in fading sunlight[otherwise if the current daytime is evening]tranquil sea under a darkening sky[otherwise]brilliant sunlight and the hot sea[end if]."   It is north of Private Solarium and south of the Precarious Perch.
 
 The description of the tall window is "[if the tall window is open]The window stands open.[else]The window is closed.[end if]".
 
@@ -12298,7 +12299,7 @@ Report touching the sea-view:
 		-- evening:
 			say "The water retains the heat of a very sunny day, though the air is cooling quickly." instead;
 
-Precarious Perch is a room. It is forbidden. "From up here there's a handsome [distant-sea-view], which isn't [i]so[/i] far down [i]really[/i]. But it's a scramble down a nearly sheer cliff for the first bit, until [you] make it down to the rockfall below, and it would be easy for a careless person to injure herself." 
+Precarious Perch is a room. It is forbidden. The description is "From up here there's a handsome [distant-sea-view], which isn't [i]so[/i] far down [i]really[/i]. But it's a scramble down a nearly sheer cliff for the first bit, until [you] make it down to the rockfall below, and it would be easy for a careless person to injure herself." 
 
 Rule for listing exits while looking in Precarious Perch:
 	do nothing instead.
@@ -12329,7 +12330,7 @@ Instead of going up in Abandoned Shore:
 Instead of going north in Abandoned Shore when the player is not in the kayak:
 	say "[You] have too far to go; just swimming won't get us out to Slango's yacht."
 
-Abandoned Shore is below Precarious Perch. It is forbidden. "There's a little inlet of shore here, mostly boulders with little sand, completely cut off from the dock area and sheltered by the curve of the rock so that it wouldn't be visible from the sea unless someone were very close in."
+Abandoned Shore is below Precarious Perch. It is forbidden. The description is "There's a little inlet of shore here, mostly boulders with little sand, completely cut off from the dock area and sheltered by the curve of the rock so that it wouldn't be visible from the sea unless someone were very close in."
 
 Some boulders are scenery in Abandoned Shore. Understand "crack" or "rocks" or "boulder" as the boulders. The description is "Rough black rock, the kind that tears up your hands if you try to hold onto it too tightly."
 
@@ -12350,7 +12351,7 @@ Report examining the boulders when the squid is not seen:
 
 [Originally, the squid here was dead and just a body washed ashore -- long before the squid became prevalent imagery in the rest of the game. But once that imagery was in place, it seemed kind of weird and depressing to have a dead squid there, so this was replaced with a different description.]
 
-A squid is an animal on the boulders. "There is a [squid] in the tidal pools among [the boulders]." The description of a squid is "A squid, washed into a tidal pool, but not damaged. When the tide comes back in, it will be free to go."
+A squid is an animal on the boulders. The initial appearance is "There is a [squid] in the tidal pools among [the boulders]." The description of a squid is "A squid, washed into a tidal pool, but not damaged. When the tide comes back in, it will be free to go."
 
 Sanity-check saying hello to the squid:
 	say "[one of]One tentacle waves back. It is probably a coincidence[or]I'm not even sure squid can hear. At any rate there is no response[stopping]." instead.
@@ -12370,11 +12371,11 @@ Instead of touching the squid:
 Rule for listing exits when looking in Abandoned Shore:
 	do nothing instead.
 
-The bollard is a fixed in place thing in Abandoned Shore. "A [bollard] is bolted to one of the rocks, which is curious considering the otherwise unused and inaccessible look of the spot." Understand "bolt" or "bolted" as the bollard.
+The bollard is a fixed in place thing in Abandoned Shore. The initial appearance is "A [bollard] is bolted to one of the rocks, which is curious considering the otherwise unused and inaccessible look of the spot." Understand "bolt" or "bolted" as the bollard.
 	The description is "A metal pole, painted all-weather green and bolted to a rock. Its ilk are used in more trafficked places for securing boats and so on; and indeed so is this one, despite the implausible setting."
 	The heft of the bollard is 5.
 
-The kayak is a vehicle in Abandoned Shore. "An old but still serviceable [kayak] is drawn up[if the bollard is in the location and the shackles are part of the kayak] and firmly shackled to the bollard[otherwise] here[end if]." 
+The kayak is a vehicle in Abandoned Shore. The initial appearance is "An old but still serviceable [kayak] is drawn up[if the bollard is in the location and the shackles are part of the kayak] and firmly shackled to the bollard[otherwise] here[end if]." 
 
 The description of the kayak is "A green plastic boat, designed to be used by one person with a paddle or oar. [if the bollard is in the location and the shackles are part of the kayak]It's seaworthy, at least for reasonable distances, and shackled to the bollard for safety[otherwise]It looks seaworthy and ready to use[end if]." 
 
@@ -12447,7 +12448,7 @@ Report launching the kayak:
 Report facing in Abandoned Shore:
 	say "The charm of this place is that it's very hard to see anything in any direction but the ocean. In every other direction [you] are completely protected by rocks." instead.
 	
-Open Sea is north of the Abandoned Shore. It is forbidden. "The water stretches in all directions, but [you] can see off to the north where [viewed-yacht] is anchored, ready to bring us back aboard. Its metallic blue shape almost blends in with the water."
+Open Sea is north of the Abandoned Shore. It is forbidden. The description is "The water stretches in all directions, but [you] can see off to the north where [viewed-yacht] is anchored, ready to bring us back aboard. Its metallic blue shape almost blends in with the water."
 	The introduction is "If [you] were further around the island to the east, [you] might be able to see bits of the drowned city: both the buildings that were legitimately destroyed when the land sunk into the sea, and the areas where during the Civil Dispute of Standard[ization] the authorities dumped unwanted foreign archaeological [if the player is wearing britishizing goggles]artefact[otherwise]artifact[end if]s. But here I'm afraid it's just shellfish and sand down there."
 
 Rule for listing exits when looking in the Open Sea:
@@ -12573,7 +12574,7 @@ This bit is the aft portion[or]This is the aft section of the deck[stopping], br
 
 [This device is based on a broadband satellite equipment and service package offered by radio-marine.com.]
 
-The communication unit is a fixed in place thing in the Sunning Deck. "Fixed on the roof above the entry to the navigation area is a white object that looks a little like an igloo. It is the [communication unit] that handles the yacht's wifi connection." The description is "It provides broadband access from the yacht wherever you are, from Biarritz to Istanbul, for a mere thousand euros a month. Slango frequently comments on the iniquity of this fee, but it would be impossible to do your research and make deals without it." Understand "white object" or "white" or "igloo" or "wifi" or "wireless" or "connection" as the communication unit.
+The communication unit is a fixed in place thing in the Sunning Deck. The initial appearance is "Fixed on the roof above the entry to the navigation area is a white object that looks a little like an igloo. It is the [communication unit] that handles the yacht's wifi connection." The description is "It provides broadband access from the yacht wherever you are, from Biarritz to Istanbul, for a mere thousand euros a month. Slango frequently comments on the iniquity of this fee, but it would be impossible to do your research and make deals without it." Understand "white object" or "white" or "igloo" or "wifi" or "wireless" or "connection" as the communication unit.
 
 Rule for writing a topic sentence about a long thing when the location is Sunning Deck:
 	if at least two long things are mentionable:
@@ -12583,7 +12584,7 @@ Rule for writing a topic sentence about a long thing when the location is Sunnin
 
 Section 3 - Navigation Area
 
-The Navigation Area is fore from the Sunning Deck. It is nautical. "[if Slango is not on the command chair]A [command chair] waits at the [controls], a mass of buttons and levers and a tiny, low-mounted steering wheel that seems like an awfully small device to control such a high-powered machine. But I'll take your word that it works.[otherwise]Arrayed on the dashboard (is that even the right word?) is a mass of buttons and levers, and a tiny, low-mounted steering wheel.[end if]
+The Navigation Area is fore from the Sunning Deck. It is nautical. The description is "[if Slango is not on the command chair]A [command chair] waits at the [controls], a mass of buttons and levers and a tiny, low-mounted steering wheel that seems like an awfully small device to control such a high-powered machine. But I'll take your word that it works.[otherwise]Arrayed on the dashboard (is that even the right word?) is a mass of buttons and levers, and a tiny, low-mounted steering wheel.[end if]
 
 The Galley is just below, [down] a steep staircase that is almost a ladder."
 
@@ -12598,7 +12599,7 @@ The command chair is an enterable scenery supporter in the Navigation Area. The 
 
 The controls are scenery in the Navigation Area. Understand "mass" or "buttons" or "button" or "lever" or "levers" or "steering" or "wheel" as the controls. The description is "It's curious, looking at these and knowing I've never touched them before in my life, and yet having your instinctive muscular knowledge of what they're all for and how they work. I feel like I could sit down and drive the yacht, and at the same time I find the idea terrifying."
 
-Foredeck is fore from the Navigation Area. It is nautical. "Here the yacht is nothing but a nose over the water. A [hatch], hardly big enough for a portly person, descends into the so-called crew cabin."
+Foredeck is fore from the Navigation Area. It is nautical. The description is "Here the yacht is nothing but a nose over the water. A [hatch], hardly big enough for a portly person, descends into the so-called crew cabin."
 
 Some portholes are a kind of thing. Portholes are usually scenery. The description of the portholes is usually "Perhaps I should drop any attempt to sound nautical and just call them windows, because they are not the round things one normally thinks of. But they are waterproof and just above the water line."  Understand "window" or "windows" or "porthole" or "portholes" as portholes. The printed name of portholes is always "portholes".
 
@@ -12625,7 +12626,7 @@ This is the pre-drawer rule:
 	
 Section 4 - Crew Cabin
 
-The Crew Cabin is a room. It is nautical.  It is indoors. "It was meant to be mine, before we turned out to be inseparable It's... Spartan. But I didn't pay for expensive accommodations. Oh, yes, and I can understand that it must be a bother for you to give up the storage space.
+The Crew Cabin is a room. It is nautical.  It is indoors. The description is "It was meant to be mine, before we turned out to be inseparable It's... Spartan. But I didn't pay for expensive accommodations. Oh, yes, and I can understand that it must be a bother for you to give up the storage space.
 
 I'm fascinated to note what shape a bed can be when it's not rectangular. More sort of curved and tapering. Convenient if you're called on to house a mermaid.".
 
@@ -12776,7 +12777,7 @@ Some front portholes are portholes. They are in Brock's Stateroom.
 
 Section 7 - Brock's Head
 
-Brock's Head is aft-port from Brock's Stateroom. It is nautical .  It is indoors.  It is a bathroom. "Brock has gotten the best accommodations in this respect as well: his bathroom is less cramped than the others aboard, and the mirror is bigger."
+Brock's Head is aft-port from Brock's Stateroom. It is nautical .  It is indoors.  It is a bathroom. The description is "Brock has gotten the best accommodations in this respect as well: his bathroom is less cramped than the others aboard, and the mirror is bigger."
 
 Instead of going starboard in Brock's Head:
 	try going fore-starboard.
@@ -12798,7 +12799,7 @@ All that stuff about the struggle to achieve perfection as man's gift back to Go
 
 ...Well. If I may be permitted a word (and I don't see how you could stop me, sorry): I don't think they were hypocrites. I think they meant well. But I can understand how all that would have done a heck of a job on your head."
 
-Your wardrobe is an openable closed container in Your Bunk. It is fixed in place. "[if your wardrobe is open]Your wardrobe door is open[otherwise]Your wardrobe door is firmly closed, which is helpful because otherwise it is tricky walking around in here[end if]." Understand "door" as the wardrobe.
+Your wardrobe is an openable closed container in Your Bunk. It is fixed in place. The initial appearance is "[if your wardrobe is open]Your wardrobe door is open[otherwise]Your wardrobe door is firmly closed, which is helpful because otherwise it is tricky walking around in here[end if]." Understand "door" as the wardrobe.
 
 Your wardrobe contains a sundress, a black turtleneck, some trousers, and a swimsuit. 
 	The sundress, black turtleneck, trousers, and swimsuit are wearable. 
@@ -12839,7 +12840,7 @@ Instead of going fore in Your Bunk:
 
 Section 10 - Your Head
 
-Your Head is aft from Your Bunk. It is nautical. It is a bathroom.  It is indoors.  "All the absolutely required amenities of a bathroom, packed into the least possible space. The international space station assigns more room to the bathroom functions."
+Your Head is aft from Your Bunk. It is nautical. It is a bathroom.  It is indoors. The description is "All the absolutely required amenities of a bathroom, packed into the least possible space. The international space station assigns more room to the bathroom functions."
 
 Section 11 - Slango's Bunk
 
@@ -12857,7 +12858,9 @@ Instead of doing something other than examining to something that is part of Sla
 	
 Section 12 - Slango's Head
 
-Slango's Head is aft from Slango's Bunk. It is nautical .  It is indoors. It is a bathroom. "All the absolutely required amenities of a bathroom, packed into the least possible space. The international space station probably assigns more room to the bathroom functions."
+Slango's Head is aft from Slango's Bunk.
+The description is "All the absolutely required amenities of a bathroom, packed into the least possible space. The international space station probably assigns more room to the bathroom functions."
+It is nautical. It is indoors. It is a bathroom. 
 
 When play begins:
 	repeat with item running through baths which are in nautical bathrooms:
@@ -13943,7 +13946,7 @@ To decide what thing is the homonym-match of (target - a thing):
 
 Chapter 3 - The T-inserter
 
-The T-inserter machine is a fixed in place container in the Sensitive Equipment Testing Room. "At the cen[ter] of the room is a gleaming new T-inserter Machine[if something is in the machine], currently containing [a random thing in the T-inserter machine][end if][one of]. This is a state of the art device: letter removal has been well understood for decades, but insertion is much more dangerous and difficult, fraught with ambiguity[or][stopping]." The description is "Made of brushed steel, it resembles an industrial espresso machine, with a space in which to insert items. A dozen small nozzles poke into this space, and the grate beneath is ready to drain off any superfluity of T-ness. There is a tiny brass plate near the base of the machine."  
+The T-inserter machine is a fixed in place container in the Sensitive Equipment Testing Room. The initial appearance is "At the cen[ter] of the room is a gleaming new T-inserter Machine[if something is in the machine], currently containing [a random thing in the T-inserter machine][end if][one of]. This is a state of the art device: letter removal has been well understood for decades, but insertion is much more dangerous and difficult, fraught with ambiguity[or][stopping]." The description is "Made of brushed steel, it resembles an industrial espresso machine, with a space in which to insert items. A dozen small nozzles poke into this space, and the grate beneath is ready to drain off any superfluity of T-ness. There is a tiny brass plate near the base of the machine."  
 
 Understand "space" and "grate" and "inserter" as the machine. The carrying capacity of the T-inserter Machine is 1.
 
@@ -14063,7 +14066,7 @@ Test it-construction with "autoupgrade / wave a-remover at pita / wave p-remover
 
 Chapter 4 - The Synthesizer
 
-The plexiglas case is a thing in the Language Studies Seminar Room. It is transparent, closed, openable, lockable, and locked. It is fixed in place. "A massive plexiglas case takes up one corner of the room." The description is "The case is made of very thick protective plastic on a metal frame[if the screws are part of the plexiglas case and the plexiglas case is lockable]. It is thoroughly locked shut; I don't think [you][']ll have any luck with normal forms of approach. However, plexiglas is a cuttable substance with the right tools, and then there are the screws at the back[otherwise if the plexiglas case is not lockable]. The lid has been compromised by a saw, and the case is now permanenty open[end if]." 
+The plexiglas case is a thing in the Language Studies Seminar Room. It is transparent, closed, openable, lockable, and locked. It is fixed in place. The initial appearance is "A massive plexiglas case takes up one corner of the room." The description is "The case is made of very thick protective plastic on a metal frame[if the screws are part of the plexiglas case and the plexiglas case is lockable]. It is thoroughly locked shut; I don't think [you][']ll have any luck with normal forms of approach. However, plexiglas is a cuttable substance with the right tools, and then there are the screws at the back[otherwise if the plexiglas case is not lockable]. The lid has been compromised by a saw, and the case is now permanenty open[end if]." 
 
 Test plexibug with "tutorial off / get plexiglas" in the Language Studies Seminar Room.
 
@@ -15184,7 +15187,7 @@ To comment on band quality of (item - a thing):
 	
 	
 	
-The power chord is an r-abstract noisy thing. "A power chord vibrates ominously in the air." The description of the power chord is "The chord [--] played as though by electric guitar [--] almost makes it sound as though heavy machinery is in use in here."
+The power chord is an r-abstract noisy thing. The initial appearance is "A power chord vibrates ominously in the air." The description of the power chord is "The chord [--] played as though by electric guitar [--] almost makes it sound as though heavy machinery is in use in here."
 	The introduction of the power chord is "Having a leftover like this is… unusual. A sign of spare reification energy in this area, maybe. Like radiation left over from some really high energy abstraction work."
 
 Instead of listening to the power chord:
@@ -15234,7 +15237,7 @@ Understand the commands "pierce" and "stick" and "penetrate" as "poke".
 Chapter 15 - The Workshop Platform
 
 The programmable dais is an enterable supporter in the Workshop. Understand "machine" or "equipment" or "platform" or "big" or "black" or "metal" or "round" or "machinery" or "coil" or "coils" as the dais.
-	"A programmable dais sits in the middle of the room. It has the raw look of lab equipment rather than a nice smooth commercial instrument."
+	The initial appearance is "A programmable dais sits in the middle of the room. It has the raw look of lab equipment rather than a nice smooth commercial instrument."
 	The description is "It's a round black metal platform with substantial stabil[izing] coils visible underneath, five or six feet in diameter. This is experimental lab grade letter equipment, ferociously powerful, insanely dangerous." 
 	
 After examining the programmable dais:
@@ -16683,7 +16686,9 @@ The ant is an insect. The heft of the ant is 0. The description is "This particu
 	
 An applet is r-abstract. The heft is 0. The description is "An abstract representation. An anonymous browser window appears to hover in the air, [one of][if protest-scenario has happened and protest-scenario ended in DP-tanking]currently replaying a satellite footage of the deplural[ization] a few hours ago[otherwise]currently showing satellite footage of the big demonstration a few hours ago[end if][or]streaming a television show from one of Atlantis['] top chefs, demonstrating how to depluralize fruit for best effect. [one of]'Single varietal fruits produce the most intense flav[our],' she's explaining to the screen, a bushel of limes at her side[or]'A mixture of different varieties can produce a well-structured blend, as with a Bordeaux,' she continues[cycling][or]currently playing streaming video of a rally by the Atlantean Anti-Babel Party[or]streaming news clips of the Serial Comma Day celebration[or]streaming a public service message about keeping letter tools out of the hands of children[or]currently playing a web game about jumping cats[or]currently playing a text-based web game[as decreasingly likely outcomes]."
 
-The ape is an animal. "The ape, which is of the menacing kind rather than of the sweetly charming kind, has us fixed in an unpleasant stare." The description is "It is very large." 
+The ape is an animal.
+The initial appearance is "The ape, which is of the menacing kind rather than of the sweetly charming kind, has us fixed in an unpleasant stare."
+The description is "It is very large." 
 
 The description of the arc is "A bent bow of steel, but more decorative than functional." The heft is 3. 
 
@@ -16732,7 +16737,7 @@ Instead of buying the fake-as:
 Instead of touching or squeezing or rubbing the fake-as:
 	say "The metal surface is dull and weathered, skin-temperature, all smooth edges." 
 	
-The ass is an animal. "Adorably miniature, as donkeys on this island tend to be: he comes up to roughly knee-height and could be carried like a dog, though his sentiments on the experience might not be flattering. He does still have a bite, and back legs." 
+The ass is an animal. The initial appearance is "Adorably miniature, as donkeys on this island tend to be: he comes up to roughly knee-height and could be carried like a dog, though his sentiments on the experience might not be flattering. He does still have a bite, and back legs." 
 	The description of the ass is "He is not the ideal companion in a mission of stealth."  
 	The heft is 3.
 
@@ -17245,7 +17250,11 @@ The heft of the complicit shark is 10. The description of complicit shark is "It
 	The scent-description of the complicit shark is "rotting fish".
 	Understand "gash" as the complicit shark.
 
-The conference-poser is a woman. The printed name is "conference poser". Understand "conference" or "poser" as the conference-poser. "The conference poser stands in the corner, cultivating an expression of keen intellectual skepticism." The description of the conference-poser is "She looks back at us with a martial gleam of the eye, willing us to be impressed by her.".
+The conference-poser is a woman.
+The printed name is "conference poser".
+Understand "conference" or "poser" as the conference-poser.
+The initial appearance is "The conference poser stands in the corner, cultivating an expression of keen intellectual skepticism."
+The description of the conference-poser is "She looks back at us with a martial gleam of the eye, willing us to be impressed by her.".
 	The greeting of the conference-poser is "The conference poser looks at us a little hazily and says, 'Oh, yes, didn't we meet at the [one of]Linguistics and Empire[or]Post-Colonial Consonants[or]Concept Formation Through Hiphop[or]Ecologically Responsible Linguistics[at random] [one of]symposium[or]workshop[or]conference[at random] in [one of]San Diego[or]Austin[or]Minsk[or]Liverpool[or]Lampeter[or]Montreal[or]Cologne[at random] [one of]last year[or]last winter[or]back in [a random number between 1995 and 2009][at random]?'"
 
 Every turn when the conference-poser is in the location:
@@ -17338,7 +17347,11 @@ The description of the bacon chapeau is "People sometimes pin bacon on turkeys t
 [TODO: fix test]
 [Test diva with "switch switch / put dove in bucket / x diva / x gown / x chapeau / load gun / shoot gown / shoot chapeau / x diva" holding the dove and the anagramming gun and the bullets in the Generator Room.]
 
-The doe is an animal. The doe is female. The heft of the doe is 6. "A doe lurks nervously nearby." The description is "She looks very skittish."
+The doe is an animal.
+The doe is female.
+The heft of the doe is 6.
+The initial appearance is "A doe lurks nervously nearby."
+The description is "She looks very skittish."
 
 The printed name of the secret-door is "door". Understand "door" as the secret-door. The description of the secret-door is "It is part of the north wall[if secret-door is closed], and currently closed[otherwise]. It stands ajar[end if]." The secret-door is an openable, closed, enterable container. It is fixed in place.
 
@@ -17385,7 +17398,10 @@ The description of the earlap is "Just the severed [i]tip[/i] of the ear, for th
 
 The eases are r-abstract. The description is "Foggy, shifting images of the idea of ease: now a pillow; now a cigarette; now a seat in first class for a change.".
 
-The earl is a man. "An Earl stands a few feet away, decked in identifying [ermine]." The description is "He looks anxious and out-of-place."
+The earl is a man.
+The initial appearance is "An Earl stands a few feet away, decked in identifying [ermine]."
+The description is "He looks anxious and out-of-place."
+
 	The earl wears an ermine. Understand "coat" as the ermine. The description of the ermine is "It is a coat of soft white fur, legendarily associated with purity and nobility, but now rather more suggestive of the mistreatment of animals."
 	The scent-description of the earl is "musty furs".
 	The greeting of the earl is "'Pleasure to meet you,' says the earl. 'No need to stand on ceremony, eh? Excellent.'"
@@ -17398,7 +17414,7 @@ Sanity-check wearing the earring:
 The earpiece is a wearable thing. The description of the earpiece is "It's a little bluetooth device for use with a telephone; the kind of thing you typically don't see around the island, with cell phones as limited as they are."
 
 The earwig is an insect. 
-	"An earwig is crawling about looking menacing and slightly alien."
+	The initial appearance is "An earwig is crawling about looking menacing and slightly alien."
 	The description is "These things have always given me the creeps."
 	
 [The elongating trouser is wearable. The description of the elongating trouser is "A garment with a single gradually lengthening leg. [trouser-growth]."
@@ -17415,12 +17431,12 @@ An eel is edible. The description of an eel is "Manifested dead, because out of 
 The eight-object is an r-abstract thing. The printed name is "eight". Understand "eight" or "8" as the eight-object. The heft is 0. The description is "It looks like an infinity symbol rotated ninety degrees."
 	
 The elegantly winter pilot is a woman. Understand "aviatrix" or "slim" or "alert" as the elegantly winter pilot.
-	"[The elegantly winter pilot] shows no sign of nervousness or impatience."
+	The initial appearance is "[The elegantly winter pilot] shows no sign of nervousness or impatience."
 	The description is "A slim, alert aviatrix, dressed suitably for a biplane duel somewhere over the Ukraine. Her eyes are almond-shaped and her glance taunting."
 	The greeting of the elegantly winter pilot is "The pilot's greeting is a series of unidentifiable syllables. But somehow they hint at black forests dusted with snow, and a single jingling sleigh."
 	
 The elf nun is a woman. Understand "pale" or "pointed" or "ears" or "white-blonde" or "hair" as the elf nun.
-	"The elf nun stands watching us. Her eyes are very dark, almost blue-black."
+	The initial appearance is "The elf nun stands watching us. Her eyes are very dark, almost blue-black."
 	The description of the elf nun is "Her expression is deep and unreadable. From under her wimple, pale pointed ears and a few whisps of white-blonde hair show."
 	The elf nun wears a wimple. The description of the wimple is "Embroidered in white on white with Celtic crosses and patterns that speak of Kells."
 	The greeting of the elf nun is "'Blessings of growth and renewal be upon you,' says the elf nun. Her accent is sing-song and alien."
@@ -18283,15 +18299,19 @@ The passage-place is a thing. The printed name is "passage". Understand "passage
 
 [This portion is, again, totally an Easter egg: there's no need to go to the Shadow Chamber, and on the whole it's pretty unlikely that anyone will on the first try. However, it's a repository for palindromes and word puzzles of non-English and slightly superstitious origin, suggesting that some sense of magic attached to these even before linguistic efficacy was widely detected.]
 
-The Shadow Chamber is a room. It is indoors. "Dim lights in the floor make it possible to navigate in here, though it's still fairly dark. The place is small and shabby, the air stale.[assign-amanda]"
+The Shadow Chamber is a room. It is indoors. The description is "Dim lights in the floor make it possible to navigate in here, though it's still fairly dark. The place is small and shabby, the air stale.[assign-amanda]".
 
 To say assign-amanda:
 	record "Amanda Waterstone award for discovering cultic passages" as an achievement.
 
-The Greek inscription is fixed in place in the shadow chamber. "Cold water flows from a crack in the wall. Above it, words are carved: ΝΙΨΟΝ ΑΝΟΜΗΜΑΤΑ ΜΗ ΜΟΝΑΝ ΟΨΙΝ." The description is "The words are ΝΙΨΟΝ ΑΝΟΜΗΜΑΤΑ ΜΗ ΜΟΝΑΝ ΟΨΙΝ." Understand "cold" or "water" or "greek" as the Greek inscription.
+The Greek inscription is fixed in place in the shadow chamber.
+The initial appearance is "Cold water flows from a crack in the wall. Above it, words are carved: ΝΙΨΟΝ ΑΝΟΜΗΜΑΤΑ ΜΗ ΜΟΝΑΝ ΟΨΙΝ."
+The description is "The words are ΝΙΨΟΝ ΑΝΟΜΗΜΑΤΑ ΜΗ ΜΟΝΑΝ ΟΨΙΝ."
+Understand "cold" or "water" or "greek" as the Greek inscription.
 
-The sator inscription is fixed in place in the Shadow Chamber. "On the opposite wall is a square of inscribed letters, this time Roman."  The description is 
-	"It reads: 
+The sator inscription is fixed in place in the Shadow Chamber.
+The initial appearance is "On the opposite wall is a square of inscribed letters, this time Roman."
+The description is "It reads: 
 	
 [fixed letter spacing]SATOR[line break]AREPO[line break]TENET[line break]OPERA[line break]ROTAS[variable letter spacing]". 
 		Understand "roman" or "letters" or "lettering" or "square" or "square of" as the sator inscription.
@@ -18641,7 +18661,10 @@ The pineapple-ring is an edible thing. The description of the pineapple-ring is 
 
 The description of some pins is "Straight pins, the kind people use for pinning up alterations."
 
-The description of the pint is "As pints ought to be, this one is a pint of dark beer." The pint is edible and contained and fluid. "Someone has left a full pint of beer on the ground." The scent-description of the pint is "malt and alcohol".
+The description of the pint is "As pints ought to be, this one is a pint of dark beer."
+The pint is edible and contained and fluid.
+The initial appearance is "Someone has left a full pint of beer on the ground."
+The scent-description of the pint is "malt and alcohol".
 
 The description of the pints is "Enough beer to load up a barmaid at Octoberfest.". The pints are edible and contained and fluid. The heft of the pints is 6.
 
@@ -18830,7 +18853,8 @@ The description of the power cord is "This is the heaviest-duty cabling I've eve
 
 A power socket is a kind of thing. The description of a power socket is usually "[if something is plugged into the item described]A power socket, with one end of the power cord currently plugged in[otherwise]A power socket suitable for plugging a cord into[end if]."
 
-A power socket called a wall socket is fixed in place in the Workshop. "A specialized wall socket is built into the east wall, clearly not part of the ordinary power system for the Bureau."
+A power socket called a wall socket is fixed in place in the Workshop.
+The initial appearance is "A specialized wall socket is built into the east wall, clearly not part of the ordinary power system for the Bureau."
 
 A power socket called a dais socket is part of the programmable dais.
 
@@ -19128,7 +19152,11 @@ The printed name of the fishing-reel is "reel". Understand "reel" or "fishing" a
 Instead of turning the fishing-reel:
 	say "[You] crank the reel a few times, but as it's not attached to a line, nothing very interesting results."
 
-A rig is a device. The heft of the rig is 10. "A rig is set up here[if the rig is lit], lighting the vicinity[end if]." The description of the rig is "A whole collection of lighting units on poles and stands."
+A rig is a device.
+The heft of the rig is 10.
+The initial appearance is "A rig is set up here[if the rig is lit], lighting the vicinity[end if]."
+The description of the rig is "A whole collection of lighting units on poles and stands."
+
 	Carry out switching on the rig:
 		now the rig is lit.
 	Carry out switching off the rig:
@@ -19175,7 +19203,9 @@ Before putting the restoration gel on the rock when the rock is in a container (
 [TODO: fix test]
 [Test rock-bug with "put rock in t-inserter / open tub / gel rock" holding the rock and the tub in the Sensitive Equipment Testing Room.]
 
-The roc is a rideable animal. "The roc towers over us, looking smarter than a bird has the right to look." The description of the roc is "The bird is enormous[if the location is indoors], so big it seems incredible that it can even fit into the room[end if]. Brock is a tall man, but not nearly this tall. Its eyes are bright and (if [you] [are] not reading too much in) ironically clever; its plumage a little like an eagle's, if an eagle were made many times larger and feathered in a kind of sleek, luminous black."
+The roc is a rideable animal.
+The initial appearance is "The roc towers over us, looking smarter than a bird has the right to look."
+The description of the roc is "The bird is enormous[if the location is indoors], so big it seems incredible that it can even fit into the room[end if]. Brock is a tall man, but not nearly this tall. Its eyes are bright and (if [you] [are] not reading too much in) ironically clever; its plumage a little like an eagle's, if an eagle were made many times larger and feathered in a kind of sleek, luminous black."
 
 [Every turn when the roc is in the Sunning Deck and the Sunning Deck is the location:
 	say "[one of][The roc]'s claws dig into the cushions of the sunning deck as the yacht pitches[or][roc-igloo][or][The roc] stretches its wings out so that they reach the whole width of the yacht[or]I catch [the roc] looking at us[at random].".]
@@ -19602,7 +19632,9 @@ Report switching off the stopwatch:
 	
 The strolling chap is a man. The description is "He is walking back and forth, forth and back, at a leisurely pace, as though he had all the time in the world."
 
-A suid is an animal. "The suid stands stupidly nearby, looking dazed." The description is usually "A suid is any kind of pig; this one is a sizable domestic sow, as it turns out."
+A suid is an animal.
+The initial appearance is "The suid stands stupidly nearby, looking dazed."
+The description is usually "A suid is any kind of pig; this one is a sizable domestic sow, as it turns out."
 
 A sud is a thing. The heft of the sud is 1. The description of the sud is "A solitary soap-bubble, clinging iridescently to the nearest surface."
 
@@ -19620,7 +19652,7 @@ The printed name of the sun-product is "sun". The heft of a sun-product is 1000.
 		
 The description of the sunlit ray is "Not a ray of sunlight. No. This is a dead sea-creature, perpetually lit as though by the sun." The sunlit ray is edible. The scent-description is "seawater".
 
-[The skit is a man. "A man wearing a tea-towel over his head is enacting some kind of skit about Gandhi." The skit wears a tea-towel. The skit is r-abstract. ]
+[The skit is a man. The initial appearance is "A man wearing a tea-towel over his head is enacting some kind of skit about Gandhi." The skit wears a tea-towel. The skit is r-abstract. ]
 
 The description of the swat is "The smack of a hand, or the slap of a rolled-up newspaper hitting a fly: you perceive it as a comic-book sound.". The swat is r-abstract and noisy.
 
@@ -20432,8 +20464,10 @@ The trill is an r-abstract noisy thing. The heft of the trill is 0. The descript
 
 Instead of listening to the trill: say "The trill keeps on trilling."
 
-The troll is a man. "The troll [one of]grunts[or]looks at us with an unpleasantly hungry expression[or]picks its nose[or]pounds one of its meaty fists into the opposite palm[or]looks around for something to smash[at random]." The description of the troll is "Grey skin, yellow teeth, green eyes. Legs as big around as tree trunks. A pot belly, speaking of a great deal of food eaten raw."
-	The greeting of the troll is "The troll grunts."
+The troll is a man.
+The initial appearance is "The troll [one of]grunts[or]looks at us with an unpleasantly hungry expression[or]picks its nose[or]pounds one of its meaty fists into the opposite palm[or]looks around for something to smash[at random]."
+The description of the troll is "Grey skin, yellow teeth, green eyes. Legs as big around as tree trunks. A pot belly, speaking of a great deal of food eaten raw."
+The greeting of the troll is "The troll grunts."
 
 [A lightweight nod to tv tropes, focusing on the artifact section, both because it places us very early in the count and because it seemed like a suitable place to start for this game.]
 The trope count is an r-abstract thing. The description of the trope count is "The count is currently only up to '[one of]applied phlebotinum[or]amulet of concentrated awesome[or]amulet of dependency[or]amplifier artifact[or]antimatter[or]artifact of death[or]artifact of doom[or]artifact of attraction[cycling].' This could take a while."
@@ -23895,7 +23929,7 @@ To say game-coaching:
 
 The wager is an object that varies. The wager is yourself.
 The wager-name is some indexed text that varies.
-The wager-judging rule is an object based rule that varies. The wager-judging rule is the liquid wager rule.
+The wager-judging rule is a rule that varies. The wager-judging rule is the liquid wager rule.
 The wager-index is a number that varies.
 
 Setting action variables for giving something to the barman when play the game is the current quip and the wager is yourself:
@@ -25051,7 +25085,9 @@ That puts a lot of weight on this one scene. Though we've heard from and about B
 -- to make Brock seem sufficiently human, present, and likeable that the choice about whether to betray him seems like a genuine concern
 ]
 
-Brock is a man in the repository. "Brock is preternaturally still.". The current mood of Brock is neutral.
+Brock is a man in the repository.
+The initial appearance is "Brock is preternaturally still."
+The current mood of Brock is neutral.
 
 Brock is alert. The description of Brock is "He looks a bit haggard to me, but I don't think anything too horrible has happened to him[one of]. So perhaps you can stop worrying[or][stopping]."
 
@@ -25441,8 +25477,11 @@ Section 9 - Mother
 
 [ Mother has only this one brief scene, but she's an important influence in Alex's life: a source of cosmopolitan and slightly subversive ideas, more in touch with the world outside than Alex's father, and source of the unquestioned privilege of his upbringing. ]
 
-My mother is a woman. Understand "mom" or "ma" or "mum" or "mommy" as mother. "My mother is here, looking around as though she would like to comment on my housekeeping." The description of my mother is "She is a tall woman with short brown hair expertly cut, and a tailored suit." 
-	The introduction is "She has in addition a certain air which is very rare on this island: the air of seeming not to care whether anyone is watching her, or whether she is exhibiting the proper respect for authority."
+My mother is a woman.
+Understand "mom" or "ma" or "mum" or "mommy" as mother.
+The initial appearance is "My mother is here, looking around as though she would like to comment on my housekeeping."
+The description of my mother is "She is a tall woman with short brown hair expertly cut, and a tailored suit." 
+The introduction is "She has in addition a certain air which is very rare on this island: the air of seeming not to care whether anyone is watching her, or whether she is exhibiting the proper respect for authority."
 	
 Sanity-check kissing my mother:
 	say "Save the skeezy Oedipal reenactments for when you're inhabiting your own body, eh?" instead.
@@ -25710,7 +25749,10 @@ Confrontation-with-father ends when the player recollects final-dad-goodbye.
 When confrontation-with-father ends: 
 	try approaching cold storage.
 
-Father is a man. "My father stands a few feet away, his posture oddly askew, as though the situation takes him aback so much that he can't stand up straight. His arms are crossed over his chest. Through your eyes, he looks older than he is." The indefinite article is "my". The description is "He's in his mid-fifties, tall, thin but not excessively so. His hair is going white at the temples. His manner has always been mild and unimposing, but he is actually a capable manager, and more highly placed in the Bureau than he likes to let on.
+Father is a man.
+The initial appearance is "My father stands a few feet away, his posture oddly askew, as though the situation takes him aback so much that he can't stand up straight. His arms are crossed over his chest. Through your eyes, he looks older than he is."
+The indefinite article is "my".
+The description is "He's in his mid-fifties, tall, thin but not excessively so. His hair is going white at the temples. His manner has always been mild and unimposing, but he is actually a capable manager, and more highly placed in the Bureau than he likes to let on.
 
 Right now he looks both exhausted and fiery, as though he's been called up for a difficult and possibly fatal duty."
 
@@ -26253,11 +26295,15 @@ We say nothing.";
 [TODO: fix test]
 [Test almostlast with "tutorial off / load gun / put counterweight on hook / open tub / open portcullis / go through portcullis / x files / a cold storage / look / shoot anagramming gun at gel rifle / look / gel astrologer / shoot gel rifle at atlantida" in the Tunnel  holding the anagramming gun and the bullets and the tub and the counterweight.
 
-Test lastmeeting with "tutorial off / open tub / x files / a cold storage / look / shoot anagramming gun at gel rifle / look / gel astrologer / shoot gel rifle at atlantida" in the Personal Apartment holding the anagramming gun and the tub.]
+Test lastmeeting with "tutorial off / open tub / x files / a cold storage / look / shoot anagramming gunsource:story.ni#line25713 at gel rifle / look / gel astrologer / shoot gel rifle at atlantida" in the Personal Apartment holding the anagramming gun and the tub.]
 
 Section 14 - The Nicer Atlantida
 
-Atlantida-refreshed is a woman. "Atlantida stands nearby, urging us to hurry out via the Private Solarium[one of]. I think she's enjoying her role as conspiratorial heroine[or][stopping]." The printed name of atlantida-refreshed is "Atlantida". Understand "atlantida" as atlantida-refreshed. The description of Atlantida-refreshed is "She looks very similar to her earlier self, but the differences are there. The eyes are grey now. A tattoo of a writhing squid encircles her left wrist. Her face is younger."
+Atlantida-refreshed is a woman.
+The initial appearance is "Atlantida stands nearby, urging us to hurry out via the Private Solarium. I think she's enjoying her role as conspiratorial heroine."
+The printed name of atlantida-refreshed is "Atlantida".
+Understand "atlantida" as atlantida-refreshed.
+The description of Atlantida-refreshed is "She looks very similar to her earlier self, but the differences are there. The eyes are grey now. A tattoo of a writhing squid encircles her left wrist. Her face is younger."
 
 Atlantida-shooing is a scene. Atlantida-shooing begins when guard-imminence ends in postponement. 
 
