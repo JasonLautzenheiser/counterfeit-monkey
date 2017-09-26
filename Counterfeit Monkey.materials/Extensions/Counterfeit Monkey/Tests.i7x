@@ -7,7 +7,7 @@ Volume 8 - Tests
 
 Chapter 0 - Skipping breaks
 
-No pauses is a truth-state that varies. No pauses is initially false.
+No pauses is a truth state that varies. No pauses is initially false.
 
 To custom-pause the game:
 	if no pauses is false:
@@ -1114,6 +1114,7 @@ Carry out ultratesting a topic:
 		if there is a setting entry:
 			say "Moving to [setting entry].";
 			move the player to the setting entry, without printing a room description;
+			carry out the caching scope activity with the player;
 		if there is a stuff entry:
 			repeat with item running through stuff entry:
 				say "Procuring [the item].";

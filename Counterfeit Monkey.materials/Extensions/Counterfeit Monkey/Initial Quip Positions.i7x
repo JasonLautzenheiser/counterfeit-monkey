@@ -69,7 +69,6 @@ whether Brock-man seemed upset is in the backup-repository.
 why Arbot now sells antiques is in the backup-repository.
 what types of antiques they sell here is in the backup-repository.
 what the map legend means is in the backup-repository.
-thank kate is in the backup-repository.
 offer the ticket is in the backup-repository.
 offer the ticket redundantly is in the backup-repository.
 when the movie starts is in the backup-repository.
@@ -84,6 +83,7 @@ claim to be taking a survey is in the backup-repository.
 explain that we hath a recorder is in the backup-repository.
 we seem curious is in the backup-repository.
 what he likes to eat is in the backup-repository.
+where there seems Babel Cafe is in the backup-repository.
 where he gets Mediterranean foods is in the backup-repository.
 assure him that we seem not hitting on him is in the backup-repository.
 what his girlfriend seems like is in the backup-repository.
@@ -214,7 +214,6 @@ whether Professor Higgate would translate part of the novel is in the backup-rep
 whether she encountered activists is in the backup-repository.
 whether she might let us into the language studies seminar room is in the backup-repository.
 how we might return a book is in the backup-repository.
-thank Professor Higgate is in the backup-repository.
 which conlangs she kens is in the backup-repository.
 make up some excuse is in the backup-repository.
 that we just dropped by to meet him is in the backup-repository.

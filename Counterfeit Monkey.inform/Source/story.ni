@@ -6,8 +6,6 @@
 
 [A word about the source release:
 
-This source is provided for its interest value. Not all of the extensions necessary to compile the source are available to the public and it is not the author's intention to have others recompile or revise the game.
-
 There is no guarantee that any of the included code is suitable for any specific purpose, but the author grants users the right to adapt the code they find as they wish for other projects. The author's release of the source does not constitute a promise to support that code or help other authors in adapting it to their own purposes.
 
 Output text remains copyright Emily Short.]
@@ -151,6 +149,7 @@ Include Viewpoint and Narrative Voice by Counterfeit Monkey.
 
 Include World Model Tweaks by Counterfeit Monkey.
 
+Include Loudness by Counterfeit Monkey.
 Include Room Description Speedups by Counterfeit Monkey.
 Include Custom Speedups by Counterfeit Monkey.
 Include Conversation Speedups by Counterfeit Monkey.
@@ -549,7 +548,7 @@ Include Initial Quip Positions by Counterfeit Monkey.
 Include Fakes by Counterfeit Monkey.
 Include Initial Proffering by Counterfeit Monkey.
 Include Backdrops by Counterfeit Monkey.
-Include Hard-Coded Quip Cache by Counterfeit Monkey.
+Include Hard-coded Quip Cache by Counterfeit Monkey.
 
 [The following source files are included above:
 

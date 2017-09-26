@@ -2,8 +2,6 @@ Version 2/160606 of Threaded Conversation by Emily Short begins here.
 
 "A conversation system tracking facts known, phrases spoken, and subjects of conversation."
 
-"modified from Threaded Conversation by Emily Short and based on Alabaster by Emily Short, et. al."
-
 Include Basic Screen Effects by Emily Short.
 Include Very Complex Listing by Counterfeit Monkey.
 
@@ -320,7 +318,7 @@ The first availability rule (this is the don't talk to no one rule):
 	if the current interlocutor is not a person:
 		it is off-limits; [But this should never happen!]
 
-A person can be currently listening. A person is usually not currently listening.
+[A person can be currently listening. A person is usually not currently listening.]
 
 Addressing everyone is initially false.
 
@@ -475,7 +473,7 @@ Rule for listing plausible quips (this is the standard quip plausibility rule):
 			carry out the quip-introducing activity with the output item entry;
 		[This could have blanked some rows out, so we need to check again:]
 		if special listing count is positive,
-			say "[quip-suggestion-phrase][the prepared list delimited in disjunctive style]." (A);
+			say "[quip-suggestion-phrase][the prepared list delimited in disjunctive style][one of]. [paragraph break][first custom style][bracket]Type TOPICS to repeat current conversation topics and suggest new ones.[close bracket][roman type][or].[stopping][line break]" (A);
 
 Before printing the name of a questioning quip while listing plausible quips or listing peripheral quips or listing recommended quips (this is the prefix-ask rule):
 	say "ask " (A).
@@ -529,7 +527,7 @@ This is the offer hint quips rule:
 			now suppress-hint-quips is false;
 			the rule fails;
 		if sp reparse flag is false: [Don't want to also display hints before conversation, if we just implicitly greeted someone]
-			carry out the listing plausible quips activity;
+			carry out the listing plausible quips activity.
 			[Hint about quips if there's something on the table that's particularly unusual.]
 
 The offer hint quips rule is listed after the adjust light rule in the turn sequence rules.

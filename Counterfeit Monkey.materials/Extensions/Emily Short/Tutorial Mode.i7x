@@ -71,7 +71,7 @@ Carry out looking (this is the register looking rule):
 
 An instructional rule (this is the teach examining rule): 
 	if the teach examining rule is listed in the completed instruction list, make no decision;
-	if a previously-mentioned non-player thing (called target) is marked-visible: 
+	if a previously-mentioned non-player thing (called target) is enclosed by location:
 		let N be "[the target]"; 
 		let M be "[target]";
 		say "You can find out more if you LOOK AT [N in upper case] (or shorten it to L [M in upper case])." (A);
@@ -140,7 +140,7 @@ Carry out dropping something (this is the register dropping rule):
 
 An instructional rule (this is the teach taking rule):
 	if the teach taking rule is listed in the completed instruction list, make no decision;
-	if a take-worthy thing (called target item) is marked-visible: 
+	if a take-worthy thing (called target item) is enclosed by location:
 		let N be "[the target item]";
 		say "You can pick things up when you see them, like this: TAKE [N in upper case]." (A);
 		now the expected action is the action of taking the target item;

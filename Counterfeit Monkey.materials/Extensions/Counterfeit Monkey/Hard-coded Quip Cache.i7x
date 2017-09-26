@@ -1,4 +1,4 @@
-Hard-coded quip cache by Counterfeit Monkey begins here.
+Hard-coded Quip Cache by Counterfeit Monkey begins here.
 
 Use authorial modesty.
 
@@ -78,7 +78,6 @@ whether Brock-man seemed upset is  dead-ended and  a quip.
 why Arbot now sells antiques is  dead-ended and  a quip.
 what types of antiques they sell here is  dead-ended and shallowly-buried and a quip.
 what the map legend means is  dead-ended and shallowly-buried and a quip.
-thank kate is  dead-ended and shallowly-buried and a quip.
 offer the ticket is  dead-ended and shallowly-buried and a quip.
 offer the ticket redundantly is  dead-ended and shallowly-buried and a quip.
 when the movie starts is   shallowly-buried and a quip.
@@ -93,7 +92,7 @@ claim to be taking a survey is upwardly-restrictive and   a quip.
 explain that we hath a recorder is upwardly-restrictive and dead-ended and  a quip.
 we seem curious is upwardly-restrictive and dead-ended and  a quip.
 what he likes to eat is   shallowly-buried and a quip.
-where he gets Mediterranean foods is  dead-ended and  a quip.
+where there seems Babel Cafe is  dead-ended and  a quip.
 assure him that we seem not hitting on him is upwardly-restrictive and dead-ended and  a quip.
 what his girlfriend seems like is  dead-ended and  a quip.
 delay ticket-taker is upwardly-restrictive and dead-ended and  a quip.
@@ -211,7 +210,6 @@ whether Professor Higgate would translate part of the novel is upwardly-restrict
 whether she encountered activists is  dead-ended and shallowly-buried and a quip.
 whether she might let us into the language studies seminar room is  dead-ended and shallowly-buried and a quip.
 how we might return a book is  dead-ended and shallowly-buried and a quip.
-thank Professor Higgate is  dead-ended and shallowly-buried and a quip.
 which conlangs she kens is  dead-ended and shallowly-buried and a quip.
 make up some excuse is upwardly-restrictive and   a quip.
 that we just dropped by to meet him is upwardly-restrictive and dead-ended and  a quip.
@@ -448,4 +446,4 @@ how fusion happens indirectly-follows gel-shot.
 whether the protesters feel the same way indirectly-follows thing-about-democracy.
 what Atlantida kens concerning synthesis indirectly-follows how to fix the fusion.
 
-Hard-coded quip cache end here.
+Hard-coded Quip Cache ends here.

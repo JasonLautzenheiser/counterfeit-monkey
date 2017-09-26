@@ -18,10 +18,44 @@ The position of the graphics window is g-placeleft.
 
 The graphics window construction rule is not listed in any rulebook.
 
-When identification ends (this is the open the graphics window rule):
-	now current graphics drawing rule is the compass-drawing rule;
-	open the graphics window;
+Before refreshing the graphics window (this is the adjust the graphics window to accommodate the map rule):
+	if glulx graphics is supported:
+		adjust width of the graphics window;
+	continue the activity.
 
+[ The measuring window is used to measure to total width of the game window in pixels. This lets us adjust the width of the graphics window properly. ]
+The measuring window is a graphics g-window spawned by the main window.
+The position of the measuring window is g-placebelow.
+The measurement of the measuring window is 0.
+
+When play begins (this is the open the measuring window rule):
+	if glulx graphics is supported:
+		open the measuring window.
+
+Ideal-width is a number that varies.
+
+To adjust width of the graphics window:
+	let original width be the width of the graphics window;
+	now ideal-width is the width of the measuring window / 2;
+	if ideal-width > the maximum size of the graphics window:
+		now ideal-width is maximum size of the graphics window;
+	[ Currently maximum size of the graphics window is 722 pixels. This is large enough to never happen on most screens. ]
+	let real-ideal be 0.0;
+	now real-ideal is ideal-width;
+	let ratio be real-ideal divided by the height of the graphics window;
+	if ratio > 0.8395: [ Too low to show the entire map when scaled to window width ]
+		now ideal-width is (height of graphics window * 0.8395) to the nearest whole number;
+	if ideal-width is not original width: [ The width has changed ]
+		force the size of graphics window to ideal-width.
+
+When identification ends (this is the open the graphics window rule):
+	if glulx graphics is supported:
+		now current graphics drawing rule is the compass-drawing rule;
+		open the graphics window;
+		start looking for graphlinks.
+
+A glulx input handling rule for an arrange-event (this is the update the status line after arranging rule):
+	update the status line.
 
 
 Chapter 1 - Images
@@ -290,7 +324,7 @@ Report looking (this is the update compass after looking rule):
 [We want the compass to stay down in a corner of the screen and not to scale up too huge if the screen is resized. One of the irritating things about Glulx window management is that it's impossible to force an aspect ratio on the player, so I have no idea whether they're going to go tall-and-skinny or short-and-wide. Testers playing in full-screen mode sometimes found that the compass got way too large and encroached on the upper part of the map if I just set the compass to be one quarter the width of the window.]
 
 To decide what number is grid-size:
-	let width-quarter be (the width of the graphics window / 4);
+	let width-quarter be (ideal-width / 4);
 	let height-quarter be (the height of the graphics window / 4);
 	if width-quarter is greater than height-quarter:
 		now compass width is height-quarter;
@@ -303,7 +337,7 @@ To decide what number is grid-margin:
 	decide on grid-size / 2.
 
 This is the compass-drawing rule:
-	if glulx graphics is supported:
+	if the graphics window is g-present:
 		clear compass graphlinks; [We need to reset the graphlinks every time the player resizes the window, because if the height of the screen changes, the compass may move vertically.]
 		establish compass graphlinks;
 		redraw the map and compass;
@@ -366,16 +400,17 @@ In theory, it would have been possible to make the map images carry the compass 
 Figure of background colour is the file "map-background-colour.png".
 
 To redraw the map and compass:
-	if glulx graphics is supported:
-		clear the graphics window;
-		[ Draw the background at slightly more than half the window height to ensure odd heights don't leave a 1 pixel black line ]
-		let half height be (height of the graphics window / 2) + 1;
-		draw figure of background colour in graphics window at x 0 and y half height scaled to width (width of the graphics window) and height half height;
-		draw the local map of the location in graphics window;
-		draw Figure of center-squiggle in graphics window at x x-coordinate of north and y y-coordinate of west scaled to width grid-size and height grid-size;
+	if the graphics window is g-present:
+		let total height be height of the graphics window;
+		let scaled height be (ideal-width / 0.8395) to the nearest whole number;
+		draw the local map of the location in graphics window at x 0 and y ((total height - scaled height) / 2) scaled to width ideal-width and height scaled height;
+		[ Draw the blue background below the map and add a pixel to the height to ensure that odd heights don't leave a 1 pixel black line ]
+		let padding height be (total height - scaled height) / 2 + 1;
+		draw figure of background colour in graphics window at x 0 and y (((total height - scaled height) / 2) + scaled height) scaled to width ideal-width and height padding height;
 		determine compass coordinates;
+		draw Figure of center-squiggle in graphics window at x x-coordinate of north and y y-coordinate of west scaled to width grid-size and height grid-size;
 		repeat with way running through directions:
-			if the way is a listable exit:
+			if the way is a listable exit and the way is not inside and the way is not outside:
 				let X be the x-coordinate of way;
 				let Y be the y-coordinate of way;
 				if the room way from the location is visited:
@@ -383,6 +418,28 @@ To redraw the map and compass:
 				otherwise:
 					draw the unvisited image of the way in graphics window at x X and y Y scaled to width grid-size and height grid-size;
 
+
+Understand "graphics on" or "enable graphics" or "graphics" or "graphics mode" as enabling graphics. Enabling graphics is an action out of world.
+
+Carry out enabling graphics:
+	if the graphics window is g-present:
+		say "[first custom style][bracket]Graphics are already enabled.[close bracket][roman type][paragraph break]";
+	otherwise:
+		unless glulx graphics is supported:
+			say "[bracket]This interpreter does not support displaying graphics.[close bracket][paragraph break]" instead;
+		open the graphics window;
+		start looking for graphlinks;
+		say "[first custom style][bracket]Graphics are now enabled.[close bracket][roman type][paragraph break]".
+
+Understand "graphics off" or "text only" or "text mode" as disabling graphics. Disabling graphics is an action out of world.
+
+Carry out disabling graphics:
+	add the teach disabling graphics rule to the completed instruction list, if absent;
+	if the graphics window is g-present:
+		close the graphics window;
+		say "[first custom style][bracket]Graphics are now disabled.[close bracket][roman type][paragraph break]";
+	otherwise:
+		say "[first custom style][bracket]Graphics are already disabled.[close bracket][roman type][paragraph break]".
 
 
 Chapter 2 - Sounds

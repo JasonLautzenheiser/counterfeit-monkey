@@ -227,6 +227,12 @@ Some font t-shirts are part of the clothing shops. Understand "t-shirt" or "shir
 Some ethnic bodices are part of the clothing shops. Understand "bodice" as the bodices. They are floppy and wearable. The description is "Closed with ribbons and laces, to be worn over frilly white shirts." Understand "ribbons" or "laces" or "ribbon" or "lace" as the ethnic bodices. They cover the torso-area.
 A mourning dress is part of the clothing shops. It is floppy and wearable. The description is a "A black vintage gown trimmed with much lace and dripping with jet beads." Understand "beads" or "jet" or "bead" or "black" or "vintage" or "gown" as the mourning dress. It covers the torso-area.
 
+Rule for printing the name of the mourning dress while examining the clothing shops:
+	say "a mourning dress".
+
+Rule for printing the name of the morning dress while examining the clothing shops:
+	say "a morning dress".
+
 Check waving the letter-remover at font t-shirts when the current setting of the letter-remover is "r":
 	say "No doubt this would be a cogent statement about the commercial[ization] of the body, if it weren't for the fact that T-SHIT doesn't describe anything anyone with a functional colon has ever heard of." instead.
 
@@ -371,6 +377,14 @@ A first instructional rule:
 	if "Finished tutorial mode" is a used achievement:
 		now tutorial mode is false;
 		stop.
+
+Check turning on tutorial mode:
+	if "Finished tutorial mode" is a used achievement:
+		if Monumental Staircase is visited:
+			say "[first custom style]Tutorial mode doesn't work this far into the game. Please restart before turning it on again.[roman type][paragraph break]" instead;
+		otherwise:
+			choose row with achievement of "Finished tutorial mode" in Table of Possible Achievements;
+			blank out the whole row.
 
 An instructional rule (this is the teach examining thoroughness rule):
 	if the teach examining thoroughness rule is listed in the completed instruction list:
@@ -642,6 +656,17 @@ An instructional rule (this is the teach consulting rule):
 	record "Finished tutorial mode" as an achievement;
 	rule succeeds;
 
+The teach disabling graphics rule is listed after the teach meta-features rule in the instructional rules.
+
+A last instructional rule (this is the teach disabling graphics rule):
+	if the teach disabling graphics rule is listed in the completed instruction list:
+		make no decision;
+	unless glulx graphics is supported:
+		make no decision;
+	say "[first custom style]The map and compass can be switched off by typing GRAPHICS OFF. If you change your mind later, switch them back on with GRAPHICS ON.[roman type]";
+	add the teach disabling graphics rule to the completed instruction list, if absent;
+	rule succeeds.
+
 The teach more compass directions rule is listed before the teach dropping rule in the instructional rules.
 The teach distance movement rule is listed before the teach dropping rule in the instructional rules.
 The check out the place rule is listed before the teach dropping rule in the instructional rules.
@@ -845,7 +870,7 @@ Instead of pushing or pulling the wheel:
 	say "The wheel contraption moves a few millimeters to the side. Of course, we could always spin it and see what happens."
 
 Instead of looking under the wheel:
-	say "It looks heavy, but is not actually attached to the ground."
+	say "It looks heavy, but is not actually attached to the [ground]."
 
 Instead of listening to the wheel:
 	say "When the wheel is spinning, the flipper makes a satisfying [i]thup thup thup[/i] noise as it flips from one slot to the next."
@@ -1455,7 +1480,7 @@ Not to worry. I won't turn you in. I can hardly afford to, can I?[or][stopping]"
 
 A dangerous destruction rule for the poster:
 	now the poster is not fixed in place;
-	now the initial appearance of the poster is "The blue and orange warning [poster] is rolled up on the ground nearby."
+	now the initial appearance of the poster is "The blue and orange warning [poster] is rolled up on the [ground] nearby."
 
 Instead of taking or attacking the poster when the poster is in Monumental Staircase:
 	if the poser is seen:
@@ -1574,9 +1599,9 @@ topic	reply
 
 
 Every turn when the attendant carries a louse:
-	say "The attendant screams, and performs some kind of strange dance, first brushing at her skin and then stomping at something on the ground. (So much for the louse, I think.)
+	say "The attendant screams, and performs some kind of strange dance, first brushing at her skin and then stomping at something on the [ground]. (So much for the louse, I think.)
 
-She then tears out of the room, leaving the room unattended. Unfortunately, places like this don't keep anything of value out front anyway, so your natural gift for larceny hasn't much scope here.";
+She then tears out of the room, leaving it unattended. Unfortunately, places like this don't keep anything of value out front anyway, so your natural gift for larceny hasn't much scope here.";
 	move the louse to the repository;
 	now the attendant is nowhere;
 	if the attendant is the current interlocutor:
@@ -2430,7 +2455,6 @@ A flicker of curtains from inside the house suggests that someone saw us [--] a 
 A soil is a fixed in place thing in the Patriotic Chard-Garden. The indefinite article is "some". The initial appearance is "At our feet is a patch of [soil]."
 	Understand "ground" or "earth" or "soil" as the soil.
 	The description is "Bare dirt[if the chard is not in the location and the location is the Patriotic Chard-Garden], revealed when the chard was cleared away[otherwise], looking somewhat out of place here[end if]."
-	The soil is diggable.
 
 Instead of taking the soil when the soil is in the location:
 	say "It's more than [we] can carry around by the handful."
@@ -2740,7 +2764,7 @@ Instead of finding the museum exterior when the subcommand of the museum exterio
 
 Test sandcastle with "x castle / build castle / build sandcastle / look / smell castle / taste castle / touch castle / x castle / z".
 
-The sand is scenery in Private Beach. Understand "ground" as the sand. The description is "It's baking hot." The indefinite article is "some". The sand is diggable.
+The sand is scenery in Private Beach. Understand "ground" as the sand. The description is "It's baking hot." The indefinite article is "some".
 
 Instead of taking the sand:
 	say "Sure, [we] could wander off with a handful of sand, but [we] could hardly shift any significant portion of the beach. And then we'd be making a mess and dribbling sand grains everywhere."

@@ -122,7 +122,7 @@ Rule for supplying a missing second noun while buying something from:
 		find a suitable interlocutor;
 		now second noun is current interlocutor;
 	if second noun is nothing:
-		say "From whom should [we] buy [the noun]?";
+		say "There's no one about to sell us [the noun].";
 		stop the action.
 
 
@@ -352,6 +352,8 @@ Sanity-check waving to a person:
 Sanity-check waving to something:
 	say "[The noun] [appear] very unlikely to respond." instead.
 
+Understand "wave hand" or "wave our hand" or "wave our hands" or "wave hands" as waving hands.
+
 Test secondaries with "tutorial off / z / say hello / g / ask about paddle / say hello to mark / ask mark about mark / ask mark about the paddle / test customer" in the Drinks Club.
 
 Table of Ultratests (continued)
@@ -410,11 +412,8 @@ car-needed	"That we need a car."
 car-broken	"That the car does not run."
 thank-mechanic	"That we have reason to thank the mechanic."
 thank-lena	"That we have reason to thank Lena."
-thank-kate	"That we have reason to thank Kate."
 thank-bartender	"That we have reason to thank the bartender."
 thank-brown	"That we have reason to thank Professor Brown."
-thank-higgate	"That we have reason to thank Professor Higgate."
-thank-brock	"That we have reason to thank Brock."
 thank-atlantida	"That we have reason to thank Atlantida."
 
 A fact can be motivational or purposeless. A fact is usually purposeless. you-are-student, you-hit-on, you-are-tourist, you-are-possible-customer, you-are-past-customer, you-take-survey, you-are-feckless, you-are-dangerous are motivational.

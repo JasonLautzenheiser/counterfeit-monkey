@@ -428,7 +428,7 @@ where there seems hotel is a weakly-phrased location-questioning quip.
 
 where there seems Arbot is a weakly-phrased location-questioning quip.
 	The printed name is "where to find Arbot Maps & Antiques". The true-name is "where there seems Arbot".
-	Understand "is" or "a" or "Arbot" or "antiques" or "arbots" or "arbot's" or "maps" or "&" as where there seems arbot.  The place-sought is "an antiques store".
+	Understand "is" or "Arbot" or "antiques" or "arbots" or "arbot's" or "maps" or "&" as where there seems arbot.  The place-sought is "an antiques store".
 	The mentions-list is {geography}.
 	It is background-information.
 	The correct answer is Arbot Maps & Antiques.
@@ -698,8 +698,8 @@ Rule for refusing comment by someone when the noun is an as:
 	otherwise:
 		say "'[one of]Looks old[or]Huh[or]Looks like it came up heads[or]Tails, I see[at random].'"
 
-[Rule for refusing comment by an animal (called viewer):
-	say "[The viewer] cock[s] [their] head[regarding the noun][s].".]
+Sanity-check showing something to an animal (called viewer):
+	say "[The viewer] cock[s] [their] head[if the viewer is plural-named]s[end if]." instead.
 
 Rule for refusing comment by something:
 	say "[one of]This evokes no particular interest[or][The current interlocutor] [shake] [their] head[or][The current interlocutor] [don't] have anything to say in response[at random]."
@@ -786,7 +786,7 @@ why the car does not run is a questioning quip.
 	[Every car is mentioned by why the car does not run.]
 
 where there seems a car-2 is an unlisted repeatable questioning quip.
-	Understand "buy car" or "car" or "there is" or "buy a car" or "where i could" as where there seems a car-2. The printed name is "where to find a car". The true-name is "where there seems a car-2".
+	Understand "buy car" or "car" or "there is" or "buy a car" or "i could" or "we could" as where there seems a car-2. The printed name is "where to find a car". The true-name is "where there seems a car-2".
 	It quip-supplies the mechanic.
 	The comment is "'I'm looking for a car,' we say.".
 	The reply is "'Sorry,' he mumbles. '[one of]I fix them. I don't sell them[or]Perhaps you should ask somebody else[stopping].'".
@@ -851,6 +851,8 @@ An availability rule for where oil might be:
 	make no decision.
 
 where oil might be is an unlisted questioning quip.
+	The printed name is "where we might find oil".
+	Understand "find" or "some" or "could" or "there is" or "we" as where oil might be.
 	The comment is "'Do you have any oil? Or do you know where we could find some?'"
 	The reply is "[one of]He looks stumped for a minute, then offers, 'Comes in a can.'[or]'Yup, likely there's a source of oil around somewhere.'[stopping]".
 	It quip-supplies the mechanic.
@@ -864,6 +866,8 @@ An availability rule for where fuel might be:
 
 where fuel might be is an unlisted questioning quip.
 	The mentions-list is {gas, fuel}.
+	The printed name is "where we could find some fuel".
+	Understand "we" or "could" or "find" or "some" or "there is" or "gas" as where fuel might be.
 	The comment is "'Do you have any [one of]gas[or]fuel[at random]? Or do you know where we could find some?'"
 	The reply is "He chews on his tongue a couple of times and then notes that he heard [one of]gas comes from old plants[or]fuel was usually found by digging in the ground[at random]."
 	It quip-supplies the mechanic.
@@ -1873,7 +1877,7 @@ Rule for beat-producing when the current interlocutor is Kate:
 Kate answers, briefly assures the person on the other end of the line that the shop is indeed open today, and hangs up[as decreasingly likely outcomes].[run paragraph on]".
 
 
-The greeting of Kate is "'Welcome to Arbot,' says Kate. 'Feel free to browse and ask me any questions you may have about the merchandise[change-kate-greeting][thank-kate].'"
+The greeting of Kate is "'Welcome to Arbot,' says Kate. 'Feel free to browse and ask me any questions you may have about the merchandise[change-kate-greeting].'"
 The generic adversative of Kate is "[one of]ah but[at random]".
 The generic confrontational of Kate is "one moment".
 
@@ -2052,13 +2056,6 @@ Sanity-check showing the map to Kate when the legend is part of the map:
 	say "Now that it's obvious this is a secret message, you're not exactly going to show it to all and sundry." instead.
 Sanity-check showing the legend to Kate:
 	say "Now that it's obvious this is a secret message, you're not exactly going to show it to all and sundry." instead.
-
-thank kate is an unlisted thanking quip.
-	The mentions-list is {Kate}.
-	It assumes thank-kate.
-	The comment is "'[one of]Thank you[or]Thanks again[stopping],' [we] say.".
-	The reply is "She smiles. [one of]'No problem.'[or]'You don't have to thank me,' she says.[or]'That's enough!'[stopping]".
-	It quip-supplies Kate.
 
 Test Kate with "tutorial off / z / ask about brock / ask about demonstration / ask about antiques / ask about map / buy map / z / z / z / look / x map / x legend / a legend / show map to kate" in Arbot Maps & Antiques.
 Test Kate2 with "tutorial off / z / x maps / buy map / ask about brock / ask about antiques / ask about demonstration / ask about brock / z / z / z/ look / a legend / x map / x legend / a legend / show map to kate" in Arbot Maps & Antiques.
@@ -2271,9 +2268,15 @@ what he likes to eat is a questioning quip. The comment is "'What kinds of foods
 where he gets Mediterranean foods is a questioning quip. The comment is "'Where do you go for [if immediately]that kind of [otherwise]Mediterranean [end if]food?'".
 	Understand "ticket-taker" as where he gets Mediterranean foods.
 	The mentions-list is {food}.
-	The reply is "'The Babel Cafe is good,' he says. 'There are always a lot of university students over there, though, so it gets kind of crowded sometimes.'".
+	The reply is "'The Babel Café is good,' he says. 'There are always a lot of university students over there, though, so it gets kind of crowded sometimes.'".
 	It quip-supplies the ticket-taker.
-	It indirectly-follows what he likes to eat
+	It indirectly-follows what he likes to eat.
+
+where there seems Babel Cafe is a questioning quip. The comment is "'So where is The Babel Café?'".
+	Understand "is" or "this" or "café" as where there seems Babel Cafe. The printed name is "where the Babel Café is". The true-name is "where there seems Babel Cafe".
+	The reply is "'It's quite a walk from here. You have to go along High Street east of the park, past the roundabout, then down Long Street until you get to Palm Square. You'll see it [--] it's right next to the university.'".
+	It quip-supplies the ticket-taker.
+	It indirectly-follows where he gets Mediterranean foods.
 
 Instead of the ticket-taker discussing what he likes to eat when the ostensible motive is generic-truth:
 	try the ticket-taker discussing mutual-embarrassment.
@@ -2466,7 +2469,7 @@ where to get a pass is a questioning quip.
 	It is repeatable.
 
 An availability rule for where to get a pass:
-	if the player is allowed, it is off-limits;
+	if player-is-allowed is true, it is off-limits;
 	make no decision.
 
 whether she enjoys her job is a questioning quip.
@@ -4303,6 +4306,7 @@ what he thinks of Higgate is a questioning quip.
 
 what he thinks of you is a questioning quip.
 	The mentions-list is {yourself}.
+	Understand "me" as what he thinks of you.
 	The comment is "'So... There's a guy who I think is a graduate student here [--] Matthew Rosehip? Do you know him?'".
 	The reply is "This startles Brown enough that he turns around and looks at us. There is a curiously wary look in his eyes, and it hits me: He's worried. [paragraph break]See, about a month ago I was down here talking to Brown and I let slip some general hints about what I've been working on, and I had the impression that for once he was listening. When I was done with the very rough outlines, he told me to be careful, really really careful [--] not just on the island, but in the outside world, too, because there were a lot of people who wouldn't want a plan like that to succeed. [paragraph break]'I know all the graduate students,' he replies, turning another knob until his equipment gives a high-pitched whine. There is no functional purpose to that knob, he confessed once, other than to make strangers and idiots think they're interrupting a dangerous test. 'I'm not supervising his research, if that's what you mean. His advisor is Professor Waterstone.'".
 	It quip-supplies Professor Brown.
@@ -4351,6 +4355,9 @@ how Professor Brown makes abstracts is a questioning quip.
 	The reply is "'It's an ordinary letter-remover with a few adjustments,' Brown says. 'The department's computer can lift some of the legal overrides on standard letter tools. The job would be easier if I had access to higher-powered machinery, but...'".
 	It quip-supplies Professor Brown.
 	It indirectly-follows what he seems doing.
+
+A plausibility rule for how Professor Brown makes abstracts:
+	it is plausible.
 
 Availability rule for whether he can fix the letter-remover:
 	if the letter-remover is marked invisible, it is off-limits.
@@ -4439,8 +4446,6 @@ Definition: a thing is verbal:
 	if it is proffered by the word:
 		yes;
 	no.
-
-
 
 
 Rule for refusing comment by Brown when the noun is r-abstract:
@@ -4603,7 +4608,7 @@ Report Professor Higgate unlocking the seminar door with something:
 	say "She fiddles with her keys for a moment before finding the right one. [run paragraph on]" instead.
 
 Report Professor Higgate opening the seminar door:
-	say "[thank-higgate]'Here we you go,' she says, pushing the door open." instead.
+	say "'Here we you go,' she says, pushing the door open." instead.
 
 Report Professor Higgate getting off the chair:
 	say "Higgate stands, patting herself down as though worried she has forgotten something." instead.
@@ -4672,14 +4677,6 @@ Before going from Higgate's office when the paint is released and the player doe
 paint-recycling is an NPC-directed quip.
 	The reply is "[one of]'Wait [--] weren't you going to dispose of the paint for me?'[or]'Do take the paint with you now if you want it,' she says. 'I may be gone later.'[or]'You're forgetting the paint again,' she says.[stopping]". Before going from Higgate's office when the paint is released and the player does not carry the paint:
 	try Professor Higgate discussing paint-recycling instead. ]
-
-thank Professor Higgate is an unlisted thanking quip.
-	The mentions-list is {Professor Higgate}.
-	It assumes thank-higgate.
-	The comment is "'Thank you,' we say.".
-	The reply is "'[one of]Don't worry about it,[or]That's enough![stopping]' she replies.".
-	It quip-supplies Professor Higgate.
-
 
 which conlangs she kens is a questioning quip.
 	The printed name is "which conlangs she knows". The true-name is "which conlangs she kens".

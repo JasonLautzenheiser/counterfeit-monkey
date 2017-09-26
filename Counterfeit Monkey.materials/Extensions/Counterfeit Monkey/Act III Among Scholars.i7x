@@ -1274,6 +1274,12 @@ Definition: a thing is Waterstone-inspiring:
 
 We-have-knocked is a truth state that varies.
 
+To say He-Waterstone:
+	if we-have-knocked is true:
+		say "Waterstone";
+	otherwise:
+		say "He".
+
 Instead of knocking on office-door-1 when the location of Professor Waterstone is Waterstone's Office and office-door-1 is closed and the location is Language Studies Department Office:
 	if we-have-knocked is false:
 		say "Professor Waterstone looks up at us through the window in the door, as if to ask 'Yes? Was there something you wanted to show me?'[paragraph break]";
@@ -1294,7 +1300,7 @@ Instead of knocking on office-door-1 when the location of Professor Waterstone i
 	else:
 		repeat with item running through things enclosed by the location:
 			if item is waterstone-inspiring:
-				say "[if we-have-knocked is true]Waterstone looks up and gives a little frown. [end if]It's clear he doesn't know why we knocked; perhaps he can't see [the item] from that angle. Maybe if [we] were holding [regarding the item][them].";
+				say "[if we-have-knocked is true]Waterstone looks up and gives a little frown. [end if]It's clear he doesn't know why we knocked. [The item] might interest him, but perhaps he can't see [them] from that angle. Maybe if we were holding [them].";
 				now we-have-knocked is true;
 				stop the action;
 	if the selected object is nothing:
@@ -1309,7 +1315,7 @@ Instead of knocking on office-door-1 when the location of Professor Waterstone i
 The water-reaction rules are an object-based rulebook.
 
 A Water-reaction rule for a Waterstone-inspiring thing (called the target):
-	say "[if we-have-knocked is true]Waterstone[else]He[end if] looks at [the target], briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at [the target], notes [the list of things which proffer the target]; grins. ";
+	say "[He-Waterstone] looks at [the target], briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at [the target], notes [the list of things which proffer the target]; grins. ";
 	say "He gets up and comes out of his office.
 
 'This is perfect,' Waterstone says. 'One more example to put into my talk [--] but I really should be going [--] should be able to get a ride from my wife [--] if I leave now [--] Here, you can have this if it interests you. I won't have time to use it.' He sets an invitation down on the desk.
@@ -1328,7 +1334,7 @@ He locks his door again and goes out. I think he is actually humming something."
 	rule succeeds.
 
 A Water-reaction rule for the passage when the ass does not proffer the passage:
-	say "[one of]Waterstone looks at the passage, briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at the passage.
+	say "[one of][He-Waterstone] looks at the passage, briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at the passage.
 
 But what he sees disappoints him, and he shoves the monocle away again. He writes something on a paper and holds it up: 'Good thought [--] P-ASS-AGE [--] but it must have been genuinely constructed from [']ass['], not cobbled from [a list of things that proffer the passage]. Can't cite it.'
 
@@ -1336,27 +1342,27 @@ This is an awful lot of writing; why the man can't come to the door and hold a c
 	rule succeeds.
 
 A Water-reaction rule for the cock-ring:
-	say "Waterstone sees what [we][']ve made of the cock, and clutches desperately at his hair as though he's going to tear it out in tufts. His eyes bulge and water. I've never seen the man so close to apoplexy.
+	say "[He-Waterstone] sees what [we][']ve made of the cock, and clutches desperately at his hair as though he's going to tear it out in tufts. His eyes bulge and water. I've never seen the man so close to apoplexy.
 
 I think that was exactly the wrong thing, somehow.";
 	rule succeeds.
 
 A Water-reaction rule for a naughty-sounding thing (called target):
-	say "Waterstone glares at [the target]. Then he picks up a marker and writes on a piece of paper, '[one of]Yes, but how to change its name to something innocent?[no line break][or]Now you're just taunting me.[no line break][or]Please go away![no line break][stopping]' Having held up this sign for a minute, he crumples it and goes back to work.
+	say "[He-Waterstone] glares at [the target]. Then he picks up a marker and writes on a piece of paper, '[one of]Yes, but how to change its name to something innocent?[no line break][or]Now you're just taunting me.[no line break][or]Please go away![no line break][stopping]' Having held up this sign for a minute, he crumples it and goes back to work.
 
 If he were a cartoon there would be a thundercloud over his laptop.";
 	rule succeeds.
 
 A Water-reaction rule for the clock:
-	say "Waterstone inspects the clock through his monocle a moment. Then he picks up a marker and writes on a piece of paper, 'It was always a CLOCK. I need something where the original was naughty.' Having held up this sign for a minute, he crumples it and goes back to work.";
+	say "[He-Waterstone] inspects the clock through his monocle a moment. Then he picks up a marker and writes on a piece of paper, 'It was always a CLOCK. I need something where the original was naughty.' Having held up this sign for a minute, he crumples it and goes back to work.";
 	rule succeeds.
 
 A Water-reaction rule for the draft document:
-	say "[one of]Waterstone stares at the draft document, apparently not recognizing it at first. Then he picks up a marker and writes on a piece of paper, 'Have you read it? Any ideas?' Having held up this sign for a minute, he crumples it and goes back to work.[or]Waterstone looks up from his work long enough to give us an irritated glare. Perhaps we should consider what he suggested.[or]We get only a momentary flicker of attention from Waterstone. Perhaps we should have another look at the draft and think about what might interest him.[stopping]";
+	say "[one of][He-Waterstone] stares at the draft document, apparently not recognizing it at first. Then he picks up a marker and writes on a piece of paper, 'Have you read it? Any ideas?' Having held up this sign for a minute, he crumples it and goes back to work.[or][He-Waterstone] looks up from his work long enough to give us an irritated glare. Perhaps we should consider what he suggested.[or]We get only a momentary flicker of attention from Waterstone. Perhaps we should have another look at the draft and think about what might interest him.[stopping]";
 	rule succeeds.
 
 A last Water-reaction rule for something (called the target):
-	say "[one of]Waterstone looks up from his work long enough to give us an irritated glare.[or]Waterstone barely glances away from his typing this time.[or]Without looking up, Waterstone sticks out his tongue. Really, he's clearly very upset about his deadlines, it seems.[or][We] get only a momentary flicker of attention from Waterstone.[stopping]";
+	say "[one of][He-Waterstone] looks up from his work long enough to give us an irritated glare.[or][He-Waterstone] barely glances away from his typing this time.[or]Without looking up, Waterstone sticks out his tongue. Really, he's clearly very upset about his deadlines, it seems.[or][We] get only a momentary flicker of attention from Waterstone.[stopping]";
 	if the draft document is examined:
 		say "[line break]He seems to get that we're trying to show him [the target][one of], but as [they] [are] not related to the concept of homonym shame, it's not much help with his paper, so he probably doesn't want to be distracted[or], but [they] [are] not something whose original sounded dirty, so presumably that's not a lot of help with the paper[stopping].";
 	else:
@@ -1535,7 +1541,16 @@ The carton-sign is a sign. The carton-sign is part of the carton. The printed na
 In the large carton is a banana. The banana is edible. It is a vegetable. The description of the banana is "Just beginning to get brown and spotty."
 
 Sanity-check going to the Rectification Room when the alterna-snap is in the large carton:
-	say "We real[ize] that we don't want to leave [the alterna-snap] unattended after all."
+	now the alterna-snap is not essential.
+
+After going to the Rectification Room when the alterna-snap is in the large carton:
+	now the alterna-snap is essential;
+	continue the action.
+
+Check going to Samuel Johnson Hall from Samuel Johnson Basement when the alterna-snap is in the large carton and the player is hurrying:
+	clear path-walked for the player;
+	now the player carries the alterna-snap;
+	say "We retrieve the snap as we walk past the carton."
 
 Instead of going to the Rectification Room when the large carton does not contain something noisy:
 	let N be the number of entries in the path so far of the player;
@@ -1543,7 +1558,7 @@ Instead of going to the Rectification Room when the large carton does not contai
 		say "[path-walked so far]";
 	otherwise:
 		clear the path-walked for the player;
-	say "[one of]Before [we] go through the door to the Rectification Room, it occurs to us that Professor Brown is just next door, and that he is likely to be able to hear if [we] do anything in there. Possibly some kind of masking noise is in order[or][if the noisemaker is something and the noisemaker is not the alterna-snap][The noisemaker] [do] make noise, but you figure we should leave [them] out here in the hallway so that it will be louder than whatever we do in the room[end if][if the noisemaker is the alterna-snap][The alterna-snap] does make noise, but we'd rather not leave it unattended out here[end if][if the noisemaker is nothing]I defer to your judgment that [we] ought to provide some masking sound before proceeding[end if][stopping].".
+	say "[one of]Before [we] go through the door to the Rectification Room, it occurs to us that Professor Brown is just next door, and that he is likely to be able to hear if [we] do anything in there. Possibly some kind of masking noise is in order[or][if the noisemaker is something][The noisemaker] [do] make noise, but you figure we should leave [them] out here in the hallway so that it will be louder than whatever we do in the room[otherwise]I defer to your judgment that [we] ought to provide some masking sound before proceeding[end if][stopping].".
 
 Instead of dropping something in Samuel Johnson Basement when the heft of the noun is less than 4:
 	say "I'll just leave [regarding the noun][those] in the carton; less likely to be disturbed there.";
@@ -1899,7 +1914,7 @@ The conference poster is a fixed in place thing in Lecture Hall 1. Understand "t
 [After we've changed the poster once, it should stop being stuck in place.]
 A dangerous destruction rule for the conference poster:
 	now the conference poster is not fixed in place;
-	now the initial appearance of the conference poster is "A conference poster lies curled on the ground.";
+	now the initial appearance of the conference poster is "A conference poster lies curled on the [ground].";
 	now the description of the conference poster is "The poster announces a conference on cultural reactions to linguistic change. It is being held in Nice the day after tomorrow, with Professor Waterstone as keynote speaker, on the topic of 'homonym shame'. It's the usual sort of thing: the conference title set in Papyrus font; a stock daguerreotype of a portly woman holding a letter-remover the size of a policeman's cosh; inset pictures of the major speakers, with pride of place for Waterstone himself.".
 
 Sanity-check looking under the conference poster when the conference poster is fixed in place:

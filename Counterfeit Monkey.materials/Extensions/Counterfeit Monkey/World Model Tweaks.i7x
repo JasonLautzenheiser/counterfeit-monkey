@@ -65,9 +65,9 @@ The the Smarter Parser simplify punctuation rule is not listed in any rulebook.
 
 When play begins (this is the change smarter parse messages rule):
 	choose row with SP rule of asking unparseable questions rule in the Table of Smarter Parser Messages;
-	now the message entry is "If you're trying to converse with other characters, the suggestions in the text provide possible phrasings; so if you read 'I might ask about lentils.', you might phrase your command ASK ABOUT LENTILS. Introducing other words or variant phrasings that weren't part of the suggestion may confuse the game.
+	now the message entry is "[one of]If you're trying to converse with other characters, the suggestions in the text provide possible phrasings; so if you read 'I might ask about lentils.', you might phrase your command ASK ABOUT LENTILS. Introducing other words or variant phrasings that weren't part of the suggestion may confuse the game.
 
-Alternatively, if you just want to take an action in the game world, try giving a direct command, such as EXAMINE THE ASP or WAVE THE P-REMOVER AT THE PHONEY."
+Alternatively, if you just want to take an action in the game world, try giving a direct command, such as EXAMINE THE ASP or WAVE THE P-REMOVER AT THE PHONEY[or]That does not seem to be a topic of conversation at the moment[stopping]."
 
 Section 2 - Additional Parsing Lines for USE
 
@@ -169,7 +169,7 @@ A first accessibility rule (this is the go to location rule):
 
 Rule for reaching outside a car (called C) (this is the can't reach outside car rule):
 	try exiting;
-	if the player is in C:
+	if the player is enclosed by C:
 		deny access;
 	make no decision.
 
@@ -371,6 +371,7 @@ Instead of drinking something which is not fluid:
 Understand "apply pressure to [something]" as pushing.
 Understand "lean on [something]" as pushing.
 
+
 Part 2 - Senses
 
 Section 1 - Smell and Taste
@@ -411,111 +412,6 @@ Understand "bite [something]" as tasting.
 
 Instead of eating something:
 	say "[one of]I don't think our nausea makes [if noun is fluid]drinking[otherwise]eating[end if] such a great idea.[or]I really couldn't.[or]I'm still feeling pretty sick to our stomach.[or]Let's not tempt fate.[cycling]"
-
-Section 2 - Loudness
-
-A thing can be noisy or quiet. A thing is usually quiet.
-
-Listening to something is acting fast.
-
-A first every turn rule (this is the make noisemakers make noise every turn rule):
-	if listening:
-		make no decision;
-	otherwise:
-		follow the make noise rule.
-
-The noisemaker is an object that varies.
-
-This is the make noise rule:
-	now the noisemaker is find noisy thing;
-	if the noisemaker is something:
-		try listening to the noisemaker.
-
-Instead of listening to a room:
-	follow the make noise rule;
-	if the noisemaker is nothing:
-		continue the action.
-
-Report listening to a quiet thing:
-	say "[The noun] [one of][don't] make much noise[or][are] naturally silent[or][make] no notable noises[at random]." instead.
-
-Report listening to a person:
-	if the noun is the current interlocutor:
-		say "I'm paying attention, don't worry." instead;
-	otherwise:
-		say "[We] hear some breathing, I guess. Nothing extraordinary." instead.
-
-
-To decide which object is find noisy thing:
-	(- FindNoiseMaker() -)
-
-Include (-
-
-Array noisy_things --> 10;
-
-[ FindNoiseMaker i o audible_ceiling noisemaker;
-	i = 0;
-
-	noisemaker = nothing;
-
-	! Search the container of the player for noisy things
-	audible_ceiling = parent (player);
-
-	while (~~(audible_ceiling == real_location || (audible_ceiling has openable && audible_ceiling hasnt open)))
-		audible_ceiling = parent(audible_ceiling);
-
-	! We could be inside something noisy
-	if (audible_ceiling provides (+ noisy +) && audible_ceiling.(+ noisy +))
-		noisy_things --> i++ = audible_ceiling;
-
-	if (audible_ceiling provides component_child && audible_ceiling.component_child)
-			i = MyFindNoiseMakerLoop(audible_ceiling.component_child, i);
-
-	i = MyFindNoiseMakerLoop(child(audible_ceiling), i);
-
-	!Pick a random noisy thing and return it
-	if ( i > 0)
-		noisemaker = noisy_things --> (random(i) - 1);
-
-	return noisemaker;
-];
-
-[ MyFindNoiseMakerLoop start i o;
-
-	!loop through everything in start object
-	for (o=start : o : ) {
-
-		if (o provides (+ noisy +) && o.(+ noisy +)) {
-
-			if(i >= 10) return 9;
-			else
-				noisy_things --> i++ = o;
-				if(i == 10) return 9;
-		}
-
-		!Check any components recursively
-		if (o.component_child)
-			i = MyFindNoiseMakerLoop(o.component_child, i);
-
-		if (o.component_sibling)
-			i = MyFindNoiseMakerLoop(o.component_sibling, i);
-
-		! Don't look inside closed containers
-		if (child(o) &&  ~~(o has openable && o hasnt open) ) o = child(o);
-		else
-			while (o) {
-
-				if (sibling(o)) { o = sibling(o); break; }
-
-				o = parent(o);
-				if ( o == parent(start)) return i;
-
-			}
-	}
-	return i;
-];
-
--).
 
 
 Part 3 - Travel and the Map
@@ -835,6 +731,7 @@ After going a direction for the third turn:
 		say "[first custom style][bracket]If you're traveling far, you can always type GO TO (location name) to get there automatically.[close bracket][roman type][paragraph break]";
 	continue the action.
 
+
 Section 4 - Going Back and Going Vaguely
 
 Understand "go back" as retreating. Understand "back" or "return" or "retreat" as retreating.
@@ -864,6 +761,7 @@ Carry out departing:
 	otherwise:
 		say "Any particular direction? ";
 		carry out the listing exits activity.
+
 
 Chapter 2 - Looking Towards Other Areas
 
@@ -944,6 +842,7 @@ Local looking is an action applying to one thing.
 
 Carry out local looking:
 	try looking.
+
 
 Section 3 - Facing
 
@@ -1816,7 +1715,22 @@ Sanity-check sitting at a desk:
 
 Section 7 - Outdoor Rooms and Digging
 
-A thing can be diggable. A thing is usually not diggable.
+To say ground:
+	if location is outdoors:
+		say "ground";
+	otherwise:
+		say "floor".
+
+Definition: a thing is diggable:
+	if it is the soil:
+		yes;
+	if it is the sand:
+		yes;
+	if it is the patchy grass:
+		yes;
+	if it is the scree:
+		yes;
+	no.
 
 Understand "hole in" or "in" or "up" or "a hole in" as "[hole in]".
 
@@ -1953,6 +1867,26 @@ Instead of inserting a fluid thing into the backpack:
 Instead of inserting the iron-pans into the backpack:
 	say "There's nowhere near enough room."
 
+
+[PUT ALL IN BACKPACK can be quite slow, so let's speed it up a bit by skipping some checks]
+This is the fast backpack stowing rule:
+	if the backpack is closed:
+		abide by the try opening rules for the backpack;
+	repeat with N running through multiple object list:
+		if N is fluid:
+			say "[N]: [The N] [one of]would make a real mess[or]would just spill[at random].";
+		otherwise:
+			if N is long:
+				say "[N]: [The N] [one of]couldn't possibly fit[or]would be much too long[or]would just stick out[at random].";
+			otherwise:
+				if N is iron-pans:
+					say "[N]: There's nowhere near enough room.";
+				otherwise:
+					say "[N]: Done.";
+					now N is in backpack;
+	abide by the cancel multiple rule.
+
+
 Section 2 - Clothing
 
 [Our clothing simulation is as lightweight as we can make it. The aim is
@@ -2028,8 +1962,6 @@ Sanity-check an actor writing on something:
 		say "[The pen] is out of ink at the moment." instead;
 	if the actor carries the pens:
 		say "[The pens] are only nominally writing implements at all." instead.
-
-
 
 
 Section 5 - Instruments and Performance
@@ -2211,7 +2143,16 @@ Sanity-check attacking something with something:
 	if the second noun is floppy:
 		say "[The second noun] [are] too floppy to do much damage." instead.
 
-A thing can be attackable.
+Definition: a thing is attackable:
+	if it is atlantida-woman:
+		yes;
+	if it is the tall window:
+		yes;
+	if it is the hanging Atlantida figure:
+		yes;
+	no.
+
+Understand "attack [something not attackable]" as attacking.
 
 Sanity-check attacking something which is not attackable with something:
 	try attacking the noun instead.
