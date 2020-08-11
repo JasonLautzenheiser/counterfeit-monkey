@@ -11,8 +11,8 @@ Instead of taking inventory when the current inventory listing style is utilitar
 	now inventory count is populate inventory table;
 	repeat with R running from 1 to inventory count:
 		choose row R in Table of Inventory Ordering;
-		let N be "[referent entry]";
-		now appearance entry is "[N in lower case]";
+		let N be the printed name of referent entry;
+		now appearance entry is N in lower case;
 	sort Table of Inventory Ordering up to row inventory count in appearance order;
 	let paragraph break needed be false;
 	[ List essentials ]
@@ -51,9 +51,9 @@ Instead of taking inventory when the current inventory listing style is utilitar
 				say "[paragraph break]Of that collection, [the packed-list are] packed away in the backpack, which is [if backpack is closed]closed for greater concealment[else]gaping wide open so everyone can see what's inside[end if]. ";
 	[ List any contents of other carried containers or supporters ]
 	let listed container be next listable container;
-	if listed container is something:
+	if listed container is not nothing:
 		say paragraph break;
-		while listed container is something:
+		while listed container is not nothing:
 			say "[The inventory-container-list of listed container are] [in-on the listed container]. [no line break]";
 			now listed container is next listable container;
 		now paragraph break needed is true;
@@ -77,14 +77,13 @@ topic (a topic)	stuff (a list of objects)	setting (a room)
 
 Test newutility with "tutorial off / i / put all in backpack / i / wave l-remover at plans / put pans in backpack / i / put all in backpack / i / close backpack / i / x backpack / open backpack / x backpack / i / wear wig / i / wear monocle / i / drop backpack / i / x me" [holding the backpack and the secret-plans and the lime and the cate and the wig.]
 
-After printing the name of something (called target) which is proffered by the secret-plans while taking inventory:
-	if the current inventory listing style is utilitarian and the target is not secret-plans:
+After printing the name of the derivate of the secret-plans while taking inventory:
+	if the current inventory listing style is utilitarian and the derivate of the secret-plans is not the secret-plans:
 		say "[roman type] (really the smuggled plans in disguise)".
 
 After printing the name of the tub while taking inventory:
 	if the current inventory listing style is utilitarian:
 		say " of restoration gel".
-
 
 To decide which number is populate inventory table:
 	(- ( PopulateTableOfInventoryOrdering() ) -).
@@ -94,32 +93,32 @@ Include (-
 ! This routine traverses the object tree inside the player and writes everything carried into the table, but skips over any components, i.e. anything that is part of something else. I don't think this ever matters in practice.
 
 [ PopulateTableOfInventoryOrdering o row real_parent;
-	
+
 	row = 1;
 	essential_count = 0;
 	packed_count = 0;
 	for (o = child(player) : o : ) {
 		if (IsInventoryListable(o)) {
-			TableLookUpEntry((+ Table of Inventory Ordering +), (+ referent +), row, 1, o);			
-			if( ( o provides (+ essential +)) && (o.(+ essential +) ) ) 
+			TableLookUpEntry((+ Table of Inventory Ordering +), (+ referent +), row, 1, o);
+			if( ( o provides (+ essential +)) && (o.(+ essential +) ) )
 				essential_count = essential_count + 1;
 
 			real_parent = parent(o);
-			
+
 			! If current object is in a container other than the backpack, add parent to row 4 (listable container entry), then check if parent is in the backpack.
-			
+
 			if (real_parent ~= player or (+backpack+))
 				TableLookUpEntry((+ Table of Inventory Ordering +), (+ listable container +), row, 1, real_parent);
-			
+
 			while (real_parent ~= player or (+backpack+))
 				real_parent = parent(real_parent);
-			
+
 			if (real_parent == (+backpack+))
 					packed_count = packed_count + 1;
 
 			! Write backpack or player in holder entry
-			
-			TableLookUpEntry((+ Table of Inventory Ordering +), (+ holder +), row, 1, real_parent);	 
+
+			TableLookUpEntry((+ Table of Inventory Ordering +), (+ holder +), row, 1, real_parent);
 			row++;
 			if (row > 100) { print "ERROR: more than 100 listable things in inventory!^"; return 100; }
 		}
@@ -180,7 +179,7 @@ To decide which number is the length of The inventory-container-list of (N - a t
 	(- (MyWriteInventoryList (ENGLISH_BIT+DEFART_BIT+CFIRSTART_BIT, CONTAINERS, {N})) -).
 
 
-Inventory count is a number that varies. 
+Inventory count is a number that varies.
 The inventory count variable translates into I6 as "inventory_count".
 
 Packed count is a number that varies.
@@ -210,38 +209,38 @@ Constant CONTAINERS		= 5;
 Include (-
 
 [ MyWriteInventoryList style type par i o match length;
-	
+
 	if (inventory_count == 0) {
 		LIST_WRITER_INTERNAL_RM('Y');
 	} else {
-		
+
 		@push MarkedObjectArray; @push MarkedObjectLength;
 		MarkedObjectArray = RequisitionStack(inventory_count);
-		if (MarkedObjectArray == 0) return RunTimeProblem(RTP_LISTWRITERMEMORY); 
-		
+		if (MarkedObjectArray == 0) return RunTimeProblem(RTP_LISTWRITERMEMORY);
+
 		length = 0;
-		
+
 		for (i = 1 : i <= inventory_count : i++ ) {
 				o = TableLookUpEntry((+ Table of Inventory Ordering +), (+ referent +),i);
 				switch (type) {
-			
-					ESSENTIALS, INESSENTIALS: 
+
+					ESSENTIALS, INESSENTIALS:
 						match = ((o provides (+ essential +)) && (o.(+ essential +)));
 						if (type == INESSENTIALS) match = ~~(match);
-					
+
 					PACKED, UNPACKED:
 						match = ( TableLookUpEntry((+ Table of Inventory Ordering +), (+ holder +), i) == (+ backpack +));
 						! Don't list the backpack among unpacked things.
 						if (type == UNPACKED && o ~= (+ backpack +)) match = ~~(match);
-					
+
 					CONTAINERS: match = (parent(o) == par);
-				
+
 					default: print "Error! No type given in MyWriteInventoryList!^";
 				}
-			
+
 				if (match) MarkedObjectArray-->length++ = o;
 		}
-	
+
 		MarkedObjectLength = length;
 		WriteListFrom( MarkedObjectArray-->0 , style, 0, false, MarkedListIterator );
 
@@ -259,14 +258,14 @@ To decide which thing is next listable container:
 
 Include (-
 
-! Hacky but fast way to find all unique containers listed in the listable container column 
+! Hacky but fast way to find all unique containers listed in the listable container column
 
 [ FindContainerAndBlankOut i v col;
 	v = TABLE_NOVALUE;
-	
+
 	col = (+ listable container +);
 	if (col >= 100) col=TableFindCol((+ Table of Inventory Ordering +), (+ listable container +), true);
-	
+
 	! if we find a value, blank it out, then blank out the same value if we find it in other rows. Then return it.
 	for (i = 1 : i <= inventory_count : i++ ) {
 		if (v == TABLE_NOVALUE)
@@ -275,7 +274,7 @@ Include (-
 			if (v == ((+ Table of Inventory Ordering +)-->col)-->(i+COL_HSIZE))
 				((+ Table of Inventory Ordering +)-->col)-->(i+COL_HSIZE) = TABLE_NOVALUE;
   	}
-  	
+
   	! if we found no value, return nothing.
   	if (v == TABLE_NOVALUE) return nothing;
   	else return v;
@@ -301,7 +300,7 @@ Include (-
 	rtrue;
 ];
 
-[ EverythingCarriedIsWorn par o;
+[ EverythingCarriedIsWorn o;
 	for (o=child(player) : o : ) {
 		if (o hasnt worn)
 			rfalse;

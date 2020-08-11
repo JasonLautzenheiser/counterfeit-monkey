@@ -85,10 +85,6 @@ generic-quip is a npc-directed quip. Availability rule for generic-quip: it is o
 
 Definition: a quip is viable if it is in the quip-repository.
 
-People-present is a list of people that varies.
-How-many-people-here is a number that varies.
-
-
 Part Three - Defining Facts
 
 A fact is a kind of object. Some facts are defined by the Table of All Known Facts.
@@ -160,8 +156,8 @@ Part One - Learning Facts
 Fact-awareness relates various people to various facts. The verb to know implies the fact-awareness relation.
 
 Before printing the name of a fact (called target) while an actor discussing something (this is the broadcast spoken facts rule):
-	repeat with listener running through people-present[who can see the person asked]:
-		now the listener knows the target;
+	repeat with N running from 1 to how-many-people-here [who can see the person asked]:
+		now present-person N knows the target;
 
 Before printing the name of a fact (called target) (this is the player learns facts rule):
 	now the player knows the target.
@@ -170,8 +166,8 @@ Rule for printing the name of a fact (this is the silence actual output of facts
 	do nothing instead.
 
 To say forget (target - a fact):
-	repeat with listener running through people-present[who can see the person asked]:
-		now the listener does not know the target.
+	repeat with N running from 1 to how-many-people-here [who can see the person asked]:
+		now present-person N does not know the target.
 
 
 Part Two - Thinking and Review of Known Facts
@@ -295,7 +291,7 @@ Definition: a quip is recent
 	or it is the previous quip
 	or it is the grandparent quip.
 
-Definition: a quip (called target) is plausible:
+Definition: a quip is plausible:
 	if the current interlocutor is not a person, no;
 	if it is not flagged-ready, no;
 	follow the plausibility rules for it;
@@ -309,7 +305,7 @@ Availability rules are an object-based rulebook. The availability rules have out
 [	Availability determines whether a given quip is even allowed to be used. Available quips are a superset of plausible quips, which are limited to those quips that are contextually relevant,	]
 [	but (depending on the system) might not include everything that the player could reasonably choose to talk about at the moment.	]
 
-Definition: a quip (called target quip) is available:
+Definition: a quip is available:
 	follow the availability rules for it;
 	if the outcome of the rulebook is the it is available outcome:
 		yes.
@@ -473,7 +469,7 @@ Rule for listing plausible quips (this is the standard quip plausibility rule):
 			carry out the quip-introducing activity with the output item entry;
 		[This could have blanked some rows out, so we need to check again:]
 		if special listing count is positive,
-			say "[quip-suggestion-phrase][the prepared list delimited in disjunctive style][one of]. [paragraph break][first custom style][bracket]Type TOPICS to repeat current conversation topics and suggest new ones.[close bracket][roman type][or].[stopping][line break]" (A);
+			say "[quip-suggestion-phrase][the prepared list delimited in disjunctive style][if tutorial mode is true][one of]. [paragraph break][first custom style][bracket]Type TOPICS to repeat current conversation topics and suggest new ones.[close bracket][roman type][or].[stopping][otherwise].[end if][line break]" (A);
 
 Before printing the name of a questioning quip while listing plausible quips or listing peripheral quips or listing recommended quips (this is the prefix-ask rule):
 	say "ask " (A).
@@ -640,7 +636,7 @@ Volume 3 - Performing Discussion
 
 Book 1 - The Current Interlocutor
 
-The current interlocutor is an object that varies. The current interlocutor is nothing.
+The current interlocutor is an object that varies. [The current interlocutor is nothing.]
 
 Understand "himself" as a man when the item described is the current interlocutor.
 Understand "herself" as a woman when the item described is the current interlocutor.
@@ -730,29 +726,44 @@ Section 1c - Subject-asking
 
 [Subject-asking handles asking about subjects mentioned by available quips.]
 
-Understand "ask about/for/-- [thing]" or "tell about/that/-- [thing]" as subject-asking when predicted-interlocutor is something. Subject-asking is an action applying to one visible thing.
+Understand "ask about/for/-- [thing]" or "tell about/that/-- [thing]" as subject-asking when predicted-interlocutor is not nothing. Subject-asking is an action applying to one visible thing.
 
-A quip has a list of objects called the mentions-list.
+[A quip has a list of objects called the mentions-list.]
 
-When play begins (this is the add indistinguishable to mentions-lists rule):
+When play begins (this is the add indistinguishable to mentions-array rule):
 	repeat with I running through cars:
-		add I to mentions-list of where there seems garage;
-		add I to mentions-list of whether car be fixed;
-		add I to mentions-list of why the car does not run;
-		add I to mentions-list of where there seems a car;
-		add I to mentions-list of where there seems a car-2;
+		unless I is the alterna-shuttle or I is the truck:
+			mentions-add I to where there seems garage;
+			mentions-add I to whether car be fixed;
+			mentions-add I to why the car does not run;
+			mentions-add I to where there seems a car;
+			mentions-add I to where there seems a car-2;
 	repeat with I running through oils:
-		add I to mentions-list of whether the oil seems interesting;
-		add I to mentions-list of whether car be fixed;
-		add I to mentions-list of whether the oil will work;
-		add I to mentions-list of check out this oil;
-		add I to mentions-list of check out this oil-1;
-		add I to mentions-list of where oil might be;
-		add I to mentions-list of we'll find some;
+		mentions-add I to whether the oil seems interesting;
+		mentions-add I to whether car be fixed;
+		mentions-add I to whether the oil will work;
+		mentions-add I to check out this oil;
+		mentions-add I to check out this oil-1;
+		mentions-add I to where oil might be;
+		mentions-add I to we'll find some;
 	repeat with I running through odes:
-		add I to mentions-list of calm Lena.
+		mentions-add I to calm Lena;
 
-After deciding the scope of the player when the action name part of current action is the starting a conversation with it about action:
+To mentions-add (X - a thing) to (Q - a quip):
+	let found be false;
+	repeat with N running from mention-start-index of Q to mention-stop-index of Q:
+		if mentions-index N is dummy-object:
+			set mentions-index N to X;
+			now found is true;
+			break;
+	if found is false:
+		say "Error: Found nowhere to insert [X] in the quip '[Q]'."
+
+To set mentions-index (N - a number) to (X - a thing):
+	(- mentions_array --> {N} = {X}; -)
+
+
+After deciding the scope of the player when starting a conversation with an object about an object:
 	repeat with N running from 1 to subject count:
 		place subject-number N in scope.
 
@@ -784,11 +795,11 @@ Carry out subject-asking:
 			if current interlocutor is the gift shop volunteer:
 				follow the gift shop volunteer doesn't know rule instead;
 			otherwise:
-				if the holder of the noun is current interlocutor and purchasing-quip is something:
+				if the holder of the noun is current interlocutor and purchasing-quip is not nothing:
 					try requesting the noun from the current interlocutor instead;
 			unless the noun is a distant backdrop or the noun is a person or the holder of the noun is current interlocutor:
 				try showing the noun to the current interlocutor instead;
-		say "[The current interlocutor] [don't] [one of]seem interested in talking[or][have] anything to say[at random] about [the noun] at the moment."
+		say "[The current interlocutor] [don't] [one of]seem interested in talking[or]have anything to say[at random] about [the noun] at the moment."
 
 
 Chapter 2 - Setting discussing variables
@@ -826,12 +837,20 @@ Rule for printing a parser error when the latest parser error is the noun did no
 	otherwise:
 		make no decision.
 
+Rule for printing a parser error when the latest parser error is the didn't understand that number error (this is the prevent number error rule):
+	if the player's command includes "say/ask/answer/discuss/tell/a/t" and the player's command includes "[any person]":
+		if the current interlocutor is a person:
+			say "That doesn't seem to be a topic of conversation at the moment." (A) instead;
+		otherwise:
+			say "[We] [aren't] talking to anyone." (B) instead; ['You aren't talking to anyone.']
+	make no decision.
+
 Section 3 - The Player Discussing
 
 Check discussing (this is the cannot talk without an interlocutor rule):
 	unless the current interlocutor is a person:
 		if how-many-people-here is 1:
-			try discussing the noun with entry 1 of people-present instead;
+			try discussing the noun with present-person 1 instead;
 		otherwise:
 			say "[We]['re not] talking to anyone right [now]." (A) instead.
 
@@ -1067,8 +1086,8 @@ To perform the/-- next queued conversation for (chosen person - a person):
 To perform the/-- (chosen precedence - a quip-precedence) conversation for every person:
 	if the current interlocutor is a person and the current interlocutor is marked-visible,
 		perform the chosen precedence conversation for the current interlocutor;
-	repeat with target running through people-present:
-		if the target is not the current interlocutor, perform the chosen precedence conversation for the target.
+		repeat with N running from 1 to how-many-people-here:
+			if present-person N is not the current interlocutor, perform the chosen precedence conversation for present-person N.
 
 To perform the/-- (chosen precedence - a quip-precedence) conversation for (chosen person - a person):
 	if the number of entries in the planned conversation of the chosen person is greater than 0:
@@ -1080,8 +1099,8 @@ To perform the/-- (chosen precedence - a quip-precedence) conversation for (chos
 To perform the/-- next queued conversation for every person:
 	if the current interlocutor is a person and the current interlocutor is marked-visible,
 		perform the next queued conversation for the current interlocutor;
-	repeat with target running through people-present:
-		if the target is not the current interlocutor, perform the next queued conversation for the target.
+	repeat with N running from 1 to how-many-people-here:
+		if present-person N is not the current interlocutor, perform the next queued conversation for present-person N.
 
 Section 2 - Deletion Phrases
 
@@ -1102,13 +1121,16 @@ Section 3 - Conversation Reply Rules
 [This is what makes the NPCs actually respond to things: all answers to player conversation, and independent conversation on the NPCs' part, comes from the conversation reply rules.]
 
 A first every turn rule (this is the update people-present rule):
-	now people-present is the list of other people enclosed by location;
-	now how-many-people-here is the number of entries in people-present;
-	if how-many-people-here is positive:
-		repeat with P running through people-present:
-			now P is marked-visible;
+	headcount;
+	[The lines below are from an "Check for alert people in location" rule that I merged into this because it wouldn't get the right precedence no matter how I tried. See the ProspectiveInterlocutor code in Character Models.i7x]
+	let X be prospective-interlocutor;
+	if X is not nothing:
+		try X saying hello to the player.
 
-Every turn when the player is staid (this is the active conversation rule):
+To headcount:
+	(- MyCountPeople(); -). [See the section People present in Conversation Speedups.i7x]
+
+Every turn (this is the active conversation rule):
 	if how-many-people-here is positive:
 		follow the conversation-reply rules.
 
@@ -1319,7 +1341,7 @@ Carry out someone saying hello to the player (this is the someone else says hell
 	set the interlocutor to the actor.
 
 Report someone saying hello to the player (this is the report someone saying hello rule):
-	say "[The person asked] say[s] hello."
+	say "[The person asked] [say] hello."
 
 
 Hailing is an action applying to nothing.
@@ -2312,4 +2334,3 @@ The specific quips are once again generated by Conversation Builder.
 	Test me with "talk to Lavine / ask why she has come".
 
 	Test again with "talk to Lavine / t alliance".
-	

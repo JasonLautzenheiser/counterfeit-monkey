@@ -80,8 +80,8 @@ Does the player mean pushing the small black push-button:
 
 Instead of pushing the small black push-button:
 	if the display-platform is in the location:
-		if an essential thing (called essential item) is on the display-platform:
-			say "Best not to part with [the list of essential things *in the display-platform]." instead;
+		if an essential thing (called essential item) is enclosed by the display-platform:
+			say "Best not to part with [the list of essential things enclosed by the display-platform]." instead;
 		raise the display;
 	otherwise:
 		lower the display.
@@ -119,13 +119,11 @@ The odor is a fixed in place thing in Wonderland. The printed name is "od[our]".
 Instead of examining the odor:
 	try smelling the odor.
 
-Sanity-check doing something when the odor must be touched:
-	if the current action is the action of smelling the odor:
-		make no decision;
-	say "[We] can't actually touch [the odor], seeing as it is, in fact, just a vapor in the air, a dispersion of molecules dispersed through the rest of the local atmosphere." instead.
+Sanity-check smelling the odor:
+	say "I can't quite place it. There's definitely a smell, but what is it [i]like[/i]? Strawberries? Burning rubber? Freshly chopped chives? Every time I think I've pinned it, it goes again, sliding sideways to smell like something else." instead.
 
-Instead of smelling the odor:
-	say "I can't quite place it. There's definitely a smell, but what is it [i]like[/i]? Strawberries? Burning rubber? Freshly chopped chives? Every time I think I've pinned it, it goes again, sliding sideways to smell like something else."
+Sanity-check doing something when the odor must be touched:
+	say "[We] can't actually touch [the odor], seeing as it is, in fact, just a vapor in the air, a dispersion of molecules dispersed through the rest of the local atmosphere." instead.
 
 Instead of smelling Wonderland when the odor is in Wonderland:
 	try smelling the odor.
@@ -155,7 +153,7 @@ Rule for printing the name of the odor while shooting the odor with the anagramm
 Rule for printing the name of the odor while waving the letter-remover at the odor:
 	say "odor".
 
-Instead of going north in Wonderland when the secret-door is closed and The Oracle Project is nonsecret:
+Instead of going north in Wonderland when the secret-door is closed and the secret-door is seen:
 	if the secret-door is marked-visible:
 		say "[The secret-door] is not open.";
 	otherwise:
@@ -163,7 +161,7 @@ Instead of going north in Wonderland when the secret-door is closed and The Orac
 
 Section 3 - Equipment Archive
 
-Equipment Archive is a room. It is indoors, forbidden and southern. The description is "The ceiling is mirrored, perhaps to make it harder for anyone to sneak around without being noticed among the shelves."
+Equipment Archive is a room. It is indoors, forbidden and southern. The description is "The [if boldening is true][bold type][end if]ceiling[roman type] is mirrored, perhaps to make it harder for anyone to sneak around without being noticed among the shelves."
 
 A ceiling mirror is a mirror in the Equipment Archive.
 
@@ -313,8 +311,8 @@ topic	title	data
 "arbot" or "pleice/julius" or "mr" or "julius/mr pleice" or "promotion"	"Promotion Julius Pleice"	"'No subject contact. Subject A confirmed promotion of Julius Pleice to replace departing supervisor Arbot. Papers were submitted for written confirmation from Subject A.'"
 "utopian/utopia/linguistics/language" or "linguistics"	"Utopian Linguistics Conference"	"'No subject contact. Question concerning support for Utopian Linguistics Conference. Subject A ruled to permit conference to proceed with intensive surveillance of all attending.'"
 "university/school/scholarship/waterstone/linguistics/language"	"Inquiry on University Maintenance and Fees"	"'No subject contact. Question concerned university funding. Subject recommended preferential funding for those departments [']most likely to promote Atlantis['] pre-eminent standing and def[ense].['] List of departments submitted in paper form and approved by Subject A with three amendments as attached.'"
-"andra/me/you/alexandra"	"[--]"	"There is no direct reference to you in here."
-"me/alex/rosehip" or "alex rosehip"	"[--]"	"There is no direct reference to me in here."
+"andra/me/us/alexandra"	"[--]"	"There is no direct reference to you in here."
+"you/us/alexandra/alex/rosehip" or "alex rosehip"	"[--]"	"There is no direct reference to me in here."
 "dad/father/rosehip"	"[--]"	"A quick search turns up no access attempts by my father. It would seem he doesn't have access here, whatever that means."
 "Atlantida"	"[--]"	"That name doesn't appear. At all."
 
@@ -453,7 +451,7 @@ The description is "This frighteningly massive contraption has pipes and compres
 
 Understand "rust stains" or "stains" or "gauges" or "steam" or "power" or "generator" or "boilers" or "compression tanks" or "pipe" or "pipes" or "needles" or "large pipe" or "water" as the boiler.
 
-Every turn when the location contains the switched on boiler:
+Every turn when the location is Generator Room and the boiler is switched on:
 	if the remainder after dividing turn count by 3 is 0:
 		say "[one of]Light flashes[or]White light flashes[or]There's a particularly vibrant blue-white flash[or]There's a flash of light[or]Ice flashes into steam[or]A loud pfft! sounds[at random] [one of]within[or]inside[or]from within[or]in[at random] the boiler[one of] and[or] and all[or]. All[at random] the [one of]meters twitch[or]meter needles flicker into the red[or]steam gauge needles jump[at random][if a random chance of 1 in 3 succeeds] violently[end if]."
 
@@ -565,7 +563,7 @@ Every turn when the portcullis is open and the counterweight is not on the pulle
 
 Check opening portcullis:
 	if the counterweight is not on the pulley:
-		say "[We] strain at the base of the gate, but the portcullis is much too heavy for us to lift unaided. We need some kind of mechanical advantage." instead.
+		say "[We] strain at the base of the gate, but the portcullis is much too heavy for [us] to lift unaided. [We] need some kind of mechanical advantage." instead.
 
 Report putting something on the pulley:
 	say "[We] hang [the noun] on the hook." instead.
@@ -593,7 +591,7 @@ Sanity-check unlocking the portcullis with the jack:
 	try propping the portcullis with the jack instead.
 
 Report propping the portcullis with the jack:
-	say "[We] slip [the jack] under the portcullis and raise it a few feet [--] enough for us to slip past." instead.
+	say "[We] slip [the jack] under the portcullis and raise it a few feet [--] enough for [us] to slip past." instead.
 
 After deciding the scope of the player when the location is Personal Apartment or the location is Tunnel through Chalk:
 	if the portcullis is wedged by something (called the impediment):
@@ -662,7 +660,9 @@ A rubber stamp is a thing on the inlaid desk. The description is "It is made to 
 
 Understand "stamp [text]" as a mistake ("It seems unlikely that our tampering would go unnoticed.") when the rubber stamp is marked-visible.
 
-The oil-paintings are scenery in Personal Apartment. They are plural-named. The printed name is "[if looking]Oil[otherwise]oil[end if] paintings". Understand "oil" or "painting" or "paintings" or "portraits" or "portrait" as the oil-paintings. The description is "They look like originals. I have seen some of these portraits before, in books at school or in the museum, but was given to understand that they'd been stolen, leaving only photographs or replicas."
+The oil-paintings are scenery in Personal Apartment. They are plural-named. The printed name is "[if looking]Oil[otherwise]oil[end if] paintings". Understand "oil" or "painting" or "paintings" or "portraits" or "portrait" as the oil-paintings. The heft of the oil-paintings is 5. The description is "They look like originals. I have seen some of these portraits before, in books at school or in the museum, but was given to understand that they'd been stolen, leaving only photographs or replicas."
+
+The oil-paintings can be stolen. The oil-paintings are not stolen.
 
 A fancy bed is a clothed bed. It is scenery in Personal Apartment. The description of the fancy bed is "Draped in eau-de-Nil blankets, and tossed by a restless occupant." Understand "antique" as the fancy bed. The printed name of the fancy bed is "bed".
 
@@ -740,7 +740,7 @@ The description of the tall window is "[if the tall window is open]The window st
 After examining the tall window, try searching the tall window.
 
 Sanity-check unlocking keylessly the tall window when the tall window is locked:
-		say "It's locked again. There's no way for us but forward from here." instead.
+		say "It's locked again. There's no way for [us] but forward from here." instead.
 
 Rule for writing a paragraph about the tall window when the location is the Precarious Perch:
 	if the tall window is open:
@@ -759,7 +759,7 @@ Instead of searching the tall window:
 		say "Through the window, there's a beautiful view of the sea; but further inspection also reveals a narrow strip of grassy ledge, really only just wide enough to stand on, before a steep descent over stones."
 
 Check attacking the tall window with something:
-	say "[The second noun] bounce[s] harmlessly off the window glass. It must be artificially strengthened or something." instead.
+	say "[The second noun] [bounce] harmlessly off the window glass. It must be artificially strengthened or something." instead.
 
 Instead of climbing the tall window:
 	try entering the tall window.
@@ -784,7 +784,7 @@ Part 2 - Final Departure
 
 Chapter 1 - The Seaside
 
-The distant-sea-view is a distant backdrop. It is fluid. It is in Customs Hallway, Precarious Perch, Old City Walls, Old Hexagonal Turret, and Crumbling Wall Face. The printed name is "view of the sea". Understand "view of the sea" as the distant-sea-view. It screens north, northwest, and northeast. Understand "ocean" or "sea" or "waves" or "water" or "horizon" as the distant-sea-view. The description is "The water is quiet today [--] though it rarely achieves very impressive waves anyhow. The col[our] ranges from a bright Bureau blue close to shore to a deep lapis at the horizon."
+The distant-sea-view is a distant backdrop. It is fluid. It is in Customs Hallway, Precarious Perch, Old City Walls, Old Hexagonal Turret, and Crumbling Wall Face. The printed name is "distant sea". Understand "view of the sea" as the distant-sea-view. It screens north, northwest, and northeast. Understand "ocean" or "sea" or "waves" or "water" or "horizon" as the distant-sea-view. The description is "The water is quiet today [--] though it rarely achieves very impressive waves anyhow. The col[our] ranges from a bright Bureau blue close to shore to a deep lapis at the horizon."
 
 The sea-view is a backdrop. It is fluid. It is in Abandoned Shore, Private Beach, and Open Sea. It screens north, northwest, and northeast. The printed name is "sea". Understand "view of the sea" as the sea-view. Understand "ocean" or "sea" or "waves" or "water" or "horizon" as the sea-view. The description is "[if the location is Open Sea]The seawater is pleasantly clear here: there's little turbulence to stir up muck, little seaweed.[otherwise if the location is nautical]The surface of the water glitters in the last light.[otherwise]The waves are low and gentle, little more than a wash of foam over the surface of the beach, like an emptied dishpan.[end if]".
 
@@ -831,7 +831,7 @@ Report touching the sea-view:
 		-- evening:
 			say "The water retains the heat of a very sunny day, though the air is cooling quickly." instead;
 
-Precarious Perch is a room. It is forbidden and checkpoint. The description is "From up here there's a handsome [distant-sea-view], which isn't [i]so[/i] far down [i]really[/i]. But it's a scramble down a nearly sheer cliff for the first bit, until [we] make it down to the rockfall below, and it would be easy for a careless person to injure herself."
+Precarious Perch is a room. It is forbidden and checkpoint. The description is "From up here there's a handsome [if boldening is true][bold type][end if]view of the sea[roman type], which isn't [i]so[/i] far down [i]really[/i]. But it's a scramble down a nearly sheer cliff for the first bit, until [we] make it down to the rockfall below, and it would be easy for a careless person to injure herself."
 
 In-direction of Precarious Perch is south. [Back into private solarium]
 
@@ -862,7 +862,7 @@ Instead of going up in Abandoned Shore:
 	say "[We] doubt whether [we] would make the return trip. It was bad enough coming down."
 
 Instead of going north in Abandoned Shore when the player is not in the kayak:
-	say "[We] have too far to go; just swimming won't get us out to Slango's yacht."
+	say "[We] have too far to go; just swimming won't get [us] out to Slango's yacht."
 
 Abandoned Shore is below Precarious Perch. It is forbidden and checkpoint. The description is "There's a little inlet of shore here, mostly boulders with little sand, completely cut off from the dock area and sheltered by the curve of the rock so that it wouldn't be visible from the sea unless someone were very close in."
 
@@ -873,7 +873,7 @@ Some tidal pools are scenery in Abandoned Shore. The description is "Pools of se
 Instead of climbing the boulders:
 	say "While it might be possible to scramble up over the curve of rock and get a glimpse of the harbor, there's an equally good possibility that doing so would get [me] undesirable attention."
 
-The non-sand is scenery in Abandoned Shore. The non-sand is privately-named. Understand "sand" as the non-sand.
+The non-sand is scenery in Abandoned Shore. The printed name is "boulders". The non-sand is privately-named. Understand "sand" as the non-sand.
 
 Sanity-check doing something when the noun is non-sand or the second noun is non-sand:
 	say "There's very little sand here, just boulders." instead.
@@ -986,7 +986,7 @@ Check facing in abandoned shore:
 Report facing in Abandoned Shore:
 	say "The charm of this place is that it's very hard to see anything in any direction but the ocean. In every other direction [we] are completely protected by rocks." instead.
 
-Open Sea is north of the Abandoned Shore. It is forbidden and checkpoint. The description is "The water stretches in all directions, but [we] can see off to the north where [viewed-yacht] is anchored, ready to bring us back aboard. Its metallic blue shape almost blends in with the water."
+Open Sea is north of the Abandoned Shore. It is forbidden and checkpoint. The description is "The water stretches in all directions, but [we] can see off to the north where [viewed-yacht] is anchored, ready to bring [us] back aboard. Its metallic blue shape almost blends in with the water."
 	The introduction is "If [we] were further around the island to the east, [we] might be able to see bits of the drowned city: both the buildings that were legitimately destroyed when the land sunk into the sea, and the areas where during the Civil Dispute of Standard[ization] the authorities dumped unwanted foreign archaeological [if the player is wearing britishizing goggles]artefact[otherwise]artifact[end if]s. But here I'm afraid it's just shellfish and sand down there."
 
 Rule for listing exits when looking in the Open Sea:
@@ -996,7 +996,7 @@ A description-concealing rule:
 	if the location is the Open Sea:
 		rapidly set all contents of the kayak not marked for listing.
 
-The viewed-yacht is a distant, privately-named scenery thing in Open Sea. Understand "slango's" or "yacht" as the viewed-yacht. The description is "It's just there on the horizon." The printed name is "Slango's yacht".
+The viewed-yacht is a distant, proper-named, privately-named scenery thing in Open Sea. Understand "slango's" or "yacht" as the viewed-yacht. The description is "It's just there on the horizon." The printed name is "Slango's yacht".
 
 Instead of finding viewed-yacht:
 	try going north.
@@ -1008,7 +1008,7 @@ Instead of launching the kayak in Open Sea:
 	try going north instead.
 
 Instead of exiting in Open Sea:
-	say "Leaving the kayak at this juncture would only get us all wet. And I'm too tired for that right now."
+	say "Leaving the kayak at this juncture would only get [us] all wet. And [we]['re] too tired for that right now."
 
 Instead of putting gel on the oar when the player is in the kayak and the location is Open Sea:
 	say "It would be extremely inconvenient to lose the oar at this juncture."
@@ -1233,8 +1233,13 @@ The rest of the food is in the cabinet."
 
 A stove called a galley stove is in the Galley. The description of the galley stove is "A perfectly smooth, easy-to-clean black surface with electric burners underneath."
 
-[This is to avoid things being called "the galley sink galley sink's tap" and "the galley stove galley stove's switch"]
-The switch identification rule response (A) is "[unless the target is part of the galley stove or the target is part of the galley sink][random thing which includes the target] [end if]".
+[To avoid things being called "the galley sink galley sink's tap" and "the galley stove galley stove's switch"]
+Before printing the name of a switch (called target) (this is the new switch identification rule):
+	if the target is part of something (called fixture):
+		unless the fixture is the galley stove or the fixture is the galley sink or the fixture is the galley stove's oven:
+			say "[fixture] ".
+
+The new switch identification rule is listed instead of the switch identification rule in the before printing the name rulebook.
 
 A sink called a galley sink is in the Galley. The description of the galley sink is "Stainless steel, and very clean."
 
@@ -1407,7 +1412,7 @@ When play begins (this is the setting up your bunk rule):
 	otherwise:
 		say "ERROR: found no leftmost drawer in Your Bunk!"
 
-Every turn when portholes are in location:
+Every turn when the location is nautical and portholes are in location:
 	if a random chance of 1 in 13 succeeds:
 		say "[one of]Odd patterns of light dance on the ceiling, reflected through the portholes from the water outside.[or]The yacht rolls gently under the influence of an especially strong wave.[or]The waves lap gently against the side of the ship.[or]Just outside the porthole, a seabird is visible resting on the waves; and then it floats on.[or]The wake of what must be quite a large ship raises the [i]True Macaque[/i] and then lowers her again.[as decreasingly likely outcomes]".
 
@@ -1443,18 +1448,6 @@ Section 12 - Slango's Head
 Slango's Head is aft from Slango's Bunk.
 The description is "All the absolutely required amenities of a bathroom, packed into the least possible space. The international space station probably assigns more room to the bathroom functions."
 It is nautical and forbidden. It is indoors. It is a bathroom.
-
-When play begins (this is the setting up the nautical bathrooms rule):
-	repeat with item running through baths which are in nautical bathrooms:
-		now the printed name of the item is "shower";
-		now the hash code of the item is -1874835968;
-		repeat with shower-tap running through taps which are part of item:
-			now the hash code of shower-tap is -1849668096;
-		repeat with shower-drain running through drains which are part of item:
-			now the hash code of shower-drain is -1721678336;
-		now the description of the item is "Just a stand-up shower with a folding plastic door. At least the water is usually hot."
-
-The setting up the nautical bathrooms rule is listed after the initialize difficult hash codes rule in the when play begins rules.
 
 Section 13 - View from Outdoor Areas
 

@@ -10,14 +10,14 @@ Chapter 1 - The Letter-Remover
 Section 1 - Normal Behavior
 
 Definition: a thing is irretrievable:
-	if it is the player:
-		no;
-	if it encloses the player:
-		no; [because we've got a different disaster lined up to deal with this.]
 	if it is the letter-remover:
 		yes;
 	if it is the tub:
 		yes;
+	if it is the player:
+		no;
+	if it encloses the player:
+		no; [because we've got a different disaster lined up to deal with this.]
 	if it encloses an essential thing:
 		yes;
 	no.
@@ -28,6 +28,22 @@ Check waving the letter-remover at something irretrievable:
 
 The don't change irretrievable rules is an object-based rulebook.
 
+[The irretrievable-ordinal stuff below is a lazy way to try and get some variation, avoiding repeated phrases such as "We try to retrieve everything important from the pit. We try to retrieve everything important from the crate." Instead we get "First, we try to retrieve everything important from the pit. Second, we try to retrieve everything important from the crate. Third, we try to retrieve everything important from the coffer."]
+
+Last-irretrievable-turn is a number that varies.
+
+Current-irretrievable-ordinal is a number that varies.
+
+To say irretrievable-ordinal:
+	if the turn count is last-irretrievable-turn:
+		increment current-irretrievable-ordinal;
+	otherwise:
+		now current-irretrievable-ordinal is 1;
+		now last-irretrievable-turn is the turn count;
+	let N be "[ordinal of current-irretrievable-ordinal]";
+	now N is N in sentence case;
+	say N.
+
 A don't change irretrievable rule for a thing (called the item):
 	if the item is the tub or the item is the letter-remover or the item is the restoration gel:
 		say "It would be a bad idea to change the form of [the item]. [We] might not be able to get it back.";
@@ -37,7 +53,7 @@ A don't change irretrievable rule for a thing (called the item):
 		the rule fails;
 	if the item is a person:
 		make no decision;
-	say "First [we] try to remove anything useful from [the item]. [run paragraph on]";
+	say "[irretrievable-ordinal], [we] try to retrieve everything important from [the item]. [run paragraph on]";
 	let essential-list be the list of essential things enclosed by item;
 	let taken-list be a list of things;
 	let holder-list be a list of things;
@@ -59,11 +75,11 @@ A don't change irretrievable rule for a thing (called the item):
 Instead of waving the letter-remover device:
 	say "Whoa, whoa! Just waving that thing around without an exact aim could do a lot of damage. Wave it AT something, or don't wave it at all."
 
-The letter-remover device is a thing. It is essential and illegal. Understand "letter remover" or "plastic device" or "device" or "blunt-nosed" as letter-remover.
-	The description of the letter-remover device is "It is a blunt-nosed plastic device, about the size of a laser pointer, that can be waved at things to remove excess [current setting in upper case]s. It is not very powerful, and often fails against large items. On the other hand, it has a wide range of action: it can be set to any letter [we] choose."
+The letter-remover device is a thing. It is essential and illegal and examined. Understand "letter remover" or "plastic device" or "device" or "blunt-nosed" as letter-remover.
+	The description of the letter-remover device is "It is a blunt-nosed plastic device, about the size of a laser pointer, that can be waved at things to remove excess [current setting of letter-remover in upper case]s. It is not very powerful, and often fails against large items. On the other hand, it has a wide range of action: it can be set to any letter [we] choose."
 	The introduction is "These are, if not exactly cheap, hardly unknown in Atlantis."
 	Understand "remover" as the letter-remover device.
-	The printed name of the letter-remover device is "[current setting in upper case]-remover". The indefinite article of the letter-remover device is "your".
+	The printed name of the letter-remover device is "[current setting of letter-remover in upper case]-remover". The indefinite article of the letter-remover device is "your".
 
 After printing the name of the letter-remover device while taking inventory:
 	if the letter-remover device is upgraded:
@@ -90,45 +106,41 @@ A small knob is part of the letter-remover device. Understand "dial" as the smal
 After printing the name of the small knob:
 	say " on your [letter-remover]".
 
-Before doing something to the small knob:
-	now the noun is the letter-remover device;
-	try the current action instead.
+Sanity-check doing something to the small knob:
+	now the noun is the letter-remover device.
 
-Understand "[letter-remover] [something]" as waving it at.
+To expand X-remover-string:
+	replace the text " [current setting of the letter-remover]-remover" in player-command-substitute with " letter-remover";
+	replace the regular expression "^[current setting of the letter-remover]-remove " in player-command-substitute with "letter-remove ".
 
-After reading a command (this is the change X-remover to letter-remover rule):
-	say "[run paragraph on]";
-	let N be "[the player's command]";
-	replace the regular expression " [current setting of the letter-remover]-remover" in N with " letter-remover";
-	change the text of the player's command to N;
-	say "[run paragraph on]";
-
-A first after reading a command rule (this is the implicitly change letter-remover setting rule):
-	let N be "[the player's command]";
-	if N matches the regular expression ".-remover":
+A first command-string altering rule (this is the implicitly change letter-remover setting rule):
+	now the letter-remover is static;
+	let N be player-command-substitute;
+	if N matches the regular expression ".-remove":
 		if N matches the regular expression "(.*) (.)-remover (.)*":
 			replace the regular expression "(.*) (.)-remover (.)*" in N with "\2";
 		otherwise if N matches the regular expression "(.*) (.)-remover":
 			replace the regular expression "(.*) (.)-remover" in N with "\2";
 		otherwise:
-			replace the regular expression "(.)-remover.*" in N with "\1";
-		if the current setting of the letter-remover exactly matches the text "[N]":
+			replace the regular expression "(.)-remove.*" in N with "\1";
+		if the current setting of the letter-remover exactly matches the text N:
+			expand X-remover-string;
 			make no decision;
 		if the number of characters in N is greater than 1:
 			make no decision;
-		now N is "[N in lower case]";
-		if the letter-remover is in a closed backpack and the backpack is enclosed by location:
+		if the letter-remover is in a closed backpack:
 			silently try opening the backpack;
+			if the backpack is closed:
+				stop the action;
 		if the player can touch the letter-remover:
-			unless N matches the regular expression "\l":
+			unless N matches the regular expression "<a-z>":
 				say "Only the 26 letters of the English alphabet are available to the letter-remover.";
-				reject the player's command;
-			now the current setting of the letter-remover is "[N]";
+				parsing fails;
+			now the current setting of the letter-remover is N;
 			now the letter-remover is changing;
+			expand X-remover-string;
 		otherwise:
 			say "[run paragraph on]";
-
-
 
 The letter-remover can be static or changing. The letter-remover is static.
 
@@ -160,8 +172,8 @@ Check tuning it to:
 	let N be "[the topic understood]";
 	if the number of characters in N is greater than 1:
 		say "[We] can only tune the letter-remover device to one letter at a time." instead;
-	now N is "[N in lower case]";
-	unless N matches the regular expression "\l":
+	[now N is "[N in lower case]";]
+	unless N matches the regular expression "<a-z>":
 		say "Only the 26 letters of the English alphabet are available to the letter-remover." instead.
 
 Carry out tuning it to:
@@ -190,8 +202,14 @@ Carry out letter-removing the topic understood from something:
 				otherwise:
 					try removing the first thing held by the second noun from the second noun instead;
 			say "[We] can't see any such thing [in-on the second noun]." instead;
-	try tuning the letter-remover to the topic understood;
+	unless the current setting of the letter-remover is noun-text:
+		try tuning the letter-remover to the topic understood;
 	try waving the letter-remover at the second noun.
+
+Understand "letter-remove [something]" as vaguely letter-removing. Vaguely letter-removing is an action applying to one visible thing.
+
+Carry out vaguely letter-removing something:
+	try waving the letter-remover at the noun.
 
 Understand "wave [something preferably held] at/toward/over/around/on/across [thing]" as waving it at. Waving it at is an action applying to one carried thing and one visible thing.
 
@@ -213,6 +231,8 @@ Check waving something at a room:
 Check waving the letter-remover device at the letter-remover device:
 	say "This is physically impossible as well as pointless." instead.
 
+Before waving the letter-remover device at the small knob:
+	say "This is physically impossible as well as pointless." instead.
 
 [Check waving the letter-remover device at something which encloses the player:
 	say "A safety override prevents [the letter-remover] from working on objects which actually contain the operator at the time."]
@@ -235,24 +255,23 @@ Setting action variables for waving the letter-remover device at an object which
 	if comparison number is the hash code of the second noun:
 		now letter absence is true;
 	otherwise:
-		let starting text be "[second noun]";
-		now starting text is "[starting text in lower case]";
+		let starting text be the printed name of second noun;
+		now the second noun is seen;
+		now starting text is starting text in lower case;
 		if the second noun is yourself:
 			now starting text is "alexandra";
-		replace the regular expression "[current setting]" in the starting text with "";
+		replace the text current setting in the starting text with "";
 		now generated object is the letter-remover device;
-		let match-list be a list of things;
 		repeat with item running through things in repository:
 			if comparison number is the hash code of the item:
-				let goal text be "[printed name of the item]";
-				let goal text be "[goal text in lower case]";
+				let goal text be printed name of the item;
+				now goal text is goal text in lower case;
 				if the goal text is the starting text:
 					if second noun proffers item:
 						now the generated object is item;
 						make no decision;
-					add item to match-list;
-		unless match-list is empty:
-			now the generated object is substitute from match-list;
+					match-add item;
+		now the generated object is the best of all matches;
 		if the generated object is the letter-remover device:
 			now the disappointment text is the starting text.
 
@@ -262,42 +281,41 @@ The disappointment text is some text that varies.
 
 [The jury is still out on whether this could ever happen when using the other letter-transformation tools.]
 
-To decide what thing is the substitute from (matchlist - a list of things) (this is the intelligent substitution rule):
+Include Intelligent Substitution by Counterfeit Monkey.
+
+[To decide what thing is the substitute from (matchlist - a list of things) (this is the intelligent substitution rule):
 	if the number of entries in matchlist is greater than 1:
-		let high-scorers be a list of things;
+		let high-scorer be nothing;
 		let high-score be 0;
 		repeat with contender running through matchlist:
 			let scr be 500;
-			let prof-list be the list of things that proffer contender;
-			remove contender from prof-list, if present;
-			if prof-list is not empty:
+			let part-of-other-chain be false;
+			repeat with X running through things in repository that proffer contender:
+				if X is not contender and X does not proffer the second noun:
+					now part-of-other-chain is true;
+			if part-of-other-chain is true:
 				decrease scr by 150;
 				[Something else proffers the contender. Don't choose this.]
-			if the first thing held by contender is something:
+			if the first thing held by contender is not nothing:
 				increase scr by 100;
 				[The contender contains something. Prefer this.]
 			if contender is r-abstract and the letter-remover is not upgraded:
 				decrease scr by 100;
 			if contender is a person and the letter-remover is not creature-enabled:
 				decrease scr by 100;
+			if contender is seen:
+				increase scr by 1;
 			if contender is a car:
 				if contender is fueled:
 					increase scr by 101;
 				if contender is operational:
 					increase scr by 100;
-			if scr is high-score:
-				add contender to high-scorers;
-			otherwise:
-				[This is the new highest score. Clean out the old ones.]
-				if scr is greater than high-score:
-					now high-score is scr;
-					now high-scorers is {};
-					add contender to high-scorers;
-		[sort high-scorers in random order;]
-		[Choose an object from those with the highest score]
-		decide on entry 1 in high-scorers;
+			if scr is greater than high-score or high-scorer is nothing:
+				now high-score is scr;
+				now high-scorer is contender;
+		decide on high-scorer;
 	otherwise:
-		decide on entry 1 in matchlist.
+		decide on entry 1 in matchlist.]
 
 [Check waving the letter-remover at a foreign-tongued thing:
 	say "[The letter-remover] squeaks as though frightened[one of]. Apparently encountering objects that aren't in English generates its own alarm tone[or] by the foreign-language [second noun][stopping]." instead. ]
@@ -317,7 +335,7 @@ Check waving the letter-remover at something which is enclosed by the player:
 		try taking off the second noun;
 		if the player does not carry the second noun:
 			say "Altering one's clothes while they're on can have some unfortunate side effects." instead;
-	if the player does not carry the second noun:
+	if the player does not carry the second noun and the second noun is not an uncontained fluid:
 		try taking the second noun;
 		if the player does not carry the second noun:
 			let enclosure be the holder of the second noun;
@@ -325,9 +343,9 @@ Check waving the letter-remover at something which is enclosed by the player:
 
 Check waving the letter-remover at something creating the letter-remover:
 	if the disappointment text matches the regular expression ".*\s.*":
-		let presumed second noun be "[second noun]";
+		let presumed second noun be the printed name of the second noun;
 		let C be the number of words in presumed second noun;
-		let presumed second noun be "[word number C in presumed second noun]";
+		let presumed second noun be word number C in presumed second noun;
 		now the prior named object is the second noun;
 		say "The device buzzes, puzzled. It has tried to create a '[disappointment text]': evidently '[presumed second noun]' [are] too tightly bound to [their] modifiers and can't be manipulated separately[one of]. This is a serious problem in my field of study, incidentally[or][stopping][if the second noun is fixed in place or the second noun is scenery]. Or perhaps it just doesn't have sufficient power to handle [the second noun][end if]." instead;
 	otherwise:
@@ -340,10 +358,20 @@ Check waving the letter-remover at something creating the letter-remover:
 	say "A safety override mechanism kicks into play before the operation is complete; the device plays a short snickering noise. Evidently its one joy in life is detecting and foiling practical jokes." instead;]
 
 Check waving the letter-remover at something creating a person when the letter-remover device is not creature-enabled:
-	say "[The second noun] flickers and there is a brief image of [a generated object] in [regarding the second noun][their] place, but a legal override kicks in: [a-an letter-remover] is hardware-crippled to prevent generating any living creature." instead;
+	say "[The second noun] [flicker] and there is a brief image of [a generated object] in [regarding the second noun][their] place, but a legal override kicks in: [a-an letter-remover] is hardware-crippled to prevent generating any living creature." instead.
 
 Check waving the letter-remover at something creating an r-abstract thing when the letter-remover device is not upgraded:
-	say "[The second noun] flickers and there is a brief image of [a generated object] in [regarding the second noun][their] place [--] the concept strangely embodied in a physical form [--] before the power gives out[one of]. I guess your device there just isn't tuned to reify abstracts[stopping]." instead;
+	say "[The second noun] [flicker] and there is a brief image of [a generated object] in [regarding the second noun][their] place [--] the concept strangely embodied in a physical form [--] before the power gives out[one of]. I guess your device there just isn't tuned to reify abstracts[stopping]." instead.
+
+Check waving the letter-remover at something creating a car:
+	if the second noun is enclosed by a container (called outer):
+		unless the outer is the garage or the outer is the synthesizer:
+			say "It is probably not a good idea to create a car inside [the outer]. Perhaps [we] should put [the second noun] somewhere safer first." instead.
+
+Check putting gel on something which is proffered by a car:
+	if the second noun is enclosed by a container (called outer):
+		unless the outer is the garage or the outer is the synthesizer:
+			say "It is probably not a good idea to create a car inside [the outer]. Perhaps [we] should put [the second noun] somewhere safer first." instead.
 
 Check waving the letter-remover device at something (this is the checking for danger rule):
 	abide by the dangerous destruction rules for the second noun;
@@ -354,7 +382,10 @@ Check waving the letter-remover at a room creating the letter-remover:
 
 Check waving the letter-remover at something (called target) creating an uncontained fluid thing (called the liquid):
 	if the target is in a container (called target holder) and the number of things in target holder is greater than 1 and target holder is not the synthesizer:
-		say "[The liquid] would make a real mess in [the target holder]." instead.
+		say the liquid would make a mess in the target holder instead.
+
+To say (X - a thing) would make a mess in (Y - a container):
+	say "[We] better not. [one of][if X is seen][The X][otherwise][A X][end if] would make a real mess in [the Y][or][We] don't want to get [X] on everything in [the Y][cycling].";
 
 Check waving the letter-remover at a room creating something which is not the letter-remover:
 	abide by the dangerous destruction rules for the second noun;
@@ -376,6 +407,8 @@ Carry out waving the letter-remover device at something:
 		now every thing which proffers the second noun proffers the generated object;
 	if an essential thing (called source) proffers the generated object:
 		now the generated object is essential;
+		if the second noun is derivate of the secret-plans:
+			now the derivate of the secret-plans is the generated object;
 	[if something (called source) which encloses an essential thing proffers the generated object:
 		now the generated object is essential; ]
 	[so that 'take it' or whatever will work, after we've made something: ]
@@ -394,14 +427,16 @@ Report waving the letter-remover device at something:
 	if the scent-description of the generated object is not "":
 		say "With a distinct whiff of [the scent-description of the generated object], [the second noun] [turn] into [a generated object]. [run paragraph on]";
 	otherwise:
-		say "There is [one of]a flash of psychedelic col[our]s[or]a mad-scientist cackle[or]a [pastel-color] cloud[or]a flash of [primary-color] light[or]a smell of anise[or]a distinct spearmint flavor[at random], and [the second noun] [turn] into [a generated object]. [run paragraph on]";
+		say "[random-letter-removal-text][the second noun] [turn] into [a generated object]. [run paragraph on]";
 	if the number of entries in the list of remaining letters is 0:
 		let N be "Admiral Thoureaux award for removing every letter of the alphabet in one playthrough";
 		unless N is a used achievement:
 			say paragraph break;
 			record N as an achievement;
+	try examining the generated object;
 	abide by the dangerous construction rules for the generated object;
-	try examining the generated object instead.
+	stop the action.
+
 
 Report waving the letter-remover device at something creating a seen thing:
 	say "[The second noun] [give] way to the now-familiar [generated object].";
@@ -420,6 +455,8 @@ The homonym paddle is carried by the bartender. It is long and strong. The descr
 
 To prevent theft, the paddle is attached to the bartender's wrist by a thin steel cable and bracelet."
 
+A thing has a number called the homonym index. The homonym index of a thing is usually 0.
+
 To homonym-paddle (N - a thing):
 	move the N to the repository;
 	let X be the player;
@@ -433,6 +470,10 @@ To homonym-paddle (N - a thing):
 	unless X is the player:
 		record "getting a product of the homonym paddle" as achieved;
 		move the X to the dor-bar-top;
+		if N is essential:
+			now X is essential;
+			if N is the derivate of the secret-plans:
+				now derivate of the secret-plans is X;
 		set pronouns from X;
 		now X does not proffer X;
 		now N proffers X;
@@ -450,20 +491,21 @@ She grins at us and sets the glass down neatly on the bar.[or]This time she lays
 
 
 To decide what thing is the homonym-match of (target - a thing):
-	let old text be "[target]";
-	let old text be "[old text in lower case]";
+	let old text be the printed name of target;
+	now old text is old text in lower case;
+	let target-hash be the hash code of target;
+	let target-index be the homonym index of target;
 	repeat with item running through things in the repository:
-		if the hash code of the item is the hash code of target:
-			let new text be "[item]";
-			let new text be "[new text in lower case]";
+		if the hash code of the item is target-hash and the homonym index of the item is not target-index:
+			let new text be the printed name of item;
+			now new text is new text in lower case;
 			if new text is old text:
-				if the description of the item is not the description of the target:
-					decide on item;
+				decide on item;
 	decide on player.
 
 Chapter 3 - The T-inserter
 
-The T-inserter machine is a fixed in place container in the Sensitive Equipment Testing Room. The initial appearance is "At the cen[ter] of the room is a gleaming new T-inserter Machine[if the machine is non-empty], currently containing [a random thing in the T-inserter machine][end if][one of]. This is a state of the art device: letter removal has been well understood for decades, but insertion is much more dangerous and difficult, fraught with ambiguity[or][stopping]." The description is "Made of brushed steel, it resembles an industrial espresso machine, with a space in which to insert items. A dozen small nozzles poke into this space, and the grate beneath is ready to drain off any superfluity of T-ness. There is a tiny brass plate near the base of the machine."
+The T-inserter machine is a fixed in place enterable container in the Sensitive Equipment Testing Room. The initial appearance is "At the cen[ter] of the room is a gleaming new T-inserter Machine[if the machine is non-empty], currently containing [a random thing in the T-inserter machine][end if][one of]. This is a state of the art device: letter removal has been well understood for decades, but insertion is much more dangerous and difficult, fraught with ambiguity[or][stopping]." The description is "Made of brushed steel, it resembles an industrial espresso machine, with a space in which to insert items. A dozen small nozzles poke into this space, and the grate beneath is ready to drain off any superfluity of T-ness. There is a tiny brass plate near the base of the machine."
 
 Understand "space" and "grate" and "inserter" as the machine. The carrying capacity of the T-inserter Machine is 1.
 
@@ -486,12 +528,16 @@ Sanity-check inserting something irretrievable into the T-inserter:
 After inserting something into the T-inserter:
 	try teeing the noun.
 
+Check entering a synth-like thing:
+	unless the noun is the programmable dais:
+		say "It's not made for human-sized things. And even if it was, I'm not sure changing [us] like this would be a good idea." instead.
+
 teeing is an action applying to one thing. The teeing action has an object called the goal-object (matched as "to"). The teeing action has a number called the t-count. The teeing action has a list of objects called the possible-goals. The teeing action has a list of texts called the possible-goal-texts.
 
 [We can't guess where to stick our ts in order to arrive at other objects. And because the starting object might already contain one or more instances of T, we can't just strip the Ts from our goal objects and see if they match. What we have to do instead is go through the name of all our target objects, subtract the name of the starting object, and see if all that is left is a string of ts. This gives us an opportunity to do some detailed work with individual characters:]
 
 Setting action variables for teeing something:
-	let starting text be "[printed name of the noun]";
+	let starting text be printed name of the noun;
 	let Y be the single-letter-hash of "t";
 	let comparison number be the hash code of the noun with Y added;
 	repeat with item running through things in repository:
@@ -502,7 +548,7 @@ Setting action variables for teeing something:
 			let X be the number of times the goal text matches the regular expression "<tT>";
 			[say "[item]: [goal text] (success [matching success])[line break]";]
 			if the matching success is true and goal text exactly matches the regular expression "<tT>+":
-				let name text be "[item]";
+				let name text be printed name of item;
 				unless name text is listed in possible-goal-texts:
 					if the goal-object is multiply-made or the goal-object is nothing:
 						now the goal-object is the item;
@@ -511,10 +557,10 @@ Setting action variables for teeing something:
 					add name text to possible-goal-texts.
 
 To decide what text is the name of (Y - an object) minus the name of (X - an object):
-	let starting text be "[X]";
-	let starting text be "[starting text in lower case]";
-	let goal text be "[Y]";
-	let goal text be "[goal text in lower case]";
+	let starting text be printed name of X;
+	now starting text is starting text in lower case;
+	let goal text be the printed name of Y;
+	now goal text is goal text in lower case;
 	let character count be the number of characters in the goal text;
 	let matching success be true;
 	let next be 1;
@@ -537,6 +583,10 @@ Check teeing something:
 Check teeing something:
 	abide by the dangerous destruction rules for the noun.
 
+Check teeing the ear:
+	if the goal-object is a tear and an alterna-tear (called the goal) is in the repository:
+		now the goal-object is the goal.
+
 Carry out teeing something:
 	now the goal-object is not proffered by anything;
 	if the goal-object is r-abstract:
@@ -545,6 +595,10 @@ Carry out teeing something:
 		complete "Test T-inserter on making creatures";
 	if the number of entries in the possible-goals is greater than 1:
 		now the goal-object is multiply-made;
+	if noun is essential:
+		now goal-object is essential;
+		if noun is the derivate of the secret-plans:
+			now derivate of the secret-plans is goal-object;
 	now every thing which proffers the noun proffers the goal-object;
 	move the goal-object to the holder of the noun;
 	now goal-object is marked-visible;
@@ -562,27 +616,31 @@ After teeing something:
 	otherwise:
 		continue the action;
 	let N be the number of entries in the possible-goals;
-	say "[if t-count is 1]There is a loud and satisfying pop[otherwise]There are [t-count in words] small pops[end if] from the machine as it turns [the noun] into [a goal-object]. ";
+	say "[if t-count is 1]There is a loud and satisfying pop[otherwise]There are [t-count in words] small pops[end if] from the machine as it turns [the noun] into [a goal-object]. [run paragraph on]";
+	if the goal-object is not examined:
+		try examining the goal-object;
 	say "There now: the T-inserter has constructed [if N is 2]both[otherwise]all of[end if] [possible-goals]. Not very stable, it seems. Slango will be interested to know that.";
 	complete "Test T-inserter on situations where it could build more than one thing";
 	set pronouns from the goal-object;
-	try examining the goal-object;
 	abide by the dangerous construction rules for the goal-object instead.
 
 Report teeing something:
 	say "[if t-count is 1]There is a loud and satisfying pop[otherwise]There are [t-count in words] small pops[end if] from the machine as it turns [the noun] into [a goal-object].";
+	let line break needed be true;
+	if the goal-object is not examined:
+		try examining the goal-object;
+		now line break needed is false;
 	if the number of entries in the possible-goals is greater than 1:
 		let N be the number of entries in the possible-goals;
-		say "[line break]Of course, there were other options there: the T-inserter could have made [N in words] words. But it seems to be disambiguating to [the goal-object]. The question now is whether it would do so consistently or whether its behavi[our] is underdetermined; [we] don't have time for a really thorough trial set, but checking a couple more times may be indicative.";
+		say "[if line break needed is true][line break][end if]Of course, there were other options there: the T-inserter could have made [N in words] words. But it seems to be disambiguating to [the goal-object]. The question now is whether it would do so consistently or whether its behavi[our] is underdetermined; [we] don't have time for a really thorough trial set, but checking a couple more times may be indicative.";
 	set pronouns from the goal-object;
-	try examining the goal-object;
 	abide by the dangerous construction rules for the goal-object instead.
 
 Test it-construction with "autoupgrade / wave a-remover at pita / wave p-remover at pit / wave t-remover at it / put i in t-inserter / get it / wave t-remover at it / put i in t-inserter" holding the pita in the Sensitive Equipment Testing Room.
 
 Chapter 4 - The Synthesizer
 
-The plexiglas case is a thing in the Language Studies Seminar Room. It is transparent, closed, openable, lockable, and locked. It is fixed in place. The initial appearance is "A massive plexiglas case takes up one corner of the room." The description is "The case is made of very thick protective plastic on a metal frame[if the screws are part of the plexiglas case and the plexiglas case is lockable]. It is thoroughly locked shut; I don't think [we][']ll have any luck with normal forms of approach. However, plexiglas is a cuttable substance with the right tools, and then there are the screws at the back[otherwise if the plexiglas case is not lockable]. The lid has been compromised by a saw, and the case is now permanenty open[end if]."
+The plexiglas case is a thing in the Language Studies Seminar Room. It is enterable, transparent, closed, openable, lockable, and locked. It is fixed in place. The initial appearance is "A massive plexiglas case takes up one corner of the room." The description is "The case is made of very thick protective plastic on a metal frame[if the screws are part of the plexiglas case and the plexiglas case is lockable]. It is thoroughly locked shut; I don't think [we][']ll have any luck with normal forms of approach. However, plexiglas is a cuttable substance with the right tools, and then there are the screws at the back[otherwise if the plexiglas case is not lockable]. The lid has been compromised by a saw, and the case is now permanenty open[end if]."
 
 Test plexibug with "tutorial off / get plexiglas" in the Language Studies Seminar Room.
 
@@ -651,7 +709,7 @@ Check unlocking the plexiglas case with something which is not the screwdriver:
 		if the second noun is floppy:
 			say "[The second noun] [are] not at all suited to the purpose. There's a reason they make screwdrivers for this." instead;
 		else:
-			say "[We] try contriving to get an edge of [the second noun] into the slot of the screws, but [the second noun] just slip[s] around unhelpfully. There's a reason they make screwdrivers for this." instead;
+			say "[We] try contriving to get an edge of [the second noun] into the slot of the screws, but [the second noun] just [slip] around unhelpfully. There's a reason they make screwdrivers for this." instead;
 
 Test unscrewing-bug with "unscrew case with as / unscrew screws with as" holding the as-coin in the Seminar Room.
 
@@ -661,6 +719,13 @@ Setting action variables for unlocking the screws with something:
 
 Carry out unlocking the plexiglas case with the screwdriver:
 	move the screws to the location.
+
+Instead of unlocking the plexiglas case with the screwdriver when the plexiglas case is unlocked:
+	if the screws are part of the plexiglas case:
+		move the screws to the location;
+		say "[We] awkwardly and silently squeeze against the wall and angle ourself so that [we] can reach the screws with the screwdriver. It's annoying work, but eventually [we] do work all the screws free.";
+	otherwise:
+		say "Thanks to our earlier efforts, the plexiglas case is now unlocked permanently."
 
 Instead of unlocking the plexiglas case with the screwdriver for the first time:
 	say "[We] squeeze ourselves against the wall and angle to reach the screws with the screwdriver. I start on the first screw when[--]
@@ -678,12 +743,32 @@ Report unlocking the plexiglas case with the screwdriver:
 
 Sanity-check locking the plexiglas case with something:
 	say "[We][']ll never get the screws back in. [We] just have to hope no one notices what [we] did until [we] [are] long gone." instead.
+
 Sanity-check locking keylessly the plexiglas case:
 	say "[We][']ll never get the screws back in. [We] just have to hope no one notices what [we] did until [we] [are] long gone." instead.
+
 Sanity-check turning the screws when the screws are not part of the plexiglas case:
 	say "There's no point now: they're not holding anything in place." instead.
 
-The synthesizer is a container in the plexiglas case. The heft of the synthesizer is 4. The synthesizer is fixed in place. Understand "synth" or "synthesiser" or "machine" as the synthesizer.
+Sanity-check unlocking the screws with something:
+	try turning the screws instead.
+
+Instead of turning the plexiglas case when the player's command includes "unscrew":
+	if the screwdriver is not enclosed by location:
+		say "I don't think we can pry the screws out with our fingers.";
+	otherwise:
+		if the screws are part of the plexiglas case:
+			try unlocking the plexiglas case with the screwdriver;
+		otherwise:
+			say "All screws have been removed."
+
+Instead of inserting something into the plexiglas case:
+	try inserting the noun into the synthesizer.
+
+Instead of entering the plexiglas case:
+	try entering the synthesizer.
+
+The synthesizer is an enterable container in the plexiglas case. The heft of the synthesizer is 4. The synthesizer is fixed in place. Understand "synth" or "synthesiser" or "machine" as the synthesizer.
 	The description is "It is designed to accept two items and then be turned on. It is shiny and white, and looks a little like a bathtub for very short people."
 	The introduction is "It was a full-sized, human version of this that made us what [we] [are] now, so the object makes both of us feel a little skittish and self-conscious."
 
@@ -721,20 +806,10 @@ Carry out synth-activating:
 	otherwise:
 		 say "There is no synthesizer here."
 
-Sanity-check inserting something irretrievable into the synthesizer:
-	abide by the don't change irretrievable rules for the noun.
-
-Instead of switching on the synthesizer when the synthesizer contains the roll and the synthesizer contains the rock:
-	say "You can't get to rock & roll with just a synthes[ize]r. You'd need an ampersand generator, which unfortunately (despite promising research and a prototype resembling a pretzel-maker) has yet to achieve stable results."
-
-Instead of switching on the synthesizer when the synthesizer contains the sill and the synthesizer contains the cate:
-	say "It feels like [we] ought to be close to getting a silicate out of all this, but no, I fear not. That final L on SILL is going nowhere."
-
-Instead of switching on the synthesizer when the synthesizer contains the key-lime and the synthesizer contains a pi-object:
-	say "What, are you hoping for key lime π? I'm afraid the synthes[ize]r is literal-minded and doesn't do puns as such."
-
-Instead of switching on the synthesizer when the synthesizer contains a pan and the synthesizer contains the ear:
-	say "That Indian soft cheese is called paneer, you know, not panear."
+Sanity-check switching on the synthesizer:
+	repeat with item running through things in the synthesizer:
+		if item is irretrievable:
+			abide by the don't change irretrievable rules for item.
 
 Instead of switching on the synthesizer:
 	synthesize contents of synthesizer.
@@ -751,36 +826,46 @@ To synthesize contents of (source - a thing):
 		stop;
 	let X be entry 1 in contents-list;
 	let Y be entry 2 in contents-list;
-	let the chosen article be Y;
+	now the-other-thing is Y;
+	abide by the synthesis-override rules for X;
+	now the-other-thing is X;
+	abide by the synthesis-override rules for Y;
 	let comparison number be the hash code of X with the hash code of Y added;
 	repeat with item running through things in the repository:
-		let matching success be true;
 		if the comparison number is the hash code of the item:
 			let the goal text be the name of the item minus the name of X;
 			replace the text " " in goal text with "";
-			if the goal text is "0":
-				now the matching success is false;
-			otherwise:
-				if goal text exactly matches the text "[Y]":
-					now the chosen article is the item;
+			if the goal text is not "0":
+				let Y-name be the printed name of Y;
+				now Y-name is Y-name in lower case;
+				if goal text exactly matches the text Y-name:
+					unless the item is the passage-place:
+						match-add item;
 				otherwise:
 					let the goal text be the name of item minus the name of Y;
 					replace the text " " in goal text with "";
-					if goal text exactly matches the text "[X]":
-						now the chosen article is the item;
-	if the chosen article is not Y:
+					let X-name be the printed name of X;
+					now X-name is X-name in lower case;
+					if goal text exactly matches the text X-name:
+						unless the item is the passage-place:
+							match-add item;
+	let the chosen article be the best synthesis-match using X;
+	if the chosen article is not the letter-remover device:
 		if the heft of the chosen article is greater than 4 and source is synthesizer:
-			let N be "[chosen article]";
-			say "An indicator message lights up: OVERRIDE: GENERATED OBJECT [N in upper case] EXCEEDS MAXIMUM SIZE LIMIT.";
+			let N be the printed name of chosen article;
+			now N is N in upper case;
+			say "An indicator message lights up: OVERRIDE: GENERATED OBJECT [N] EXCEEDS MAXIMUM SIZE LIMIT.";
 			stop;
 		abide by the dangerous destruction rules for X;
 		abide by the dangerous destruction rules for Y;
-		abide by the dangerous construction rules for the chosen article;
 		now the chosen article is not proffered by anything;
-		repeat with item running through contents-list:
-			now the item proffers the chosen article;
+		now X proffers the chosen article;
+		now Y proffers the chosen article;
 		if an essential thing (called parent) proffers the chosen article:
 			now the chosen article is essential;
+			if X is derivate of the secret-plans or Y is derivate of the secret-plans :
+				now the previous derivate of the secret-plans is the derivate of the secret-plans;
+				now the derivate of the secret-plans is the chosen article;
 		[if something which proffers the chosen article encloses an essential thing:
 			now the chosen article is essential; ]
 		now X is in the repository;
@@ -788,11 +873,13 @@ To synthesize contents of (source - a thing):
 		move the chosen article to the source;
 		record "using the synthesizer" as achieved;
 		say "[The source] [if the source is a container]hums like a microwave oven for 43 seconds, then pings. Inside there [is-are a list of things *in the source][otherwise]glows vibrant blue for five seconds, leaving behind [a list of things *in the source][end if].";
-		try examining the chosen article;
+		if the chosen article is not examined:
+			try examining the chosen article;
 		set pronouns from the chosen article;
 		now the chosen article is marked-visible;
 		now X is marked invisible;
 		now Y is marked invisible;
+		abide by the dangerous construction rules for the chosen article;
 	otherwise:
 		say "[The source] whirs for a moment, then dies down again.";
 
@@ -821,10 +908,18 @@ That in turn necessitated other changes as follow:
 
 This is all a lot of bother just for the sake of adding an achievement/easter egg that most players probably won't notice. In each case, though, I felt as though the result of the design fix was a richer, more interesting setting with more playful manipulation available. Adding the yam to the game also provided another purpose for the farmer, who had been relatively useless (other than as the provider of the totally optional lime) ever since he stopped selling chard.  ]
 
-The spinner is part of the spinner-gate. It is a supporter. Understand "sculpture" or "mirror" or "statue" or "pedestal" or "cone" as the spinner.
+The spinner is part of the spinner-gate. It is an enterable supporter. The posture of the spinner is standing. The spinner allows seated and standing. Understand "sculpture" or "mirror" or "statue" or "pedestal" or "cone" as the spinner.
 	The description of the spinner is "The base of the sculpture is a cone about four feet tall. On top of that is a flat circular pedestal, and there is a mirror that rotates around the outer circumference. The mirrored surface faces inward, so that it is sometimes reflecting [if the spinner is non-empty][the random thing on the spinner] on the pedestal[otherwise]whatever might be on the pedestal (currently nothing)[end if] and sometimes concealing [if the spinner is non-empty][them][otherwise]it[end if] from view.".
 	The printed name of the spinner is "pedestal".
 	The carrying capacity is 1.
+
+Instead of examining the spinner:
+	say "[description of the spinner][line break]";
+	if the player wears the monocle:
+		try looking at the spinner through the monocle;
+	if the spinner is non-empty:
+		follow the spinner-turning rule;
+		say line break.
 
 Sanity-check switching on the spinner:
 	say "The sculpture appears to be permanently on." instead.
@@ -832,27 +927,30 @@ Sanity-check switching on the spinner:
 Sanity-check switching off the spinner:
 	say "If there is an off-switch, it's nowhere we can see it." instead.
 
+Instead of climbing the spinner:
+	try entering the spinner.
 
+Sanity-check entering something which is enclosed by the spinner:
+	say "It would be very difficult to get [in-on the noun] while [they] [are] spinning on the pedestal." instead.
+
+Instead of climbing the spinner-gate:
+	if the player is on the spinner:
+		say "The gate is still too high, even now that we're on the sculpture.";
+	otherwise:
+		say "The iron bars of the gate are too close to climb through and too tall to climb over."
 
 Section 2 - Spinning Functionality
 
 Every turn rule when the location is Roget Close and the spinner is non-empty (this is the spin the spinner rule) :
-	if turned-this-turn is time of day:
-		make no decision;
-	otherwise:
+	unless going or approaching: [Otherwise we might get a double spin when entering the room]
 		follow the spinner-turning rule;
 		say line break.
 
-Turned-this-turn is a time that varies.
-
 This is the spinner-turning rule:
-	if turned-this-turn is time of day:
-		make no decision;
-	now turned-this-turn is time of day;
-	let the chosen article be a random thing on the spinner;
+	let the chosen article be the first thing held by the spinner;
 	let X be the chosen article;
-	let goal text be "[printed name of the X]";
-	now goal text is "[goal text in lower case]";
+	let goal text be printed name of the X;
+	now goal text is goal text in lower case;
 	let max characters be the number of characters in the goal text;
 	let substitute text be some text;
 	repeat with Z running from 1 to max characters:
@@ -862,28 +960,35 @@ This is the spinner-turning rule:
 	[since the spinner's likely to be undoing its own work, allow it to get the original back.]
 	if the chosen article is proffered by something (called the source) which is not the chosen article:
 		if the hash code of the source is the hash code of X:
-			let item text be "[source]";
-			now item text is "[item text in lower case]";
+			let item text be the printed name of source;
+			now item text is item text in lower case;
 			if the goal text is item text:
 				now the chosen article is the source;
 	if the chosen article is X:
+		let x-homonym be the homonym index of X;
+		let x-hash be the hash code of X;
 		repeat with item running through things in the repository:
-			if the hash code of the item is the hash code of X:
-				let item text be "[item]";
-				now item text is "[item text in lower case]";
+			if the hash code of the item is x-hash:
+				let item text be the printed name of item;
+				now item text is item text in lower case;
 				if the goal text is item text:
-					now the chosen article is the item;
+					unless item is the reel or item is the snap or the homonym index of item is x-homonym:
+					[Make sure that we always get the fishing reel and the sound snap rather than the film reel or the clothes snap. Also make sure that a palindrome is not transformed into another instance of itself.]
+						now the chosen article is the item;
+						break;
 	if the chosen article is not X:
 		abide by the dangerous destruction rules for X;
 		now the chosen article is not proffered by anything;
 		now everything which proffers X proffers the chosen article;
 		if an essential thing (called source) proffers the chosen article:
 			now the chosen article is essential;
+			if X is the derivate of the secret-plans:
+				now derivate of the secret-plans is the chosen article;
 		[ if something (called source) which proffers the chosen article encloses an essential thing:
 			now the chosen article is essential; ]
-		now everything which is on the spinner is in the repository;
+		now X is in the repository;
 		move the chosen article to the spinner;
-		say "[if looking]After the mirror does its work,[otherwise]The mirror rotates in leisurely fashion, and when it is done[end if] there [is-are a list of things *in the spinner].[no line break]";
+		say "[if going or looking]After the mirror does its work,[otherwise]The mirror rotates in leisurely fashion, and when it is done[end if] there [regarding the first thing held by the spinner][are] [a first thing held by the spinner].[no line break]";
 		[The lines below is a hack to get rid of an annoying triple paragraph break caused by "try examining the chosen article".]
 		let N be the chosen article;
 		if N is unexamined:
@@ -904,11 +1009,12 @@ This is the spinner-turning rule:
 		set pronouns from the chosen article;
 		now the chosen article is marked-visible;
 		now X is marked invisible;
+		if the chosen article is a person and the chosen article is on the spinner:
+			say "[The chosen article] [get] down from the sculpture. ";
+			move the chosen article to location;
 	otherwise:
 		if looking:
-			if exactly one thing is on the spinner, say "It does";
-			otherwise say "[The list of things *in the spinner] [do]";
-			say " not change, however. ";
+			say "[Regarding the first thing held by the spinner][They] [do] not change, however. ";
 		otherwise:
 			say "The mirror revolves for a moment, [one of]without effect[or]without changing [the list of things *in the spinner][at random], though the word '[substitute text]' appears in startling green on the mirror's surface. "
 
@@ -918,12 +1024,19 @@ topic	stuff	setting
 
 Test yambug with "tutorial off / wear monocle / buy yam / n / w / put yam on pedestal / z / x yam" [holding the roll of bills and the monocle in Hesychius Street.]
 
+Rule for writing a topic sentence about something (called special-target) which is on the spinner:
+	say "[The special-target] [are] slowly revolving on [a spinner]. [run paragraph on]";
+	if the special-target is as-yet-unknown:
+		introduce the special-target;
+		now the introduction of the special-target is "";
+	follow the spinner-turning rule.
+
 Rule for disclosing exterior of something (called special-target) which is on the spinner:
-	say "[The special-target] [are] slowly revolving on [a spinner][if a mentionable thing is on the spinner], together with [a list of mentionable things *in the spinner][end if]. [run paragraph on]";
+	say "[The special-target] [are] slowly revolving on [a spinner]. [run paragraph on]";
 	follow the spinner-turning rule.
 
 Rule for disclosing contents of the spinner (this is the spinner-content rule):
-	say "On [the spinner], [a list of things *in the spinner] revolve[s] idly. [run paragraph on]";
+	say "On [the spinner], [the first thing held by the spinner] [revolve] idly. [run paragraph on]";
 	follow the spinner-turning rule.
 
 Test spin-plans with "tutorial off / wave l-remover at plans / put pans on spinner / get snap / i / wave s-remover at snap / i / put nap on spinner / get pan / i / n" holding the secret-plans in Roget Close.
@@ -961,7 +1074,7 @@ Every turn when the turntable is visible and something is on the turntable:
 This is the turntable-turning rule:
 	let the chosen article be a random thing on the turntable;
 	let X be the chosen article;
-	let goal text be "[printed name of the X]";
+	let goal text be printed name of the X;
 	if the turntable is clockwise
 	begin;	[put first letter at the end, as in ape --> pea]
 		if the goal text matches the regular expression "(.)(.*)", replace the regular expression "(.)(.*)" in goal text with "\2\1";
@@ -970,7 +1083,7 @@ This is the turntable-turning rule:
 	end if;
 	repeat with item running through things in the repository
 	begin;
-		if the goal text exactly matches the regular expression "[item]", now the chosen article is the item;
+		if the goal text exactly matches the text "[item]", now the chosen article is the item;
 	end repeat;
 	if the chosen article is not X
 	begin;
@@ -1009,13 +1122,13 @@ In the backpack is an authentication scope called a monocle. The description of 
 	The monocle is essential.
 	The monocle covers the face-area.
 
-Last after examining something when the player wears the monocle:
+Last after examining something when the player wears the monocle (this is the use monocle after examine rule):
 	if the noun is not the monocle:
 		try looking at the noun through the monocle;
 	continue the action.
 
 After wearing the monocle:
-	if the player is not enclosed by the kayak:
+	if the player is not in the kayak:
 		say "Everything turns computer-monitor green when viewed through our right eye. And staring fixedly at anything will turn up its authenticity status."
 
 Understand "stare at [something]" or "stare fixedly at [something]" as examining.
@@ -1034,7 +1147,7 @@ Looking at it through is an action applying to one visible thing and one carried
 Check an actor looking at something through something:
 	if the second noun is not an Authentication Scope
 	begin;
-		if the actor is the player, say "[The second noun] won't give us a clear view of [the noun]." instead;
+		if the actor is the player, say "[The second noun] won't give [us] a clear view of [the noun]." instead;
 		stop the action;
 	end if.
 
@@ -1068,10 +1181,11 @@ Carry out looking at it through:
 		say "There is a dismissive blatt from [the second noun], and transposed over [the noun] is a faint, [if the noun is edible and the noun is proffered by something inedible]unappet[izing][otherwise]greenish[end if] image of [a list of things which proffer the noun]."
 
 Report someone looking at something through something:
-	if the noun is original, say "In response [the actor] looks through [the second noun] at [the noun], then nods briskly. '[one of]The genuine article[or]Definitely not fake[or]Looks clean[or]Not a forgery[or]Real[or]Yup, authentic[at random].'";
-	otherwise say "Thoughtfully [the actor] [peer] through [the second noun] at [the noun], then frown[s]. '[one of]Fake[or]An obvious forgery[or]Not at all the real thing[or]Bogus[or]I hope that came with a money-back guarantee[as decreasingly likely outcomes]!' [regarding the actor][they] [one of]say[s][or]remark[s][or]exclaim[s][as decreasingly likely outcomes]."
+	if the noun is original, say "In response [the actor] [look] through [the second noun] at [the noun], then [nod] briskly. '[one of]The genuine article[or]Definitely not fake[or]Looks clean[or]Not a forgery[or]Real[or]Yup, authentic[at random].'";
+	otherwise say "Thoughtfully [the actor] [peer] through [the second noun] at [the noun], then [regarding the actor][frown]. '[one of]Fake[or]An obvious forgery[or]Not at all the real thing[or]Bogus[or]I hope that came with a money-back guarantee[as decreasingly likely outcomes]!' [regarding the actor][they] [one of][say][or][remark][or][exclaim][as decreasingly likely outcomes]."
 
-
+After the secretary looking at something illegal through a scope:
+	stop the action.
 
 After the secretary looking at the disguised pass through a scope:
 	say "The secretary raises her Authentication Scope to look at the pass. There is a moment of silence. The scope does nothing.";
@@ -1210,11 +1324,22 @@ Understand "gel [something]" as gelling. Gelling is an action applying to one th
 
 Carry out gelling something:
 	if the tube is marked-visible:
-		say "[one of]Unfortunately, there's hardly any gel remaining in the tube.[or]There isn't enough gel remaining in the little tube for use.[at random]" instead;
+		if the noun is the tube:
+			try putting the tube on tube instead;
+		otherwise:
+			say "[one of]Unfortunately, there's hardly any gel remaining in the tube.[or]There isn't enough gel remaining in the little tube for use.[at random]" instead;
 	if the tub is marked-visible:
-		try putting the restoration gel on the noun instead.
+		try putting the restoration gel on the noun instead;
+	otherwise:
+		say "[one of][We] can't gel [the noun] without any gel[or][We] have no gel to gel [the noun] with[cycling]."
 
-Understand "[paste] [something]" as putting it on.
+Understand "paste [something]" or "origin paste [something]" as pasting. Pasting is an action applying to one thing.
+
+Carry out pasting something:
+	if the origin paste is marked-visible:
+		try putting the origin paste on the noun instead;
+	otherwise:
+		say "[one of][We] can't paste [the noun] without any paste[or][We] have no paste to paste [the noun] with[cycling]."
 
 Sanity-check waving the restoration gel:
 	try waving the holder of the restoration gel instead.
@@ -1235,13 +1360,14 @@ Sanity-check opening the restoration gel:
 	try opening the holder of the restoration gel instead.
 
 Sanity-check putting the tube on the tube:
-	if the player's command includes "gel on/onto/tube":
-		say "The gel doesn't restore the contents of things: it changes back items that have been linguistically manipulated." instead;
-	otherwise:
-		continue the action.
+	unless the barker has the tube:
+		if the subcommand of tube includes "tube" and the player's command includes "gel":
+			say "The gel doesn't restore the contents of things: it changes back items that have been linguistically manipulated." instead;
+		if the subcommand of the tube includes "gel" and the player's command includes "tube":
+			say "Well, I guess the tube is on (and under, and all around) whatever little restoration gel remains already." instead.
 
 Before putting the tub on something:
-	if the subcommand of the tub matches the text "gel" or the subcommand of the tub matches the text "restoration gel":
+	if the subcommand of the tub matches "gel" or the subcommand of the tub matches "restoration gel":
 		if the tub is in the backpack and the backpack is closed:
 			try opening the backpack;
 			if the backpack is closed:
@@ -1273,11 +1399,29 @@ Sanity-check inserting something gel-related (called the target) into the target
 		continue the action.
 
 Sanity-check putting the tub on the tub:
-	if the player's command includes "gel on/onto/tub":
-		try putting the restoration gel on the tub instead.
+	if the subcommand of the tub includes "gel":
+		if the player's command includes "tub":
+			try putting the tub on the restoration gel instead;
+		otherwise:
+			try putting the restoration gel on the restoration gel instead;
+	otherwise:
+		if the subcommand of the tub includes "tub" and the player's command includes "gel":
+			try putting the restoration gel on the tub instead.
+
+Sanity-check putting the restoration gel on the tub:
+	say "There is restoration gel all over the inside of the tub already, so I guess it has some kind of restoration gel-resistant coating." instead.
+
+Sanity-check putting the tub on the restoration gel:
+	say "Well, I guess the tub is on (and under, and all around) the restoration gel already." instead.
+
+Sanity-check putting the restoration gel on the restoration gel:
+	say "Well, I suppose the restoration gel is smeared all over itself already." instead.
+
+Sanity-check putting the origin paste on the origin paste:
+	say "The Origin Paste is smeared all over itself already, I guess." instead.
 
 Sanity-check taking the tub when the player carries the tub:
-	if the subcommand of the tub matches the text "gel" or the subcommand of the tub matches the text "restoration gel":
+	if the subcommand of the tub matches "gel" or the subcommand of the tub matches "restoration gel":
 		say "[don't remove gel from tub]" instead.
 
 Sanity-check removing the tub from the tub:
@@ -1297,12 +1441,15 @@ Instead of removing the tube from the tube:
 	try taking the tube.
 
 Before doing something when the noun is the tube or the second noun is the tube:
-	if the subcommand of the tube matches the text "gel" or the subcommand of the tube matches the text "restoration gel":
+	if the subcommand of the tube matches "gel" or the subcommand of the tube matches "restoration gel":
 		if the barker carries the tube:
 			if not taking and the tube must be touched:
 				say "We don't have the gel at the moment." instead;
 		otherwise:
-			say "[one of]Unfortunately, there's hardly any gel remaining in the tube.[or]There isn't enough gel remaining in the little tube for use.[at random]" instead.
+			if shooting:
+				continue the action;
+			otherwise:
+				say "[one of]Unfortunately, there's hardly any gel remaining in the tube.[or]There isn't enough gel remaining in the little tube for use.[at random]" instead.
 
 Sanity-check putting the restoration gel on something when the tub is in a closed backpack:
 	try opening the backpack.
@@ -1327,10 +1474,13 @@ Sanity-check putting the restoration gel on something irretrievable:
 Before putting the restoration gel on something which is in a container (called the box):
 	if the second noun is proffered by an uncontained fluid thing (called the liquid):
 		if the number of things in the box is greater than 1 or the number of things proffered by the second noun is greater than 1 and the box is not the synthesizer:
-			say "[The liquid] would make a real mess in [the box]." instead.
+			say the liquid would make a  mess in the box instead.
 
-Before putting the restoration gel on something which is in the backpack:
-	try taking the second noun;
+Before putting the restoration gel on something which is enclosed by the backpack:
+	if the backpack is closed:
+		try opening the backpack;
+	if the backpack is open:
+		try taking the second noun;
 	if the player does not carry the second noun:
 		say "It seems best not to word-change things that are in the backpack." instead.
 
@@ -1341,21 +1491,37 @@ Instead of putting the restoration gel on the origin paste:
 
 Instead of putting the restoration gel on something:
 	say "[We] dip out a [if the heft of the second noun is 1]fingertip-coating[otherwise]pea-sized[end if] quantity of gel and rub it gently onto [the second noun]. [run paragraph on]";
-	gel-convert second noun.
+	gel-convert second noun;
+	if the second noun is in the repository:
+		express gel-admiration.
 
 Instead of putting the restoration gel on something fluid:
 	say "[We] just touch a coated fingertip of gel to [the second noun]. [run paragraph on]";
-	gel-convert second noun.
+	gel-convert second noun;
+	if the second noun is in the repository:
+		express gel-admiration.
+
+To express gel-admiration:
+	say "[one of]I'm starting to understand how you got into all the places you got into. Not that I judge you or your line of work, of course.[or][run paragraph on][stopping]";
+	record "using the gel" as achieved.
 
 Instead of putting the restoration gel on yourself:
 	if atlantida-woman is seen:
 		say "[We] optimistically rub in a little gel, but it doesn't make any difference. We're stuck this way, for good.";
 	else:
-		say "A fingertip-dab isn't enough to undo the doubling-up [we] experienced, but if [we] applied more, there's a real chance [we][']d come apart into a you and a me. And [we] can't afford that right now."
+		say "A fingertip-dab of restoration gel isn't enough to undo the doubling-up [we] experienced, but if [we] applied more, there's a real chance [we][']d come apart into a you and a me. And [we] can't afford that right now."
 
 Yourself can be gelled or ungelled. Yourself is ungelled.
 
 Instead of wearing the restoration gel:
+	try putting the restoration gel on yourself.
+
+Instead of touching the restoration gel:
+	say "It is sticky to the touch. [run paragraph on]";
+	try putting the restoration gel on yourself.
+
+Instead of touching the tub when the subcommand of the tub matches "gel" or the subcommand of the tub matches "restoration gel":
+	say "It is sticky to the touch. [run paragraph on]";
 	try putting the restoration gel on yourself.
 
 [Instead of putting the restoration gel on yourself during Nightfalling:
@@ -1390,11 +1556,25 @@ But no exciting conversions occur.[or][We] get some gel and try to be subtle abo
 [Before putting the restoration gel on something which encloses the player:
 	say "Are you insane? If [the second noun] go[es] away, we'll go too." instead. ]
 
+Instead of touching a sticky-to-the-touch thing:
+	say "Sticky."
 
-Instead of someone trying touching the restoration gel:
-	if the person asked can touch the restoration gel:
-		gel-convert the person asked;
-		rule succeeds.
+Definition: a thing is sticky-to-the-touch:
+	if it is the Origin Paste:
+		yes;
+	if it is the tube:
+		yes;
+	if it is the tub:
+		yes;
+	if it is the sticky:
+		yes;
+	if it is the tape:
+		yes;
+	if it is a tar:
+		yes.
+
+Instead of touching a fluid thing:
+	say "Wet."
 
 Definition: a thing (called itself) is original if it proffers itself and it is proffered by exactly one thing.
 
@@ -1402,27 +1582,32 @@ To gel-convert (item - an object):
 	if the item is not original:
 		abide by the dangerous destruction rules for the item;
 		let destination be home for the item;
-		now everything which proffers the item is in the destination;
-		now everything which proffers the item is marked-visible;
+		repeat with source running through things which proffer the item:
+			if source is not in repository:
+				say "[line break][bracket]gel-convert: BUG! [The source] is not in the repository. It will be moved from [the holder of the source] to [the destination].[close bracket][line break]";
+			now the source is in the destination;
+			now the source is marked-visible;
+			if source is stuck:
+				now source is part of the destination;
 		now the item is marked invisible;
 		[play the sound of gel splort;]
-		repeat with secondary running through things which proffer the item:
-			if secondary is stuck:
-				now secondary is part of the destination;
 		let description needed be false;
 		if exactly one thing (called the parent) proffers the item:
 			set pronouns from parent;
 			abide by the dangerous construction rules for the parent;
 			if the parent is unseen:
 				now description needed is true;
+		if item is derivate of the secret-plans:
+			now derivate of the secret-plans is previous derivate of secret-plans;
+			if derivate of the secret-plans is not held by destination:
+				say "BUG! Derivate of the secret-plans ([derivate of the secret-plans]) was not recreated when gelling [the item]!";
 		if item is hoses or item is hoe:
 			say "[The item] [become] [a list of things which proffer the item], redecorating the fountain. [run paragraph on]";
 		otherwise:
 			say "With an audible SPLORT, [the item] [become] [a list of things which proffer the item][if the destination is the location and the holder of the item is not the location] and falls to the [ground][end if]. ";
 			if description needed is true:
 				say "[parent description]";
-		say "[one of][paragraph break]I'm starting to understand how you got into all the places you got into. Not that I judge you or your line of work, of course. [or][stopping][paragraph break]";
-		record "using the gel" as achieved;
+		say paragraph break;
 		[It's possible, in rare cases, for something to be its own parent: AS+COT -> SCOT -> COT leaves a result that is one of its own earlier ingredients. So we need to account for that: ]
 		if the item does not proffer the item:
 			move the item to the repository;
@@ -1440,7 +1625,7 @@ To decide what object is home for (item - a thing):
 Definition: an object is stuck if it is an item listed in the Table of stuck things.
 
 Table of stuck things
-item (an object)
+item (a thing)
 horses
 hoses
 hoe
@@ -1451,7 +1636,9 @@ Instead of putting the restoration gel on a naughty-sounding thing:
 	say "[We] squeeze out a pea-sized quantity of gel and rub it gently onto [--]
 
 No, let me rephrase. [We] clinically and distantly apply some of the restoration gel to an innocent portion of the object in question. [run paragraph on]";
-	gel-convert the second noun.
+	gel-convert the second noun;
+	if the second noun is in the repository:
+		express gel-admiration.
 
 
 Table of Ultratests (continued)
@@ -1486,6 +1673,9 @@ Does the player mean shooting something with the restoration gel:
 Does the player mean shooting something with the tub:
 	it is very unlikely.
 
+Does the player mean shooting the tube with the restoration-gel rifle:
+	it is very unlikely.
+
 Does the player mean shooting something with a pistol:
 	it is very likely.
 
@@ -1505,11 +1695,18 @@ Sanity-check shooting the restoration gel with:
 			now the reborn command is the substituted form of "[player's command]";
 			now sp reparse flag is true instead;
 
+Sanity-check shooting the tube with:
+	if the restoration-gel rifle is marked-visible and the player's command does not include "gel/at with/gel":
+		if the player's command includes "shoot/fire gel" or the player's command includes "shoot/fire restoration gel":
+			replace the matched text with "shoot rifle";
+			now the reborn command is the substituted form of "[player's command]";
+			now sp reparse flag is true instead;
+
 Does the player mean shooting something enclosed by the player with: it is very unlikely.
 Does the player mean shooting a pistol (called P) with P: it is very unlikely.
 
-Understand "shoot [something] with [something]" as shooting it with.
-Understand "fire at [something] with [something]" as shooting it with (with nouns reversed).
+Understand "shoot [thing] with [thing]" as shooting it with.
+Understand "fire at [thing] with [thing]" as shooting it with (with nouns reversed).
 Understand "shoot [thing] at [thing]" as shooting it with (with nouns reversed).
 Understand "fire [thing] at [thing]" as shooting it with (with nouns reversed).
 
@@ -1534,6 +1731,9 @@ Section 3 - Loading the Gun
 Sanity-check inserting the bullets into a gun:
 	try loading the noun into the second noun instead.
 
+Sanity-check inserting the anagram bullet into a gun:
+	try loading the anagram bullet into the second noun instead.
+
 Understand "load [something] with [something]" as loading it into (with nouns reversed).
 Understand "load [something] into [something]" as loading it into.
 Understand "load [anagramming gun] with [anagram bullets]" as loading it into (with nouns reversed).
@@ -1548,6 +1748,9 @@ Check loading something into something ungunlike:
 
 Check loading something which is not the anagram bullets into something:
 	say "[The noun] [are] not ammunition." instead.
+
+Check loading the anagram bullet into something:
+	say "The single bullet can't be loaded like this." instead.
 
 Carry out loading the anagram bullets into the anagramming gun:
 	now the anagram bullets are nowhere;
@@ -1583,19 +1786,20 @@ Sanity-check shooting the loaded anagramming gun with the loaded anagramming gun
 
 Check shooting the pills with the loaded anagramming gun:
 	if the pills are in a container (called the box) and the number of things in the box is greater than 1 and the box is not the synthesizer:
-		say "The spill would make a real mess in [the box]." instead.
+		say the spill would make a mess in the box instead.
 
 Check shooting something with the loaded anagramming gun:
 	let initial key be the anagram key of the noun;
 	now detritus is the noun;
 	let the possibles list be a list of things;
+	let noun-hash be the hash code of the noun;
 	repeat with item running through things in the repository:
-		if the hash code of the item is the hash code of the noun:
+		if the hash code of the item is noun-hash:
 			[say "[item]: ";]
-			let initial name be "[noun]";
-			let initial name be "[initial name in lower case]";
-			let comparison name be "[item]";
-			let comparison name be "[comparison name in lower case]";
+			let initial name be the printed name of noun;
+			now initial name is initial name in lower case;
+			let comparison name be the printed name of item;
+			now comparison name is comparison name in lower case;
 			let comparison key be the anagram key of the item;
 			[say "[comparison key]";
 			say "[noun]: [initial key]"; ]
@@ -1603,19 +1807,21 @@ Check shooting something with the loaded anagramming gun:
 				add the item to the possibles list; [* We make a list because otherwise, for any set of anagrammed objects in the repository, we will always just swap back and forth between the first two that are implemented and never get to the others.]
 	let max be the number of entries in the possibles list;
 	if max is 0:
-		say "The gun fires ruggedly into [the noun], but is unable to make anything interesting out of [the initial key]. [The noun] recoalesce[s] into [their] original form." instead;
+		say "The gun fires ruggedly into [the noun], but is unable to make anything interesting out of [the initial key]. [The noun] [recoalesce] into [their] original form." instead;
 	otherwise:
 		now detritus is entry max of the possibles list.
 
-To decide what list of text is the anagram key of (n - an object):
+To decide what list of text is the anagram key of (N - an object):
 	let anagram key be a list of text;
-	let starting form be "[n]";
-	if n is yourself:
+	let starting form be some text;
+	if N is yourself:
 		now starting form is "alexandra";
+	otherwise:
+		now starting form is the printed name of N;
 	let count be the number of characters in starting form;
 	repeat with i running from 1 to count:
-		let char be "[character number i in starting form]";
-		let char be "[char in lower case]";
+		let char be character number i in starting form;
+		now char is char in lower case;
 		if char is not " ":
 			add char to anagram key;
 	sort anagram key;
@@ -1623,6 +1829,11 @@ To decide what list of text is the anagram key of (n - an object):
 
 Check shooting something with the anagramming gun:
 	abide by the dangerous destruction rules for the noun.
+
+A last check shooting something with the anagramming gun:
+	if the detritus is a tear:
+		if there is an alterna-tear (called the other-tear) in the repository:
+			now the detritus is the other-tear.
 
 Carry out shooting something with the anagramming gun:
 	move the detritus to the holder of the noun;
@@ -1637,6 +1848,8 @@ Carry out shooting something with the anagramming gun:
 		now every thing which proffers the noun proffers the detritus;
 	if an essential thing (called source) proffers the detritus:
 		now the detritus is essential;
+		if the noun is the derivate of the secret-plans:
+			now derivate of the secret-plans is the detritus;
 	[ if something (called source) which proffers the detritus encloses an essential thing:
 		now the detritus is essential; ]
 	now the detritus is marked-visible;
@@ -1644,12 +1857,12 @@ Carry out shooting something with the anagramming gun:
 	record "using the anagramming gun" as achieved;
 
 Report shooting something with the anagramming gun when the detritus is unseen:
-	say "The gun fires ruggedly into [the noun], which shatter[s] and then reform[s] as [the detritus]. [run paragraph on][detritus description][paragraph break]";
+	say "The gun fires ruggedly into [the noun], which [shatter] and then [reform] as [a detritus]. [run paragraph on][detritus description][paragraph break]";
 	set pronouns from the detritus;
 	abide by the dangerous construction rules for the detritus instead.
 
 Report shooting something with the anagramming gun:
-	say "The gun fires ruggedly into [the noun], which shatter[s] and then reform[s] as [the detritus].";
+	say "The gun fires ruggedly into [the noun], which [shatter] and then [reform] as [the detritus].";
 	abide by the dangerous construction rules for the detritus instead.
 
 
@@ -1657,7 +1870,7 @@ Report shooting something with the anagramming gun:
 
 Chapter 11 - Restoration gel rifle
 
-The restoration-gel rifle is a pistol. The printed name of the restoration-gel rifle is "restoration gel rifle". Understand "restoration/gel/handgun" as the restoration-gel rifle.
+The restoration-gel rifle is a long strong pistol. The printed name of the restoration-gel rifle is "restoration gel rifle". Understand "restoration/gel/handgun" as the restoration-gel rifle.
 
 [we want use of the regular gel to win, if possible]
 Does the player mean putting the restoration-gel rifle on:
@@ -1672,12 +1885,15 @@ Sanity-check shooting something irretrievable with the restoration-gel rifle:
 Before shooting something which is in a container (called the box) with the restoration-gel rifle:
 	if the noun is proffered by an uncontained fluid thing (called the liquid):
 		if the number of things in the box is greater than 1 or the number of things proffered by the noun is greater than 1 and the box is not the synthesizer:
-			say "[The liquid] would make a real mess in [the box]." instead.
+			say the liquid would make a  mess in the box instead.
 
 [Because it's possible to change something into an object that becomes fixed in place in the backpack, or too heavy to move...]
 
-Before shooting something which is in the backpack with the restoration-gel rifle:
-	try taking the noun;
+Before shooting something which is enclosed by the backpack with the restoration-gel rifle:
+	if the backpack is closed:
+		try opening the backpack;
+	if the backpack is open:
+		try taking the noun;
 	if the player does not carry the noun:
 		say "It seems best not to word-change things that are in the backpack." instead.
 
@@ -1839,8 +2055,8 @@ But the effect fades almost instantly." instead.
 
 Report inserting something into the umlaut punch:
 	say "[We] put [the noun] into the wire basket of the umlaut punch. There is a hum as the punch warms up, then a bang! as the tines come down sharply, tattooing [the noun].[paragraph break]";
-	let sample be "[noun]";
-	now sample is "[sample in lower case]";
+	let sample be the printed name of noun;
+	now sample is sample in lower case;
 	let replacement made be false;
 	if sample matches the text "u":
 		replace the text "u" in sample with "ü";
@@ -1943,8 +2159,8 @@ Check poking the Catalan needle with the Catalan needle:
 
 Carry out poking something with the Catalan punt volat needle:
 	let sample be text;
-	let sample be "[noun]";
-	now sample is "[sample in lower case]";
+	let sample be the printed name of noun;
+	now sample is sample in lower case;
 	if sample matches the regular expression "(.*l)(l.*)":
 		say "The needle slips into place, trying to construct '[text matching subexpression 1]·[text matching subexpression 2]'. It fails, however, to make any recognizable word out of this, and the needle wire grows hotter and hotter in our hand as it tries to fix the change. Finally [we] have to pull out." instead;
 	otherwise:
@@ -1960,8 +2176,10 @@ Understand the commands "pierce" and "stick" and "penetrate" as "poke".
 Chapter 15 - The Workshop Platform
 
 The programmable dais is an enterable supporter in the Workshop. Understand "machine" or "equipment" or "platform" or "big" or "black" or "metal" or "round" or "machinery" or "coil" or "coils" as the dais.
-	The initial appearance is "A programmable dais sits in the middle of the room. It has the raw look of lab equipment rather than a nice smooth commercial instrument."
+	The initial appearance is "A [programmable dais] sits in the middle of the room. It has the raw look of lab equipment rather than a nice smooth commercial instrument."
 	The description is "It's a round black metal platform with substantial stabil[izing] coils visible underneath, five or six feet in diameter. This is experimental lab grade letter equipment, ferociously powerful, insanely dangerous."
+
+The programmable dais allows seated, standing and reclining.
 
 After examining the programmable dais:
 	say "The dais has [a list of things which are part of the dais]."
@@ -1976,8 +2194,10 @@ Sanity-check pulling the big lever:
 Sanity-check pushing the big lever:
 	try switching on the programmable dais instead.
 
-Sanity-check putting something irretrievable on the programmable dais:
-	abide by the don't change irretrievable rules for the noun.
+Sanity-check switching on the big lever:
+	repeat with item running through things on the programmable dais:
+		if item is irretrievable:
+			abide by the don't change irretrievable rules for item.
 
 Sanity-check switching on the programmable dais:
 	try switching on the big lever instead.
@@ -2020,9 +2240,9 @@ Instead of switching on the big lever:
 			if exactly one thing (called target) is on the programmable dais:
 				let result be the homonym-match of the target;
 				if the result is not the player:
-					if something (called the source) proffers the target:
+					if something proffers the target:
 						now the result is not proffered by anything;
-						now the source proffers the result;
+						now everything which proffers the target proffers the result;
 					abide by the dangerous destruction rules for the target;
 					move the result to the programmable dais;
 					move the target to the repository;
@@ -2031,7 +2251,8 @@ Instead of switching on the big lever:
 					if the result is the passage-place:
 						say "[The programmable dais] glows deep red, then deeper. There's a roar like a stadium being demolished, and a passage opens, descending into the dais itself." instead;
 					otherwise:
-						say "[The programmable dais] glows deep red. Almost at once [the result] [are] lying on the surface. [result description][line break]" instead;
+						say "[The programmable dais] glows deep red. Almost at once [the result] [are] lying on the surface. [result description][line break]";
+						abide by the dangerous construction rules for the target instead;
 			say "[The programmable dais] goes red, then dims again. Apparently it can't find a homonym to fit [the list of things *in the programmable dais]." instead;
 	now the big lever is switched off.
 
@@ -2097,9 +2318,15 @@ Chapter 16 - The Cryptolock aka Vowel Rotator
 
 The puzzle here is completely different depending on whether you're playing hard mode or easy mode.]
 
-The cryptolock is a scenery container in the Generator Room. It is fixed in place. The printed name of the cryptolock is "brushed steel bucket". Understand "brushed" or "steel" or "container" or "bucket"  as the cryptolock.
+The cryptolock is a scenery enterable container in the Generator Room. It is fixed in place. The printed name of the cryptolock is "brushed steel bucket". Understand "brushed" or "steel" or "container" or "bucket"  as the cryptolock.
 
 The cryptoswitch is a device. The cryptoswitch is part of the cryptolock. The printed name of the cryptoswitch is "reverse switch". Understand "reverse" or "switch" as the cryptoswitch.
+
+Instead of pushing the cryptoswitch when the cryptoswitch is switched on:
+	try switching off the cryptoswitch.
+
+Instead of pushing the cryptoswitch when the cryptoswitch is switched off:
+	try switching on the cryptoswitch.
 
 Report switching on the cryptoswitch:
 	say "The switch thunks over into the Reverse position." instead.
@@ -2128,14 +2355,6 @@ Check inserting something into the cryptolock when the cryptolock contains somet
 	if the blockage is in the cryptolock:
 		stop the action.
 
-Check inserting something into the cryptolock when the heft of the noun is greater than 3:
-	say "[The noun] [are] too big to fit into [the cryptolock]." instead.
-
-A dangerous construction rule for something (called the target):
-	if the target is in the cryptolock and the heft of the target is greater than 3:
-		now the target is in the Generator Room;
-		say "There is a churning noise from within [the cryptolock] as [a target] [are] formed within. The finished [target] [are] too big to fit in the bucket, however, and [fall] out during the process of formation. "
-
 Test bucket-size with "put coat in bucket / wave a-remover at coat / get cot / put cot in bucket" holding the coat in the Generator Room.
 
 After inserting something into the cryptolock:
@@ -2155,10 +2374,11 @@ After inserting something into the cryptolock:
 	let chosen article be the noun;
 	repeat with item running through things in the repository:
 		if the hash code of the item is the source hash:
-			let item text be "[item]";
-			now item text is "[item text in lower case]";
+			let item text be the printed name of item;
+			now item text is item text in lower case;
 			if the goal text is item text:
 				now the chosen article is the item;
+				break;
 	if the chosen article is not the noun:
 		abide by the dangerous destruction rules for the noun;
 		now the chosen article is not proffered by anything;
@@ -2167,19 +2387,32 @@ After inserting something into the cryptolock:
 			say "There is a churning noise from within [the cryptolock] and '[goal text]' appears in letters of vivid purple smoke. Additional letters read 'SAFETY OVERRIDE.' Then the smoke dissipates without result." instead;
 		if an essential thing (called source) proffers the chosen article:
 			now the chosen article is essential;
+			if noun is the derivate of the secret-plans:
+				now the derivate of the secret-plans is the chosen article;
 		[ if something which proffers the chosen article encloses an essential thing:
 			now the chosen article is essential; ]
 		now everything which is in the cryptolock is in the repository;
+		if the chosen article is the cord and the power chord is not seen:
+			now the chosen article is the power cord;
+			now the printed name of power cord is "cord";
+			reset hash code of power cord;
 		move the chosen article to the cryptolock;
-		abide by the dangerous construction rules for the chosen article;
-		unless the chosen article is in the Generator room:
-			say "There is a churning noise from within [the cryptolock], and a moment later [we] see inside [a list of things *in the cryptolock]. ";
+		if the heft of the chosen article is greater than 3:
+			now the chosen article is in the Generator Room;
+			say "There is a churning noise from within [the cryptolock] as [a chosen article] [are] formed within. The finished [chosen article] [are] too big to fit in the bucket, however, and [fall] out during the process of formation. [run paragraph on]";
+		otherwise:
+			say "There is a churning noise from within [the cryptolock], and a moment later [we] see inside [a list of things *in the cryptolock]. [run paragraph on]";
+		let paragraph break needed be true;
 		now the chosen article is marked-visible;
 		now the noun is marked invisible;
+		if the chosen article is not examined:
+			try examining the chosen article;
+			now paragraph break needed is false;
 		record "using the vowel rotator" as achieved;
+		abide by the dangerous construction rules for the chosen article;
 		if the boiler is switched off:
 			now the boiler is switched on;
-			say "[paragraph break]This appears to have unlocked the mechanism. With a growl, the boiler comes to life.";
+			say "[if paragraph break needed is true][paragraph break][end if]This appears to have unlocked the mechanism. With a growl, the boiler comes to life.";
 		otherwise:
 			say "The boiler growls but cannot become any more on than it already is.";
 	otherwise:
@@ -2199,25 +2432,25 @@ Test crypto with "tutorial off / autoupgrade / x boiler / look through pane / w 
 To avoid confusion during the replacement process, we replace lower-case letters with upper-case ones to show they've already been changed.]
 
 To decide what text is the encryption of (X - a thing):
-	let goal text be "[printed name of the X]";
-	let goal text be "[goal text in lower case]";
+	let goal text be the printed name of the X;
+	now goal text is goal text in lower case;
 	replace the text "a" in goal text with "E";
 	replace the text "e" in goal text with "I";
 	replace the text "i" in goal text with "O";
 	replace the text "o" in goal text with "U";
 	replace the text "u" in goal text with "A";
-	let goal text be "[goal text in lower case]";
+	now goal text is goal text in lower case;
 	decide on goal text.
 
 To decide what text is the back encryption of (X - a thing):
-	let goal text be "[printed name of the X]";
-	let goal text be "[goal text in lower case]";
+	let goal text be the printed name of the X;
+	now goal text is goal text in lower case;
 	replace the text "a" in goal text with "U";
 	replace the text "e" in goal text with "A";
 	replace the text "i" in goal text with "E";
 	replace the text "o" in goal text with "I";
 	replace the text "u" in goal text with "O";
-	let goal text be "[goal text in lower case]";
+	now goal text is goal text in lower case;
 	decide on goal text.
 
 
@@ -2226,8 +2459,8 @@ To decide what text is the back encryption of (X - a thing):
 To figure out whether the game supplied any objects that could fruitfully be encrypted this way, we ran the encryption on every object in the game and inspected the results for things that were really words.]
 
 To decide what text is the hard encryption of (X - a thing):
-	let goal text be "[printed name of the X]";
-	let goal text be "[goal text in lower case]";
+	let goal text be the printed name of the X;
+	now goal text is goal text in lower case;
 	replace the text "a" in goal text with "B";
 	replace the text "b" in goal text with "E";
 	replace the text "c" in goal text with "E";
@@ -2254,12 +2487,12 @@ To decide what text is the hard encryption of (X - a thing):
 	replace the text "x" in goal text with "A";
 	replace the text "y" in goal text with "A";
 	replace the text "z" in goal text with "A";
-	let goal text be "[goal text in lower case]";
+	now goal text is goal text in lower case;
 	decide on goal text.
 
 To decide what text is the back hard encryption of (X - a thing):
-	let goal text be "[printed name of the X]";
-	let goal text be "[goal text in lower case]";
+	let goal text be the printed name of the X;
+	now goal text is goal text in lower case;
 	replace the text "a" in goal text with "Z";
 	replace the text "b" in goal text with "A";
 	replace the text "c" in goal text with "A";
@@ -2286,7 +2519,7 @@ To decide what text is the back hard encryption of (X - a thing):
 	replace the text "x" in goal text with "U";
 	replace the text "y" in goal text with "U";
 	replace the text "z" in goal text with "U";
-	let goal text be "[goal text in lower case]";
+	now goal text is goal text in lower case;
 	decide on goal text.
 
 

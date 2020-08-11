@@ -20,7 +20,7 @@ The description of the temporary barrier is "It's a high metal fence, supported 
 Instead of looking under the temporary barrier:
 	say "[The temporary barrier] is set flush with the ground. There is certainly not enough room to crawl underneath."
 
-Instead of climbing the temporary barrier:
+Instead of climbing or standing up on or lying on or sitting on the temporary barrier:
 	say "The links of the fence are too close to offer easy purchase for feet, and the fence is high and barbed on top. They really don't want anyone coming through uninvited."
 
 Instead of pulling or pushing or turning or attacking the temporary barrier:
@@ -196,7 +196,7 @@ Rule for listing exits while looking in Ampersand Bend:
 
 Sigil Street is west of Ampersand Bend. The description is "The buildings here are two and three [if the player wears the Britishizing goggles]storeys[otherwise]stories[end if], with shops at ground level and [apartments] above. The shops are closed for the holiday: [a typographer's office], [clothing shops] of col[our]ful skirts and ethnic bodices (rarely if ever worn by natives) and t-shirts covered with font designs[if the reflective window is in Sigil Street].
 
-[one of]Passing by [the reflective window] [we] catch the sight of our single blended body, and it creeps me out[or][The reflective window] of the closed shops reflect our synthes[ize]d self[stopping][end if]."
+[one of]Passing by [the reflective window] [we] catch the sight of our single blended body, and it creeps me out[or][The reflective window] of a closed shop reflects our synthes[ize]d self[stopping][end if]."
 
 Some elderly apartments are scenery in Sigil Street. The description is "From down here [we] can only see the shuttered windows and the occasional balcony or awning, but you can guess what they're probably like from the environment: old-fashioned inside, kitchens and bathrooms awkwardly fitted into niches and closets of buildings that weren't designed for plumbing. But they're also probably rather [if the player wears the Britishizing goggles]cosy[otherwise]cozy[end if] and handsome, with exposed beams under the ceiling." Understand "flat" or "apartment" or "building" or "buildings" as the elderly apartments when location is Sigil Street.
 
@@ -204,7 +204,7 @@ Does the player mean approaching My Apartment:
 	it is very likely.
 
 Instead of finding the elderly apartments:
-	if the subcommand of the elderly apartments matches the text "apartment":
+	if the subcommand of the elderly apartments matches "apartment":
 		try approaching My Apartment.
 
 The reflective window is a fixed in place mirror in Sigil Street.
@@ -242,6 +242,9 @@ Instead of taking something which is part of the clothing shops:
 Instead of buying something which is part of the clothing shops:
 	say "Though [the noun] [are] theoretically for sale, there's no one in at the moment to sell [them] to us."
 
+Instead of putting the restoration gel on something which is part of the clothing shops:
+	say "The shop window is, unsurprisingly, not open to reach into."
+
 The typographer's office is a facade in Sigil Street.  It is scenery.
 	Understand "sign" or "display" or "poster" or "typographer" or "font" or "fonts" or "comma" or "commas" or "punctuation" as the typographer's office. It fronts north. The description of the typographer's office is "The office advertises custom fonts and symbols, though it is very unlikely that anyone decides to have a custom font made simply because they happened to catch a notice in a shop window. In hon[our] of the holiday, there is also a display poster showing the form of the humble comma as it manifests itself in a variety of popular fonts."
 
@@ -259,6 +262,11 @@ Some yellow buildings are a facade in Back Alley. They front east. They are scen
 
 Does the player mean finding the yellow buildings:
 	it is very unlikely.
+
+Does the player mean doing something to the letter-remover:
+	it is very unlikely.
+
+The can't take what's already taken rule response (A) is "[We] already [have] [if the noun is the letter-remover][the noun][otherwise][regarding the noun][those][end if]." (A);
 
 Some beige buildings are a facade in Back Alley. They front west. They are scenery. The description is "A little more beige than the buildings facing them, but just as shabby and free of windows."
 	The closure notice is "There are no doors in [the item described]. ".
@@ -346,10 +354,9 @@ After reading a command during identification (this is the parse identification 
 			otherwise:
 				say "...er, no. We're Alexandra now. Before the synthesis, I was Alex. You were...";
 		otherwise:
-			now new first name is "[the player's command]";
+			now new first name is the player's command;
 			replace the regular expression "\p" in new first name with "";
 			now new first name is new first name in sentence case;
-			replace the regular expression "\p" in new first name with "";
 			if new first name is "Andra":
 				say "...yes! Okay. We're both here, neither of us lost our minds in the synthesis process. ";
 			otherwise:
@@ -360,7 +367,8 @@ After reading a command during identification (this is the parse identification 
 			say "[banner text]";
 			say "[paragraph break]Let's try to get a look around. I haven't been able to run our body without your help, but maybe now you're awake, it'll work better.";
 		follow the scene changing rules;
-		reject the player's command.
+		reject the player's command;
+
 
 
 Section 2 - Tutorial Mode
@@ -373,18 +381,27 @@ Include Tutorial Mode by Emily Short.
 The teach inventory rule is listed before the teach dropping rule in the instructional rules.
 
 [Turn off tutorial mode if you've already done it...]
-A first instructional rule:
-	if "Finished tutorial mode" is a used achievement:
-		now tutorial mode is false;
-		stop.
+A first instructional rule (this is the turn off tutorial mode rule):
+	if the turn off tutorial mode rule is not listed in the completed instruction list:
+		add the turn off tutorial mode rule to the completed instruction list;
+		read the achievements;
+		if "Finished tutorial mode" is a used achievement:
+			now tutorial mode is false;
+			stop;
 
 Check turning on tutorial mode:
 	if "Finished tutorial mode" is a used achievement:
 		if Monumental Staircase is visited:
 			say "[first custom style]Tutorial mode doesn't work this far into the game. Please restart before turning it on again.[roman type][paragraph break]" instead;
 		otherwise:
-			choose row with achievement of "Finished tutorial mode" in Table of Possible Achievements;
-			blank out the whole row.
+			say "This will erase the 'Finished tutorial mode' achievement. Are you sure? >> [run paragraph on]";
+			if the player consents:
+				choose row with achievement of "Finished tutorial mode" in Table of Possible Achievements;
+				blank out the whole row;
+				write File of Conclusions from the Table of Possible Achievements;
+			otherwise:
+				stop the action.
+
 
 An instructional rule (this is the teach examining thoroughness rule):
 	if the teach examining thoroughness rule is listed in the completed instruction list:
@@ -423,8 +440,9 @@ An instructional rule (this is the teach about letter-remover rule):
 		make no decision;
 	if the number of entries in the list of remaining letters is not 26:
 		make no decision;
-	let N be "[letter-remover]";
-	say "[first custom style]That looks interesting. Try looking at that [letter-remover][one of][or]. L [N in upper case][stopping].[roman type]";
+	let N be the printed name of letter-remover;
+	now N is N in upper case;
+	say "[first custom style]That looks interesting. Try looking at that [letter-remover][one of][or]. L [N][stopping].[roman type]";
 	now the expected action is the action of examining the mourning dress;
 	now the held rule is the teach examining super thoroughness rule;
 	rule succeeds.
@@ -438,7 +456,8 @@ An instructional rule (this is the teach setting rule):
 	if the number of entries in the list of remaining letters is not 26:
 		make no decision;
 	let N be "[the letter-remover]";
-	say "[first custom style]It can be set to any letter we choose, hm? That sounds like a hint. Try SET [N in upper case] TO U.[roman type]";
+	now N is N in upper case;
+	say "[first custom style]It can be set to any letter we choose, hm? That sounds like a hint. Try SET [N] TO U.[roman type]";
 	now the expected action is the action of tuning the letter-remover to "u";
 	now the held rule is the teach setting rule;
 	rule succeeds.
@@ -455,7 +474,6 @@ An instructional rule (this is the teach waving rule):
 		make no decision;
 	if the mourning dress is not enclosed by location:
 		make no decision;
-	let N be "[the letter-remover]";
 	say "[first custom style]That letter-remover is going to be very important as we try to escape here. To test it out, try WAVE U-REMOVER AT MOURNING DRESS.[roman type]";
 	now the expected action is the action of waving the letter-remover at the mourning dress;
 	now the held rule is the teach waving rule;
@@ -492,7 +510,7 @@ This is the teach scoring rule:
 		make no decision;
 	unless the score is 1:
 		make no decision;
-	if waving the letter-remover at something:
+	if waiting:
 		say "[first custom style]Something we did has just raised our score! We must be on the right track. To find out what exactly we did right, type SCORE.[roman type]";
 	otherwise:
 		say "[first custom style]To see how we're doing so far, type SCORE.[roman type]";
@@ -524,8 +542,9 @@ An instructional rule (this is the teach more compass directions rule):
 		make no decision;
 	if way is nothing:
 		make no decision;
-	let N be "[way]";
-	say "[first custom style][one of]You can spend some more time looking around or checking out your inventory to see what you've changed in this location. When you're ready to move on, you can head[or]When you want to move to a new location, you can go[stopping] [N in upper case].[roman type]";
+	let N be the printed name of way;
+	now N is N in upper case;
+	say "[first custom style][one of]You can spend some more time looking around or checking out your inventory to see what you've changed in this location. When you're ready to move on, you can head[or]When you want to move to a new location, you can go[stopping] [N].[roman type]";
 	now the expected action is the action of going way;
 	now the held rule is the teach more compass directions rule;
 	now next movement reminder is the time of day;
@@ -651,10 +670,13 @@ An instructional rule (this is the teach consulting rule):
 			make no decision;
 	otherwise:
 		make no decision;
-	say "[first custom style][bracket]We can LOOK UP interesting subjects IN books, if we like.[close bracket][roman type]";
+	say "[first custom style]You can LOOK UP interesting subjects IN books, if you like.[roman type]";
 	add the teach consulting rule to the completed instruction list, if absent;
-	record "Finished tutorial mode" as an achievement;
+	the player finishes tutorial in one turn from now;
 	rule succeeds;
+
+At the time when the player finishes tutorial:
+	record "Finished tutorial mode" as an achievement.
 
 The teach disabling graphics rule is listed after the teach meta-features rule in the instructional rules.
 
@@ -696,8 +718,9 @@ An instructional rule (this is the new teach compass directions rule):
 		make no decision;
 	if way is nothing:
 		make no decision;
-	let N be "[way]";
-	say "[first custom style][one of]Feel free to look around some more. When you're ready to move on from here, try[or]No rush, but just a reminder that when you want to move to a new location, you can go[stopping] [N in upper case].[roman type]" (A);
+	let N be the printed name of way;
+	now N is N in upper case;
+	say "[first custom style][one of]Feel free to look around some more. When you're ready to move on from here, try[or]No rush, but just a reminder that when you want to move to a new location, you can go[stopping] [N].[roman type]" (A);
 	now the expected action is the action of going way;
 	now the held rule is the new teach compass directions rule;
 	now movement reminder is the time of day;
@@ -754,7 +777,7 @@ Carry out examining small children:
 
 Some small children are a person in Park Center. Understand "child" or "boy" or "girl" or "sibling" as the small children. The description is "They look small and harmless, but you're probably right that they have sticky hands." The children are scenery.
 
-Every turn when the location is Park Center and the location of the small children encloses the hoses:
+Every turn when the location is Park Center and the hoses are part of the marble fountain:
 	if a random chance of 1 in 2 succeeds:
 		say "[one of]A little boy[or]A small girl[at random] [one of]tries to catch the spraying hosewater in an open mouth[or]pushes a sibling into the path of the water[or]leaps gleefully through the arc of water[at random].";
 		now the description of the small children is "Most of them are now sopping wet, and loving it.";
@@ -765,7 +788,7 @@ There's a bang, a last glittering fan of water in the air.[paragraph break]";
 			gel-convert the hoses;
 			say "As for the Officer, she's already speaking into her radio as she turns away.".
 
-Every turn when the location is Park Center and the location of the small children encloses the ho:
+Every turn when the ho is in location:
 	say "It isn't but a few seconds before a watchful parent notices the ho strutting around and goes to report her.
 
 She is too stupid [--] as a constructed person [--] to put up much resistance when an officer shows up to escort her away.";
@@ -942,7 +965,7 @@ A first every turn rule (this is the win the tube rule):
 	if the barker is in location:
 		if the word-balance is tilting:
 			move the tube to the player;
-			move the barker to the repository;
+			now the barker is nowhere;
 			say "There is a [if the ear is in a pan]disgusted gasp[otherwise]cheer[end if] from the spectators. [The word-balance] tilts slowly but inexorably.
 
 	[The barker] looks astonished and displeased, except for a fraction of a second when he just noticeably winks. With exaggerated bad grace hands us [a gel]. 'There's your prize. And now this contest is over.'
@@ -1133,7 +1156,7 @@ A diorama table is fixed in place in Heritage Corner. It is a supporter. The ini
 
 The description of the diorama table is "The patriotic scene is set against the backdrop of the Bureau's buildings ca. 1895, where the committee first met, but the historians have included a bit of the building exterior to show that the meetings were conducted under army guard. The writing of dictionaries has not always been bloodless[if the army is not on the diorama table and the members are not on the diorama table]. Both army and members are missing[otherwise if the army is not on the diorama table]. The army has been removed[otherwise if the members are not on the diorama table and the member is on the diorama table]. The members have been reduced to a single [member][otherwise if the members are not on the diorama table]. The members have been removed[end if].". Understand "backdrop" or "setting" or "buildings" or "bureau" or "bureau's" or "building" or "scenery" as the diorama table when the location is Heritage Corner.
 
-Instead of finding the diorama table when the subcommand of the diorama table matches the text "bureau":
+Instead of finding the diorama table when the subcommand of the diorama table matches "bureau":
 	try approaching the Rotunda.
 
 The diorama-shelter is part of the diorama table. The printed name is "shelter". Understand "shelter" or "bit" or "bit of" or "clear" or "plastic" or "hood" as the diorama-shelter. The description is "Little more than a clear plastic hood to protect the diorama beneath."
@@ -1184,7 +1207,7 @@ This is the diorama follow-on rule:
 		if the diorama table does not support anything:
 			say "The scenery appears to have been hot-glued in place.";
 		otherwise:
-			say "[The list of things on the diorama table] [are] movable, but the rest of the scenery appears to have been hot-glued in place.";
+			say "[The list of things *in the diorama table] [if the number of things on the diorama table is 1 and the members are not on the diorama table]is[otherwise]are[end if] movable, but the rest of the scenery appears to have been hot-glued in place.";
 		rule succeeds.
 
 
@@ -1206,7 +1229,7 @@ The hostel-exterior is a facade in Heritage Corner. It is scenery. The printed n
 The octagonal bricks are scenery in Heritage Corner. The description is "Alternating with square bricks of a slightly darker shade of maroon. Nothing about this seems remotely significant." Understand "ground" or "paving" or "floor" as the octagonal bricks.
 
 Instead of examining the octagonal bricks:
-	if the subcommand of the noun matches the text "bricks":
+	if the subcommand of the noun matches "bricks":
 		try examining the hostel-exterior instead;
 	otherwise:
 		continue the action.
@@ -1265,7 +1288,7 @@ Instead of listening to the Screening Room:
 
 The film screen is scenery in the screening room. Understand "show" or "movie" as the film screen. The printed name is "screen". The description is "[if the reel is in the projector and the projector is switched on]The screen flickers black and white[otherwise if the projector is switched on]The white beam from the projector illuminates it, but no movie is showing[otherwise]The screen is empty: nothing is yet being shown. It is also very very small by modern cinema standards[end if]."
 
-The seats are an enterable supporter in the Screening Room. The seats are scenery and plural-named. The description is "In an age of stadium seating and theater chairs that resemble home recliners, these don't even have the usual old-fashioned red plush. They are hard wooden seats such as might be found in a puritanical schoolroom." Understand "row" or "rows" or "seat" or "seating" or "chairs" or "chair" as the seats.
+The seats are an enterable supporter in the Screening Room. The seats allow seated, standing, and reclining. The posture of the seats is seated. The seats are scenery and plural-named. The description is "In an age of stadium seating and theater chairs that resemble home recliners, these don't even have the usual old-fashioned red plush. They are hard wooden seats such as might be found in a puritanical schoolroom." Understand "row" or "rows" or "seat" or "seating" or "chairs" or "chair" as the seats.
 	Instead of looking under the seats when the backpack is in the Screening Room:
 		say "I've already located the backpack, right where I left it."
 	The scent-description of the seats is "a mixture of wood lacquer and popcorn grease".
@@ -1400,6 +1423,8 @@ The film ends and the projector goes dark.";
 
 
 Check inserting something into the projector:
+	if the noun is the fishing-reel:
+		say "It is not that kind of reel." instead;
 	if the noun is not the reel:
 		say "The projector can only really show reels of film." instead;
 	if the projector-switch is switched on:
@@ -1408,10 +1433,13 @@ Check inserting something into the projector:
 Sanity-check putting the reel on the projector:
 	try inserting the reel into the projector instead.
 
-Understand "thread [reel] on/onto [the projector]" as inserting it into.
-Understand "mount [reel] on/onto [the projector]" as inserting it into.
+Understand "thread [something] on/onto [the projector]" as inserting it into.
+Understand "mount [something] on/onto [the projector]" as inserting it into.
 
-Understand "show [reel] on [the projector]" as showing it on. Showing it on is an action applying to two things.
+Understand "show [something] on [the projector]" as showing it on. Showing it on is an action applying to two things.
+
+Sanity-check performing something on the projector:
+	try showing the noun on the projector instead.
 
 Instead of mounting the reel:
 	if the projector is in location:
@@ -1420,7 +1448,7 @@ Instead of mounting the reel:
 		say "There is nothing suitable here to mount it on."
 
 Check showing something which is not the reel on the projector:
-	say "[The noun] [are] not a reel of film." instead.
+	try inserting the noun into the projector instead.
 
 Check showing the reel on something which is not the projector:
 	say "[We] really need a film projector for that." instead.
@@ -1548,7 +1576,7 @@ Guidebook is a book in the Hostel. The printed name is "Guidebook to Anglophone 
 
 There's too much here to take in in a quick read, but we could look up specific topics if we wanted to read more." The contents of the guidebook is the Table of Local Attractions.
 
-After reading a command (this is the cut the the rule):
+A first after reading a command (this is the cut the the rule):
 	while the player's command includes "the":
 		cut the matched text.
 
@@ -1628,7 +1656,7 @@ A backpacking girl is an alert tourist woman in the dormitory room. She exhibits
 	The flexible appearance of the heavy pack is "A massively full pack leans against one of the beds."
 	Understand "tourist" as the backpacking girl.
 
-Instead of finding a person when the subcommand of the noun matches the text "girl":
+Instead of finding a person when the subcommand of the noun matches "girl":
 	try finding the backpacking girl.
 
 Does the player mean finding the backpacking girl:
@@ -1721,8 +1749,14 @@ Instead of waving the letter-remover at the locker when the backpacking girl is 
 Instead of waving the letter-remover at the lock when the backpacking girl is marked-visible:
 	try taking the lock.
 
+Sanity-check showing the locker to the backpacking girl:
+	carry out the refusing comment by activity with the backpacking girl instead.
+
+Sanity-check showing the lock to the backpacking girl:
+	carry out the refusing comment by activity with the backpacking girl instead.
+
 An accessibility rule when the touch-goal is the lock or the touch-goal is the locker:
-	if the backpacking girl is marked invisible or the action name part of current action is the showing it to action:
+	if the backpacking girl is marked invisible:
 		make no decision;
 	otherwise:
 		say "[The backpacking girl] is watching our every move with unconcealed curiosity, which makes me a little hesitant to do anything with the locker[one of][or]. Maybe if we freaked her out somehow she would go away[or]. I think our best bet is to show her something that really weirds her out[stopping]." instead.
@@ -1734,7 +1768,7 @@ Some hard wood floors are scenery in the Dormitory room. Understand "floor" or "
 
 Instead of putting something on the hard wood floors, try dropping the noun.
 
-The locker is a fixed in place closed openable container in the Dormitory Room. The lock is part of the locker. The initial appearance of the locker is "The [locker] you identify as your own sits near one of the beds[if the locker is open], door standing open[otherwise if the lock is part of the locker], still locked with its dial [lock-name][otherwise], closed but not locked[end if]. ".
+The locker is a fixed in place closed openable container in the Dormitory Room. The lock is part of the locker. The initial appearance of the locker is "The [locker] you identify as your own sits near one of the beds[if the locker is open], door standing open[otherwise if the lock is part of the locker], still locked with its dial [lock-name][otherwise], closed but not locked[end if]. ". Understand "lockers" as the locker.
 
 A ranking rule for the locker:
 	increase description-rank of the locker by 100.
@@ -1767,10 +1801,9 @@ Instead of setting the lock to something:
 
 Locking something with something is key-related behavior. Unlocking something with something is key-related behavior. Unlocking keylessly something is key-related behavior. Locking keylessly something is key-related behavior. Opening something is key-related behavior. Closing something is key-related behavior.
 
-Instead of key-related behavior when the current action involves the locker and the lock is part of the locker:
+Sanity-check key-related behavior when (the noun is the locker or the second noun is the locker) and the lock is part of the locker:
 	if the noun is the locker, now the noun is the lock;
 	if the second noun is the locker, now the second noun is the lock;
-	try the current action.
 
 Instead of attacking the locker with something:
 	say "It is built to withstand attack, as witness the several dents in the frame that nonetheless failed to pop the door out."
@@ -1810,6 +1843,12 @@ Some secret-plans are in the locker. They are privately-named.
 	The printed name is "plans".
 	Understand "plan" or "plans" as the secret-plans.
 	The description of the secret-plans is "The plans are rolled up and stuck shut with a label that reads 'PROPERTY OF DENTAL CONSONANTS LIMITED [--] UNAUTHOR[IZE]D USE ILLEGAL'. They're just a set of prints from the main computer design, of course, but still extremely informative: to the right engineer, they might reveal the secret of T-insertion for replication by other companies. These are what you and Brock were originally contracted to lift from the island, at a fee in the multiple millions.". The secret-plans are essential, illegal, floppy, and long. Understand "tube" as the secret-plans when the tube is marked invisible. Understand "label" as the secret-plans.
+
+[We need these variables to keep track of the smuggled plans across several transformations, in particular when synthesized with other items, in order to print (really the smuggled plans in disguise) after the correct object in the inventory.]
+The secret-plans has an object called the derivate. The derivate of the secret-plans is the secret-plans.
+
+The secret-plans has an object called the previous derivate. The previous derivate of the secret-plans is the secret-plans.
+
 
 Understand "count [bills]" as a mistake ("[We] thumb quickly through the bills [--] smaller currency on the outside, larger denominations on the inside. I wouldn't have thought I could add that quickly and accurately, but you, evidently, have more practice. It works out to just over fifteen thousand euros.").
 
@@ -1891,7 +1930,7 @@ Some postcards are on the wire racks. The description of the postcards is "You m
 Does the player mean finding the postcards:
 	it is very unlikely.
 
-Instead of finding the postcards when the subcommand of the postcards matches the text "walls":
+Instead of finding the postcards when the subcommand of the postcards matches "walls":
 	try approaching the old city walls.
 
 A dangerous construction rule for the wire racks:
@@ -2037,7 +2076,7 @@ The crowds are a backdrop. The crowds are in Fair, Monumental Staircase, Church 
 	understand "children" or "child" as the crowds when the small children are not in the location.
 	The description is "[if the location is a road]They are all in a hurry to get somewhere, though it is not clear exactly where or why[otherwise]The people seem to be enjoying themselves. I don't recogn[ize] anyone in particular, though[end if]."
 
-The High Street is east of Monumental Staircase. It is proper-named. The description is "[if the player is not enclosed by a car]Hustle, bustle, [grimy-dirt]; [ugly American chain shops]; lots and lots of people. [otherwise][We] [are] surrounded by tail-lights and impatient men swearing. [end if][if the protesters are in High Street]There seems to be a large organ[ize]d protest in progress: [protesters] completely cram the sidewalk to the southeast.[end if]"
+The High Street is east of Monumental Staircase. It is proper-named. The description is "[if the player is not in a car]Hustle, bustle, [grimy-dirt]; [ugly American chain shops]; lots and lots of people. [otherwise][We] [are] surrounded by tail-lights and impatient men swearing. [end if][if the protesters are in High Street]There seems to be a large organ[ize]d protest in progress: [protesters] completely cram the sidewalk to the southeast.[end if]"
 
 
 The grimy-dirt is scenery in High Street. Understand "grime" or "dirt" or "griminess" or "filth" as the grimy-dirt. The printed name is "dirt". The description is "Just a general griminess over all surfaces. Some parts of the city have recently been renovated, and some are being renovated now, scouring off the accumulated filth on facades and walls; but this area hasn't been treated yet and is simply unappealing."
@@ -2056,6 +2095,8 @@ Instead of examining the garage:
 	let N be the number of things which are not the mechanic in the garage;
 	unless N is 0:
 		say "[line break]In [the garage] [is-are a list of things which are not the mechanic *in the garage].";
+	if the player wears the monocle:
+		try looking at the garage through the monocle.
 
 Instead of putting gel on the mechanic:
 	try putting gel on the garage.
@@ -2075,10 +2116,12 @@ Rule for listing exits when the location is High Street:
 	say "To the west, the street turns into a monumental staircase leading to the old fortified area[if the hostel is unvisited] [--] your hostel should be up that way [--] while[otherwise];[end if] a cross street heads southeast towards the main roundabout." High Street is a road.
 
 The distant-staircase is scenery in High Street. Instead of climbing or entering the distant-staircase, try going west. The description of the distant-staircase is "Broad flat stairs of white stone, with people going up and down[if Monumental Staircase is unvisited]. There's a good view from the top of those stairs: you can see the ships in the harbor and everything. Well, you'll know that, of course[end if]."
+The printed name of distant-staircase is "monumental staircase".
 
 The Roundabout is southeast of the High Street. The Roundabout is a checkpoint road. The description is "The traffic flows in a tight circle around a statue which [if Traffic Circle is visited][we] know all too well[otherwise][we] can never see clearly[end if][if the player is not in a car]. There is a pedestrian walkway around the outside of this circle, but crossing the tributary streets is an unpleasant experience involving considerable hazard. Unfortunately, there is no other quick way to get around this part of town[end if]."
 
 The hard-to-see statue is scenery in the Roundabout. The description is "[if Traffic Circle is visited]It is, curiously, easier to get a sense of from a distance than it was close-up in the Traffic Circle[otherwise]I've seen it before: it's supposed to be Atlantida, the Spirit of the Atlantean people[end if]. Kind of a 19th-century French style of thing: flowing bronze robes, one breast naked, plump fingers clasping an olive branch. But [we] can't stop and stare at it with the traffic the way it is." Understand "atlantida" or "olive" or "branch" or "robes" or "bronze" or "breast" or "naked" as the hard-to-see statue.
+The printed name of the hard-to-see statue is "giant Atlantida statue".
 
 Instead of opening a car when the location is the Roundabout and the player is in a car:
 	say "Are you mad? [we][']ll be killed."
@@ -2215,7 +2258,7 @@ rule for listing exits while looking in Crumbling Wall Face:
 Instead of facing southeast in Crumbling Wall Face:
 	say "[We] would have to go south and then east to reach it, but that way is the top of the hexagonal turret."
 
-The fossil is a thing in Crumbling Wall Face. The initial appearance is "Among the rubble fill of the wall is [if we have examined the fossil]a fossil[otherwise]an odd spiral-shaped rock[end if]."
+The fossil is a thing in Crumbling Wall Face. The initial appearance is "Among the rubble fill of the wall is [if we have examined the fossil]a [otherwise]an odd spiral-shaped [end if][if boldening is true][bold type][end if][if we have examined the fossil]fossil[otherwise]rock[roman type][end if]."
 	Understand "odd" or "spiral-shaped" or "spiral" or "shaped" or "rock" or "stone" as the fossil.
 	The description is "[one of]The spiral rock turns out to be a fossil, from one of those sea creatures long ago.[or]It is perhaps an inch and a half long, the shape of a corkscrew seashell that once housed something small and soft. There are thousands of these things around; they're not exactly valuable, but an interesting curiosity all the same.[stopping]".
 
@@ -2247,7 +2290,7 @@ The Walltop is a region. The Old City Walls, the Crumbling Wall Face, and the Ol
 Instead of listening to a location in Walltop:
 	say "The noises that reach us are the sounds of distant traffic, the occasional horn blast from the docks, and some cheery shouting from the direction of the fair."
 
-Test wallbug with "tutorial on / n" in Crumbling Wall Face.
+Test wallbug with "tutorial on / Y / n" in Crumbling Wall Face.
 
 Chapter 2 - Residential District
 
@@ -2337,8 +2380,18 @@ A description-concealing rule when the location is not Webster Court:
 Instead of examining the statue of Noah Webster when the player is not in Webster Court:
 	say "From this distance the statue is little more than a glare of sunlight."
 
-After deciding the scope of the player when Webster Court is adjacent to the location:
+After deciding the scope of the player when the location is Webster Court-adjacent:
 	place the statue of Noah Webster in scope.
+
+Definition: a room is Webster Court-adjacent:
+	if it is the Patriotic Chard-Garden:
+		yes;
+	if it is Roget Close:
+		yes;
+	if it is Hesychius Street:
+		yes;
+	if it is Crumbling Wall Face:
+		yes.
 
 My parents' home is a facade in Webster Court. The printed name is "my parents['] home". Understand "house" or "building" or "pink" or "large building" as my parents' home. The initial appearance is "The [one of]large building just to the north [--] yes, the one in pale pink [--][or]large, pale pink building north of us[stopping] is [my parents' home]." The introduction is "I think I mentioned that my parents were well off. My father works for the Bureau, embarrassingly, and my mother was born into the kind of money that we like to pretend doesn't exist on this island."
 	The description is "It's stucco and tile, inspired by southern California ideas of gracious living. There are potted palm trees inside, and leather sofas, and French oil paintings for which expensive importation lic[ense]s had to be bought.
@@ -2354,6 +2407,7 @@ Parental appearance is a scene. Parental appearance begins when the location is 
 
 When parental appearance begins:
 	move fake-father to the location;
+	now allowed-action is false;
 	say "The door to my parents['] house opens and my father comes out. He's talking over his shoulder: 'Sorry, dear, but [i]someone[/i] has to be on call.'
 
 My mother answers from inside, but we can't make out what she's saying.
@@ -2377,21 +2431,33 @@ fake-father is a man. fake-father is privately-named. The printed name of fake-f
 After writing a paragraph about fake-father:
 	set pronouns from fake-father.
 
+Allowed-action is a truth state that varies. Allowed-action is initially false;
+
+Sanity-check listing exits during parental appearance:
+	now allowed-action is true.
+
+Sanity-check taking off the monocle during parental appearance:
+	now allowed-action is true.
+
+Sanity-check opening the backpack during parental appearance:
+	now allowed-action is true.
+
+Sanity-check inserting the monocle into the backpack during parental appearance:
+	now allowed-action is true.
+
+Sanity-check waiting during parental appearance:
+	say "We hold our breath." instead;
+
+Sanity-check going somewhere during parental appearance:
+	say "Hang on; I want to see where [fake-father] goes." instead;
+
 Sanity-check doing something other than acting fast during parental appearance:
 	[I don't know how this worked in 6G60, or what changed. Now the behavior at least matches that version.]
-	if the current action is the action of listing exits:
-		make no decision;
-	if the current action is the action of taking off the monocle:
-		make no decision;
-	if the current action is the action of opening the backpack:
-		make no decision;
-	if the current action is the action of inserting the monocle into the backpack:
-		make no decision;
-	if the current action is the action of waiting:
-		say "We hold our breath." instead;
-	if the action name part of the current action is the going action:
-		say "Hang on; I want to see where [fake-father] goes." instead;
-	say "We don't dare drawing father's attention. I'm going to have us stand over here as though checking on the health of the neighb[our][']s lawn, shall I?" instead.
+	[let through all actions if the allow-action flag is true]
+	if allowed-action is true:
+		now allowed-action is false;
+	otherwise:
+		say "We don't dare drawing father's attention. I'm going to have us stand over here as though checking on the health of the neighb[our][']s lawn, shall I?" instead.
 
 Parental appearance ends when turn-taken is true.
 
@@ -2416,9 +2482,14 @@ A room-restriction rule for Foyer:
 Instead of doing something to the pink door:
 	say "Walking into my parents['] house is the action perhaps most likely to get us caught."
 
-Rule for printing the name of the pink door:
-	if the the pink door is marked-visible, say "door here";
-	otherwise say "door of my parents['] villa".
+Rule for printing the name of the pink door when waving the letter-remover at the pink door:
+	say "door";
+
+Rule for printing the name of the pink door when not waving the letter-remover at the pink door:
+	if the the pink door is marked-visible:
+		say "door here";
+	otherwise:
+		say "door of my parents['] villa".
 
 [Because we need to stop you so that you can see the scene with Dad if you were otherwise just going to be passing through:]
 After going to Webster Court when Private Beach is visited and Patriotic Chard-Garden is visited and parental appearance has not happened :
@@ -2463,7 +2534,7 @@ Instead of taking the soil when the soil is in the location:
 	move the dirt to the location;
 	say "The dirt is more than we can contain, and spills out onto the ground instead." ]
 
-Before doing something when the current action involves the soil and the chard is in the location:
+Before doing something when (the noun is the soil or the second noun is the soil) and the chard is in the location:
 	say "The soil is hard to see under the chard." instead.
 
 A description-concealing rule when the soil is marked for listing:
@@ -2583,7 +2654,7 @@ Instead of searching or looking under the bushes:
 	if the kudzu is part of the bushes:
 		say "It's hard to get a good look under the bushes with all this kudzu in the way." instead;
 	if the bushes are shrine-hiding:
-		say "Hunting behind the bushes reveals something I vaguely remember seeing when I was a child, but not noticing again since: built into the wall is what looks like a very ancient sort of shrine.";
+		say "Hunting behind the bushes reveals something I vaguely remember seeing when I was a child, but not noticing again since: built into the wall is what looks like a very ancient sort of [shrine].";
 		now the bushes are shrine-revealing;
 	otherwise:
 		say "There's nothing more to find, really."
@@ -2609,7 +2680,7 @@ Sanity-check doing something when location is Winding Footpath and the bushes ar
 
 [The nymph 'shrine' is nod to the island's Roman history. There's nothing in the game to reveal this, really, but the idea is that this stone is actually a panel from an imperial-era sarcophagus (nymphs were often featured on such panels, and sarcophagus carvers were of very varied levels of skill). Subsequent inhabitants moved it.]
 
-The shrine is a fixed in place container in the Winding Footpath. The initial appearance is "Now that the bushes have been cleared a little, the ancient shrine is plainly visible[if the shrine is non-empty], and [a random thing in the shrine] [are] set up in the place of hon[our][end if]." Understand "ancient" or "wall" or "niche" or "stone" or "backing" as the shrine. The description of the shrine is "There's a niche dug into the stone of the wall, above a [low relief] of three ladies. It's not very good work to start with, and has been eroded by a lot of weather, and I wouldn't be surprised if this weren't its original location; it probably stood somewhere else and was brought here.".
+The shrine is a fixed in place container in the Winding Footpath. The initial appearance is "Now that the bushes have been cleared a little, the ancient [shrine] is plainly visible[if the shrine is non-empty], and [a random thing in the shrine] [are] set up in the place of hon[our][end if]." Understand "ancient" or "wall" or "niche" or "stone" or "backing" as the shrine. The description of the shrine is "There's a niche dug into the stone of the wall, above a [low relief] of three ladies. It's not very good work to start with, and has been eroded by a lot of weather, and I wouldn't be surprised if this weren't its original location; it probably stood somewhere else and was brought here.".
 
 The carrying capacity of the shrine is 1.
 
@@ -2756,10 +2827,10 @@ At the time when sandcastle washes away:
 Does the player mean finding the museum exterior:
 	it is very likely.
 
-Instead of finding the sandcastle when the subcommand of the sandcastle matches the text "wall":
+Instead of finding the sandcastle when the subcommand of the sandcastle matches "wall":
 	try approaching the old city walls.
 
-Instead of finding the museum exterior when the subcommand of the museum exterior matches the text "wall":
+Instead of finding the museum exterior when the subcommand of the museum exterior matches "wall":
 	try approaching the old city walls.
 
 Test sandcastle with "x castle / build castle / build sandcastle / look / smell castle / taste castle / touch castle / x castle / z".
@@ -2821,8 +2892,8 @@ Instead of rubbing the funnel:
 	otherwise:
 		say "[We][']ve brushed away most of the adhering sand, but there are always going to be a few grains left."
 
-Instead of wearing the funnel:
-	say "I try setting it on our head as a cap, but it slides off again."
+Sanity-check wearing the funnel:
+	say "I try setting it on our head as a cap, but it slides off again." instead.
 
 Instead of searching the funnel:
 	say "It restricts our view comically, as though [we] were peering through a doll's periscope. But the utility is limited."

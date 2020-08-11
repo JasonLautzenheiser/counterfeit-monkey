@@ -169,13 +169,16 @@ Definition: a quip is Brock-mentioning:
 	if it is what buried command center he heard of:
 		yes;
 	no.
-	
+
 Carry out examining a bed:
 	trigger Brock-bed.
 
 Carry out examining a dorm bed:
 	trigger Brock-bed.
 
+Check remembering Brock-bed:
+	if the uses of the noun is greater than 4:
+		say "I get the idea. You don't need to show me more." instead.
 
 Carry out remembering Brock-bed:
 	if the uses of the noun is:

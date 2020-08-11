@@ -32,6 +32,9 @@ When play begins (this is the open the measuring window rule):
 	if glulx graphics is supported:
 		open the measuring window.
 
+Map-ratio is a real number that varies.
+Map-ratio is initially 0.8395. [I guess this is how we do "constants" in Inform 7.]
+
 Ideal-width is a number that varies.
 
 To adjust width of the graphics window:
@@ -43,16 +46,17 @@ To adjust width of the graphics window:
 	let real-ideal be 0.0;
 	now real-ideal is ideal-width;
 	let ratio be real-ideal divided by the height of the graphics window;
-	if ratio > 0.8395: [ Too low to show the entire map when scaled to window width ]
-		now ideal-width is (height of graphics window * 0.8395) to the nearest whole number;
+	if ratio > map-ratio: [ Too low to show the entire map when scaled to window width ]
+		now ideal-width is (height of graphics window * map-ratio) to the nearest whole number;
 	if ideal-width is not original width: [ The width has changed ]
 		force the size of graphics window to ideal-width.
 
 When identification ends (this is the open the graphics window rule):
 	if glulx graphics is supported:
-		now current graphics drawing rule is the compass-drawing rule;
-		open the graphics window;
-		start looking for graphlinks.
+		unless graphics is disabled:
+			now current graphics drawing rule is the compass-drawing rule;
+			open the graphics window;
+			start looking for graphlinks.
 
 A glulx input handling rule for an arrange-event (this is the update the status line after arranging rule):
 	update the status line.
@@ -402,11 +406,13 @@ Figure of background colour is the file "map-background-colour.png".
 To redraw the map and compass:
 	if the graphics window is g-present:
 		let total height be height of the graphics window;
-		let scaled height be (ideal-width / 0.8395) to the nearest whole number;
+		let scaled height be (ideal-width / map-ratio) to the nearest whole number;
 		draw the local map of the location in graphics window at x 0 and y ((total height - scaled height) / 2) scaled to width ideal-width and height scaled height;
 		[ Draw the blue background below the map and add a pixel to the height to ensure that odd heights don't leave a 1 pixel black line ]
 		let padding height be (total height - scaled height) / 2 + 1;
 		draw figure of background colour in graphics window at x 0 and y (((total height - scaled height) / 2) + scaled height) scaled to width ideal-width and height padding height;
+		[ Draw a black square at the top to cover any artifacts left over after changing height ]
+		draw a rectangle of color "$000000" in graphics window at x 0 and y 0 of width ideal-width and height (total height - scaled height) / 2;
 		determine compass coordinates;
 		draw Figure of center-squiggle in graphics window at x x-coordinate of north and y y-coordinate of west scaled to width grid-size and height grid-size;
 		repeat with way running through directions:
@@ -418,29 +424,53 @@ To redraw the map and compass:
 				otherwise:
 					draw the unvisited image of the way in graphics window at x X and y Y scaled to width grid-size and height grid-size;
 
-
 Understand "graphics on" or "enable graphics" or "graphics" or "graphics mode" as enabling graphics. Enabling graphics is an action out of world.
 
+Include (-
+
+Array graphics_disabled --> 1;
+
+-) after "Definitions.i6t".
+
+To set graphics disabled flag:
+    (- if (arrayAsMillisecs(totalTestStartTime) == 0) @protect graphics_disabled 4;
+    graphics_disabled-->0 = 1; -)
+
+[We can only have one restore and restart protected variable at a time, so skip protecting the graphics_disabled flag if we are measuring total play time.]
+
+To unset graphics disabled flag:
+    (- graphics_disabled-->0 = 0; -)
+
+To decide whether graphics is disabled:
+	(- graphics_disabled-->0 -).
+
+
 Carry out enabling graphics:
+	unless glulx graphics is supported:
+		say "[first custom style][bracket]This interpreter does not support displaying graphics.[close bracket][roman type][paragraph break]" instead;
 	if the graphics window is g-present:
 		say "[first custom style][bracket]Graphics are already enabled.[close bracket][roman type][paragraph break]";
 	otherwise:
-		unless glulx graphics is supported:
-			say "[bracket]This interpreter does not support displaying graphics.[close bracket][paragraph break]" instead;
+		unless the measuring window is g-present:
+			open the measuring window;
+		now current graphics drawing rule is the compass-drawing rule;
 		open the graphics window;
 		start looking for graphlinks;
+		unset graphics disabled flag;
 		say "[first custom style][bracket]Graphics are now enabled.[close bracket][roman type][paragraph break]".
 
 Understand "graphics off" or "text only" or "text mode" as disabling graphics. Disabling graphics is an action out of world.
 
 Carry out disabling graphics:
+	unless glulx graphics is supported:
+		say "[first custom style][bracket]This interpreter does not support displaying graphics.[close bracket][roman type][paragraph break]" instead;
 	add the teach disabling graphics rule to the completed instruction list, if absent;
 	if the graphics window is g-present:
 		close the graphics window;
+		set graphics disabled flag;
 		say "[first custom style][bracket]Graphics are now disabled.[close bracket][roman type][paragraph break]";
 	otherwise:
 		say "[first custom style][bracket]Graphics are already disabled.[close bracket][roman type][paragraph break]".
-
 
 Chapter 2 - Sounds
 

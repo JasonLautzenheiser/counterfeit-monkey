@@ -11,11 +11,11 @@ This is the attempt going in rule:
 			say "([the C])";
 			try entering C;
 		otherwise:
-			say "[one of]Into what, exactly? [run paragraph on][or]There is no obvious way to enter. [run paragraph on][at random]";
+			say "[one of]Enter what, exactly? [run paragraph on][or]There's nothing obvious to enter here. [run paragraph on][at random]";
 			carry out the listing exits activity.
 
 This is the attempt going out rule:
-	if the player is enclosed by an enterable thing:
+	if the player is in an enterable thing or the player is on an enterable thing:
 		try exiting;
 	otherwise if out-direction of location is a direction and out-direction of location is not outside:
 		try going out-direction of location;
@@ -70,8 +70,8 @@ Instead of facing inside:
 	if dir is a direction:
 		let D be the door dir from the location;
 		if D is not a door:
-			let D be a random marked-visible facade fronting dir;
-		if D is something:
+			let D be a random facade in location fronting dir;
+		if D is not nothing:
 			say "([the D])";
 			try searching D instead;
 		otherwise if dir is inside:
@@ -80,14 +80,14 @@ Instead of facing inside:
 			try facing dir instead;
 	otherwise:
 		let C be car-or-container;
-		if C is something:
+		if C is not nothing:
 			say "([the C])";
 			try searching C instead;
 		otherwise:
 			say "[one of]What should [we] look inside, exactly?[or][We]['re] not sure what to look inside here.[at random]"
 
 To decide which object is car-or-container:
-	if there is a car (called C) in location and the player is not enclosed by C:
+	if there is a car (called C) in location and the player is not in C:
 		decide on C;
 	let B be a random marked-visible container in location;
 	if B is a box listed in the Table of Obvious Containers to Look Inside and the player is not enclosed by B:
@@ -98,7 +98,13 @@ To decide which object is car-or-container:
 Instead of exiting when the player is not enclosed by an enterable thing and the player's command does not include "get off/down/up":
 		try going outside.
 
-Check entering a closed container (called the target) when the player is not enclosed by the target (this is the attempt opening on enter rule):
+Check entering something (called target) when the target is in a container (called the target-parent):
+	if target-parent is not enterable:
+		say "[The target-parent] [are] too small to allow for that." instead;
+	if target-parent is closed:
+		say "[The target-parent] [are] closed." instead.
+
+Check entering a closed enterable container (called the target) when the player is not in the target (this is the attempt opening on enter rule):
 	try opening the noun;
 	if the noun is closed, stop the action.
 
@@ -107,13 +113,13 @@ Check exiting when the player is in a closed container (called the current-conta
 	if the current-container is closed, stop the action.
 
 Understand the command "enter" as something new.
-Understand "enter" as no-noun-entering. No-noun-entering is an action applying to nothing.
-Understand "enter [thing]" as entering.
+Understand "enter" as vaguely entering. Vaguely entering is an action applying to nothing.
+Understand "enter [thing]" or "get in/into [thing]" as entering.
 
-Carry out no-noun-entering:
+Carry out vaguely entering:
 	try going inside.
 
-Understand "get out of [thing]" or "exit [thing]" as getting out. Getting out is an action applying to one thing.
+Understand "get out of [thing]" or "get out [thing]" or "exit [thing]" as getting out. Getting out is an action applying to one thing.
 
 Understand "get out of here" as exiting.
 
@@ -136,7 +142,7 @@ the crate
 the shopping bag
 the plexiglas case
 the large carton
-the reclamation machine 
+the reclamation machine
 the shed
 the wall-hole
 the bin

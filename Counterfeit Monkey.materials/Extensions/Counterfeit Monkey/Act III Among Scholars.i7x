@@ -45,11 +45,12 @@ Section 2 - The Antiques Dealership
 After going to Arbot Maps & Antiques:
 	if Arbot Maps & Antiques is visited:
 		make no decision;
-	if the player carries the appointment card:
+	if the player encloses the appointment card:
 		say "We show the appointment card, and are let in.";
 		now Kate carries the appointment card;
 		now where there seems Arbot is nowhere;
 		now Arbot Maps & Antiques is visited;
+		continue the action;
 	otherwise:
 		say "The woman watching over the store stops you. 'I'm sorry,' she says. 'We are only open to those who have made previous visiting arrangements.' And we're shooed back out.";
 		move the player to Long Street South, without printing a room description.
@@ -68,9 +69,26 @@ Instead of examining the maps collection when the Slangovia map is unseen:
 	move the Slangovia map to the location;
 	say "[We] study the maps. One in the collection stands out: a [Slangovia map], framed like all the others but of suspiciously recent vintage."
 
+Sanity-check taking the maps collection:
+	if the Slangovia map is seen:
+		say "None of the other maps seems important." instead;
+	otherwise:
+		try examining the maps collection instead.
+
+Sanity-check buying the maps collection from Kate:
+	if the Slangovia map is seen:
+		say "None of the other maps seems important." instead;
+	otherwise:
+		 try examining the maps collection instead.
+
+Understand "map" as the maps collection when the location is Arbot Antiques and the slangovia map is not enclosed by location.
+
 The Slangovia map is a thing. The printed name is "map of Slangovia". Understand "of Slangovia" as the Slangovia map. The description is "It's a detailed street map pretending to correspond to some remote South African town called Slangovia. Cryptic icons dot the surface. There is a [fake-legend] in the lower right corner that appears to be a separate piece glued on."
 	The fake-legend is part of Slangovia map. The printed name of the fake-legend is "legend". The description of the fake-legend is "This legend tells of Iphis and Ianthe: Iphis, a girl raised in disguise as a boy, falls in love with her playmate Ianthe. She prays to the goddess Isis, who takes pity and transforms Iphis into a man, able to marry Ianthe after all." Understand "legend" as the fake-legend.
 	The introduction of the fake-legend is "It bears no obvious relation to the map of Slangovia."
+
+Does the player mean subject-asking the fake-legend:
+	it is very likely.
 
 The mannequin is a supporter in Arbot Maps & Antiques. The description is "A head and torso only, and abstractly rendered. The vaguely masculine shape is covered in coarse white linen." Understand "head" and "torso" and "masculine" and "shape" and "coarse" and "white" and "linen" as the mannequin.
 
@@ -239,9 +257,10 @@ The toolkit is a scenery thing on the dor-bar-top. The toolkit contains some scr
 	Instead of examining or searching the toolkit:
 		say "It offers an assortment: [a list of things *in the toolkit]."
 
-Rule for deciding whether all includes things enclosed by the toolkit while taking or removing:
-	if the action name part of the current action is the removing it from action:
-		it does;
+Rule for deciding whether all includes things in the toolkit while removing something from the toolkit:
+	it does.
+
+Rule for deciding whether all includes things in the toolkit while taking:
 	it does not.
 
 Instead of inserting something into the toolkit:
@@ -318,14 +337,8 @@ To say square-refusal:
 	if the legend is handled or the fake-legend is in the repository:
 		say "Hadn't we better see what message Brock left?";
 		stop the action;
-	if the fake-legend is not seen:
-		say "[if the noun is not My Apartment and the noun is not Apartment Bathroom]My apartment is that direction, but unless[otherwise]Unless[end if] we have some reason to go there, it seems least suspicious to avoid my old neighborhood.";
-	else:
-		say "At a guess, we're looking for a homonym paddle so we can convert the legend. ";
-		if Drinks Club is visited:
-			say "The Fleur d'Or Drinks Club has to be our best bet.";
-		else:
-			say "I'm pretty sure they've got one in one of the fancy bars off north Long Street.".
+	otherwise:
+		say "[if the noun is not My Apartment and the noun is not Apartment Bathroom]My apartment is that direction, but unless[otherwise]Unless[end if] we have some reason to go there, it seems least suspicious to avoid my old neighborhood[if the fake-legend is seen]. We should figure out the map enough to know where we’re going[end if].";
 
 South of Long Street South is Palm Square. The description of Palm Square is "[if unvisited]Now this is my part of town: [end if]Palm Square is the beginning of the university district. To the [Southeast], through the iron gate, is the university campus proper; and that unobtrusive little doorway directly [south] of us leads into the Babel Café." Palm Square is proper-named, checkpoint and southern.
 
@@ -393,23 +406,24 @@ Before going west in Palm Square when the bathroom window is scenery:
 	now the bathroom window is not scenery instead.
 
 Before unlocking or entering or opening the locked apartment door when the player does not enclose the key and the player is not in My Apartment:
-	if the bathroom window is scenery
-	begin;
+	if the bathroom window is scenery:
 		reveal bathroom window;
 		say "You had me leave my keys behind, remember?
 
-But if you insist, my apartment is actually pitifully easy to break into. That window there opens onto the bathroom, and you can force it from the outside without much effort. " instead;
-	otherwise;
+But if you insist, my apartment is actually pitifully easy to break into. That window there opens onto the bathroom, and you can force it from the outside without much effort. ";
+		unless the player is hurrying:
+			say paragraph break;
+		stop the action;
+	otherwise:
 		say "If we want to go into my apartment, we're going to have to climb in my window. Here, let me just streamline this process for us.";
-		try entering bathroom window instead;
-	end if.
+		try entering bathroom window instead.
 
 Understand "force [something openable]" or "force [something openable] open" as opening.
 
-Rule for printing the name of my apartment while not looking:
+Rule for printing the name of my apartment while listing exits or facing:
 	say "my apartment".
 
-Rule for printing the name of apartment bathroom while not looking:
+Rule for printing the name of apartment bathroom while listing exits or facing:
 	say "apartment bathroom".
 
 After going through the bathroom window:
@@ -449,7 +463,7 @@ Report opening the bathroom window for the first time:
 Report closing the bathroom window:
 	say "[We] slide the window shut[one of]. I feel obscurely better now[or][stopping]." instead.
 
-Before: if the current action involves the bathroom window,
+Before: if the noun is the bathroom window or the second noun is the bathroom window,
 	reveal bathroom window.
 
 To reveal bathroom window:
@@ -752,7 +766,7 @@ Instead of going east in University Oval:
 	try examining east-campus-extension.
 
 An activist is an alert woman in University Oval. Understand "student" or "protester" as the activist. The initial appearance is "[An activist] is standing in our way[if the activist carries the bright yellow sign], gripping [a bright yellow sign] that says 'TOXI WASTE AWARENESS!'[end if]." The description of the activist is "An earnest-looking woman, about 22."
-	The activist carries a bright yellow sign. The bright yellow sign is a sign. The description of the bright yellow sign is "The sign is bright yellow and says 'TOXI WASTE AWARENESS!'" The initial appearance is "A sign lies on the grass, abandoned by its owner."
+	The activist carries a bright yellow sign. The bright yellow sign is a sign. The description of the bright yellow sign is "The sign is bright yellow and says 'TOXI WASTE AWARENESS!'" The initial appearance is "A [bright yellow sign] lies on the grass, abandoned by its owner."
 	The printed name of the bright yellow sign is "sign".
 
 
@@ -814,12 +828,7 @@ After looking in the Language Studies Seminar Room when the seminar door is open
 		say "[One of]I shut the door so that [we] don't get interrupted.[or]For safety, I shut the door behind us.[stopping]";
 	continue the action.
 
-The Language Studies Seminar Room contains a chair.
-
-When play begins (this is the setting up the language studies seminar room rule):
-	let T be a random chair in the Language Studies Seminar Room;
-	now T is not scenery;
-	now T is not fixed in place.
+The LSR chair is a chair in The Language Studies Seminar Room. The printed name of the LSR chair is "chair". The LSR chair is not scenery. The LSR chair is portable.
 
 Before going from the Language Studies Seminar Room when the player carries  Problem of Adjectives:
 	try putting Problem of Adjectives on the LSR bookcase.
@@ -832,12 +841,12 @@ Carry out putting Problem of Adjectives on the LSR Bookcase:
 
 The LSR bookcase is a supporter in the Language Studies Seminar Room. The initial appearance is "The bookshelves lining the walls contain the department library." The description is "Built in and sturdily made." The printed name is "bookshelf". Understand "shelf" or "shelves" or "bookshelf" as the LSR bookcase.
 
-The big table is a supporter in the Language Studies Seminar Room.  "The [big table] at the cen[ter] of the room is an irregular polygon[if exactly one not handled chair is in location], with one [random not handled chair in location] pushed up to the shortest side[end if]."
+The big table is a supporter in the Language Studies Seminar Room.  "The [big table] at the cen[ter] of the room is an irregular polygon[if the LSR chair is in location and the LSR chair is not handled], with one [LSR chair] pushed up to the shortest side[end if]."
 	The introduction is "I think the shape is intended to undermine traditional conceptions of academic hierarchy, but in practice it  just means that whoever gets to seminar late has to sit with a table angle jabbing him in the stomach."
 	The description is "Crafted from some exotic wood with lots of interesting burl structure. There was a wealthy donor behind the construction of this room."
 	Understand "polygon" as the big table.
 
-History of the Standards Revolution is a book on the LSR bookcase. The description of History of the Standards Revolution is "It covers in minute detail the process by which the island standard[ize]d spelling and leveraged its linguistic power." The introduction is "[History] is of those bog-standard texts that everyone in my field owns a copy of and uses as a doorstop. Very occasionally something still arises that I need to look up, but I just about memor[ize]d it in preparation for my comprehensive exams."
+History of the Standards Revolution is a book on the LSR bookcase. The description of History of the Standards Revolution is "It covers in minute detail the process by which the island standard[ize]d spelling and leveraged its linguistic power." The introduction is "[History] is one of those bog-standard texts that everyone in my field owns a copy of and uses as a doorstop. Very occasionally something still arises that I need to look up, but I just about memor[ize]d it in preparation for my comprehensive exams."
 
 Lives of the Lexicographers is a book on the LSR bookcase. The description of Lives of the Lexicographers is "It is a substantial history of the major contributors to the art of dictionary-creation, and a useful guide to the specialist bibliography on each figure."
 
@@ -983,7 +992,7 @@ Instead of putting something fluid on the output tray:
 
 Test paper-bug with "tutorial off / shutoffice / wave c-remover at cream / open paper-drawer / put ream in drawer / close drawer / z / open drawer / x paper" holding the cream in the Department office.
 
-A draft document is a thing. Understand "pages" or "speech" or "talk" or "asterisks" as the draft document. [Understand "paper" as the draft document when the paper is not visible.] The description is "It's fifteen pages double-spaced, and appears to be the draft of a talk Professor Waterstone is preparing to give at a convention. I immediately notice, however, that several portions of the speech are marked with angry triple asterisks [--] Waterstone's way of marking up parts of text that need serious revision.
+A draft document is a thing. Understand "pages" or "speech" or "talk" or "asterisks" as the draft document. [Understand "paper" as the draft document when the paper is not visible.] The description is "[homonym-shame-wanted]It's fifteen pages double-spaced, and appears to be the draft of a talk Professor Waterstone is preparing to give at a convention. I immediately notice, however, that several portions of the speech are marked with angry triple asterisks [--] Waterstone's way of marking up parts of text that need serious revision.
 
 The talk concerns 'homonym shame': the anxiety felt in the Victorian era, and still manifested at times in modern culture, about objects that shared the same name as (and therefore theoretically might be converted into) something rude. Methods of disguising the legs of pianos and crotches of trees occupy a good portion of Waterstone's exposition, and there is a page-long aside on methods of  making sure that donkeys are known by that name and not by the alternative.
 
@@ -1049,7 +1058,7 @@ Section 5 - Higgate's Office
 
 Higgate's office is an office. It is privately-controlled, checkpoint and southern.
 
-Higgate's office door is west of the Language Studies Department Office. Higgate's office door is a door. It is open and lockable and scenery. Understand "west door" as higgate's office door when the location is the Language Studies Department Office.
+Higgate's office door is west of the Language Studies Department Office. Higgate's office door is a door. It is open and lockable and scenery. The description is "A nondescript office door with Professor Higgate's name on it." Understand "west door" or "name" as higgate's office door when the location is the Language Studies Department Office.
 
 Understand "bureau tape" or "tape" as Higgate's office door when Higgate-arrested has happened.
 
@@ -1095,6 +1104,9 @@ Instead of doing something in the presence of Professor Higgate when the noun is
 Instead of going somewhere when the location is the Seminar Room and Professor Higgate is in the location:
 	say "[We] got in here on the pretext of putting the book away. It would be odd to leave again without doing so."
 
+Sanity-check inserting something into the LSR Bookcase:
+	try putting the noun on the LSR Bookcase instead.
+
 After putting the Problem of Adjectives on the LSR Bookcase:
 	say "[We] take a moment to find the proper place for the book.
 
@@ -1106,6 +1118,9 @@ The sound of discussion comes from down the hall: two voices speaking in Lojban,
 	move Professor Higgate to higgate's office;
 	reset the interlocutor;
 	now higgate's office door is closed instead.
+
+Instead of taking the Problem of Adjectives when the Problem of Adjectives is on the LSR Bookcase:
+	say "[one of]After taking the trouble to return it, [or][stopping]I'd rather leave it here where it belongs."
 
 Instead of examining Higgate's office door when Higgate-arrested has happened:
 	say "The door is closed and sealed over with Bureau tape to prevent anyone from tampering with it in any way."
@@ -1178,7 +1193,10 @@ The description of Complete Lojban is "The book is bound in an ugly yellow bindi
 
 Rule for printing the name of Complete Lojban when Complete Lojban is not proper-named: say "[roman type]ugly yellow book"
 
-Carry out examining Complete Lojban: now the noun is proper-named.
+Carry out examining Complete Lojban:
+	unless the noun is proper-named:
+		now noun is proper-named;
+		reset hash code of noun.
 
 The sugar bowl is a container on the oval table. Instead of searching the sugar bowl, say "It is about a quarter full."
 
@@ -1255,11 +1273,11 @@ Instead of listening to office-door-1:
 		say "The door is open.".
 
 Instead of showing a Waterstone-inspiring thing to Professor Waterstone when the location is Waterstone's Office:
-	say "We are just about to show [Professor Waterstone] [the noun] when he suddenly gets up.";
+	say "We are just about to show [Professor Waterstone] [the noun], when he all of a sudden gets up from his chair.";
 	try Professor Waterstone discussing please-get-out.
 
 Instead of giving a Waterstone-inspiring thing to Professor Waterstone when the location is Waterstone's Office:
-	say "We are just about to give [the noun] to [Professor Waterstone] when he suddenly gets up.";
+	say "We are just about to give [the noun] to [Professor Waterstone], when he all of a sudden gets up from his chair.";
 	try Professor Waterstone discussing please-get-out.
 
 
@@ -1272,19 +1290,14 @@ Definition: a thing is Waterstone-inspiring:
 		yes;
 	no.
 
-We-have-knocked is a truth state that varies.
+[It is confusing if Watersone looks at the player's belongings before we even know that he is looking for anything. So we use a fact, homonym-shame-wanted, to check whether the player knows about the puzzle. This will be set to known if we have read the draft document, if we have already tried to show or give something to Waterstone, or simply by  knocking on his door after having been thrown out the first time.]
 
-To say He-Waterstone:
-	if we-have-knocked is true:
-		say "Waterstone";
-	otherwise:
-		say "He".
-
-Instead of knocking on office-door-1 when the location of Professor Waterstone is Waterstone's Office and office-door-1 is closed and the location is Language Studies Department Office:
-	if we-have-knocked is false:
-		say "Professor Waterstone looks up at us through the window in the door, as if to ask 'Yes? Was there something you wanted to show me?'[paragraph break]";
+Instead of knocking on office-door-1 when Professor Waterstone is on a chair and office-door-1 is closed and the location is Language Studies Department Office:
+	if the player does not know homonym-shame-wanted:
+		say "Professor Waterstone looks up at us through the window in the door, as if to ask 'Yes? Was there something you wanted to show me?'[homonym-shame-wanted]";
+		stop the action;
 	let the selected object be nothing;
-	if held-over-object is something and held-over-object is not the player:
+	if held-over-object is not nothing and held-over-object is not the player:
 		let selected object be held-over-object;
 		now held-over-object is the player;
 	else if the player carries a Waterstone-inspiring thing (called target):
@@ -1300,25 +1313,22 @@ Instead of knocking on office-door-1 when the location of Professor Waterstone i
 	else:
 		repeat with item running through things enclosed by the location:
 			if item is waterstone-inspiring:
-				say "[if we-have-knocked is true]Waterstone looks up and gives a little frown. [end if]It's clear he doesn't know why we knocked. [The item] might interest him, but perhaps he can't see [them] from that angle. Maybe if we were holding [them].";
-				now we-have-knocked is true;
+				say "Waterstone looks up and gives a little frown. It's clear he doesn't know why we knocked. [The item] might interest him, but perhaps he can't see [them] from that angle. Maybe if we were holding [them].";
 				stop the action;
 	if the selected object is nothing:
-		say "[if we-have-knocked is true]Waterstone looks up and gives a little frown. [end if]It's clear he doesn't know why we knocked; to be honest I'm not sure why we did either.";
-		now we-have-knocked is true;
+		say "Waterstone looks up and gives a little frown. It's clear he doesn't know why we knocked; to be honest I'm not sure why we did either.";
 		stop the action;
 	otherwise:
 		follow the water-reaction rules for the selected object;
-	now we-have-knocked is true;
 	stop the action.
 
 The water-reaction rules are an object-based rulebook.
 
 A Water-reaction rule for a Waterstone-inspiring thing (called the target):
-	say "[He-Waterstone] looks at [the target], briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at [the target], notes [the list of things which proffer the target]; grins. ";
+	say "Waterstone looks at [the target], briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at [the target], notes [the list of things which proffer the target]; grins. ";
 	say "He gets up and comes out of his office.
 
-'This is perfect,' Waterstone says. 'One more example to put into my talk [--] but I really should be going [--] should be able to get a ride from my wife [--] if I leave now [--] Here, you can have this if it interests you. I won't have time to use it.' He sets an invitation down on the desk.
+'This is perfect,' he says. 'One more example to put into my talk [--] but I really should be going [--] should be able to get a ride from my wife [--] if I leave now [--] Here, you can have this if it interests you. I won't have time to use it.' He sets an invitation down on the desk.
 
 'Come back and talk to me again later,' he adds. 'We can discuss your goals as a student. And now I really have to go [--] should have gone hours ago.' (There, see: he can be a nice man. More or less.)
 
@@ -1334,35 +1344,35 @@ He locks his door again and goes out. I think he is actually humming something."
 	rule succeeds.
 
 A Water-reaction rule for the passage when the ass does not proffer the passage:
-	say "[one of][He-Waterstone] looks at the passage, briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at the passage.
+	say "[one of]Waterstone looks at the passage, briefly arrested by some thought. He gets a monocle like mine out of his drawer. He looks through it at the passage.
 
 But what he sees disappoints him, and he shoves the monocle away again. He writes something on a paper and holds it up: 'Good thought [--] P-ASS-AGE [--] but it must have been genuinely constructed from [']ass['], not cobbled from [a list of things that proffer the passage]. Can't cite it.'
 
-This is an awful lot of writing; why the man can't come to the door and hold a conversation I don't know. But that's Waterstone for you[or]He checks the passage again, then shakes his head in disappointment when he sees it's not made with genuine ass[stopping].";
+This is an awful lot of writing; why the man can't come to the door and hold a conversation I don't know. But that's Waterstone for you[or]Waterstone checks the passage again, then shakes his head in disappointment when he sees it's not made with genuine ass[stopping].";
 	rule succeeds.
 
 A Water-reaction rule for the cock-ring:
-	say "[He-Waterstone] sees what [we][']ve made of the cock, and clutches desperately at his hair as though he's going to tear it out in tufts. His eyes bulge and water. I've never seen the man so close to apoplexy.
+	say "Waterstone sees what [we][']ve made of the cock, and clutches desperately at his hair as though he's going to tear it out in tufts. His eyes bulge and water. I've never seen the man so close to apoplexy.
 
 I think that was exactly the wrong thing, somehow.";
 	rule succeeds.
 
 A Water-reaction rule for a naughty-sounding thing (called target):
-	say "[He-Waterstone] glares at [the target]. Then he picks up a marker and writes on a piece of paper, '[one of]Yes, but how to change its name to something innocent?[no line break][or]Now you're just taunting me.[no line break][or]Please go away![no line break][stopping]' Having held up this sign for a minute, he crumples it and goes back to work.
+	say "Waterstone glares at [the target]. Then he picks up a marker and writes on a piece of paper, '[one of]Yes, but how to change its name to something innocent?[no line break][or]Now you're just taunting me.[no line break][or]Please go away![no line break][stopping]' Having held up this sign for a minute, he crumples it and goes back to work.
 
 If he were a cartoon there would be a thundercloud over his laptop.";
 	rule succeeds.
 
 A Water-reaction rule for the clock:
-	say "[He-Waterstone] inspects the clock through his monocle a moment. Then he picks up a marker and writes on a piece of paper, 'It was always a CLOCK. I need something where the original was naughty.' Having held up this sign for a minute, he crumples it and goes back to work.";
+	say "Waterstone inspects the clock through his monocle a moment. Then he picks up a marker and writes on a piece of paper, 'It was always a CLOCK. I need something where the original was naughty.' Having held up this sign for a minute, he crumples it and goes back to work.";
 	rule succeeds.
 
 A Water-reaction rule for the draft document:
-	say "[one of][He-Waterstone] stares at the draft document, apparently not recognizing it at first. Then he picks up a marker and writes on a piece of paper, 'Have you read it? Any ideas?' Having held up this sign for a minute, he crumples it and goes back to work.[or][He-Waterstone] looks up from his work long enough to give us an irritated glare. Perhaps we should consider what he suggested.[or]We get only a momentary flicker of attention from Waterstone. Perhaps we should have another look at the draft and think about what might interest him.[stopping]";
+	say "[one of]Waterstone stares at the draft document, apparently not recognizing it at first. Then he picks up a marker and writes on a piece of paper, 'Have you read it? Any ideas?' Having held up this sign for a minute, he crumples it and goes back to work.[or]Waterstone looks up from his work long enough to give us an irritated glare. Perhaps we should consider what he suggested.[or]We get only a momentary flicker of attention from Waterstone. Perhaps we should take another look at the draft and think about what might interest him.[stopping]";
 	rule succeeds.
 
 A last Water-reaction rule for something (called the target):
-	say "[one of][He-Waterstone] looks up from his work long enough to give us an irritated glare.[or][He-Waterstone] barely glances away from his typing this time.[or]Without looking up, Waterstone sticks out his tongue. Really, he's clearly very upset about his deadlines, it seems.[or][We] get only a momentary flicker of attention from Waterstone.[stopping]";
+	say "[one of]Waterstone looks up from his work long enough to give us an irritated glare.[or]Waterstone barely glances away from his typing this time.[or]Without looking up, Waterstone sticks out his tongue. Really, he's clearly very upset about his deadlines, it seems.[or][We] get only a momentary flicker of attention from Waterstone.[stopping]";
 	if the draft document is examined:
 		say "[line break]He seems to get that we're trying to show him [the target][one of], but as [they] [are] not related to the concept of homonym shame, it's not much help with his paper, so he probably doesn't want to be distracted[or], but [they] [are] not something whose original sounded dirty, so presumably that's not a lot of help with the paper[stopping].";
 	else:
@@ -1372,36 +1382,37 @@ A last Water-reaction rule for something (called the target):
 			say "[line break]He seems to get that we're trying to show him [the target], but I don't think he's very interested. His work doesn't seem to be going well. It's probably to do with whatever he's trying to print on the department printer.";
 	rule succeeds.
 
-Sanity-check saying hello to Professor Waterstone when Professor Waterstone is enclosed by Waterstone's Office and office-door-1 is closed and the location is Language Studies Department Office:
+Sanity-check saying hello to Professor Waterstone when Professor Waterstone is on a chair and office-door-1 is closed and the location is Language Studies Department Office:
 	say "Waterstone is unable to hear you through the closed door, which is presumably the purpose of closing it, so let's try knocking instead.";
 	try knocking on office-door-1 instead.
 
-Sanity-check giving something to Professor Waterstone when Professor Waterstone is enclosed by Waterstone's Office and office-door-1 is closed and the location is Language Studies Department Office:
+Sanity-check giving something to Professor Waterstone when Professor Waterstone is on a chair and office-door-1 is closed and the location is Language Studies Department Office:
 	now held-over-object is the noun;
-	say "Waterstone is unable to hear you through the closed door, which is presumably the purpose of closing it, so let's try knocking instead.";
+	say "Waterstone is unable to hear you through the closed door, which is presumably the purpose of closing it, so let's try knocking instead[homonym-shame-wanted].";
 	try knocking on office-door-1 instead.
 
-Sanity-check showing something to Professor Waterstone when Professor Waterstone is enclosed by Waterstone's Office and office-door-1 is closed and the location is Language Studies Department Office:
+Sanity-check showing something to Professor Waterstone when Professor Waterstone is on a chair and office-door-1 is closed and the location is Language Studies Department Office:
 	now held-over-object is the noun;
-	say "Waterstone is unable to hear you through the closed door, which is presumably the purpose of closing it, so let's try knocking instead.";
+	say "Waterstone is unable to hear you through the closed door, which is presumably the purpose of closing it, so let's try knocking instead[homonym-shame-wanted].";
 	try knocking on office-door-1 instead.
 
 Held-over-object is a thing that varies.
 
-Instead of showing something to special glass window when Professor Waterstone is enclosed by Waterstone's Office and office-door-1 is closed and the location is Language Studies Department Office:
-	say "Though there is a window and Waterstone can watch the outer office from his desk, he is unable to hear you through the closed door, which is presumably the purpose of closing it. I will try knocking instead.";
+Instead of showing something to special glass window when Professor Waterstone is on a chair and office-door-1 is closed and the location is Language Studies Department Office:
+	say "Though there is a window and Waterstone can watch the outer office from his desk, he is unable to hear you through the closed door, which is presumably the purpose of closing it. I will try knocking instead[homonym-shame-wanted].";
 	now held-over-object is the noun;
 	try knocking on office-door-1.
 
-Instead of giving something to office-door-1 when Professor Waterstone is enclosed by Waterstone's Office and office-door-1 is closed and the location is Language Studies Department Office:
-	say "Waterstone is unable to hear you through the closed door, which is presumably the purpose of closing it, so let's try knocking instead.";
+Instead of giving something to office-door-1 when Professor Waterstone is on a chair and office-door-1 is closed and the location is Language Studies Department Office:
+	say "Waterstone is unable to hear you through the closed door, which is presumably the purpose of closing it, so let's try knocking instead[homonym-shame-wanted].";
 	now held-over-object is the noun;
 	try knocking on office-door-1.
 
 A special glass window is part of office-door-1. The description of the special glass window is "It's nearly the width of the door, and fills most of the upper half of the frame."
 
 After deciding the scope of player when the player is in Language Studies Department Office:
-	place Waterstone's Office in scope.
+	if office-door-1 is closed:
+		place Waterstone's Office in scope.
 
 A description-concealing rule when the location is the Language Studies Department Office:
 	rapidly set all contents of Waterstone's Office not marked for listing.
@@ -1412,11 +1423,15 @@ A description-concealing rule when the location is the Language Studies Departme
 [Report Professor Waterstone locking office-door-1 with something:
 	say "Through the window in Waterstone's door, [we] can see him turning the lock. When he catches us watching he gives a tight, unfriendly smile and goes back to his desk." instead.]
 
+Check examining office-door-1 when the subcommand of office-door-1 matches "waterstone":
+	if Professor Waterstone is marked-visible:
+		try examining Professor Waterstone instead.
+
 Instead of searching the special glass window when office-door-1 is closed:
 	if the location is Waterstone's Office:
 		say "It's amazing what a great view there is."; [this actually should never happen because we shouldn't wind up trapped with W.]
 	otherwise:
-		if Professor Waterstone is enclosed by Waterstone's Office:
+		if Professor Waterstone is on a chair:
 			say "Though he can easily see us through the office door window, Professor Waterstone resolutely ignores our impolite staring. He's trying to get something done on his laptop, but keeps stopping to stare at the screen or, apparently, to curse at it.";
 		otherwise:
 			say "Waterstone's office looks oddly bare now that the man himself is gone."
@@ -1475,6 +1490,22 @@ A small laptop is a laptop. The description is "It goes everywhere with Watersto
 
 Instead of taking the small laptop:
 	say "We reach out our hand. He watches us the way a bird of prey might watch the twitching of a small garden snake. Our hand retracts. We do not take Professor Waterstone's laptop."
+
+Table of Ultratests (continued)
+topic	stuff	setting
+"waters1"	{ clock, screwdriver, shuttle, tub, backpack, member }	Language Studies Seminar Room
+
+Test waters1 with "unlegend / autoupgrade / wave l-remover at clock / unscrew screws / g / open case / put shuttle and cock in synthesizer / get crossword / synthesize / get shuttlecock / gonear printer / n / show shuttlecock to waterstone / put shuttlecock in backpack / knock / put member in backpack / knock / show member to waterstone / show shuttlecock to waterstone".
+
+Table of Ultratests (continued)
+topic	stuff	setting
+"waters2"	{ clock, screwdriver, shuttle, tub, backpack, cream }	Language Studies Seminar Room
+
+Test waters2 with "unlegend / autoupgrade / wave l-remover at clock / unscrew screws / g / open case / put shuttle and cock in synthesizer / get crossword / synthesize / get shuttlecock / gonear printer / n / show shuttlecock to waterstone / wave c-remover at cream / open paper drawer / put ream in paper drawer / close paper drawer / show draft to waterstone / put shuttlecock in backpack / knock / get shuttlecock / knock".
+
+Test waters3 with "unlegend / autoupgrade / n / ask why / ask whether / wave c-remover at cream / open paper drawer / put ream in paper drawer / close paper drawer / read draft / knock / show letter-remover to waterstone / g / g" holding the cream in Language Studies Department Office.
+
+Test waters4 with "unlegend / autoupgrade / n / get invitation / ask about invitation / ask why / ask whether / wave c-remover at cream / open paper drawer / put ream in paper drawer / close paper drawer / knock / show letter-remover to waterstone / g / read draft / knock / show letter-remover to waterstone / g / g" holding the cream in Language Studies Department Office.
 
 Section 7 - Samuel Johnson Basement
 
@@ -1547,7 +1578,7 @@ After going to the Rectification Room when the alterna-snap is in the large cart
 	now the alterna-snap is essential;
 	continue the action.
 
-Check going to Samuel Johnson Hall from Samuel Johnson Basement when the alterna-snap is in the large carton and the player is hurrying:
+Check going from Samuel Johnson Basement when the alterna-snap is in the large carton and the player is hurrying and final destination is not Rectification Room:
 	clear path-walked for the player;
 	now the player carries the alterna-snap;
 	say "We retrieve the snap as we walk past the carton."
@@ -1558,13 +1589,14 @@ Instead of going to the Rectification Room when the large carton does not contai
 		say "[path-walked so far]";
 	otherwise:
 		clear the path-walked for the player;
-	say "[one of]Before [we] go through the door to the Rectification Room, it occurs to us that Professor Brown is just next door, and that he is likely to be able to hear if [we] do anything in there. Possibly some kind of masking noise is in order[or][if the noisemaker is something][The noisemaker] [do] make noise, but you figure we should leave [them] out here in the hallway so that it will be louder than whatever we do in the room[otherwise]I defer to your judgment that [we] ought to provide some masking sound before proceeding[end if][stopping].".
+	say "[one of]Before [we] go through the door to the Rectification Room, it occurs to us that Professor Brown is just next door, and that he is likely to be able to hear if [we] do anything in there. Possibly some kind of masking noise is in order[or][if the noisemaker is not nothing][The noisemaker] [do] make noise, but you figure we should leave [them] out here in the hallway so that it will be louder than whatever we do in the room[otherwise]I defer to your judgment that [we] ought to provide some masking sound before proceeding[end if][stopping].".
 
 Instead of dropping something in Samuel Johnson Basement when the heft of the noun is less than 4:
-	say "I'll just leave [regarding the noun][those] in the carton; less likely to be disturbed there.";
+	unless the noun is in the large carton:
+		say "I'll just leave [regarding the noun][those] in the carton; less likely to be disturbed there.";
 	try inserting the noun into the large carton;
 
-After dropping something noisy in the large carton:
+After inserting something noisy into the large carton:
 	say "[We] set [the noun] in the carton, where [they] ought to provide a helpful distraction for the time being."
 
 Understand "recycle [something]" as recycling. Recycling is an action applying to one carried thing.
@@ -1574,6 +1606,9 @@ Check recycling something when the large carton is marked invisible:
 	say "There's no place to recycle [the noun]." instead.
 Carry out recycling something:
 	try inserting the noun into the large carton instead.
+
+Test snap with "unlegend / purloin keycard / w / drop snap in carton / w / e / sw / ne / drop snap / w / go to lecture hall at the podium / go to basement / drop snap / go to rectification room / go to monkey" holding the alterna-snap in Samuel Johnson Basement.
+
 
 Section 8 - Rectification Room
 
@@ -1733,7 +1768,7 @@ The letter-remover comes out again looking exactly the same as when it went in. 
 Section 9 - Graduate Student Office
 
 
-South of Samuel Johnson Basement is the Graduate Student Office. The description of the Graduate Student Office is "A small windowless room divided into cubicles for individual graduate students." Graduate Student Office is indoors and southern.
+South of Samuel Johnson Basement is the Graduate Student Office. The description of the Graduate Student Office is "A small windowless room divided into cubicles for individual graduate students." Graduate Student Office is indoors and southern and checkpoint.
 
 A tiny refrigerator is a refrigerator in the Graduate Student Office. The tiny refrigerator is not scenery. The fridge-top is part of the tiny refrigerator. It is a supporter. The printed name of the fridge-top is "fridge". Understand "top" or "top of fridge" as the fridge-top. The scent-description of the tiny refrigerator is "onions".
 
@@ -1817,7 +1852,7 @@ Instead of drinking the water cooler:
 
 Section 10 - Brown's Lab
 
-Southwest of Samuel Johnson Basement is Brown's Lab. Brown's Lab is indoors and southern.
+Southwest of Samuel Johnson Basement is Brown's Lab. Brown's Lab is indoors and southern and checkpoint.
 
 Sanity-check going to Brown's Lab when Higgate-arrested has happened:
 	say "The whole area is likely under inspection after Brown's little Judas act back there. Who knew he had it in him? Is he seriously expecting to get her position?" instead.
@@ -1873,7 +1908,7 @@ Rule for deciding the concealed possessions of Professor Brown:
 
 Section 11 - Lecture Hall
 
-Lecture Hall 1 is east of Samuel Johnson Basement. The description is "The main lecture hall used for large survey courses in language studies offered to undergraduates. I sat through courses here when I was an undergraduate myself, and have now delivered a few lectures as a teaching assistant." Lecture Hall 1 is indoors and southern.
+Lecture Hall 1 is east of Samuel Johnson Basement. The description is "The main lecture hall used for large survey courses in language studies offered to undergraduates. I sat through courses here when I was an undergraduate myself, and have now delivered a few lectures as a teaching assistant." Lecture Hall 1 is indoors and southern and checkpoint.
 
 Out-direction of Lecture Hall 1 is west. [Back to Samuel Johnson basement]
 
@@ -1882,7 +1917,10 @@ After deciding the scope of the player when the location is Lecture Hall 1:
 
 Rule for listing exits when looking in Lecture Hall 1: do nothing instead.
 
-The printed name is "Lecture Hall (at the podium)". Understand "podium" or "at podium" or "at the podium" or "(at podium)" or "(at the podium)" as Lecture Hall 1.
+The printed name is "Lecture Hall". Understand "podium" or "at podium" or "at the podium" or "(at podium)" or "(at the podium)" as Lecture Hall 1.
+
+After printing the name of Lecture Hall 1 while not constructing the status line:
+	say " [roman type](at the [podium])".
 
 The podium is a supporter in Lecture Hall 1. It is scenery. The description is "An advanced, pre-wired [podium] that allows the instructor to project slides from a laptop or show movies."
 
@@ -1901,13 +1939,13 @@ Rule for writing a topic sentence about the page when the page is on the podium:
 	say "Some previous lecturer has left [a page] on [the podium]. [run paragraph on]"
 
 Before local looking Lecture Hall 1:
-	if the subcommand of the noun matches the text "podium":
+	if the subcommand of the noun matches "podium":
 		try examining the podium instead.
 
 Test page with "tutorial off / look / x podium / look" in Lecture Hall 1.
 
 The conference poster is a fixed in place thing in Lecture Hall 1. Understand "title" or "papyrus" or "font" or "daguerreotype" or "catchy" or "portly woman" or "speakers" or "pictures" or "inset" or "waterstone" as the conference poster.
-	The initial appearance is "A poster at the front of the room announces a conference on cultural reactions to linguistic change. It is being held in Nice the day after tomorrow, with Professor Waterstone as keynote speaker, on the topic of 'homonym shame'."
+	The initial appearance is "A [poster] at the front of the room announces a conference on cultural reactions to linguistic change. It is being held in Nice the day after tomorrow, with Professor Waterstone as keynote speaker, on the topic of 'homonym shame'."
 	The introduction is "Somehow I had forgotten about the date of this: I've been too much worried about our escape."
 	The description is "It's the usual sort of thing: the conference title set in Papyrus font; a stock daguerreotype of a portly woman holding a letter-remover the size of a policeman's cosh; inset pictures of the major speakers, with pride of place for Waterstone himself."
 
@@ -1920,9 +1958,11 @@ A dangerous destruction rule for the conference poster:
 Sanity-check looking under the conference poster when the conference poster is fixed in place:
 	say "That would be hard to do without ripping it off the wall." instead.
 
-Lecture Hall 2 is south of Lecture Hall 1. The printed name is "Lecture Hall (among the seats)". Understand "seats" or "among the seats" or "among seats" or "(among seats)" or "(among the seats)" as Lecture Hall 2. Lecture Hall 2 is indoors and southern.
+Lecture Hall 2 is south of Lecture Hall 1. The printed name is "Lecture Hall". Understand "seats" or "among the seats" or "among seats" or "(among seats)" or "(among the seats)" as Lecture Hall 2. Lecture Hall 2 is indoors and southern.
 	The description is "Many are the fine hours I have spent here dozing; and many are the students of mine who have done the same. The circle of life becomes complete."
 
+After printing the name of Lecture Hall 2 while not constructing the status line:
+	say " [roman type](among the [if boldening is true][bold type][end if]seats[roman type])".
 
 Some wooden seats are supporters in Lecture Hall 2. Understand "hard" or "wood" as the wooden seats. The initial appearance is "The room extends [if Location is Lecture Hall 1]south[otherwise]north[end if], full of hard [wooden seats]." The description is "Ingeniously uncomfortable."
 

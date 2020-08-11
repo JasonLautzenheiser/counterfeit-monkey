@@ -14,16 +14,19 @@ Section 1 - Smarter Parser
 Include Smarter Parser by Aaron Reed.
 Include Numbered Disambiguation Choices by Aaron Reed.
 
-[This is to work around a problem where the parser is confused by numbered disambiguation choices. If it asks which souvenir we want to examine and we answer 1, the answer is parsed as "examine 1 souvenirs", which is a valid way of referring to anything that matches "souvenirs", not just the item with disambiguation id 1.]
-Does the player mean doing something when the player's command includes "[number]":
-	if the noun is not nothing and the disambiguation id of the noun is the number understood:
-		it is very likely;
-	otherwise if the second noun is not nothing and the disambiguation id of the second noun is the number understood:
-		it is very likely;
+A command-string altering rule when the number of entries in list of disambiguables > 0 (this is the New Numbered Disambiguation Choices reset disambiguation id when no numbers in command rule):
+	let disam-cmd be player-command-substitute;
+	replace the text ")" in disam-cmd with " ";
+	unless disam-cmd matches the regular expression ".*\d.*":
+		follow the Numbered Disambiguation Choices reset disambiguables rule;
+	otherwise:
+		now player-command-substitute is disam-cmd.
 
-[For some reason the above is not triggered when disambiguating quips.]
+The Numbered Disambiguation Choices reset disambiguation id when no numbers in command rule is not listed in any rulebook.
+
+[For some reason the normal Does the player mean rule in NDC does not work when disambiguating quips, so we have to add this.]
 Does the player mean discussing a quip (called target quip) when the player's command includes "1":
-	if the disambiguation id of target quip is 1:
+	if the disambiguation id of target quip is s1:
 		it is very likely;
 	otherwise:
 		it is very unlikely.
@@ -59,9 +62,18 @@ A smarter parser rule when sp_normal (this is the new stripping adverbs rule):
 		identify error as stripping adverbs rule;
 		reparse the command.
 
+The new signs of frustration rule is listed instead of the signs of frustration rule in the Smarter Parser rulebook.
+
+A smarter parser rule when sp_normal (this is the new signs of frustration rule):
+	if input contains "(dumb|moron|idiot|lame|duh|retard|suck|blow)(ic|ed|s)?" or input contains "(_swear|stupid|bored|boring|die|suicide|death|hate)":
+		identify error as signs of frustration rule;
+		reject the command.
+
 The stripping failed with rule is not listed in any rulebook. [There are too many actions in the game where "with" IS fruitful, so this often gives a misleading response.]
 
-The the Smarter Parser simplify punctuation rule is not listed in any rulebook.
+The Smarter Parser simplify punctuation rule is not listed in any rulebook.
+
+The scandalous standardize swears rule is not listed in any rulebook.
 
 When play begins (this is the change smarter parse messages rule):
 	choose row with SP rule of asking unparseable questions rule in the Table of Smarter Parser Messages;
@@ -120,13 +132,27 @@ Understand the command "chew" as "eat". [to cover the gum situation]
 
 Understand "climb on/onto [something]" as climbing.
 
-To make is a verb. To wish is a verb. To shy is a verb. To become is a verb. To make is a verb. To back is a verb. To fall is a verb. To cease is a verb. To meet is a verb. To hop is a verb. To peer is a verb. To ping is a verb. To stare is a verb. To decide is a verb. To shake is a verb. To withdraw is a verb. To bounce is a verb. To blink is a verb. To regard is a verb. To keep is a verb.
+To abut is a verb. To back is a verb. To become is a verb. To blink is a verb. To bounce is a verb. To cease is a verb. To clamber is a verb. To clatter is a verb. To cock is a verb. To decide is a verb. To drip is a verb. To exclaim is a verb. To fall is a verb. To feature is a verb. To flee is a verb. To flicker is a verb. To flutter is a verb. To fold is a verb. To frown is a verb. To gag is a verb. To hop is a verb. To keep is a verb. To land is a verb. To leak is a verb. To leap is a verb. To make is a verb. To meet is a verb. To nod is a verb. To peer is a verb. To ping is a verb. To recite is a verb. To recoalesce is a verb. To recoil is a verb. To reform is a verb. To regard is a verb. To remark is a verb. To rest is a verb. To revolve is a verb. To scrabble is a verb. To scramble is a verb. To shake is a verb. To shatter is a verb. To shift is a verb. To shy is a verb. To slip is a verb. To stare is a verb. To strike is a verb. To wish is a verb. To withdraw is a verb.
 
 [Before eating something which is not carried by the player:
 	try taking the noun;
 	if the player does not have the noun, stop the action. ]
 
-Before wearing something which is not carried by the player: if the noun is worn, continue the action; try taking the noun; if the player does not have the noun, stop the action.
+The basic accessibility rule does nothing when wearing something which is in the backpack.
+
+Before wearing something which is not carried by the player:
+	if the noun is worn:
+		continue the action;
+	try taking the noun;
+	if the player does not have the noun:
+		stop the action.
+
+The basic accessibility rule does nothing when waving the letter-remover at something and the letter-remover is in the backpack.
+
+Before waving the letter-remover at something when the letter-remover is not carried by the player:
+	try taking the letter-remover;
+	if the player does not have the letter-remover:
+		stop the action.
 
 Understand "plugh" or "xyzzy" or "frotz" or "plover" as a mistake ("What [we] do isn't magic. It's science.").
 
@@ -153,7 +179,10 @@ To decide whether (item - a thing) must be touched:
 An accessibility rule (this is the no touching NPC stuff rule):
 	if the touch-goal is enclosed by someone (called the owner) who is not the actor and the touch-goal must be touched:
 		if the person reaching is the player:
-			say "I don't dare invade the personal space of [the owner].";
+			if the owner is distant:
+				say "[The owner] is too far away.";
+			otherwise:
+				say "[We] don't dare invade the personal space of [the owner].";
 		rule fails;
 	make no decision.
 
@@ -168,10 +197,11 @@ A first accessibility rule (this is the go to location rule):
 	make no decision.
 
 Rule for reaching outside a car (called C) (this is the can't reach outside car rule):
-	try exiting;
-	if the player is enclosed by C:
-		deny access;
-	make no decision.
+	unless listening:
+		try exiting;
+		if the player is in C:
+			deny access;
+		make no decision.
 
 To decide what object is the touch-goal:
 	(- (untouchable_object) -).
@@ -195,14 +225,20 @@ Before taking something which is in a closed container (called the source):
 	abide by the try reaching rules for the noun.
 
 Check an actor inserting something into (this is the new can't insert what's not held rule):
-	if the actor is carrying the noun, continue the action;
-	if the actor is wearing the noun, continue the action;
-	if the second noun is not a container, continue the action;
+	if the actor is carrying the noun:
+		continue the action;
+	if the actor is wearing the noun:
+		continue the action;
+	if the second noun is not a container:
+		continue the action;
 	carry out the implicitly taking activity with the noun;
-	if the actor is carrying the noun, continue the action;
+	if the actor is carrying the noun:
+		if the second noun is closed:
+			abide by the try opening rules for the second noun;
+		continue the action;
 	stop the action.
 
-The new can't insert what's not held rule is listed instead of the can't insert what's not held rule in the check inserting it into rulebook
+The new can't insert what's not held rule is listed instead of the can't insert what's not held rule in the check inserting it into rulebook.
 
 Instead of inserting something into a supporter which incorporates a drawer (called target drawer):
 	try inserting the noun into target drawer.
@@ -220,7 +256,9 @@ The try opening rules is an object-based rulebook.
 The try reaching rules is an object-based rulebook.
 
 A try opening rule for a container (called the box):
-	if the player is not enclosed by the box:
+	unless the action is not silent:
+		say "(opening [the box])";
+	if the player is not in the box:
 		if the box is not openable:
 			say "[The box] [aren't] open.";
 		otherwise:
@@ -241,6 +279,20 @@ A try reaching rule for something (called the target):
 	if the target is not touchable:
 		say "[We] cannot reach [the second noun] from here.";
 		abide by the cancel multiple rule.
+
+Check inserting something heavy into something when the carrying capacity of the second noun is 1:
+	unless the second noun is the t-inserter:
+		say "[The noun] [are] too big to fit into [the second noun]." instead.
+
+After opening an opaque container (called the box):
+	if the box is open:
+		mark contents of box visible;
+		continue the action.
+
+After closing an opaque container (called the box):
+	if the box is closed:
+		mark contents of box invisible;
+		continue the action.
 
 Sanity-check giving something held by someone (called the target) to the target:
 	say "[The target] already [have] [the noun]." instead.
@@ -371,6 +423,29 @@ Instead of drinking something which is not fluid:
 Understand "apply pressure to [something]" as pushing.
 Understand "lean on [something]" as pushing.
 
+Section 5 - Input string modification
+
+[Changing the text of the player's command will re-run the tokenisation step. In order to make this happen less frequently and save some cycles, we have a custom rulebook, "the command-string altering rules" that runs at the beginning of the After reading a command stage, copies the player's command to a global string (player-command-substitute), operates on this instead of on the "player's command" array and then changes the text of the player's command once after the changes are done.
+
+The reason we do it as a custom rulebook is to make sure that they run before any other After reading a command rules.]
+
+Player-command-substitute is some text that varies. Player-command-substitute is initially "".
+
+The command-string altering rules is a rulebook. The command-string altering rules have outcomes parsing fails (failure) and parsing continues (success).
+
+A last command-string altering rule:
+	parsing continues.
+
+A first after reading a command rule (this is the alter the command-string rule):
+	now player-command-substitute is the player's command;
+	now player-command-substitute is player-command-substitute in lower case;
+	follow the command-string altering rules;
+	if the outcome of the rulebook is the parsing fails outcome:
+		now player-command-substitute is "";
+		reject the player's command;
+	otherwise:
+		change the text of the player's command to player-command-substitute;
+		now player-command-substitute is "".
 
 Part 2 - Senses
 
@@ -538,7 +613,7 @@ To say walk-length for (N - a number):
 [The rather odd cycling guarantees that we don't repeat a word.]
 
 To say walk-drive:
-	if the player is enclosed by a vehicle:
+	if the player is in a vehicle:
 		say "drive";
 	otherwise:
 		say "[one of]walk[or]hike[as decreasingly likely outcomes]".
@@ -588,9 +663,9 @@ To clear all/the/-- path-walked for (worker - yourself):
 			let last movement be entry N in the described motion of the player;
 			truncate the described motion of the player to (N - 1) entries;
 			if N is 1:
-				say "We [if the player is enclosed by a vehicle]drive[otherwise]go[end if]";
+				say "We [if the player is in a vehicle]drive[otherwise]go[end if]";
 			otherwise:
-				say "We [if the player is enclosed by a vehicle]drive[otherwise]go[end if] [described motion of the player]";
+				say "We [if the player is in a vehicle]drive[otherwise]go[end if] [described motion of the player]";
 				if N is greater than 2:
 					say ", before heading";
 				otherwise:
@@ -727,8 +802,9 @@ A room-restriction rule for Cold Storage when Brock-argument has not happened:
 	rule fails. ]
 
 After going a direction for the third turn:
-	if the location is visited:
-		say "[first custom style][bracket]If you're traveling far, you can always type GO TO (location name) to get there automatically.[close bracket][roman type][paragraph break]";
+	unless we have approached:
+		if the location is visited:
+			say "[first custom style][bracket]If you're traveling far, you can always type GO TO (location name) to get there automatically.[close bracket][roman type][paragraph break]";
 	continue the action.
 
 
@@ -769,7 +845,7 @@ Section 1 - Far Away Things and Facades
 
 Include Far away by Jon Ingold.
 
-Instead of throwing something at something far-off:
+Instead of throwing something at something distant:
 	say "Our aim isn't nearly good enough."
 
 suppress-exit-listing is a truth state that varies.
@@ -836,9 +912,12 @@ Understand "here" or "surroundings" as a room when the item described is the loc
 
 Understand "examine [thing]" or "look [thing]" or "look at [thing]" as examining.
 
-Understand "examine [any locally-present room]" or "look at [any locally-present room]" or "look [any locally-present room]" as local looking. Understand "look around" as looking.
+Understand "examine [room]" or "look at [room]" or "look [room]" as local looking. Understand "look around" as looking.
 
 Local looking is an action applying to one thing.
+
+After deciding the scope of the player while local looking:
+	place the location in scope.
 
 Carry out local looking:
 	try looking.
@@ -857,12 +936,16 @@ Rule for distantly describing a proper-named room (called target) (this is the n
 The default distant description rule is not listed in any rulebook.
 
 Rule for distantly describing a room (called target):
-	let N be "[the target]";
-	say "[We] can make out [N in lower case] that way."
+	let N be the printed name of the target;
+	unless the target is proper-named:
+		now N is N in lower case;
+	say "[We] can make out [N] that way."
 
 Rule for distantly describing a room (called target) which encloses someone when the location is indoors:
-	let N be "[the target]";
-	say "That way [we] can see [unless the target is proper-named][N in lower case][otherwise][the target][end if], in which [is-are a list of people enclosed by the target]."
+	let N be the printed name of the target;
+	unless the target is proper-named:
+		now N is N in lower case;
+	say "That way [we] can see [N], in which [is-are a list of people enclosed by the target]."
 
 When play begins (this is the nothing-to-see-that-way rule):
 	now nothing-to-see-that-way is "[We] can't see anything interesting in that direction."
@@ -916,7 +999,7 @@ Last check facing (this is the face adjacent directions rule):
 	otherwise if leftward thing is a road and rightward thing is a road:
 		say "That way is the corner of [the leftward thing] and [the rightward thing]." instead;
 	otherwise if leftward thing is a facade and rightward thing is a facade:
-		say "In that direction [one of][the leftward thing] abut[s] [the rightward thing], and there's no good way between them[or][the leftward thing] meet[s] the edge of [the rightward thing][or]lies the corner between [the leftward thing] and [the rightward thing][at random]." instead;
+		say "In that direction [one of][the leftward thing] [abut] [the rightward thing], and there's no good way between them[or][the leftward thing] [meet] the edge of [the rightward thing][or]lies the corner between [the leftward thing] and [the rightward thing][at random]." instead;
 	otherwise if leftward thing is a road:
 		say "That way is the corner of [the rightward thing] and the beginning of [leftward thing] running [leftway]." instead;
 	otherwise if rightward thing is a road:
@@ -1005,7 +1088,9 @@ Instead of going from a road to a road:
 		continue the action;
 	if a car (called target) is in location:
 		if more than one car is in location:
-			now the target is a random fueled car in location; [there will only ever be enough fuel for one car]
+			now the target is a random fueled operational car in location;
+			if target is nothing:
+				now the target is a random car in location;
 		try entering the target;
 		if the player is in the target:
 			try going the noun instead;
@@ -1045,17 +1130,34 @@ Understand "honk" or "honk at [text]" as a mistake ("[if the player is not in a 
 
 Understand "protest" or "join protest" or "picket" as a mistake ("If I thought you could change Atlantis that way, I'd be on board. But I've given up on social action long since.").
 
-A car is a kind of vehicle. A car is usually transparent. The heft of a car is 7. The flexible appearance of a car is "Our car[one of] [--] a sub-sub-compact that looks like it might be outraced by a kid on a scooter [--][or] [--] which might better be described as a covered bicycle [--][or][at random] is parked [if the location is offroad]illegally [end if]nearby."
+A car is a kind of vehicle. A car is usually transparent. The heft of a car is 8. The flexible appearance of a car is "".
 	The description of a car is "It is little larger than a toy, but that is what you want when driving on the streets around here. Any substantial vehicle wouldn't fit down the winding drives."
 	The introduction is "Here is how my mother gets around. She takes a 300 Euro Hermès scarf with an orange border and a pattern of prancing horses. She tosses it in the air. As it falls, she shoots it twice, like a clay pigeon: once to take out the F, the second time for the S. And such a car: buttery leather seats, jaguar lines. If someone asks how she gets such good results, she jokes that it's because of her quality materials.
 
 Suffice it to say that we are not similarly blessed."
-	Understand "toy" or "sub-subcompact" or "door" or "tank" as a car.
+	Understand "toy" or "sub-subcompact" or "door" or "tank" or "engine" as a car.
 	The scent-description of a car is "metal parts and oil".
+
+Rule for writing a topic sentence about a car (called target car):
+	let N be 0;
+	repeat with C running through cars in location:
+		unless C is the alterna-shuttle or C is the truck:
+			increment N;
+			now C is mentioned;
+	if N is greater than 1:
+		say "There are [N in words] cars parked [if the location is offroad]illegally [end if]nearby. ";
+	otherwise:
+		say "Our car[one of] [--] a sub-sub-compact that looks like it might be outraced by a kid on a scooter [--][or] [--] which might better be described as a covered bicycle [--][or][at random] is parked [if the location is offroad]illegally [end if]nearby. "
 
 A car can be fueled or unfueled. A car is usually unfueled.
 
 Definition: a thing is fuel-like if it is the fuel or it is the gas.
+
+Does the player mean entering a fueled car:
+	it is very likely.
+
+Does the player mean entering an operational car:
+	it is very likely.
 
 Sanity-check inserting a fuel-like thing into a car:
 	try fueling the second noun with the noun instead.
@@ -1075,6 +1177,9 @@ Rule for supplying a missing second noun while fueling something with:
 
 Instead of filling a car with a fuel-like thing:
 	try fueling the noun with the second noun.
+
+Does the player mean fueling an unfueled car with something:
+	it is very likely.
 
 Check fueling something with a vegetable:
 	say "I've heard of biodiesel, but that carries the point too far." instead.
@@ -1128,6 +1233,17 @@ Check tuning:
 Sanity-check inserting oil into a car:
 	say "In my limited interactions with motor vehicles, I've always taken the machine to a garage for any corrective work. This includes topping up the oil." instead.
 
+Understand "oil [something]" or "lubricate [something]" as oiling. Oiling is an action applying to one thing.
+
+Sanity-check oiling when there is no oil enclosed by location and the poppy-oil is not enclosed by location:
+	say "There is no oil here." instead.
+
+Check oiling something which is not a car:
+	say "[The noun] [don't] need oiling." instead.
+
+Carry out oiling:
+	try tuning the noun.
+
 Report opening a car:
 	say "[one of][We] open the car door: perhaps unsurprisingly, it comes without an effective lock system.[or][We] swing the car door open.[or][We] open the door of the car.[stopping]" instead.
 
@@ -1156,11 +1272,31 @@ An ignition is a kind of device. One ignition is part of every car. Understand "
 
 The gas-gauge is a kind of thing. One gas-gauge is part of every car. The description is "[if the item described is part of a car that is fueled]It points over at the right, which must be Full[otherwise]It points all the way around at the left, or Empty[car-broken][end if]." The printed name of the gas-gauge is "gas gauge". Understand "gauge" or "gas gauge" as the gas-gauge.
 
+Before switching on an ignition which is part of a closed car (called target car):
+	unless the player is in the target car:
+		try opening the target car;
+		if the target car is not open:
+			stop the action.
+
 Before switching on an ignition which is part of an open car (called target car):
+	unless the player is in the target car:
+		try entering the target car;
+		if the player is not in the target car:
+			stop the action;
 	silently try closing target car.
 
+Check switching on an ignition which is part of a closed car (called target car):
+	unless the player is in the target car:
+		try opening the target car;
+		if the target car is not open:
+			stop the action.
+
 Check switching on an ignition which is part of an unfueled car:
-	say "[car-broken]There's no gas in the car; without fuel, it's not going far." instead.
+	assign "Fuel the car";
+	say "[car-broken][car-needs-fuel]." instead.
+
+To say car-needs-fuel:
+	say "[car-broken][one of]The extremely primitive dial in front of us is pointing all the way to the left. I think that's its way of saying it's out of fuel. At any rate, the engine won't start[or]There's no gas in the car; without fuel, it's not going far[stopping]".
 
 Check switching on an ignition which is part of a damaged car:
 	say "[car-broken]Though the engine does briefly turn on, there's clearly something wrong with it, from the unpleasant noises and the flashing lights on the dash. Perhaps it needs oil." instead.
@@ -1178,7 +1314,7 @@ A car can be operational or damaged. A car is usually damaged.
 
 Sanity-check going by unfueled car:
 	assign "Fuel the car";
-	say "[car-broken]The extremely primitive dial in front of us is pointing all the way to the left. I think that's its way of saying it's out of fuel. At any rate, the engine won't start." instead.
+	say "[car-broken][car-needs-fuel]." instead.
 
 Sanity-check going by damaged car:
 	say "[car-broken]The car refuses to run properly: evidently you got us a lemon. It's going to take some tuning up before it will go." instead.
@@ -1280,9 +1416,9 @@ Instead of climbing the scaffolding:
 
 Understand "cross [traffic]" or "ignore [traffic]" as a mistake ("You may have the nerve, but I don't.") when the traffic is marked-visible.
 
-Test car-behavior with "tutorial off / car-acquire / cross traffic / ignore traffic / drive to roundabout / park / get out of car / go to deep street / nw / e / climb masses / look through window / out / out / se / get in car / drive to tall street / go to roundabout / drive to monkey" in high street.
+Test car-behavior with "tutorial off / car-acquire / unmonkey / put remover in backpack / close backpack / cross traffic / ignore traffic / drive to roundabout / park / get out of car / go to deep street / nw / e / climb masses / look through window / out / out / se / get in car / drive to tall street / go to roundabout / drive to monkey" holding the backpack in high street.
 
-Test roundaboutation with "tutorial off / car-acquire / drive to roundabout / z / z / z" in high street.
+Test roundaboutation with "tutorial off / unlegend / car-acquire / drive to roundabout / z / z / z" in high street.
 
 Section 4 - The View From Inside
 
@@ -1399,22 +1535,25 @@ A thing can be essential. A thing is usually not essential.
 	if it is enclosed by a vehicle which contains the player, no;
 	yes.]
 
-Before going somewhere when the player is staid and the unleavable is something:
+Before going somewhere when the player is staid and the unleavable is not nothing:
 	abide by the don't-leave-the-unleavable rule.
 
 This is the don't-leave-the-unleavable rule:
 	let the needed-thing be the unleavable;
-	while the needed-thing is something:
-		if the holder of the needed-thing is in a closed container (called the box):
+	while the needed-thing is not nothing:
+		if the needed-thing is enclosed by a closed container (called the box) and the player is not in the box:
 			try opening the box;
 		if the needed-thing is the iron-pans:
 			reduce iron-pans;
 			if the i-pan is marked-visible:
 				now the needed-thing is the i-pan;
-		try taking the needed-thing;
-		if the player does not carry the needed-thing:
-			say "I don't think [we] should leave without [the needed-thing].";
-			the rule fails;
+		if the needed-thing is a person:
+			move needed-thing to the holder of the player;
+		otherwise:
+			try taking the needed-thing;
+			if the player does not carry the needed-thing:
+				say "I don't think [we] should leave without [the needed-thing].";
+				the rule fails;
 		let the needed-thing be the unleavable.
 
 A room can be publicly-available or privately-controlled. A room is usually publicly-available.
@@ -1487,7 +1626,14 @@ Include Postures by Emily Short.
 
 Sanity-check going up when the room up from the location is nothing:
 	if the player is not standing:
-		try taking position standing instead.
+		if the player is on a supporter:
+			try exiting instead;
+		otherwise:
+			try taking position standing instead;
+
+Sanity-check going down when the room down from the location is nothing:
+	if the player is on a supporter and the player is not seated:
+		try exiting instead.
 
 Check going to a room when the player is not in the location:
 	while the player is not in the location:
@@ -1555,19 +1701,22 @@ A mirror is a kind of thing. A mirror is in every bathroom. A mirror is in every
 The description of a mirror is "It's gleaming and shiny and very clean and I don't want to look in it."
 
 Instead of searching a mirror when the player wears a wig and the player wears the monocle:
-	say "The wig and the monocle together suggest some sort of steampunk fancy dress party."
+	say "The wig and the monocle together suggest some sort of steampunk fancy dress party.";
+	try looking at the noun through the monocle.
 
 Instead of searching a mirror when the player wears a wig:
 	say "The wig looks surprisingly natural[if the pass is seen], and [we] resemble the image on the pass much better than [we] do without[end if]."
 
 Instead of searching a mirror when the player wears a hairpiece and the player wears the monocle:
-	say "The hairpiece/monocle combination makes us look like some sort of funky steampunk engineer, which might not be the most inconspicuous way to go."
+	say "The hairpiece/monocle combination makes us look like some sort of funky steampunk engineer, which might not be the most inconspicuous way to go.";
+	try looking at the noun through the monocle.
 
-Instead of searching a mirror when the player wears a hairpiece:
-	say "The hairpiece looks surprisingly natural[if the pass is seen], and [we] resemble the image on the pass much better than [we] do without[end if]."
+Instead of searching a mirror when the player wears a hairpiece (called H):
+	say "[The H] looks surprisingly natural[if the pass is seen], and [we] resemble the image on the pass much better than [we] do without[end if]."
 
 Instead of searching a mirror when the player wears a monocle:
-	say "The monocle makes our right eye look deep green, and it has a sinister quality as well."
+	say "The monocle makes our right eye look deep green, and it has a sinister quality as well.";
+	try looking at the noun through the monocle.
 
 Instead of searching a mirror:
 	say "I have not gotten used to what we look like since we were synthes[ize]d into a single female body. The face that looks back is deeply scary. It's not me. And it's not you either. It's more like one of those computer composites you can have done to envision future offspring: if you and I were to have a somewhat androgynous daughter she might look like this[one of].
@@ -1584,13 +1733,6 @@ Instead of burning something in the presence of a stove:
 		say "You are about right about my cooking abilities, I suppose, but [the noun] [are] better off as [they] [are].";
 	otherwise:
 		say "It's true there's a handy stove here, but I don't see the point."
-
-[And fix posture reporting to reflect person...]
-
-The standard position report rule is not listed in any rulebook.
-
-Report taking position (this is the new standard position report rule):
-	say "[We] [are] now [the posture of the player][if the holder of the player is not the location] [in-on the holder of the player][end if]."
 
 [And this is provided entirely as a way to redirect attempts to sit at the piano or a desk or table]
 Understand "sit at [something]" as sitting at. Sitting at is an action applying to one thing.
@@ -1668,7 +1810,42 @@ A desk is a kind of supporter. [Every desk incorporates two vertical drawers.] A
 Instead of inserting something into a desk:
 		say "[The second noun] [don't] have a drawer."
 
-A chair is a kind of supporter. A chair is usually scenery. A chair is always enterable. Understand "seat" as a chair. Understand "take [chair]" as entering. The description of a chair is usually "It is an ordinary inexpensive variety of chair, made locally and found around the island in great numbers." A chair is usually seated.
+A chair is a kind of supporter. A chair is usually scenery. A chair is always enterable. Understand "seat" as a chair. The description of a chair is usually "It is an ordinary inexpensive variety of chair, made locally and found around the island in great numbers." A chair is usually seated.
+
+Instead of taking a chair when the subcommand of the noun matches "seat" and the player's command includes "take":
+	try entering the noun.
+
+Rule for initially listing contents:
+    initially group chairs together.
+
+Rule for grouping together a chair (called target):
+	say "[listing group size in words] chairs";
+	let source be the holder of the target;
+	if hardness is true and the LSR chair is held by the source:
+		say ", one of them red,";
+	now every chair held by the source is mentioned.
+
+A dangerous construction rule for a chair (called C):
+	now C is not scenery;
+	now C is portable.
+
+Rule for printing the plural name of chair:
+	say "chairs".
+
+Does the player mean doing something to the LSR chair:
+	it is very likely.
+
+Table of Ultratests (continued)
+topic	stuff	setting
+"chair"	{ LSR chair, chard, pita, tub }	Workshop
+
+Test chair with "tutorial off / powerup / autoupgrade / open tub / wave c-remover at chair / wave d-remover at chard / wave a-remover at pita / wave t-remover at pit / wave p-remover at pi / put char and i on dais / synthesize / get chair / put gel on hair / l / take chair".
+
+Test char with "tutorial off / purloin char / wave h-remover at char / wave i-remover at chair / put gel on car" holding the tub in the Language Studies Seminar Room.
+
+Test ascot with "tutorial off / autoupgrade / powerup / purloin as / purloin cot / put as and cot on dais / synthesize / wave a-remover at ascot / wave s-remover at scot / gel cot" holding the tub in the Workshop.
+
+Test lostfuel with "tutorial off / autoupgrade / unlegend / unprotest / purloin chard / purloin funnel / purloin soil / purloin chair / wave b-remover at garbage / wave d-remover at chard / wave h-remover at char / wave n-remover at funnel / fuel car / gel car / wave i-remover at chair / wave h-remover at char / gel car / wave h-remover at chard / wave d-remover at card / wave s-remover at soil / wave i-remover at chair / wave h-remover at char / give oil to mechanic / ask mechanic about car / enter car / se" holding the tub in High Street.
 
 When play begins (this is the chair and desk postures rule):
 	now every chair allows seated;
@@ -1676,13 +1853,19 @@ When play begins (this is the chair and desk postures rule):
 	now every desk allows seated;
 	now every desk allows standing.
 
+To decide whether the action is silent:
+	(- (keep_silent == true) -).
+
 Before entering a chair which supports something (called the impediment):
 	if the noun supports a person:
 		say "[The noun] [are] plainly occupied." instead;
 	otherwise:
 		try taking the impediment;
 		if the impediment is on the noun:
-			stop the action.
+			stop the action;
+		otherwise:
+			if the action is silent:
+				say "[We] pick up [the impediment] first to make room on [the noun]."
 
 Rule for writing a topic sentence about an as-yet-unknown introduceable person (called special-target) who is on a chair (called secondary-target):
 	now the secondary-target is mentioned;
@@ -1858,14 +2041,50 @@ The carrying capacity of the player is 10. ]
 
 [And now for the cases where the player explicitly tries to stash something inappropriate, e.g. with PUT ALE IN BACKPACK: ]
 
-Instead of inserting a long thing into the backpack:
-	say "[The noun] [one of]couldn't possibly fit[or]would be much too long[or]would just stick out[at random]."
+Check inserting something into the backpack:
+	if the noun is long or the noun is fluid or the noun is heavy:
+		say backpack-refusal of the noun instead.
 
-Instead of inserting a fluid thing into the backpack:
-	say "[The noun] [one of]would make a real mess[or]would just spill[at random]."
+Check inserting a non-empty container into the backpack:
+	let N be the unsuitable of the noun;
+	if N is not nothing:
+		say backpack-refusal of N instead.
 
-Instead of inserting the iron-pans into the backpack:
-	say "There's nowhere near enough room."
+Check inserting a non-empty supporter into the backpack:
+	let N be the unsuitable of the noun;
+	if N is not nothing:
+		say backpack-refusal of N instead.
+
+To decide which object is the unsuitable of (X - a thing):
+	(- Unsuitable({X}) -).
+
+Include (-
+
+	[ Unsuitable x o;
+		for (o=child(x) : o : ) {
+			if ( (o.(+ heft +) > 3) || (o.(+ short +) == false) || (o.(+ solid +) == false) )
+				return o;
+			if (child(o)) o = child(o);
+			else
+				while (o) {
+					if (sibling(o)) { o = sibling(o); break; }
+					o = parent(o);
+					if (o == x) return nothing;
+				}
+		}
+		return nothing;
+	];
+
+-).
+
+To say backpack-refusal of (N - a thing):
+	if N is fluid:
+		say "[The N] [one of]would make a real mess[or]would just spill[at random].";
+	otherwise:
+		if N is long:
+			say "[The N] [one of]couldn't possibly fit[or]would be much too long[or]would just stick out[at random].";
+		otherwise:
+			say "There's nowhere near enough room.".
 
 
 [PUT ALL IN BACKPACK can be quite slow, so let's speed it up a bit by skipping some checks]
@@ -1873,17 +2092,19 @@ This is the fast backpack stowing rule:
 	if the backpack is closed:
 		abide by the try opening rules for the backpack;
 	repeat with N running through multiple object list:
-		if N is fluid:
-			say "[N]: [The N] [one of]would make a real mess[or]would just spill[at random].";
+		if N is fluid or N is long or N is heavy:
+			say "[N]: [backpack-refusal of N]";
 		otherwise:
-			if N is long:
-				say "[N]: [The N] [one of]couldn't possibly fit[or]would be much too long[or]would just stick out[at random].";
-			otherwise:
-				if N is iron-pans:
-					say "[N]: There's nowhere near enough room.";
+			if (N is a container or N is a supporter) and N is non-empty:
+				let X be the unsuitable of N;
+				if X is not nothing:
+					say "[N]: [backpack-refusal of X]";
 				otherwise:
 					say "[N]: Done.";
 					now N is in backpack;
+			otherwise:
+				say "[N]: Done.";
+				now N is in backpack;
 	abide by the cancel multiple rule.
 
 
@@ -1995,10 +2216,14 @@ Rule for supplying a missing second noun while performing something on:
 	otherwise:
 		if game-selection is marked-visible:
 			now the second noun is the game-selection;
-		else if computer-game-selection is marked-visible:
-			now the second noun is the computer-game-selection;
 		else:
-			say "There's no instrument handy." instead.
+			if computer-game-selection is marked-visible:
+				now the second noun is the computer-game-selection;
+			else:
+				if the projector is marked-visible:
+					now the second noun is the projector;
+				else:
+					say "There's no instrument handy." instead.
 
 Rule for supplying a missing noun while performing something on:
 	now the noun is the player. [as a safe generically-present thing]
@@ -2132,7 +2357,9 @@ Understand the commands "attack" and "punch" and "destroy" and "kill" and "murde
 
 Attacking it with is an action applying to one thing and one carried thing. Understand "attack [something] with [something preferably held]" as attacking it with.
 
-Understand the commands "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as "attack".
+Understand "punch [something] with [something preferably held]" as attacking it with when the umlaut punch is marked invisible and the mutual punch is marked invisible.
+
+Understand the commands "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as "attack".
 
 Does the player mean attacking the hanging figure with a long strong thing:
 	it is very likely.
@@ -2153,6 +2380,8 @@ Definition: a thing is attackable:
 	no.
 
 Understand "attack [something not attackable]" as attacking.
+
+Understand "punch [something not attackable]" as attacking when the umlaut punch is marked invisible and the mutual punch is marked invisible.
 
 Sanity-check attacking something which is not attackable with something:
 	try attacking the noun instead.

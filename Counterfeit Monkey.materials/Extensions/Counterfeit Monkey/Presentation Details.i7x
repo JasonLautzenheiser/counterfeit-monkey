@@ -46,7 +46,7 @@ Section 3 - Styles
 Table of User Styles (continued)
 style name (a glulx text style)	background color (a text)	color (a text)	first line indentation (a number)	fixed width (a truth state)	font weight (a font weight)	indentation (a number)	italic (a truth state)	justification (a text justification)	relative size (a number)	reversed (a truth state)
 special-style-2	--	"#444444"	0	false	light-weight	0	true	left-justified
-special-style-1	--	"#888888"
+special-style-1	--	"#767676"
 
 Before listing plausible quips [when dialogue tinting is true]:
 	say "[second custom style][run paragraph on]".
@@ -308,7 +308,8 @@ Carry out planning:
 	say "[line break]".
 
 Report planning for the second time:
-	say "[first custom style][bracket]Remember that you can move towards your goal locations with GO TO...[close bracket][roman type][paragraph break]";
+	if tutorial mode is true:
+		say "[first custom style][bracket]Remember that you can move towards your goal locations with GO TO...[close bracket][roman type][paragraph break]";
 
 To decide what number is the count of pending tasks:
 	let N be the number of filled rows in the Table of Tasks Pending;
@@ -317,7 +318,8 @@ To decide what number is the count of pending tasks:
 After going to Fair when the barrier is unlocked and we have not planned:
 	say "I'm glad to see you're feeling ready to face the wider world. [run paragraph on]";
 	try planning;
-	say "[first custom style][bracket]To go over our current goals, type GOALS at any time.[close bracket][roman type][paragraph break]";
+	if tutorial mode is true:
+		say "[first custom style][bracket]To go over our current goals, type GOALS at any time.[close bracket][roman type][paragraph break]";
 	continue the action.
 
 
@@ -328,56 +330,109 @@ Section 4 - Achievements
 The File of Conclusions is called "monkeyac".
 
 When play begins (this is the load conclusions when starting rule):
-	read the achievements.
+	read the achievements;
+	if "Atlantida award for accomplishing every achievement in the game" is a used achievement:
+		choose row with final response rule of list remaining achievements rule in Table of Final Question Options;
+		blank out the whole row.
 
-Last carry out restoring the game (this is the load conclusions when restoring rule):
-	read the achievements.
+[The rule below will never run on a successful restore]
+
+[Last carry out restoring the game rule (this is the load conclusions when restoring rule):
+	read the achievements.]
 
 To read the achievements:
 	if the File of Conclusions exists:
 		read File of Conclusions into the Table of Possible Achievements.
 
 To record (slug - some text) as an achievement:
-	read the achievements;
-	let N be "[slug]";
-	unless N is a used achievement:
-		choose a blank row in the Table of Possible Achievements;
-		now the achievement entry is N;
-		say "[first custom style]Achievement accomplished: [N]![roman type][paragraph break]";
-	write File of Conclusions from the Table of Possible Achievements.
+	record slug as an achievement with conditional break false.
 
 To record (slug - some text) as an achievement with break before:
+	record slug as an achievement with conditional break true.
+
+To record (slug - some text) as an achievement with conditional break (breakflag - a truth state):
 	read the achievements;
-	let N be "[slug]";
-	unless N is a used achievement:
+	unless slug is a used achievement:
 		choose a blank row in the Table of Possible Achievements;
-		now the achievement entry is N;
-		say "[line break][first custom style]Achievement accomplished: [N]![roman type][paragraph break]";
-	write File of Conclusions from the Table of Possible Achievements.
+		now the achievement entry is slug;
+		say "[if breakflag is true][line break][end if][first custom style]Achievement accomplished: [slug]![roman type][paragraph break]";
+		write File of Conclusions from the Table of Possible Achievements;
+		if the number of filled rows in Table of Possible Achievements is number-of-achievements:
+			now slug is "Atlantida award for accomplishing every achievement in the game";
+			unless slug is a used achievement:
+				record slug as an achievement;
+				if there is final response rule of list remaining achievements rule in Table of Final Question Options:
+					choose row with final response rule of list remaining achievements rule in Table of Final Question Options;
+					blank out the whole row.
+
+Number-of-achievements is a number that varies. Number-of-achievements is 18.
 
 Table of Possible Achievements
 achievement (some text)
 with 40 blank rows.
 
+Table of All Achievements
+achievement (some text)	done (a truth state)
+"Admiral Thoureaux award for removing every letter of the alphabet in one playthrough"	true
+"Alex Rosehip award for completing the game in easy mode"	true
+"Amanda Waterstone award for discovering cultic passages"	true
+"Andra award for completing the game in hard mode"	true
+"Camilla Downdweller award for creating five types of fish in one playthrough"	true
+"Finished tutorial mode”	true
+”Finn Rosehip award for gnu-hunting"	true
+"Horace Fingerstain award for jotting some notes"	true
+"Igor Rosehip award for creating at least five body parts in one playthrough"	true
+"Jocasta Higgate award for reconstructing pagan worship on the island"	true
+"Lester Parsons award for discovering unspecified local rites"	true
+"Lord Michael Rosehip award for showing the black spot to a pirate crew"	true
+"Lucius Quagmire award for viewing unusual films"	true
+"Mort Shaply award for showing Poe a raven-based foodstuff"	true
+"Priscilla Parsons award for winning the game without ever entering the church"	true
+"Propper Rosehip award for talespinning"	true
+"Reverend Plaice award for placing the cross on the altar while liturgically dressed"	true
+"Roman 'Sticky' Fingerstain award for impromptu art theft"	true
+
 Table of Final Question Options (continued)
 final question wording	only if victorious	topic	final response rule	final response activity
-"review the ACHIEVEMENTS you've reached so far"	false	"review/achievements"	list achievements rule	--
+"review your final SCORE"	false	"review/score"	list score rule	--
+"reveal what ACHIEVEMENTS you have yet to accomplish"	false	"reveal/achievements"	list remaining achievements rule	--
 "learn about some of the SOURCES used in creating this game"	true	"sources/source/learn"	list sources rule	--
+
+This is the list score rule:
+	try requesting the score.
 
 This is the list achievements rule:
 	read the achievements;
 	unless the number of filled rows in the Table of Possible Achievements is 0:
+		let atlantida-achievement be "Atlantida award for accomplishing every achievement in the game";
 		sort the table of Possible Achievements in achievement order;
 		say "The achievements you have accomplished so far include: [paragraph break]";
 		repeat through the Table of Possible Achievements:
-			say "  [achievement entry][line break]".
+			unless achievement entry is atlantida-achievement:
+				say "  [achievement entry][line break]";
+		if atlantida-achievement is a used achievement:
+			say "  [atlantida-achievement][line break]".
+
 
 To decide whether (chosen ending - text) is a used achievement:
-	let N be "[chosen ending]";
+	let N be chosen ending;
 	repeat through the Table of Possible Achievements:
 		if N is achievement entry:
 			yes;
 	no.
+
+This is the list remaining achievements rule:
+	read the achievements;
+	if the number of filled rows in Table of Possible Achievements is number-of-achievements + 1:
+		say "Congratulations! You have every achievement in the game!";
+	otherwise:
+		repeat through the Table of All Achievements:
+			unless achievement entry is a used achievement:
+				now done entry is false;
+		say "These achievements you have yet to accomplish:[paragraph break]";
+		repeat through the Table of All Achievements:
+			if done entry is false:
+				say "  [achievement entry][line break]".
 
 This is the list sources rule:
 	say "I started working in earnest on this game in 2008. Since that time, the US has undergone two presidential elections; for months, the Occupy Seattle protests filled a city block just a short stroll from my apartment; and the successes and failures of the Arab Spring were constantly in the news. These experiences introduced more serious themes into what was initially a purely silly game.
@@ -485,9 +540,11 @@ Carry out selecting hard mode:
 	now the printed name of the twig is "bent twig";
 	now the printed name of the fossil is "twisty fossil";
 	now the printed name of the tomes is "dusty tomes";
+	now the printed name of the LSR chair is "red chair";
 	reset hash code of the twig;
 	reset hash code of the fossil;
 	reset hash code of the tomes;
+	reset hash code of the LSR chair;
 	now the the sticky is nowhere;
 	now the the banana is nowhere;
 	move the pineapple to the large carton;
@@ -497,6 +554,7 @@ Carry out selecting hard mode:
 	move the prickly-pear to the holder of the pear;
 	now the the pear is nowhere;
 	now the the wheel is nowhere;
+	now the description of the LSR chair is "It is an ordinary inexpensive variety of chair, made locally and found around the island in great numbers. This one has been painted red.";
 	now the introduction of the clock is "It's stopped working sometime in the recent past, possibly thanks to its fall when we gelled it.";
 	[follow the initialize hash codes rule;]
 	now tutorial mode is false;
@@ -519,6 +577,7 @@ Understand "model" as the army when hardness is true.
 Understand "bent" as the twig when hardness is true.
 Understand "dusty" as the tomes when hardness is true.
 Understand "twisty" as the fossil when hardness is true.
+Understand "red" as the LSR chair when hardness is true.
 
 Before printing the name of the clock when hardness is true and printed name of the clock is not "broken clock":
 	if the clock is in the repository:
@@ -594,6 +653,34 @@ There are three cameo appearances by IF community members (or their alter egos).
 
 Please report bugs at https://github.com/i7/counterfeit-monkey/issues"
 
+This is the link-free map drawing rule:
+	redraw the map and compass.
+
+Carry out asking for help (this is the new help request rule):
+	now the current menu is the Table of Basic Help Options;
+	[We disable the compass links while displaying the help menu.]
+	now the current graphics drawing rule is the link-free map drawing rule;
+	clear compass graphlinks;
+	carry out the displaying activity;
+	clear the screen;
+	[We must explicitly update the status line after closing the help menu, otherwise the graphics window will think it still is two lines shorter than it is, resulting in a black area below the map on Glk spec compliant interpreters.]
+	update the status line;
+	now the current graphics drawing rule is the compass-drawing rule;
+	follow the compass-drawing rule;
+	try looking.
+
+The new help request rule is listed instead of the help request rule in the carry out asking for help rulebook.
+
+The constructing status line while displaying rule is not listed in any rulebook.
+
+Rule for constructing the status line while displaying (this is the new constructing status line while displaying rule):
+	if the endnode flag is 0,
+		fill status bar with Table of Deep Menu Status;
+	otherwise fill status bar with Table of Shallow Menu Status;
+	[We must redraw the map every time the status bar changes height, otherwise the bottom will get cut off on Glk spec compliant interpreters.]
+	adjust width of the graphics window;
+	redraw the map and compass;
+	rule succeeds.
 
 Section 4 - Resurrection
 
@@ -604,7 +691,7 @@ To undo a turn:
 
 When play ends when the story has not ended finally:
 	custom-wait for any key;
-	say "That is, that's what would have happened if [we] had done something so foolish. Shall we suppose [we] didn't? >";
+	say "That is, that's what would have happened if [we] had done something so foolish. Shall we suppose [we] didn't? >> ";
 	if the player consents:
 		if the turn count is greater than 1:
 			say "[line break]";
@@ -613,5 +700,29 @@ When play ends when the story has not ended finally:
 			resume the story;
 		try looking.
 
+Section 5 - Post-restore routine
+
+[Hack to make some code always run after restoring a game, to make adjustments in case the save file was made on an interpreter with different capabilities or by someone with different achievements.]
+
+restore the game rule response (B) is "[post-restore routine]";
+
+To say post-restore routine:
+	say "Ok. ";
+	read the achievements;
+	if glulx line input echo suppression is supported:
+		suppress line input echo in the main window;
+	unless graphics is disabled:
+		if glulx graphics is supported:
+			now current graphics drawing rule is the compass-drawing rule;
+			unless the measuring window is g-present:
+				open the measuring window;
+			unless the graphics window is g-present:
+				open the graphics window;
+			start looking for graphlinks;
+	otherwise:
+		if the graphics window is g-present:
+			close the graphics window.
+
+[The last line above will close the graphics window if we have switched off graphics but restore a game made with graphics on. Some interpreters, such as Spatterlight and Zoom, will still show the graphics window for a split-second on restore.]
 
 Presentation Details ends here.

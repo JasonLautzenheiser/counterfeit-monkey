@@ -118,7 +118,7 @@ difference (a number)	locale (a text)
 -3	"[one of]Santiago[or]Buenos Aires[at random]"
 -4	"[one of]Halifax[or]La Paz[at random]"
 -5	"[one of]Philadelphia[or]Atlanta[or]Indianapolis[or]Detroit[or]Columbus[or]Havana[or]Miami[or]Toronto[or]Ottawa[or]Kingston[or]DC[or]New York[or]Boston[at random]"
--6	"[one of]Winnepeg[or]Houston[or]Minneapolis[or]Chicago[or]New Orleans[or]San Salvador[at random]"
+-6	"[one of]Winnipeg[or]Houston[or]Minneapolis[or]Chicago[or]New Orleans[or]San Salvador[at random]"
 -7	"[one of]Denver[or]Edmonton[or]Phoenix[or]Salt Lake City[at random]"
 -8	"[one of]San Francisco[or]San Fran[or]Portland[or]Seattle[or]Vancouver[or]LA[or]San Diego[at random]"
 -9	"Anchorage"
@@ -206,7 +206,7 @@ Before going to University Oval:
 
 Section 5 - Higgate's Arrest
 
-[Because we need to stop you so so that you see the scene if you're just passing through:]
+[Because we need to stop you so that you see the scene if you're just passing through:]
 After going to University Oval:
 	if (the invitation is handled and higgate-arrested has not happened) or (activist is in University Oval and activist does not recollect at least three quips):
 		let N be the number of entries in the path so far of the player;
@@ -533,7 +533,7 @@ The ground is covered with glitter and candy and confetti; the Atlantida has bro
 
 Section 7 - Fireworks
 
-Fireworks is a scene. Fireworks begins when Pinata Celebration has ended and the time since Pinata Celebration ended is 2 minutes. Fireworks ends when the number of filled rows in the Table of Pyrotechnics is 0.
+Fireworks is a scene. Fireworks begins when Pinata Celebration has ended and the time since Pinata Celebration ended is at least 2 minutes. Fireworks ends when the number of filled rows in the Table of Pyrotechnics is 0.
 
 [Instead of going to a room during Fireworks:
 	say "[We] [are] relishing the not moving for a moment."]
@@ -544,7 +544,7 @@ When Fireworks begins:
 		say "The sky cracks with a tremendous boom, and you register a flash of golden fire overhead.";
 	otherwise:
 		say "There is a huge distant noise. Something is happening to the sky.";
-	say "Slango tooks one look at us and wraps us in a blanket. 'Stay here,' he says firmly. ";
+	say "Slango takes one look at us and wraps us in a blanket. 'Stay here,' he says firmly. ";
 	if the player encloses the rock or the roc is visible:
 		now Brock is in Brock's Stateroom;
 		now the rock is in the repository;
@@ -602,7 +602,7 @@ When Landing ends (this is the set us up on yacht rule):
 		repeat with item running through things proffered by Brock:
 			if item is enclosed by location:
 				now b-target is item;
-	if b-target is something:
+	if b-target is not nothing:
 		say "Slango gels [the b-target] easily enough. Then he and Brock turn the restoration gel on us. Slango ";
 		move b-target to the repository;
 	otherwise:
@@ -633,6 +633,8 @@ When Landing ends (this is the set us up on yacht rule):
 	complete "Return to yacht";
 	rapidly set all contents of the player marked for listing;
 	repeat with item running through marked for listing things:
+		if the oil-paintings proffer the item:
+			now the oil-paintings are stolen;
 		if the item is part of something:
 			next;
 		otherwise if the item is the restoration gel:
@@ -652,7 +654,7 @@ When Landing ends (this is the set us up on yacht rule):
 			now the item is on the built-in table;
 		otherwise if the item is essential:
 			now the item is in Brock's Stateroom;
-		otherwise if the item is some pots or the item is a pot:
+		otherwise if the item is the plural-pots or the item is a pot:
 			now the item is on the galley stove;
 		otherwise:
 			let the target be a random drawer which is part of your bed;
@@ -762,6 +764,7 @@ A ranking rule for Brock when Farewell is happening:
 Farewell ends when the newspaper is examined.
 
 When Farewell ends:
+	pre-remove achievements option at game end;
 	if atlantida-refreshed is seen:
 		if the story viewpoint is first person plural or the story viewpoint is first person singular:
 			say "[betrayed-outcome]";
@@ -771,6 +774,28 @@ When Farewell ends:
 		say "[no-atlantida-outcome]";
 	end the story finally saying "The End";
 
+To pre-remove achievements option at game end:
+	read the achievements;
+	if there is final response rule of list remaining achievements rule in Table of Final Question Options:
+		let N be some text;
+		let score be 0;
+		if the new church is not visited:
+			now N is "Priscilla Parsons award for winning the game without ever entering the church";
+			unless N is a used achievement:
+				increment score;
+		if hardness is true:
+			now N is "Andra award for completing the game in hard mode";
+		else:
+			now N is "Alex Rosehip award for completing the game in easy mode";
+		unless N is a used achievement:
+			increment score;
+		if the oil-paintings are stolen:
+			now N is "Roman 'Sticky' Fingerstain award for impromptu art theft";
+			unless N is a used achievement:
+				increment score;
+		if score + the number of filled rows in Table of Possible Achievements >= number-of-achievements:
+			choose row with final response rule of list remaining achievements rule in Table of Final Question Options;
+			blank out the whole row.
 
 To say no-atlantida-outcome:
 	say "Brock comes down and hands us a coffee. You look like you could use this. We've hit Mallorca,' he says. 'Slango's in town resupplying.'
@@ -797,7 +822,7 @@ To say unbetrayed-outcome:
 
 'One for the history books,' he says, with a crooked smile. 'They're showing satellite clips. Big olive garland on the depluralizing tank. People dancing on cars. Some old guy belting out La Marseillaise in the Bureau Rotunda.'
 
-Brock sits down opposite us. 'In other news,' he remarks, 'it looks like your cut of the T-remover plans, with all the tests we ran, is going to come out to this.' He writes a number. The number has six zeroes.
+Brock sits down opposite us. 'In other news,' he remarks, 'it looks like your cut of the T-inserter plans, with all the tests we ran, is going to come out to this.' He writes a number. The number has six zeroes.
 
 He leans back and looks at us.
 
@@ -825,22 +850,26 @@ Brock studies us for a moment more. Then he reaches into his pocket and pulls ou
 The print the final question rule response (A) is "[full-game achievements]Would you like to "
 
 To say full-game achievements:
-	let line break needed be false;
-	let N be some text;
-	if the new church is not visited:
-		now N is "Priscilla Parsons award for winning the game without ever entering the church";
+	if the story has ended finally:
+		let line break needed be false;
+		let N be some text;
+		if the new church is not visited:
+			now N is "Priscilla Parsons award for winning the game without ever entering the church";
+			unless N is a used achievement:
+				record N as an achievement;
+				now line break needed is true;
+		if hardness is true:
+			now N is "Andra award for completing the game in hard mode";
+		else:
+			now N is "Alex Rosehip award for completing the game in easy mode";
 		unless N is a used achievement:
 			record N as an achievement;
 			now line break needed is true;
-	if hardness is true:
-		now N is "Andra award for completing the game in hard mode";
-	else:
-		now N is "Alex Rosehip award for completing the game in easy mode";
-	unless N is a used achievement:
-		record N as an achievement;
-		now line break needed is true;
-	if line break needed is true:
-		say line break.
+		if the oil-paintings are stolen:
+			record "Roman 'Sticky' Fingerstain award for impromptu art theft" as an achievement;
+			now line break needed is true;
+		if line break needed is true:
+			say line break.
 
 
 Schedule and Time ends here.

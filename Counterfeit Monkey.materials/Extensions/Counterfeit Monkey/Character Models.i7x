@@ -74,16 +74,6 @@ Include Threaded Actions by Emily Short.
 
 Include Thanking by Counterfeit Monkey.
 
-A first after reading a command rule when how-many-people-here is positive (this is the replace ask X to rule):
-	if the player's command includes "where to find":
-		replace the matched text with "where there seems";
-		make no decision;
-	unless the player's command includes "how to" or the player's command includes "where to":
-		if the player's command includes "to" and the player's command includes "ask/tell":
-			let N be "[player's command]";
-			replace the regular expression "^(ask|tell) (.*?) to " in N with "\2, ";
-			change the text of the player's command to N.
-
 Rule for supplying a missing second noun while showing something to:
 	find a suitable interlocutor;
 	now second noun is current interlocutor;
@@ -92,7 +82,7 @@ Rule for supplying a missing second noun while showing something to:
 		stop the action.
 
 Rule for supplying a missing second noun while showing something to when location is Language Studies Department Office and office-door-1 is closed and Professor Waterstone is on a chair:
-	if current interlocutor is something:
+	if current interlocutor is not nothing:
 		now second noun is current interlocutor;
 	otherwise:
 		now second noun is Professor Waterstone;
@@ -106,7 +96,7 @@ Rule for supplying a missing second noun while giving something to:
 		stop the action.
 
 Rule for supplying a missing second noun while giving something to when location is Language Studies Department Office and office-door-1 is closed and Professor Waterstone is on a chair:
-	if current interlocutor is something:
+	if current interlocutor is not nothing:
 		now second noun is current interlocutor;
 	otherwise:
 		now second noun is Professor Waterstone;
@@ -130,7 +120,7 @@ To find a suitable interlocutor:
 	if the current interlocutor is nothing:
 		if how-many-people-here is positive:
 			if how-many-people-here is 1:
-				try saying hello to entry 1 of people-present;
+				try saying hello to present-person 1;
 			otherwise:
 				let L be { bartender, Slango, barman, Kate };
 				repeat with vip running through L:
@@ -166,22 +156,30 @@ A quip can be listed or unlisted. A quip is usually listed.
 Plausibility rule for an unlisted quip:
 	it is dubious.
 
-After reading a command when how-many-people-here is positive (this is the rearrange thanks and hello rule):
-	let N be "[player's command]";
-	if the player's command includes "hi/hello":
-		replace the regular expression "^(hi|hello)," in N with "say hello to";
-	if the player's command includes "thank/thanks":
-		replace the regular expression "^(thanks|thank you)," in N with "thank";
-	change the text of the player's command to N.
+A command-string altering rule when how-many-people-here is positive (this is the rearrange thanks and hello rule):
+	if the player's command includes "hi/hello/thank/thanks":
+		replace the regular expression "^(hi|hello)," in player-command-substitute with "say hello to";
+		replace the regular expression "^(thanks|thank you)," in player-command-substitute with "thank".
 
 Understand "hey" or "hiya" or "yo" as hailing.
+
+A first after reading a command rule when how-many-people-here is positive (this is the replace ask X to rule):
+	if the player's command includes "where":
+		if the player's command includes "where to find a/--" or the player's command includes "where i/we could find a/--" or the player's command includes "where there is a/--":
+			replace the matched text with "where there seems";
+			make no decision;
+	if the player's command includes "to" and the player's command includes "ask/tell":
+		unless the player's command includes "how to" or the player's command includes "where to" or the player's command includes "likes to" or the player's command includes "go to":
+			let N be "[player's command]";
+			replace the regular expression "^(ask|tell) (.*?) to " in N with "\2, ";
+			change the text of the player's command to N.
 
 After reading a command when the current interlocutor is not nothing and player's command includes "ask/tell/a/t" and the player's command does not include "ask/tell/a/t about" (this is the new strip interlocutor from input rule):
 	if the player's command includes "[someone talk-eligible]":
 		let M be the substituted form of the matched text;
-		unless M is "1" or M is "men":
+		unless M is "1" or M is "men": [To avoid conflicts with Numbered Disambiguation Choices and referring to the clientele in the Counterfeit Monkey bar as "men"]
 			let cmd be "[player's command]";
-			replace the regular expression "(ask|tell|a|t) [M] " in cmd with "\1 ";
+			replace the regular expression "^(ask|tell|a|t) [M] " in cmd with "\1 ";
 			change the text of the player's command to cmd.
 
 The new strip interlocutor from input rule is listed instead of the strip interlocutor from input rule in the After reading a command rules.
@@ -280,10 +278,29 @@ Characters who are "alert" will notice and greet the player when he comes into t
 
 A person can be alert.
 
-Definition: a person is alarmed if he is alert and he is not the current interlocutor.
+To decide which object is prospective-interlocutor:
+	(- ProspectiveInterlocutor() -).
 
-Every turn when an alarmed person (called the prospective interlocutor) is enclosed by the location:
-	try the prospective interlocutor saying hello to the player.
+The current interlocutor variable translates into I6 as "current_interlocutor".
+
+Include (-
+
+Global current_interlocutor = nothing;
+
+-) after "Definitions.i6t".
+
+Include (-
+
+	[ ProspectiveInterlocutor p list no_items i;
+		for (i=1: i<=how_many_people_here: i++ ) {
+			p = people_present --> i;
+			if ( current_interlocutor ~= p && p.(+ alert +) == true )
+				return p;
+		}
+		return nothing;
+	];
+
+-).
 
 The new default greeting rule is listed instead of the default greeting rule in the report saying hello to rules.
 
@@ -394,20 +411,11 @@ lena-needed	"That Slango left a message for you with Lena at the Aquarium."
 slango-friendship	"You and Slango truly are friends."
 waterstone-invited	"Waterstone is invited to a demonstration at the Fleur d'Or."
 carpets-shampooed	"Waterstone's wife is shampooing the carpets."
-plan-making-inanimate	"That you're thinking of making Brock inanimate."
-inanimate-safe	"That it's safe being inanimate."
-plan-riding-roc	"That you're considering riding a roc."
-roc-chances	"That you're willing to take your chances."
-gel-needed	"That you'll need gel."
-have-gel	"That you have gel."
-upgrades-needed	"That you'll need upgrades on your letter remover."
-have-upgrades	"That you have upgrades on your letter remover."
+homonym-shame-wanted	"Waterstone is looking for an example of homonym shame."
 trust-me	"That Lena can trust you."
 lena-distrusts	"That Lena does not trust us at the moment."
 mark-known	"That the patron's name is Mark."
 brock-found	"That the rock is really Brock."
-crime-bg	"That one of you is criminal."
-atlantean-bg	"That one of you is Atlantean."
 car-needed	"That we need a car."
 car-broken	"That the car does not run."
 thank-mechanic	"That we have reason to thank the mechanic."
@@ -436,28 +444,28 @@ A person has some text called the secondary apology. The secondary apology of a 
 A person has some text called the generic confrontational. The generic confrontational of a person is usually "look".
 
 To say Well:
-	let N be "[generic adversative of the current interlocutor]";
-	let N be "[N]" in sentence case;
-	say "[N]".
+	let N be generic adversative of the current interlocutor;
+	now N is N in sentence case;
+	say N.
 
 To say personal no:
-	let N be "[generic negative of the current interlocutor]";
-	let N be "[N]" in sentence case;
-	say "[N]".
+	let N be generic negative of the current interlocutor;
+	now N is N in sentence case;
+	say N.
 
 To say personal yes:
-	let N be "[generic positive of the current interlocutor]";
-	let N be "[N]" in sentence case;
-	say "[N]".
+	let N be generic positive of the current interlocutor;
+	now N is N in sentence case;
+	say N.
 
 To say awkward no:
 	let N be "[generic adversative of the current interlocutor], [generic negative of the current interlocutor]";
-	let N be "[N]" in sentence case;
+	now N is N in sentence case;
 	say "[N][apologetic]";
 
 To say awkward yes:
 	let N be "[generic adversative of the current interlocutor], [generic positive of the current interlocutor]";
-	let N be "[N]" in sentence case;
+	now N is N in sentence case;
 	say "[N][apologetic]";
 
 To say apologetic:
@@ -465,9 +473,9 @@ To say apologetic:
 		say ", [secondary apology of the current interlocutor]";
 
 To say awkward confrontation:
-	let N be "[generic confrontational of the current interlocutor]";
-	let N be "[N]" in sentence case;
-	say "[N]";
+	let N be generic confrontational of the current interlocutor;
+	now N is N in sentence case;
+	say N;
 
 
 To say ignorance:

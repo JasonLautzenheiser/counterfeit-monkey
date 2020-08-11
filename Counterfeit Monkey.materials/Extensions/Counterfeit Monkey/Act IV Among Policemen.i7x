@@ -14,14 +14,17 @@ Section 1 - Tall Street
 East of Roundabout is Tall Street. Tall Street is a southern road. The description is "Tall Street is very quiet. No celebrations have reached this far, and neither is there any business today; so it has an air of dull abandonment. At the [east] end the street bends to go around an old park rarely visited."
 The distant-rotunda is scenery in Tall Street. It is distant. The printed name is "rotunda". Understand "rotunda" and "distant" and "blue" and "bureau of orthography" as the distant-rotunda.
 
-Instead of doing anything when the location is Tall Street and distant-rotunda must be touched: say "From here [we] can't reach."
+Sanity-check doing anything when the location is Tall Street and distant-rotunda must be touched: say "From here [we] can't reach." instead.
 
 The description of the distant-rotunda is "It is brighter blue than the sky and soars many [if the player wears the Britishizing goggles]storeys[otherwise]stories[end if]."
 
 Rule for listing exits when looking in Tall Street:
 	if Pinata Celebration is happening:
 		do nothing instead;
-	say "To the [south] is the important blue [rotunda] of the Bureau of Orthography. The street runs [west] towards the busy roundabout."
+	if boldening is true:
+		say "To the [b]south[/b] is the important blue [b]rotunda[/b] of the Bureau of Orthography. The street runs [b]west[/b] towards the busy roundabout.";
+	else:
+		say "To the south is the important blue rotunda of the Bureau of Orthography. The street runs west towards the busy roundabout."
 
 The employment office is a facade in Tall Street. It fronts north.  It is scenery.
 	The description is "Only the stencilled lettering in the window identifies this place: Temporary Employment For Job Seekers. The blinds are down and the door locked. It doesn't look like a large facility." Understand "blinds" or "blind" or "door" or "window" or "lettering" as the employment office.
@@ -137,7 +140,7 @@ Instead of examining a sink when the referred of the sink-collectives is true an
 		continue the action;
 	say "The sinks are nothing special. Clean enough, I suppose."
 
-Sanity-check doing something when the sink-collectives is the second noun:
+Instead of doing something when the sink-collectives is the second noun:
 	if the number of sinks in the location is 0:
 		say "[We][']ve already gotten rid of all the sinks to be found in this area." instead;
 	otherwise:
@@ -160,42 +163,7 @@ Instead of doing something to the sink-collectives:
 	say "I double-take before remembering to go into the women's side; it's a good thing you're nudging me along.";
 	continue the action.]
 
-A soap is a fluid thing. The indefinite article is "some". The description is "Clear fluid for washing up with."
-	The scent-description is "herbes de Provence".
-
-Does the player mean waving the letter-remover at the soap:
-	it is very likely.
-
-The soap dispenser is a closed container in the Public Convenience. It is privately-named. Understand "dispenser" or "soap dispenser" as the soap dispenser. Understand "soap" as the soap dispenser when the soap is marked invisible. It is fixed in place. The initial appearance of the soap dispenser is "A [soap dispenser] hangs beside the mirror." The description of the soap dispenser is "It's the kind where a squeeze will dispense new soap into the sink[if the soap is not in the soap dispenser]. It is also empty[end if]."
-
-Does the player mean waving the letter-remover at the soap dispenser:
-	it is very unlikely.
-
-Sanity-check taking the soap dispenser when the soap is in the soap dispenser:
-	if the subcommand of the noun matches the text "soap":
-		try squeezing the soap dispenser instead.
-
-Instead of squeezing the soap dispenser:
-	if soap is in the dispenser:
-		if the number of sinks in the location is greater than 0:
-			let target be a random sink in the location;
-			if a switched on tap (called target tap) is part of the target:
-				silently try switching off target tap;
-				say "First switching off [the target tap], [we][run paragraph on]";
-			otherwise:
-				if a switched on tap (called target tap) is enclosed by location:
-					say "Fortunately, the faucet below the soap dispenser is not running. ";
-				say "[We][run paragraph on]";
-			say " give the dispenser a squeeze. It deposits some soap in [the target] [--] just viscous enough not to drain away instantly.";
-			move the soap to the target;
-		otherwise:
-			say "[We] give the dispenser a squeeze and it deposits some soap on the floor, the sink having been removed from the area.";
-			move the soap to the location;
-	otherwise:
-		say "This time nothing much comes out."
-
-The soap is in the soap dispenser.
-
+Include Dispensers by Counterfeit Monkey.
 
 The wall-hole is a fixed in place container in the Public Convenience. Understand "hole" or "hole in the wall" or "hole in wall" or "wall" as the wall-hole. The printed name is "[if looking]hole[otherwise]hole in the wall[end if]". The initial appearance is "About knee-height in one of the stalls is a [wall-hole] that runs right through the wall between the men's and women's restrooms." The description of the wall-hole is "It's too small to get a good look through, really, and usually cluttered with junk."
 
@@ -303,7 +271,7 @@ Instead of searching the display case:
 	try examining the display-platform.
 
 Instead of examining the display case:
-	if the subcommand of the display case matches the text "glass/casing/material" or the subcommand of the display case matches the text "casing material":
+	if the subcommand of the display case matches "glass/casing/material" or the subcommand of the display case includes "casing/material":
 		say "The casing material would stop a bullet.";
 	otherwise:
 		try examining the display-platform.
@@ -323,7 +291,7 @@ Instead of taking the model T:
 	say "It is much too large to lift."
 
 Instead of switching on the Model T:
-	say "It doesn't switch. It requires coal and water and a lot of patience, and [we] don't have a long supply of any of those things. Besides, it would only do 1/26th of what the ordinary letter remover can do."
+	say "It doesn't switch. It requires coal and water and a lot of patience, and [we] don't have a long supply of any of those things. Besides, it would only do 1/26th of what the ordinary letter-remover can do."
 
 
 
@@ -339,6 +307,12 @@ Report opening the Etymological Reversing Chamber for the first time:
 
 Instead of switching on the Etymological Reversing Chamber:
 	say "It is not plugged in, nor is there any plausible way to plug it in around here. Just as well: it probably draws a lot of power."
+
+Sanity-check plugging the power cord into the Etymological Reversing Chamber:
+	say "The plug is the wrong size. And there is no power outlet within reach." instead.
+
+Sanity-check plugging a massive plug into the Etymological Reversing Chamber:
+	try plugging the power cord into the Etymological Reversing Chamber instead.
 
 Table of Ultratests (continued)
 topic	stuff	setting
@@ -359,6 +333,8 @@ Sanity-check going to a privately-controlled room in Official grounds:
 		say "If [we] [are] going to try to get into the Bureau, [we][']ll need a pass and a reason for entry, and [we] should probably hide most of our possessions[if the player carries something bureau-allowed]. It's fine to have [the list of bureau-allowed things enclosed by the player], and our[otherwise]Our[end if] hair and clothing probably won't be closely searched, but anything illegal or weird, or anything an authentication scope would identify as fake, like [the list of visible bureau-disallowed things enclosed by the player], will need to be smuggled inside something else." instead; ]
 	if a fake person (called ringer) is in the location:
 		say "[The ringer] would probably give us away if [they] followed us. Best take care of that first." instead;
+	if a fake person (called ringer) is enclosed by the player:
+		say "[The ringer] would probably give us away if we carried [them] around. Best take care of that first." instead;
 	[if the noisemaker is something:
 		say "[The noisemaker] might give us away. Better take care of [them] first." instead;]
 	continue the action.
@@ -418,7 +394,11 @@ Instead of someone going to Bureau hallway from the Antechamber when the person 
 		say "'Pass?' demands the secretary in a bored voice. [The person asked] shrugs and goes no further."
 
 Instead of going to Bureau hallway from the Antechamber when the player does not enclose the pass and player-is-allowed is false:
-	say "[path-walked so far][one of][We] stride confidently toward [the noun] [--] that's my contribution, as you're more of a shuffler or possibly a slinker. Actually, I think a little of your posture must still be showing, because [we] [are] stopped by the secretary. [or]I do my best to give us a cocky swagger, but she's on to us now. [stopping]";
+	if the number of entries in the path so far of the player is greater than 1:
+		say "[path-walked so far]";
+	otherwise:
+		clear path-walked for player;
+	say "[one of][We] stride confidently toward [the noun] [--] that's my contribution, as you're more of a shuffler or possibly a slinker. Actually, I think a little of your posture must still be showing, because [we] [are] stopped by the secretary. [or]I do my best to give us a cocky swagger, but she's on to us now. [stopping]";
 	if the player is staid:
 		say paragraph break;
 	if the current interlocutor is not the secretary, silently try saying hello to the secretary;
@@ -432,21 +412,23 @@ Sanity-check showing the pass to the secretary:
 Instead of going to Bureau hallway from the Antechamber when the player encloses the pass and the secretary encloses the Regulation Authentication Scope and player-is-allowed is false:
 	if already caught is true:
 		make no decision;
-	if the number of entries in the path so far of the player is greater than 0:
+	if the number of entries in the path so far of the player is greater than 1:
 		say "[path-walked so far]";
+	otherwise:
+		clear path-walked for player;
 	if the pass is marked invisible:
 		if the pass is enclosed by a closed container (called the barrier):
 			try opening the barrier;
 		try taking the pass;
 	otherwise:
 		say "[We] show our pass to the secretary.";
-	if the player does not wear the hairpiece and the player does not wear the wig:
+	if the player does not wear a hairpiece and the player does not wear the wig:
 		now already caught is true;
 		say "[line break]The secretary looks at the pass, then looks at us. 'This isn't you on the pass,' she says. [paragraph break]'I've changed my hair,' I explain. 'And I'm wearing different contacts. And I've lost some weight.'[paragraph break]She looks at the picture, then at us again. 'Nope,' she says [--] and sends the room into lockdown.[paragraph break]I'm telling you, it's the hair that did it. If that matched better, I doubt she would have looked so closely at the rest.";
 		end the story saying "Our arrest goes badly";
 		stop the action;
-	if the player wears the hairpiece and the hairpiece is not disguised:
-		try the secretary looking at the hairpiece through the scope;
+	if the player wears a hairpiece (called H) which is not disguised:
+		try the secretary looking at H through the scope;
 		end the story saying "Our detention goes badly";
 		stop the action;
 	if the player wears the wig and the wig is not disguised:
@@ -455,7 +437,7 @@ Instead of going to Bureau hallway from the Antechamber when the player encloses
 		stop the action;
 	if the player does not enclose the invitation:
 		now already caught is true;
-		say "[line break]The secretary looks at the pass, then looks at us. 'And the purpose of your visit?' [paragraph break][We] say [we] [are] here at invitation to examine the T-inserter. She asks where the invitation is. [We] admit [we] don't have it just at the moment. It is possible that I come off as particularly dishonest in my nervous attempts to convince her.";
+		say "[line break]The secretary looks at the pass, then looks at us. 'And the purpose of your visit?' [paragraph break][We] say [we] [are] here at invitation to examine the T-inserter. She asks where the invitation is. [We] admit [we] don't have it just at the moment. It is possible that I come off as particularly dishonest in my nervous attempts to convince her. She sends the room into lockdown.";
 		end the story saying "Our detention goes badly";
 		stop the action;
 	try the secretary looking at the pass through the scope;
@@ -485,14 +467,17 @@ Sanity-check going to the Rotunda when the secretary carries the pass:
 
 Attempting entry is a scene. Attempting Entry begins when the secretary carries the invitation.
 
-Instead of doing something other than waiting during Attempting entry:
-	say "I'm handling this."
+Sanity-check doing something other than waiting during Attempting entry:
+	say "I'm handling this." instead.
 
 Instead of waiting during Attempting Entry:
 	say "Sure, hang in there. I'm pretty sure that what [we] need here is to act as much like Professor Waterstone himself as humanly possible."
 
-Every turn during attempting entry:
-	if time since Attempting Entry began is 1 minute:
+Entry-attempt-timer is a number that varies. Entry-attempt-timer is initially 0.
+
+Every turn during Attempting Entry:
+	if time since Attempting Entry began is greater than 0 minutes and entry-attempt-timer is 0:
+		now entry-attempt-timer is one plus the minutes part of time since Attempting Entry began;
 		say "'Professor Waterstone is a busy man,' I say. 'If you want me to tell him you wouldn't cooperate, I'm just as happy not to work on Serial Comma Day. But if DCL wants his endorsement or advice, they'll have to work within his schedule. If you are going to turn me away, however, I would like the opportunity to speak with your manager.'
 
 The secretary scowls. 'Fine. I'll contact Waterstone.' She places a call [--] on speakerphone, no less [--] glaring all the time.
@@ -509,7 +494,9 @@ The secretary scowls. 'Fine. I'll contact Waterstone.' She places a call [--] on
 
 'Sir, you are aware that this is highly irregular!'";
 
-Attempting  entry ends when the time since Attempting entry began is three minutes.
+[The rule below used to say "when the time since Attempting entry began is three minutes", but apparently it is somehow possible to get the game to skip ahead more than one minute in a turn, thus bypassing the old check. I still need to figure out exactly how this happens.]
+
+Attempting entry ends when entry-attempt-timer is greater than 0 and time since Attempting entry began is greater than entry-attempt-timer minutes.
 
 When attempting entry ends:
 	record "passing the secretarial test" as achieved;
@@ -526,8 +513,7 @@ She looks over our other visible possessions ([the list of not worn things which
 Instead of putting gel on something in the presence of the secretary:
 	say "I think the secretary would find that a little too interesting."
 
-
-already caught is a truth state that varies.
+Already caught is a truth state that varies.
 
 [A person can be allowed or barred. A person is usually barred.]
 
@@ -536,18 +522,20 @@ already caught is a truth state that varies.
 
 Understand "bribe [secretary]" as a mistake ("Attempts to bribe bureau employees carry sentences of up to ten years in prison. I'm not up for that, thanks.").
 
-Instead of taking something which is enclosed by the secretary:
-	say "Theft from bureau employees carries a sentence of up to fifteen years in prison and rationed use of plurals."
+Sanity-check taking something which is held by the secretary:
+	say "Theft from bureau employees carries a sentence of up to fifteen years in prison and rationed use of plurals." instead.
 
-Instead of kissing or attacking the secretary:
-	say "Violence against the person of a bureau employee is grounds for Cold Storage."
-
+Sanity-check kissing or attacking the secretary:
+	say "Violence against the person of a bureau employee is grounds for Cold Storage." instead.
 
 Instead of giving something to the secretary:
 	try showing the noun to the secretary.
 
 Instead of showing something to the secretary when the secretary encloses the Scope:
 	try the secretary looking at the noun through the scope.
+
+Sanity-check opening the backpack when the location is Antechamber and the backpack contains an illegal thing (called the offending item):
+	say "Better not. We don't want the secretary to see [the offending item]." instead.
 
 [After going to the Rotunda when the player encloses the pass:
 	say "You flash your pass at the secretary, and she shrugs, allowing you in."]
@@ -720,8 +708,12 @@ Sanity-check going from the Sensitive Equipment Testing Room:
 		otherwise:
 			say "We can hardly leave Brock here." instead;
 	if Brock is in the location:
-		say "Brock is determined that we get the T-inserter tested before we leave, and it's probably faster to cooperate with him than to fight it out." instead.
+		say "Brock is determined that we get the T-inserter tested before we leave, and it's probably faster to cooperate with him than to fight it out." instead;
+	if the rock is enclosed by the player and Brock does not recollect getting-out-now and Brock does not recollect what-day:
+		say "We better talk to Brock first and find out what happened. Let's gel him." instead.
 
+Check waving the letter-remover at Brock when the current setting of the letter-remover is "b":
+	say "Brock would never forgive [us] if [we] turned him back into a rock now." instead.
 
 Carry out putting gel on the rock when the player does not know brock-found:
 	now the player knows brock-found;
@@ -769,7 +761,7 @@ After printing the name of the pants while taking inventory:
 	otherwise:
 		make no decision. ]
 
-Definition: a thing is bureau-allowed:
+[ Definition: a thing is bureau-allowed:
 	if it is part of something:
 		yes;
 	if it is the letter-remover:
@@ -790,7 +782,7 @@ Definition: a thing is bureau-allowed:
 		yes;
 	no.
 
-Definition: a thing is bureau-disallowed if it is not bureau-allowed.
+Definition: a thing is bureau-disallowed if it is not bureau-allowed. ]
 
 Section 5 - Cold Storage
 
@@ -829,8 +821,8 @@ Instead of looking at the objects-on-stands through the monocle:
 Table of Ultratests (continued)
 topic	stuff	setting
 "storage1"	{ rock, tub, monocle }	Cold Storage
-"storage 2"	{ rock, tub, monocle }	Cold Storage
-"storage-bug"	{ rock, tub, monocle }	Cold Storage
+"storage2"	{ rock, tub, monocle }	Cold Storage
+"storage-bug"	{ dove, rock, tub, monocle }	Cold Storage
 
 Test storage1 with "placefather / tutorial off / open tub / out / gel rock / z" [holding the rock and the tub and the monocle in Cold Storage].
 Test storage2 with "placefather / tutorial off / open tub / out / x objects / gel object / z" [holding the rock and the tub and the monocle in Cold Storage].
@@ -847,8 +839,6 @@ Instead of going from the Cold Storage when Cold Dilemma is happening:
 
 Every turn when Cold Dilemma is happening and the time since Cold Dilemma began is 1 minute and father is in a room:
 	say "I vote [we] gel Brock and send him out to my father. No, hear me out. Brock's cover is probably not in great shape anyway. You might be able to rescue him later. And it would be a coup for my father to have a real big arrest to put on the record."
-
-Definition: a person is human if it is not an animal.
 
 Every turn when Cold Dilemma is happening and there is someone human (called the victim) who is not the player enclosed by location:
 	if victim is Brock:

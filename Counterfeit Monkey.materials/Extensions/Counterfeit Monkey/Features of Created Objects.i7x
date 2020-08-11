@@ -11,8 +11,27 @@ Section 1 - Legality
 
 A thing can be legal or illegal. A thing is usually legal.
 
-Before going to the Antechamber when the player has a backpack:
-	stow gear.
+Tried-hiding-plans is a truth state that varies. Tried-hiding-plans is initially false.
+
+Before going to the Antechamber:
+	if the player is hurrying:
+		if the number of entries in the described motion of the player is greater than 1:
+			say "[path-walked so far][line break][paragraph break]";
+		otherwise:
+			clear path-walked for player;
+	if the player has the secret-plans:
+		say "[if tried-hiding-plans is false]We try hiding the plans in the backpack before approaching the secretary ahead, but they are too long to fit. We decide to stay where we are for now.[otherwise][still-too-long][end if]";
+		now tried-hiding-plans is true;
+		stop the action;
+	follow the don't-leave-the-unleavable rule;
+	if the player has the secret-plans and tried-hiding-plans is true:
+		say still-too-long instead;
+	stow gear;
+	if the player has the secret-plans:
+		stop the action.
+
+To say still-too-long:
+	say "The plans are still too long to hide in the backpack[one of]. I don't think we should let the secretary ahead see us with them[or][stopping]."
 
 [Before approaching a room that encloses a police person when the player has a backpack:
 	if the room gone to is the fish Market:
@@ -22,7 +41,7 @@ Before going to the Antechamber when the player has a backpack:
 To stow gear:
 	let L be a list of things;
 	repeat with item running through things which are enclosed by the player:
-		if the item is marked-visible and the item is illegal and the item is not enclosed by a backpack:
+		if the item is marked-visible and the item is illegal and the item is not enclosed by the backpack:
 			add item to L;
 	if the number of entries in L is positive:
 		say "Before approaching the secretary ahead, we try to hide all our illegal things in the backpack.";
@@ -30,7 +49,9 @@ To stow gear:
 			silently try opening the backpack;
 		repeat with item running through L:
 			if item is the secret-plans:
-				say "[line break]The rolled-up plans are too long to fit, however, so we try to hold them hidden behind our back instead.";
+				say "[line break][if tried-hiding-plans is false]The rolled-up plans are too long to fit, however, so we stop and consider our options[otherwise]The plans are still too long[end if].";
+				now tried-hiding-plans is true;
+				stop the action;
 			otherwise:
 				silently try inserting the item into the backpack;
 		silently try closing the backpack;
@@ -45,6 +66,12 @@ Every turn when location is the Antechamber (this is the caught by police rule):
 			say "The attention of [the secretary] lights on [the evidence]. 'Let's see [regarding the evidence][those],' she says. [paragraph break]Of course, her quick inspection doesn't make her any happier, and she sends the room into lockdown.";
 			end the story saying "Our arrest goes badly";
 			the rule fails.
+
+Table of Ultratests (continued)
+topic	stuff	setting
+"hidestuff"	{ backpack, secret-plans, crate, silver tray }	Rotunda
+
+Test hidestuff with "unmonkey / put tray in crate / put plans on tray / close crate / south".
 
 
 Section 2 - Proffering and thing relations
@@ -112,10 +139,17 @@ A thing can be fake or real. A thing is usually real.
 
 When play begins (this is the setting real and fake rule):
 	now every thing enclosed by the repository is fake;
+	now the trash is real;
+	now the pearl is real;
+	now the pita is real;
+	now the pastis is real;
+	now the brown tee is real;
+	now the paper is real;
+	now the weight is real;
 	now patsy-woman is real;
 	now Brock is real.
 
-Definition: a thing is discovered if it is fake and it is seen.
+[Definition: a thing is discovered if it is fake and it is seen.]
 
 
 Section 3 - Concreteness
@@ -142,8 +176,34 @@ The verb to weigh (it weighs, they weigh, it is weighing) implies the heft prope
 
 Definition: a thing is heavy if its heft is greater than 3.
 
-Every turn when the player carries a heavy thing (called burden):
-	try involuntarily-dropping the burden.
+Every turn:
+	let X be the burden;
+	if X is not nothing:
+		if the player does not carry X:
+			move X to the player;
+		try involuntarily-dropping X.
+
+To decide which object is the burden:
+	(- Burden() -).
+
+Include (-
+
+	[ Burden o;
+		for (o=child(player) : o : ) {
+			if (o.(+ heft +) > 3 || o has scenery || o has static)
+				return o;
+			if (child(o)) o = child(o);
+			else
+				while (o) {
+					if (sibling(o)) { o = sibling(o); break; }
+					o = parent(o);
+					if (o == player) return nothing;
+				}
+		}
+		return nothing;
+	];
+
+-).
 
 Sanity-check waving a heavy thing:
 	say "Unlikely, unless [we] suddenly [become] a good deal stronger." instead.
@@ -159,20 +219,33 @@ Carry out involuntarily-dropping:
 		stop the action.
 
 Report involuntarily-dropping:
-	say "[The noun] [are] [if the heft of the noun is greater than 4]far too large[otherwise]too awkward[end if] for [us] to carry, and [regarding the noun][fall] onto the [ground]." instead.
+	say "[The noun] [are] [if the heft of the noun is greater than 4]far too large[otherwise]too awkward[end if] for [us] to carry, and [regarding the noun][fall] onto the [fall-receiver]." instead.
 
 Report involuntarily-dropping an animal:
-	say "[The noun] [are] [if the heft of the noun is greater than 4]far too large[otherwise]too awkward[end if] for [us] to carry, and half-[regarding the noun][fall], half-[jump] to the [ground]." instead.
+	say "[The noun] [are] [if the heft of the noun is greater than 4]far too large[otherwise]too awkward[end if] for [us] to carry, and half-[regarding the noun][fall], half-[jump] to the [fall-receiver]." instead.
 
 Report involuntarily-dropping the boar:
 	now the boar is in the location;
 	say "[We] more or less throw the boar as far away as possible. It seems the wisest course." instead.
 
 Report involuntarily-dropping a person:
-	say "[The noun] [look] rather awkward, and clamber[s] out of our ineffective hold onto solid ground." instead.
+	if the noun is brock:
+		stop the action;
+	otherwise:
+		say "[The noun] [look] rather awkward, and [clamber] out of our ineffective hold onto solid ground." instead.
 
 Report involuntarily-dropping a cat:
-	say "[The noun] [get] tired of being carried and leap[s] delicately to the [ground]." instead.
+	say "[The noun] [get] tired of being carried and [leap] delicately to the [fall-receiver]." instead.
+
+To say fall-receiver:
+	let H be the holder of the player;
+	if H is the location:
+		say "[ground]";
+	otherwise:
+		if H is a car:
+			say "[H] floor";
+		otherwise:
+			say the printed name of H.
 
 Section 5 - Length and Strength
 

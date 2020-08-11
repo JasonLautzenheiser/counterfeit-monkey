@@ -40,13 +40,13 @@ To decide whether the current input context is line input (deprecated):
 
 To decide whether the current input context is char/character input (deprecated):
 	(- ( (+ library input context +) == 1 ) -)
-	
+
 To decide which g-event is the current glk event (deprecated):
 	(- GE_Event_Struct_type -)
-	
+
 To decide what number is the window of the current glk event (deprecated):
 	(- GE_Event_Struct_win -)
-	
+
 To decide what number is the character code returned (deprecated):
 	(- GE_Event_Struct_val1 -)
 
@@ -64,6 +64,8 @@ The glulx input handling rules have outcomes replace player input (success) and 
 
 [This is an I7 version of the event handling that was included in the I6 HandleGlkEvent routine in previous versions of Glulx Entry Points, with minor changes to allow any event type to provide a replacement command. Converted to I7 code in version 10.]
 
+To follow (RL - a rule) without linebreaks: (- FollowRulebook({RL}, 0, true); -).
+
 To decide what number is the value returned by glk event handling (this is the handle glk event rule):
 	now glulx replacement command is "";
 	follow the glulx input handling rules for the current glk event;
@@ -71,11 +73,11 @@ To decide what number is the value returned by glk event handling (this is the h
 		decide on input replacement;
 	if the outcome of the rulebook is the require input to continue outcome:
 		decide on input continuation;
-	follow the command-counting rules;
+	follow the command-counting rules without linebreaks;
 	if the rule succeeded:
-		follow the input-cancelling rules;
-		follow the command-showing rules;
-		follow the command-pasting rules;
+		follow the input-cancelling rules without linebreaks;
+		follow the command-showing rules without linebreaks;
+		follow the command-pasting rules without linebreaks;
 		if the [command-pasting] rule succeeded:
 			decide on input replacement.
 
@@ -116,34 +118,36 @@ The glulx character input rules is a rulebook.
 The glulx line input rules is a rulebook.
 The glulx hyperlink rules is a rulebook.
 
+To abide by (RB - a rulebook) without linebreaks:
+	(- if (FollowRulebook({RB}, 0, true)) rtrue; -).
+
 [ These rules route input to the separate event-handling rulebooks originally used by older versions of Glulx Entry Points. They do nothing if we have activated the direct event handling use option. ]
 
 Last glulx input handling rule for a timer-event when the direct event handling option is not active (this is the redirect to GEP timed activity rule):
-	abide by the glulx timed activity rules.
+	abide by the glulx timed activity rules without linebreaks.
 
 Last glulx input handling rule for a char-event when the direct event handling option is not active (this is the redirect to GEP character input rule):
-	abide by the glulx character input rules.
+	abide by the glulx character input rules without linebreaks.
 
 Last glulx input handling rule for a line-event when the direct event handling option is not active (this is the redirect to GEP line input rule):
-	follow the glulx line input rules;
+	follow the glulx line input rules without linebreaks;
 	if the rule succeeded:
 		replace player input.
 
 Last glulx input handling rule for a mouse-event when the direct event handling option is not active (this is the redirect to GEP mouse input rule):
-	abide by the glulx mouse input rules.
+	abide by the glulx mouse input rules without linebreaks.
 
 Last glulx input handling rule for an arrange-event when the direct event handling option is not active (this is the redirect to GEP arranging rule):
-	abide by the glulx arranging rules.
+	abide by the glulx arranging rules without linebreaks.
 
 Last glulx input handling rule for a redraw-event when the direct event handling option is not active (this is the redirect to GEP redrawing rule):
-	abide by the glulx redrawing rules.
+	abide by the glulx redrawing rules without linebreaks.
 
 Last glulx input handling rule for a sound-notify-event when the direct event handling option is not active (this is the redirect to GEP sound notification rule):
-	abide by the glulx sound notification rules.
+	abide by the glulx sound notification rules without linebreaks.
 
 Last glulx input handling rule for a hyperlink-event when the direct event handling option is not active (this is the redirect to GEP hyperlink rule):
-	abide by the glulx hyperlink rules.
-
+	abide by the glulx hyperlink rules without linebreaks.
 
 
 Section - Debounce arrange events - unindexed
@@ -211,16 +215,16 @@ A command-counting rule (this is the ordinary checking for content rule):
 
 
 Section - Input-cancelling rules
-	
+
 The input-cancelling rules are a rulebook.
 
 An input-cancelling rule (this is the cancelling input in the main window rule):
 	cancel line input in the main window;
 	cancel character input in the main window;
-	
+
 To cancel line input in the/-- main window:
 	(- glk_cancel_line_event(gg_mainwin, GLK_NULL); -)
-	
+
 To cancel character input in the/-- main window:
 	(- glk_cancel_char_event(gg_mainwin); -)
 
@@ -230,23 +234,23 @@ Section - Command showing rules
 The command-showing rules are a rulebook.
 
 A command-showing rule (this is the print text to the input prompt rule):
-	say input-style-for-glulx;
-	say Glulx replacement command;
-	say roman type;
+	say "[input-style-for-glulx][Glulx replacement command][roman type][conditional paragraph break]";
 
-To say input-style-for-Glulx: 
+To say input-style-for-Glulx:
 	(- glk_set_style(style_Input); -)
- 
+
 
 Section - Command pasting rules
 
-The command-pasting rules are a rulebook. 
+The command-pasting rules are a rulebook.
 
-A command-pasting rule (this is the glue replacement command into parse buffer rule): 
+A command-pasting rule (this is the glue replacement command into parse buffer rule):
 	change the text of the player's command to the Glulx replacement command;
+	copy input to secondary buffer;
 	rule succeeds.
 
-
+To copy input to secondary buffer:
+	(- VM_CopyBuffer(buffer2, buffer); -)
 
 Glulx Entry Points ends here.
 
@@ -305,11 +309,11 @@ If you are certain that you do not need these rulebooks in a project (i.e., you 
 	Use direct event handling.
 
 
-Chapter: Replacement Commands 
+Chapter: Replacement Commands
 
-One of the things we may want to do -- especially with mouse input or hyperlinks -- is generate a command for the player. To do this, we set the value of Glulx replacement command to whatever string of text we want to turn into the player's command. If we do this, Inform will treat whatever command we issued in "Glulx replacement command" as though the player had typed it at the command prompt. The extension Basic Hyperlinks builds on this infrastructure and provides an example of how to make use of these features. 
+One of the things we may want to do -- especially with mouse input or hyperlinks -- is generate a command for the player. To do this, we set the value of Glulx replacement command to whatever string of text we want to turn into the player's command. If we do this, Inform will treat whatever command we issued in "Glulx replacement command" as though the player had typed it at the command prompt. The extension Basic Hyperlinks builds on this infrastructure and provides an example of how to make use of these features.
 
-Because the Glulx replacement command is indexed text, it is possible to build on to the string automatically, if for some reason we need to auto-generate our recommended commands. 
+Because the Glulx replacement command is indexed text, it is possible to build on to the string automatically, if for some reason we need to auto-generate our recommended commands.
 
 
 
@@ -329,17 +333,17 @@ Two phrases that may be useful to those working with Glulx input/output are prov
 Example: * Input Handling - Very basic use of the glulx input handling rules. Shows how to detect events according to whether they are generated by player input, how to override the player's typed input with a replacement command, and how to use the "current glk event" phrase.
 
 	Include version 10 of Glulx Entry Points by Emily Short.
-	
+
 	Use direct event handling.
-	
+
 	Glk Testing is a room.
-	
+
 	Glulx input handling rule for an independent of the player g-event:
 	say "[bracket]Non-input event detected: [current glk event][close bracket][line break]".
-		
+
 	Glulx input handling rule for a dependent on the player g-event:
 		say "[bracket]Player input detected: [current glk event][close bracket][line break]".
-		
+
 	Glulx input handling rule for a line-event:
 		now the Glulx replacement command is "jump".
 
@@ -355,11 +359,11 @@ Example: * Working Without Sound - Printing a warning at the beginning of the ga
 	First when play begins:
 		unless glulx sound is supported:
 			say "This game uses sound effects extensively. The interpreter you're using is unable to play sounds, so you will be missing part of the intended experience.
-		
+
 Would you like to continue anyway?";
 			unless the player consents:
 				stop game abruptly.
 
 	Royal Albert Hall is a room.
-	
+
 	Test me with "listen".

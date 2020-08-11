@@ -1,6 +1,6 @@
 Version 4/160517 of Notepad by Jim Aikin begins here.
 
-[Updated allowed pens to be relation for Counterfeit Monkey, everything else broken - Petter Sjölund]
+[Updated allowed pens to be a relation for Counterfeit Monkey, everything else broken - Petter Sjölund]
 
 "A system for creating an in-game notepad that the player can write on."
 
@@ -21,7 +21,7 @@ To decide which termination type is the terminor of (T - text):
 	otherwise if C is "!":
 		decide on terminated;
 	decide on unterminated.
-	
+
 Section 2 - Reading
 
 To protest (he protests, they protest, he protested, it is protested, he is protesting) is a verb.
@@ -70,7 +70,8 @@ After examining a notepad (called N) (this is the notepad output rule):
 		if term is terminated:
 			say "'[memo of N]'[paragraph break]" (B);
 		otherwise:
-			say "'[memo of N].'" (C).
+			say "'[memo of N].'" (C);
+	continue the action.
 
 Section 3 - Writing It On
 
@@ -107,8 +108,8 @@ Check an actor writing on something (this is the ordinary check writing it on ru
 			now carrying-pen is true;
 		if carrying-pen is false:
 			say "[The actor] [have] nothing to write with." (F);
-			rule succeeds.	
-	
+			rule succeeds.
+
 Carry out an actor writing on something (this is the ordinary carry out writing it on rule):
 	let T be text;
 	let T be the topic understood;
@@ -139,13 +140,13 @@ Check an actor adding to something (this is the ordinary check adding it to rule
 	if carrying-pen is false:
 		say "[The actor] [have] nothing to write with." (C);
 		rule succeeds.
-		
+
 To say now:
 	if the story tense is past tense:
 		say "then";
 	else:
 		say "now".
-		
+
 To say that:
 	if the story tense is present tense:
 		say "the";
@@ -207,7 +208,7 @@ Check an actor copying something to something (this is the ordinary check copyin
 	if carrying-pen is false:
 		say "[The actor] [have] nothing to write on [the second noun] with." (H);
 		rule succeeds.
-		
+
 Carry out an actor copying something to something (this is the ordinary carry out copying it to rule):
 	let T be text;
 	let T be the memo of the noun;
@@ -301,7 +302,7 @@ Check protecting (this is the standard check protecting rule):
 		say "[The noun] is already write-protected." (B) instead.
 
 Carry out protecting:
-	now the noun is non-edit-allowing. 
+	now the noun is non-edit-allowing.
 
 Report protecting (this is the standard report protecting rule):
 	say "You have write-protected the text on [the noun]." (A).
@@ -350,7 +351,7 @@ By default, when a notepad is examined, its memo is printed out in a separate pa
 
 	The notepad output rule is not listed in any rulebook.
 
-In practice, long texts may slow the interpreter noticeably. The erasing it from action can become quite sluggish with long texts. 
+In practice, long texts may slow the interpreter noticeably. The erasing it from action can become quite sluggish with long texts.
 
 Section: New Commands
 
@@ -470,7 +471,7 @@ Example: * Beethoven - A deaf NPC who responds only to commands written in the c
 	Instead of showing the conversation book to Beethoven:
 		if the memo of the conversation book is empty, say "Beethoven frowns at the empty page. 'You have an odd sense of humor,' he says gruffly.";
 		otherwise now the queued command is "beethoven, [memo of the conversation book]".
-	
+
 	Section 4 - The Playing Action
 
 	Playing is an action applying to one thing. Understand "play [something]" as playing.
@@ -483,5 +484,3 @@ Example: * Beethoven - A deaf NPC who responds only to commands written in the c
 		say "You try a few tentative notes on [the noun], but it's in such poor condition that you desist almost before you start."
 
 	Test me with "show book to beethoven / write play the piano in the book / show book to beethoven / beethoven, play the piano / write go north in conversation book / show book to beethoven".
-	
-		

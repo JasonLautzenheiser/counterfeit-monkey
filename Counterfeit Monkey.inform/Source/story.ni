@@ -51,7 +51,7 @@ Use MAX_STATIC_DATA of 3000000.
 Use MAX_PROP_TABLE_SIZE of 4000000.
 Use MAX_INDIV_PROP_TABLE_SIZE of 2000.
 Use MAX_STACK_SIZE of  600000.
-Use MAX_SYMBOLS of 80000.
+Use MAX_SYMBOLS of 90000.
 Use MAX_EXPRESSION_NODES of 600.
 Use MAX_LOCAL_VARIABLES of 128.
 Use MAX_OBJECTS of 3000.
@@ -71,9 +71,10 @@ Ultra Undo is an extension kindly written by Dannii Willis to use external file 
 
 Include version 1/160501 of Ultra Undo by Dannii Willis.
 
-The release number is 6.
+The release number is 9.
 
 Use scoring.
+Use static object grouping.
 [Use no deprecated features.]
 
 Include Scope Caching by Mike Ciul.
@@ -83,11 +84,15 @@ Include Subcommands by Daniel Stelzer.
 [ Startup precomputation ]
 Include version 1/160718 of Startup Precomputation by Dannii Willis.
 The finalise startup precomputation rule is listed last in the when play begins rules.
-The initial conversation rule is listed after the finalise startup precomputation rule in the when play begins rules.
 
-Last after starting the virtual machine rule (this is the apologise for a slow start rule):
-	say "Counterfeit Monkey is starting. This may take a short moment.";
+Include Echo replacement by Counterfeit Monkey.
 
+The check for echo suppression support rule is listed after the finalise startup precomputation rule in the when play begins rules.
+
+The initial conversation rule is listed after the check for echo suppression support rule in the when play begins rules.
+
+[Last after starting the virtual machine rule (this is the apologise for a slow start rule):
+	say "Counterfeit Monkey is starting. This may take a short moment.";]
 
 Volume 2 - Source files inclusion
 
@@ -148,7 +153,7 @@ Include Viewpoint and Narrative Voice by Counterfeit Monkey.
 		•	Section 6 - The THINK verb ]
 
 Include World Model Tweaks by Counterfeit Monkey.
-
+Include Additional Achievements by Counterfeit Monkey.
 Include Loudness by Counterfeit Monkey.
 Include Room Description Speedups by Counterfeit Monkey.
 Include Custom Speedups by Counterfeit Monkey.
@@ -544,11 +549,15 @@ Include Tests by Counterfeit Monkey.
 		•	Section 5 - Ultratest ]
 
 Include Letter Hash Codes by Counterfeit Monkey.
+Include Homonym Indices by Counterfeit Monkey.
 Include Initial Quip Positions by Counterfeit Monkey.
 Include Fakes by Counterfeit Monkey.
 Include Initial Proffering by Counterfeit Monkey.
 Include Backdrops by Counterfeit Monkey.
 Include Hard-coded Quip Cache by Counterfeit Monkey.
+Include Mentions Indices by Counterfeit Monkey.
+Include Mentions Array by Counterfeit Monkey.
+[Include Regenerate Mentions by Counterfeit Monkey.]
 
 [The following source files are included above:
 

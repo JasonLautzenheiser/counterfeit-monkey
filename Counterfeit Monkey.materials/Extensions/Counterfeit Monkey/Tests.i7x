@@ -5,7 +5,9 @@ Use authorial modesty.
 
 Volume 8 - Tests
 
-Chapter 0 - Skipping breaks
+Chapter 0
+
+Section 1 - Skipping breaks
 
 No pauses is a truth state that varies. No pauses is initially false.
 
@@ -21,13 +23,18 @@ To custom-wait for any key:
 
 The File of Tests is called "testing".
 
-[Start automated test if File of Tests exists.]
+[Start automated test if File of Tests or File of Automated Tests exists.]
 
-A last after starting the virtual machine rule (this is the automated testing rule):
-	if the File of Tests exists:
-		say "[first custom style][bracket]Test mode active. No waiting for key presses, deterministic randomness[close bracket][roman type][paragraph break]";
+A last after starting the virtual machine rule (this is the no pauses rule):
+	if the File of Tests exists or the file of Automated Tests exists:
+		say "[first custom style][bracket]Test mode active. No waiting for key presses, deterministic randomness.[close bracket][roman type]";
 		seed the random-number generator with 1234;
 		now no pauses is true;
+		if glulx system clock is supported:
+			start the timer;
+		otherwise:
+			say "[paragraph break][first custom style][bracket]This interpreter does not provide system clock functionality. Total play time will not be shown at the end of the game.[close bracket][roman type][paragraph break]";
+		say paragraph break;
 
 Understand "pauses on" as on-pausing. On-pausing is an action out of world.
 Understand "pauses off" as off-pausing. Off-pausing is an action out of world.
@@ -44,6 +51,127 @@ Understand "random-seed [number]" as reseeding. Reseeding is an action out of wo
 Carry out reseeding:
 	say "[first custom style][bracket]Random-number generator seeded with [the number understood].[close bracket][roman type]";
 	seed the random-number generator with the number understood.
+
+
+
+Section 2 - Automated testing
+
+The automated testing rule translates into I6 as "StartAutoTests".
+The automated testing rule is listed last in the after starting the virtual machine rules.
+The attempt to load a precomputation data file rule does nothing if the File of Automated Tests exists or the File of Tests exists.
+
+To decide whether the file of Automated Tests exists:
+	(- TestAutoTestsFile() -).
+
+Include (-
+
+! Hard coded file name for non-interactive tests
+Array autotestfilename -> $E0 'a' 'u' 't' 'o' 't' 'e' 's' 't' 'i' 'n' 'g' 0;
+
+[ StartAutoTests fref;
+	fref = glk_fileref_create_by_name( fileusage_InputRecord | fileusage_TextMode, autotestfilename, 0 );
+	if ( fref )
+	{
+		if ( glk_fileref_does_file_exist( fref ) )
+		{
+			if ( gg_commandstr == 0 )
+			{
+				gg_commandstr = glk_stream_open_file( fref, filemode_Read, GG_COMMANDWSTR_ROCK );
+			}
+			if ( gg_commandstr )
+			{
+				gg_command_reading = true;
+			}
+		}
+	}
+	glk_fileref_destroy( fref );
+	rfalse;
+];
+
+[ TestAutoTestsFile fref res;
+	fref = glk_fileref_create_by_name( fileusage_InputRecord | fileusage_TextMode, autotestfilename, 0 );
+	res = glk_fileref_does_file_exist( fref );
+	glk_fileref_destroy( fref );
+	return res;
+];
+
+-).
+
+
+
+Section 3 - Measure play time
+
+Include (-
+
+Array currentTime --> 0 0 0;   ! Microseconds elapsed since midnight on January 1, 1970, GMT/UTC
+Array totalTestStartTime --> 0 0 0; ! This will survive restarts
+
+Global startTime;
+Global stopTime;
+
+[ readTimer;
+	glk_current_time( currentTime );
+	return arrayAsMillisecs( currentTime );
+];
+
+[ arrayAsMillisecs theArray;
+	return theArray-->1 * 1000 + theArray-->2 / 1000;
+];
+
+-) after "Definitions.i6t".
+
+To start the timer:
+	(-
+		! If we haven't yet set a restart-persistent total test start time, do it now
+		if ( arrayAsMillisecs( totalTestStartTime ) == 0 )
+		{
+			glk_current_time( totalTestStartTime );
+			@protect totalTestStartTime 12;
+			startTime = arrayAsMillisecs( totalTestStartTime );
+		}
+		else
+		{
+			startTime = readTimer();
+		}
+	-);
+
+To stop the timer:
+	(-
+		stopTime = readTimer();
+	-);
+
+The start time is a number variable.
+The start time variable translates into I6 as "startTime".
+The stop time is a number variable.
+The stop time variable translates into I6 as "stopTime".
+
+To display the total test time:
+	if glulx system clock is supported and (the File of Tests exists or the File of Automated Tests exists):
+		stop the timer;
+		let time diff be stop time - start time;
+		say "Total play time: [time diff as time]";
+		if test start time is not start time:
+			let total diff be stop time - test start time;
+			say "[line break]Accumulated test time: [total diff as time]";
+		say paragraph break;
+
+To decide which number is test start time:
+	(- arrayAsMillisecs( totalTestStartTime ) -);
+
+To say (T - a number) as time:
+	let minutes be T / 60000;
+	let millisecs be the remainder after dividing T by 60000;
+	let seconds be millisecs / 1000;
+	now millisecs is the remainder after dividing millisecs by 1000;
+	say "[minutes]:[seconds].[no line break][millisecs]";
+
+Check quitting the game:
+	display the total test time;
+	continue the action;
+
+First before handling the final question rule:
+	display the total test time;
+
 
 
 Chapter 1 - Tests - Not for release
@@ -218,7 +346,6 @@ Carry out animal-summoning:
 Report animal-summoning:
 	try looking.
 
-
 [Since it takes several steps to get a working car, sometimes we want to be able to test without going through that rigamarole.]
 
 Understand "car-acquire" as car-acquiring. Car-acquiring is an action out of world.
@@ -293,6 +420,9 @@ Carry out establishing longs:
 	now the crosspiece is not proffered by anything;
 	now the cross proffers the crosspiece;
 	now the piece proffers the crosspiece;
+	now the counterweight is not proffered by anything;
+	now the ordinary-counter proffers the counterweight;
+	now the weight proffers the counterweight.
 
 [Multi-step test with writing]
 
@@ -459,52 +589,52 @@ When play begins:
 	say "I believe that makes [C] items with distinct names." ]
 
 
-[Understand "list all sizes" as listing all sizes. Listing all sizes is an action out of world.
+Understand "list all sizes" as listing all sizes. Listing all sizes is an action out of world.
 
 Carry out listing all sizes:
 	say "Size 0 (abstracts and the totally weightless):[line break]";
 	try listing size 0;
-	paragraph break;
+	say paragraph break;
 	say "Size 1:[line break]";
 	try listing size 1;
-	paragraph break;
+	say paragraph break;
 	say "Size 2:[line break]";
 	try listing size 2;
-	paragraph break;
+	say paragraph break;
 	say "Size 3:[line break]";
 	try listing size 3;
-	paragraph break;
+	say paragraph break;
 	say "Size 4:[line break]";
 	try listing size 4;
-	paragraph break;
+	say paragraph break;
 	say "Size 5:[line break]";
 	try listing size 5;
-	paragraph break;
+	say paragraph break;
 	say "Size 6:[line break]";
 	try listing size 6;
-	paragraph break;
+	say paragraph break;
 	say "Size 7:[line break]";
 	try listing size 7;
-	paragraph break;
+	say paragraph break;
 	say "Size 8:[line break]";
 	try listing size 8;
-	paragraph break;
+	say paragraph break;
 	say "Size 9 and up (large enough to crush the player on creation):[line break]";
 	repeat with N running from 9 to 20:
 		try listing size N;
-	paragraph break;]
+	say paragraph break;
 
 [ The mentioning relation broke horribly when porting from 6G60 because some quips had locations listed as mentioned. The compiler seemed to accept it, but instead a long list of random things were suddenly mentioned by the quip. Use this to test if it happens again. ]
 
 [Understand "list mentions" as listing-subjects. Listing-subjects is an action out of world. Carry out listing-subjects:
 		show relation mentioning relation.]
 
-Understand "list available subjects" as listing-available-subjects. Listing-available-subjects is an action out of world. Carry out listing-available-subjects:
+[Understand "list available subjects" as listing-available-subjects. Listing-available-subjects is an action out of world. Carry out listing-available-subjects:
 	let subject-list be a list of subjects;
 	repeat with Q running through available quips in quip-repository:
 		repeat with S running through mentions-list of Q:
 			add S to subject-list, if absent;
-	say "[subject-list in brace notation]".
+	say "[subject-list in brace notation]".]
 
 Understand "list quips" as listing-quips. Listing-quips is an action out of world.
 Carry out listing-quips:
@@ -576,8 +706,16 @@ Understand "all-greet" as testing greetings. Testing greetings is an action appl
 
 Carry out testing greetings:
 	repeat with item running through people who are not animals:
-		move the item to the location;
-		try the item saying hello to the player.
+		let O be the holder of item;
+		unless O is the location:
+			move the item to the location;
+		say "[bracket][The item][close bracket]";
+		try the item saying hello to the player;
+		if O is nothing:
+			now the item is nowhere;
+		otherwise:
+			unless O is the location:
+				move the item to O.
 
 [This goes through locations and tests how well they describe the surroundings if the player types LOOK (DIRECTION). This is partly an act of world-building self-discipline: we never want there to be streets without buildings fronting them, even if those buildings aren't important and aren't part of the primary description. There should always be *something* there to reward playful investigation.]
 Understand "pound face" as testing facing. Testing facing is an action out of world.
@@ -746,6 +884,30 @@ Carry out pounding all-lists:
 		try inserting the apple into item;
 		say "(remove apple from [item])";
 		try removing apple from item;
+
+Understand "accomplish achievements" as accomplishing achievements. Accomplishing achievements is an action out of world.
+
+Carry out accomplishing achievements:
+	repeat through Table of all achievements:
+		record achievement entry as an achievement.
+
+Understand "delete achievements" as deleting achievements. Deleting achievements is an action out of world.
+
+Carry out deleting achievements:
+	say "Warning! This will delete any recorded achievements and overwrite the monkeyac file with a blank file of the same name. This can not be undone. Do you want to continue? >>" ;
+	if the player consents:
+		blank out the whole of the Table of Possible achievements;
+		write File of Conclusions from the Table of Possible Achievements;
+		say "[first custom style][bracket]Achievements deleted.[close bracket][roman type][line break]".
+
+Understand "end the/-- game/story" as ending. Ending is an action out of world. Carry out ending:
+	say "[bracket]Press a key[close bracket]";
+	end the story saying "This was just a test of the ending functionality".
+
+Understand "end the/-- game/story finally" as final ending. Final ending is an action out of world. Carry out final ending:
+	pre-remove achievements option at game end;
+	end the story finally saying "This is just a test of the final ending functionality";
+
 
 [Object responses for everything in the repository.]
 
@@ -991,17 +1153,7 @@ Understand "pound anagrams" as testing anagrams. Testing anagrams is an action a
 
 Carry out testing anagrams:
 	repeat with item running through synthesizable things:
-		hash item;
-		say " - [item][line break]";
-
-To hash (N - a thing):
-	let anagram key be a list of text;
-	let starting form be "[n]";
-	let count be the number of characters in starting form;
-	repeat with i running from 1 to count:
-		add "[character number i in starting form]" to anagram key;
-	sort anagram key;
-	say anagram key.
+		say "[anagram key of item] - [item][line break]";
 
 Understand "list sources" as listing sources. Listing sources is an action applying to nothing.
 
@@ -1074,14 +1226,14 @@ Carry out hashtesting:
 			if the hash code of the item is not H:
 				[say "Hashtest for [item] passed![line break]";
 			else:]
-				say "ERROR:Hashtest for [item] FAILED! Hash was [hash code of item], should have been [H]![line break]";
+				say "ERROR:Hashtest for [item] FAILED! Hash was [hash code of item] ([hash code of item as letter-hash]), should have been [H] ([H as letter-hash])![line break]";
 				now hash-fail is true;
 			now the item is unseen;
 	repeat with item running through rooms:
 		let T be "[item]";
 		let H be the letter-hash of T;
 		if the hash code of the item is not H:
-			say "ERROR:Hashtest for [item] FAILED! Hash was [hash code of item], should have been [H]![line break]";
+			say "ERROR:Hashtest for [item] FAILED! Hash was [hash code of item] ([hash code of item as letter-hash]), should have been [H] ([H as letter-hash])![line break]";
 			now hash-fail is true;
 	if hash-fail is false:
 		say "All tested hash codes are correct!"
@@ -1097,6 +1249,27 @@ Carry out listing hash codes:
 	repeat with item running through rooms:
 		let H be the hash code of item;
 		say "[The item] has hash code [H]."
+
+Understand "check hash codes" as checking hash codes. Checking hash codes is an action applying to nothing.
+
+Carry out checking hash codes:
+	let L be a list of objects;
+	let no-errors be true;
+	now L is {};
+	repeat with item running through things:
+		unless item is a fact or item is a quip or item is a memory or item is a subject or item is a g-window or item is dummy-object or item is yourself or item is quip-repository or item is backup-repository or item is letter-remover or item is small knob:
+			add item to L;
+	repeat with item running through rooms:
+		add item to L;
+	sort L in printed name order;
+	repeat with item running through L:
+		let T be "[item]";
+		let H be the letter-hash of T;
+		unless H is the hash code of item:
+			say "[bracket][The item] should have hash code [H] ([H as letter-hash]), not [hash code of item] ([hash code of item as letter-hash]).[close bracket][line break]";
+			now no-errors is false;
+	if no-errors is true:
+		say "[bracket]All checked hash codes were correct![close bracket][line break]".
 
 
 Section 5 - Ultratest
@@ -1127,6 +1300,5 @@ To call test:
 	special_word = NextWordStopped();
 	TestScriptSub();
 -)
-
 
 Tests ends here.

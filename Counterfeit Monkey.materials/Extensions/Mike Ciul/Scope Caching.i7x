@@ -76,10 +76,6 @@ After reading a command (this is the cache player's scope rule):
 
 The cache player's scope rule is listed first in the after reading a command rules.
 
-Before looking (this is the cache scope before looking rule):
-	Carry out the caching scope activity with the player;
-	Trust the scope cache until next turn.
-
 Volume - Interactions with Conditional Backdrops (for use with Conditional Backdrops by Mike Ciul)
 
 After moving floating objects (this is the cache scope after moving floating objects rule):
@@ -128,7 +124,7 @@ The update remembered positions of cached things rule is listed after the cache 
 First report remembering (this is the Remembering specific report remembering rule):
 	if remembered location of noun is nothing, continue the action;
 	say the message corresponding to a rule name of Remembering specific report remembering rule in Table of Remembering Messages;
-	stop the action. 
+	stop the action.
 
 Volume - Testing commands - not for release
 
@@ -255,7 +251,7 @@ Example: * Which Rubber - Uses Scope Caching to prevent an infinite loop. Withou
 
 	After deciding the scope of the player in Indoors when the front door is open:
 		place the outdoor view in scope.
-	
+
 	Test me with "rules/open door/get rubber/scopestat/scopestat bob"
 
 Section: Changes

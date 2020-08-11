@@ -24,14 +24,14 @@ The Post Office is a facade in Deep Street. It fronts southeast. It is scenery. 
 
 The convenience store is a facade in Deep Street. It fronts northeast. It is scenery. Understand "shop" or "grocery" as the convenience store. The description is "During normal business hours, it sells the usual assortment: sandwiches, cold drinks, bus tickets, recharge packets for letter tools, disposable cameras. Currently it is shut, however."
 
-Instead of finding the convenience store when the subcommand of the convenience store matches the text "convenience":
+Instead of finding the convenience store when the subcommand of the convenience store matches "convenience":
 	try approaching Public Convenience.
 
 The white concrete buildings are scenery in Deep Street. Instead of entering the white concrete buildings, say "They're all private apartments, run down but nevertheless expensive on the grounds of location alone." The description of the white concrete buildings is "Each has its [balcony] and its [laundry] flapping on clothes lines; but there the uniformity ends. Some are decorated in a curious fantasia of [painted Moorish patterns]; others a daring kind of art nouveau, all organic curves and windows that glance out under lowered concrete lids."
 
 The painted Moorish patterns are part of the white concrete buildings. The description is "Black, gold, rose and red, they mark out arches and stripe eaves."
 
-The balcony is part of the buildings. Understand "balconies" as the balcony. Instead of climbing the balcony, say "The lowest is still many feet above the sidewalk level." The description of the balcony is "Many are rounded, like boxes at the opera."
+The balcony is part of the white concrete buildings. Understand "balconies" as the balcony. Instead of climbing the balcony, say "The lowest is still many feet above the sidewalk level." The description of the balcony is "Many are rounded, like boxes at the opera."
 
 The laundry is part of the balcony. The description is "Mostly bleached t-shirts and underpants and the odd sheet pinned to a line." Understand "clothes" or "lines" or "line" or "underpants" or "odd" or "sheet" or "t-shirts" or "bleached" as the laundry.
 
@@ -70,7 +70,12 @@ A ranking rule when aquarium-exterior is not as-yet-unknown and Aquarium is visi
 	increase description-rank of the target by 20.
 
 Rule for writing a topic sentence about a car (called target car) when the location is Deep Street and Aquarium is visited and aquarium-exterior is not as-yet-unknown and aquarium-exterior is mentionable:
-	say "Our pathetic little [target car] is parked right outside [the aquarium-exterior]. "
+	let N be the number of cars in location;
+	if N is greater than 1:
+		say "Our pathetic little cars are parked right outside [the aquarium-exterior]. ";
+		now every car in location is mentioned;
+	otherwise:
+		say "Our pathetic little [target car] is parked right outside [the aquarium-exterior]. "
 
 Instead of searching aquarium-exterior:
 	if the aquarium-closed-sign is marked-visible:
@@ -84,11 +89,12 @@ Before going to the Aquarium when the Counterfeit Monkey is unvisited:
 Before approaching the Aquarium when the Counterfeit Monkey is unvisited:
 	say "I'm sure that would be interesting under other circumstances, but [we] have an appointment to keep." instead.
 
-
-Before going to the Aquarium when the aquarium-closed-sign is marked-visible:
-	say "[rejection-from-aquarium]" instead.
-
-Before approaching the Aquarium when the aquarium-closed-sign:
+Before going to the Aquarium when the aquarium-closed-sign is part of the aquarium-exterior:
+	let N be the number of entries in the path so far of the player;
+	if N is greater than 1:
+		say "[path-walked so far]";
+	otherwise:
+		clear the path-walked for the player;
 	say "[rejection-from-aquarium]" instead.
 
 To say rejection-from-aquarium:
@@ -100,6 +106,10 @@ After going from the Aquarium when Slango is in the Counterfeit Monkey:
 	say "'This would be a good time to stop for lunch and a little siesta,' says Lena, following us to the door. As we go out, she's rolling down the shades and putting up a closed sign.";
 	move the single ream to the repository;
 	move the odes-book to the repository; [The ream object actually does double-duty and will reappear when we need to fix the printer.]
+	now the single ream is not seen;
+	now the single ream is not handled;
+	now the single ream is not examined;
+	now the single ream is not disguised;
 	now the aquarium-closed-sign is part of the aquarium-exterior;
 	continue the action.
 
@@ -271,7 +281,7 @@ Sanity-check dropping secret-plans in the Tin Hut:
 Sanity-check dropping an illegal thing in the Tin Hut when the Authenticator is in Fish Market:
 	say "It doesn't feel safe leaving [the noun] here even for a short period." instead.
 
-Sanity-check propping the trap-door with an illegal thing when the Authenticator is in Fish Market:
+Sanity-check propping the trap-door with an illegal thing which is not the secret-plans when the Authenticator is in Fish Market:
 	say "It doesn't feel safe leaving [the second noun] here even for a short period." instead.
 
 Sanity-check inserting an illegal thing into something when the Authenticator is in Fish Market:
@@ -285,7 +295,7 @@ Understand "put [an illegal thing] under [tarpaulin-covered masses]" as a mistak
 Instead of looking under the trap-door:
 	try opening the trap-door.
 
-Test tinhut with "n / e / drop plans / w / wave l-remover at plans / wave s-remover at plan" in Deep Street holding the secret-plans.
+Test tinhut with "tutorial off / unlegend / nw / e / drop plans / w / wave l-remover at plans / wave s-remover at plan" in Deep Street holding the secret-plans.
 
 [Was: To the Fish Market. Broke Test2.]
 Check going west from the Tin Hut:
@@ -383,15 +393,21 @@ Rule for writing a paragraph about Nexami when Nexami is not as-yet-unknown:
 Rule for writing a topic sentence about Nexami Engeo:
 	say "[one of]Curiously, there's an acquaintance of yours here: [or][stopping][Nexami Engeo] is at one of the [round black tables]. [run paragraph on]"
 
-The wire chair is a chair in the outdoor cafe. It is scenery. On the wire chair is Nexami.
+The wire chair is a chair in the outdoor cafe. On the wire chair is Nexami.
+
+Check waving the letter-remover at the wire chair when Nexami is on the wire chair:
+		say "If we change the chair while Nexami is sitting on it, he might disappear along with it. Let's not do that." instead.
+
+Check waving the letter-remover at the wire chair when the current setting of the letter-remover is "c":
+	say "The waitstaff would certainly notice." instead.
 
 A spill is on the round black tables. It is fluid scenery. The flexible appearance is "There's [a spill] [if the spill is in the location]on the [ground][otherwise][in-on the holder of the spill][end if]." The description is "It looks like a quantity of red wine, just waiting to stain some vulnerable bit of clothing."
 
 Report Nexami saying hello to the player for the first time:
 	now the spill is not scenery;
-	say "Nexami nods to us. 'Watch out. That table next to you has something sticky spilled on it.' And indeed there is a spill. You were about to lean on it nonchalantly." instead.
+	say "Nexami nods to us. 'Watch out. That table next to you has something sticky spilled on it.' And indeed there is a [spill]. You were about to lean on it nonchalantly." instead.
 
-Nexami-encounter is a scene. Nexami-encounter begins when Nexami is the current interlocutor. Nexami-encounter ends in abandonment when Nexami is not the current interlocutor. Nexami-encounter ends in departure when the time since Nexami-encounter began is two minutes.
+Nexami-encounter is a scene. Nexami-encounter begins when Nexami is the current interlocutor. Nexami-encounter ends in abandonment when Nexami is not the current interlocutor. Nexami-encounter ends in departure when the time since Nexami-encounter began is greater than one minute.
 
 When Nexami-encounter ends in departure:
 	say "[if the prior named object is Nexami]He[otherwise]Nexami[end if] stands up and mutters something. I have a little trouble with his Scottish accent [--] [we] don't get a lot of that around here, for obvious reasons [--] but you interpret it as him saying he'd better go pay up.
@@ -442,7 +458,7 @@ Understand "hide" as a mistake ("[if the location is the Tin Hut and the Authent
 Rule for listing exits while looking in the tin hut:
 	do nothing instead.
 
-Some tarpaulin-covered masses are an enterable supporter in Tin Hut. They are fixed in place. The initial appearance is "Various [tarpaulin-covered masses] fill the room." The description is "From the shapes visible under the blue plastic, it appears that they are probably tables and stalls, buckets, signs, and other necessary features of the fish market when sales are in progress. There's a flattish area we could probably scramble onto." Understand "tarpaulin" or "tarp" or "tarps" or "tables" or "stalls" or "awnings" or "signs" or "buckets" or "table" or "stall" or "awning" or "bucket" or "flattish" or "area" as the masses.
+Some tarpaulin-covered masses are an enterable supporter in Tin Hut. They are fixed in place. The initial appearance is "Various [tarpaulin-covered masses] fill the room." The description is "From the shapes visible under the blue plastic, it appears that they are probably tables and stalls, buckets, signs, and other necessary features of the fish market when sales are in progress. There's a flattish area [if the player is on the tarpaulin-covered masses]where we are currently standing[otherwise]we could probably scramble onto[end if]." Understand "tarpaulin" or "tarp" or "tarps" or "tables" or "stalls" or "awnings" or "signs" or "buckets" or "table" or "stall" or "awning" or "bucket" or "flattish" or "area" as the masses.
 
 The masses allow seated, standing, and reclining. The posture of the masses is standing.
 
@@ -551,7 +567,7 @@ topic	stuff
 Test crate-bug with "drop crate / put tub in crate / wave c-remover at crate / autoupgrade / wave c-remover at crate / open tub / gel rate / put plans in crate / wave c-remover at crate / n" [holding the tub and the crate and the plans.]
 
 Report involuntarily-dropping the crate:
-	say "[We] [are] forced to set the bulky crate down on the [ground]." instead.
+	say "[We] [are] forced to set the bulky crate down on the [fall-receiver]." instead.
 
 Instead of taking the crate:
 	say "[The crate] is too substantial to shift easily."
@@ -705,7 +721,7 @@ Report Slango saying hello to the player:
 	say "[one of]Slango meets our eye for a long minute without smiling[or]Slango nods to us[stopping]." instead.
 
 Definition: a thing is slango-related:
-	if it is enclosed by Slango:
+	if it is held by Slango:
 		yes;
 	no.
 
@@ -1006,16 +1022,18 @@ Dramatically, it tries to
 
 ]
 
-After going to Roundabout when the protesters are not off-stage and the player is not in Traffic Circle and seeking Slango has ended:
-	if the player is hurrying:
+After going to Roundabout when the protesters are not off-stage and the location is not Traffic Circle and seeking Slango has ended:
+	if the number of entries in the path so far of the player is greater than 1:
 		say "[path-walked so far][paragraph break][line break]";
+	otherwise:
 		clear path-walked for player;
-		increase path description count by 1;
+	increase path description count by 1;
 	say "The whole Roundabout has ground to a halt, with protesters walking in the street and in some places completely filling the road. But this is mostly a nuisance until I notice that there are a couple of teenagers handcuffed to a tree.
 
 I give the wheel a yank and run the car up onto the central traffic circle a little way. Call it a parking job. We need to get those kids out of here before their arrest is processed and they go to storage. I might not have the nerve to do anything by myself, but you're with me, and I'm starting to appreciate that's like being Batman. ";
 	if the player is in a car (called target):
 		move the target to Traffic Circle;
+		silently try switching off a random ignition which is part of target;
 		follow the compass-drawing rule instead;
 	otherwise:
 		move the player to Traffic Circle;
@@ -1026,6 +1044,9 @@ Sanity-check doing something when the location is Traffic Circle and the player 
 		say "We don't have a good angle on the action from inside the car." instead;
 	if the second noun is a thing and the second noun is not enclosed by a car and the second noun is not a car:
 		say "We don't have a good angle on the action from inside the car." instead;
+
+Instead of going or approaching when the player is in an undisguised car and the location is Traffic Circle:
+	say "[one of]The way we came is completely blocked by protesters. [or][stopping]We're not going anywhere by car from here." instead.
 
 Sanity-check exiting when the player is in an undisguised car and the location is Traffic Circle:
 	say "I can see an officer making his way between the cars and stopping at the fake ones. Maybe we'd better conceal our car before we leave it [--] we may need to make a quick getaway later." instead.
@@ -1038,7 +1059,7 @@ Traffic Circle is inside from the Roundabout. It is a privately-controlled check
 
 Out-direction of Traffic Circle is outside. [The roundabout and the traffic circle are the only place where the standard outside and inside directions are used]
 
-The no-dropping rule does nothing when the current action is dropping the restoration-gel rifle and the location is Traffic Circle.
+The no-dropping rule does nothing when the noun is the restoration-gel rifle and the location is Traffic Circle.
 
 [Procedural rule while dropping the restoration-gel rifle when the location is Traffic Circle:
 	ignore the no-dropping rule.]
@@ -1115,7 +1136,7 @@ To say irritation reaction:
 	now last irritation is the time of day.
 
 
-The protest-sign is on the giant Atlantida statue. The printed name is "sign". Understand "sign" as the protest-sign.
+The protest-sign is a sign on the giant Atlantida statue. The printed name is "sign". Understand "sign" as the protest-sign.
 
 The description of the protest-sign is "It reads:
 
@@ -1186,7 +1207,10 @@ Definition: a thing is unsuitable:
 A distant stuff rule when the person asked is the All-Purpose-Officer:
 	rule succeeds.
 
+The olive branch is distant. The live branch is distant. The stuffed octopus is distant. The protest-sign is distant. The signet is distant.
+
 Every turn when the player is in Traffic Circle:
+	let difference be the time of day minus the last irritation;
 	if the teenagers are in the location:
 		if the brown tree is not in the location:
 			now the teenagers are nowhere;
@@ -1195,22 +1219,25 @@ Every turn when the player is in Traffic Circle:
 				now the stuffed octopus is nowhere;
 			say "[line break][irritation reaction].";
 		otherwise:
-			say "[one of]'Go ahead, put us in Cold Storage!' shouts the defiant teenager. 'I'm happy to sleep through all this shit and wake up when we have jet packs and a government that respects the rights of its people.'[or]The nervous teenager looks unhappy. 'We won't get out of here until our families are all dead and global warming has reduced Atlantis to three square feet of hilltop.'[or]The nervous teenager struggles against her bonds.[or]One of the other protesters tries to free the teenagers while the All-Purpose Officer isn't paying attention, but the bonds are too strong.[or]The teenagers look at us rather desperately.[stopping]";
+			say "[one of]'Go ahead, put us in Cold Storage!' shouts the defiant teenager. 'I'm happy to sleep through all this shit and wake up when we have jet packs and a government that respects the rights of its people.'[or]The nervous teenager looks unhappy. 'We won't get out of here until our families are all dead and global warming has reduced Atlantis to three square feet of hilltop.'[or]The nervous teenager struggles against her bonds.[or]One of the other protesters tries to free the teenagers while the All-Purpose Officer isn't paying attention, but the bonds are too strong.[or]The teenagers look at us rather desperately[if the player carries the letter-remover and the All-Purpose-Officer is in Traffic Circle and the All-Purpose-Officer carries the restoration-gel rifle and the The olive branch is on the huge-metal-arm and a random chance of 1 in 2 succeeds]. One of them glances at our [letter-remover] and then at the olive branch[end if].[stopping]";
+			if difference is at least 11 minutes:
+				say "[line break][irritation reaction].";
 	otherwise:
-		let difference be the time of day minus the last irritation;
-		if difference is 1 minutes:
+		if difference is 1 minute:
 			say "The crowd is parting. We might be able to leave soon.";
 	if All-Purpose-Officer is enclosed by Traffic Circle and an unsuitable thing (called the target) is enclosed by the giant Atlantida statue:
 		if the target is the live branch and the All-Purpose-Officer carries the restoration-gel rifle:
 			say "[The All-Purpose-Officer] fires the [restoration-gel rifle] at [the live branch], but the statue is holding it at a difficult angle. The gel splatters uselessly across [the huge-metal-arm].";
 		if the All-Purpose-Officer is not enclosed by the giant Atlantida statue:
 			try the All-purpose-officer entering the giant Atlantida statue;
+			now the All-purpose-officer is distant;
 			make no decision;
 		if the All-Purpose-Officer is not on the huge-metal-arm:
 			try the all-purpose-officer entering the huge-metal-arm;
 			make no decision;
-		if the target is the stuffed octopus and the All-Purpose-Officer carries the target:
-			try the All-Purpose-Officer dropping the target;
+		if the target is the stuffed octopus and the All-Purpose-Officer carries the stuffed octopus:
+			try the All-Purpose-Officer dropping the the stuffed octopus;
+			now the stuffed octopus is near;
 			make no decision;
 		try the All-Purpose-Officer touching the target;
 	otherwise:
@@ -1220,6 +1247,7 @@ Every turn when the player is in Traffic Circle:
 			make no decision;
 		if the All-Purpose-Officer is on the giant Atlantida statue:
 			try the All-purpose-officer exiting;
+			now the All-purpose-officer is near;
 			make no decision;
 		if the restoration-gel rifle is in the location:
 			try the All-Purpose-Officer taking the restoration-gel rifle;
@@ -1248,7 +1276,7 @@ Report the All-purpose-officer taking the stuffed octopus:
 	say "Lab[our]iously and with obvious irritation, the All-Purpose Officer pries the arms of the stuffed octopus off the statue's wrist, where they appear to have been fixed with glue." instead.
 
 Report the All-purpose-officer dropping the restoration-gel rifle:
-	say "[The actor] shift[s] the [noun] from one hand to another; looks around; and then props it against the foot of the statue." instead.
+	say "[The actor] [shift] the [noun] from one hand to another; looks around; and then props it against the foot of the statue." instead.
 
 Report dropping the restoration-gel rifle in the presence of the giant Atlantida statue:
 	say "[We] prop the rifle back at the foot of the statue." instead.
@@ -1291,6 +1319,9 @@ Instead of shooting something with the restoration-gel rifle when the irritation
 
 Sanity-check taking the restoration-gel rifle when the All-Purpose-Officer is not enclosed by the giant Atlantida statue and protest-scenario is happening:
 	say "[The All-Purpose-officer] is right here. You have too much sense to make a move until he's a little more distracted." instead.
+
+When protest-scenario begins:
+	now last irritation is time of day.
 
 [When protest-scenario begins:
 	say "[An All-Purpose-officer] is scaling the statue, [diminutive affixer] under his arm. His restoration gel rifle is abandoned at the statue base, probably because it's not plausible to carry both at once.";]

@@ -47,7 +47,7 @@ The new ordinary-concealment rule is listed instead of the ordinary-concealment 
 
 A scope processing rule for a thing (called n) (this is the new swift rule):
 	rapidly set workflag of n.
-	
+
 The new swift rule is listed instead of the swift rule in the scope processing rules.
 
 
@@ -66,7 +66,7 @@ The new describe contents rule is listed instead of the describe contents entere
 This is the new describe contents rule:
 	if the person asked is the player, follow the description-priority rules.
 
-A description-concealing rule while entering a container (called special-target):
+A description-concealing rule while entering a thing (called special-target):
 	rapidly set stuff outside special-target not marked for listing.
 
 Section -
@@ -83,14 +83,7 @@ The new standard surroundings rule is listed instead of the standard surrounding
 
 [ And these from the Standard Rules ]
 
-This is the new declare everything initially unmentioned rule:
-	rapidly set all things not mentioned.
-
-The new declare everything initially unmentioned rule is listed instead of the declare everything initially unmentioned rule in the turn sequence rulebook.
-
-[The new declare everything initially unmentioned rule is listed instead of the declare everything initially unmentioned rule in the startup rulebook.]
-
-The declare everything initially unmentioned rule is not listed in the startup rulebook.
+The declare everything initially unmentioned rule is not listed in any rulebook.
 
 The new declare everything unmentioned rule is listed instead of the declare everything unmentioned rule in the carry out looking rules.
 
@@ -171,7 +164,7 @@ To set clones of (n - an object) mentioned:
 To rapidly conceal possessions:
 	(- MyConcealPossessions(); -).
 
-To rapidly set stuff outside (X - a container) not marked for listing:
+To rapidly set stuff outside (X - a thing) not marked for listing:
 	(- MyHideExteriorStuff({X}); -).
 
 To rapidly hide possessions of followers in (n - a container):
@@ -244,13 +237,13 @@ Include (-
 	];
 
 	[ MySetWorkFlagOfAllContents par;
-	
+
 		if (par.component_child)
 			MySetWorkFlagLoop(par.component_child);
 
 		if (par.component_sibling)
 			MySetWorkFlagLoop(par.component_sibling);
-			
+
 		if (child(par))
 			MySetWorkFlagLoop(child(par));
 	];
@@ -306,10 +299,10 @@ Include (-
 				o = child(o);
 			else
 				while (o) {
-					if (sibling(o)) { 
-						o = sibling(o); 
+					if (sibling(o)) {
+						o = sibling(o);
 						break;
-					}					
+					}
 					o = parent(o);
 					if ( o == parent(first) ) return;
 				}
@@ -352,8 +345,11 @@ Include (-
 		sib=child(parent(obj));
 		if (~~sib) sib = (obj.component_parent).component_child;
 		for (: sib : sib=sibling(sib))
-			if (sib.list_together == obj.list_together)
+			if (sib.list_together == obj.list_together || Identical(obj, sib))
+			{
 				give sib mentioned;
+				give sib ~workflag;
+			}
 	];
 
 	[ MyConcealPossessions obj obj2;
@@ -372,13 +368,10 @@ Include (-
 			if (obj has workflag) {
 				give obj ~workflag;
 				for (obj2 = parent(obj): obj2 : obj2 = parent (obj2)) {
-					!if (obj2 == car || (obj2 provides component_parent && obj2.component_parent == car)) {
 					if (obj2 == car) {
 						give obj workflag;
 						break;
 					}
-					!if (obj2 provides component_parent && obj2.component_parent)
-					!	obj2 = obj2.component_parent;
 				}
 			}
 	];
@@ -417,7 +410,7 @@ Include (-
 		seen_count = 0;
 
 		col=TableFindCol((+ Table of Seen Things +), (+ output subject +), true);
-		
+
 		for (obj=IK2_First: obj : obj=obj.IK2_Link)
 			if (obj has workflag && obj hasnt mentioned) {
 				seen_count++;
@@ -436,7 +429,7 @@ Include (-
 
 		for (i=1: i <= seen_count : i++ ) {
 			output = ((+ Table of Seen Things +)-->output_col)-->(i+COL_HSIZE);
- 
+
 			output.(+ description-rank +) = 0;
 
 			FollowRulebook ((+ the ranking rules +), output, true);

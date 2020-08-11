@@ -13,6 +13,15 @@ To rapidly set (n - an object) marked visible:
 To rapidly set everything marked-visible as seen:
 	(- MySetAllMarkedVisibleAsSeen(); -).
 
+To mark contents of (box - an opaque container) visible:
+	(- if (child({box})) MarkContentsVisible(child({box})); -).
+
+To mark contents of (box - an opaque container) invisible:
+	(- if (child({box})) MarkContentsInvisible(child({box})); -).
+
+To decide which object is random-visible-thing:
+	(- RandomVisibleThing() -).
+
 To decide which object is the unleavable:
 	(- FindUnleavableLoop(real_location) -).
 
@@ -38,7 +47,7 @@ A player's action awareness rule
 Include (-
 
 	[ MyAllSetMarkedInvisible obj;
-		for (obj=IK2_First: obj: obj=obj.IK2_Link) {
+		for (obj = IK2_First: obj: obj = obj.IK2_Link) {
 			give obj ~(+ marked-visible +);
 		}
 	];
@@ -51,13 +60,67 @@ Include (-
 	[ MySetAllMarkedVisibleAsSeen obj;
 		for (obj=IK2_First: obj: obj=obj.IK2_Link) {
 			if (obj has (+ marked-visible +) )
-				give obj (+ seen +);
+				 obj.(+ seen +) = true;
 		}
+	];
+
+	[ MarkContentsVisible start o;
+		!loop through everything in start object
+		for (o=start : o :) {
+			give o (+ marked-visible +);
+			o.(+ seen +) = true;
+
+			!Check any components recursively
+			if (o.component_child)
+				MarkContentsVisible(o.component_child);
+
+			if (o.component_sibling)
+				MarkContentsVisible(o.component_sibling);
+
+			! Don't look inside closed opaque containers
+			if (child(o) &&  ~~((o has openable && o hasnt open) && o hasnt transparent))
+				o = child(o);
+			else
+				while (o) {
+					if (sibling(o)) { o = sibling(o); break; }
+
+					o = parent(o);
+					if ( o == parent(start)) return;
+				}
+		}
+		return;
+	];
+
+	[ MarkContentsInvisible start o;
+		!loop through everything in start object
+		for (o=start : o :) {
+			give o ~(+ marked-visible +);
+
+			!Check any components recursively
+			if (o.component_child)
+				MarkContentsInvisible(o.component_child);
+
+			if (o.component_sibling)
+				MarkContentsInvisible(o.component_sibling);
+
+			! Don't look inside closed opaque containers
+			if (child(o) &&  ~~((o has openable && o hasnt open) && o hasnt transparent))
+				o = child(o);
+			else
+				while (o) {
+					if (sibling(o)) { o = sibling(o); break; }
+
+					o = parent(o);
+					if ( o == parent(start)) return;
+				}
+		}
+		return;
 	];
 
 	[ IsUnleavable obj;
 		if (~~(obj ofclass (+ thing +))) rfalse;
 		if (~~(obj.(+ essential +))) rfalse;
+		if (obj ofclass (+ person +) && parent(obj) == parent((+ player +))) rfalse;
 		if (~~(obj.(+ seen +))) rfalse;
 		if ( obj == (+ origin paste +) && ~~(obj.(+ won +))) rfalse;
 		if ( obj == (+ rock +) && ~~(Relation_TestVtoV((+ player +), (+ the fact-awareness relation +), (+ brock-found +), false))) rfalse;
@@ -99,41 +162,40 @@ Include (-
 		return nothing;
 	];
 
-	[ ApartmentalThing i o start thing;
+	[ RandomVisibleThing i o start thing j;
 		i = 1;
 		thing = nothing;
 
-		! Search the container of the player for things
-		i = FindApartmentalThing(child((+ My Apartment +)), i);
+		! Search the current location for things
+		i = FindVisibleThing(child(real_location), i);
 
 		! Pick a random thing out of all found and return it
 		! I'm reusing Table of Inventory Ordering for this until somebody tells me not to
 		if ( i > 0)
-			thing = ((+ Table of Inventory Ordering +)-->2)-->(random(i)+COL_HSIZE);
-
+			thing = ((+ Table of Inventory Ordering +)-->2)-->(random(i) - 1 + COL_HSIZE);
 		return thing;
 	];
 
-	[ FindApartmentalThing start i o;
-		!loop through everything in start object
-		for (o=start : o : i++ ) {
-
-			if (~~(o ofclass (+ person +))) {
+	[ FindVisibleThing start i o;
+		! loop through the local object tree from start
+		for (o=start : o :) {
+			! Add o to list unless it is a person or the roc or the list is full
+			if ( (~~o ofclass (+ person +) ) || (o ofclass (+ animal +) && o ~= (+ the roc +) ) ) {
 				if (i >= 100) return 100;
 				((+ Table of Inventory Ordering +)-->2)-->(i+COL_HSIZE) = o;
 				i++;
-				if (i >= 100) return 100;
+				if (i == 100) return 100;
 			}
 
-			!Check any components recursively
+			! Check any components recursively
 			if (o.component_child)
-				i = FindApartmentalThing(o.component_child, i);
+				i = FindVisibleThing(o.component_child, i);
 
 			if (o.component_sibling)
-				i = FindApartmentalThing(o.component_sibling, i);
+				i = FindVisibleThing(o.component_sibling, i);
 
-			! Don't look inside closed containers or the backpack
-			if (child(o) &&  ~~(o has openable && o hasnt open) && ~~(o == (+ the backpack +) )) o = child(o);
+			! Don't look inside closed opaque containers or the backpack
+			if (child(o) &&  ~~(o has openable && (o hasnt open && (o hasnt transparent || o == (+ the backpack +) )))) o = child(o);
 			else
 				while (o) {
 					if (sibling(o)) { o = sibling(o); break; }
